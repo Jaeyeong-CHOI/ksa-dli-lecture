@@ -183,12 +183,25 @@ assert answer.strip(), "생성된 답변이 비어 있습니다."
 print("RAG 답변:", answer)`,
 };
 
+export const certificationActions = {
+  setup: {notebook: '08_evaluation.ipynb', cell: 3, kind: 'run', find: 'from functools import partial', contains: 'embedder = NVIDIAEmbeddings(', result: '빨간 오류 없이 실행이 끝나면 됩니다. 이 셀은 설정을 만드는 단계라 별도 출력이 없을 수 있습니다.'},
+  load: {notebook: '08_evaluation.ipynb', cell: 7, kind: 'replace', find: 'from langchain_community.vectorstores import FAISS', contains: '!tar xzvf docstore_index.tgz', result: '“현재 작업 폴더”, “문서 조각 수”와 실제 문서 내용이 셀 아래에 출력됩니다.'},
+  rag: {notebook: '08_evaluation.ipynb', cell: 9, kind: 'replace', find: 'from langchain_core.output_parsers import StrOutputParser', contains: 'context_getter =', result: '질문에 대한 답변이 셀 아래에 출력됩니다. 이 코드가 끝나야 다음 질문 생성 셀을 실행합니다.'},
+  questions: {notebook: '08_evaluation.ipynb', cell: 11, kind: 'run', find: 'import random', contains: 'num_questions = 3', result: '질문과 기준 답변 3쌍이 출력될 때까지 기다립니다. 실행 표시 [*]가 끝난 뒤 다음 셀로 이동합니다.'},
+  answers: {notebook: '08_evaluation.ipynb', cell: 13, kind: 'replace', find: 'rag_answers = []', contains: 'rag_answer = ""', result: '질문마다 RAG 답변이 출력되고 마지막에 “질문과 RAG 답변의 개수·순서가 준비되었습니다.”가 나옵니다.'},
+  judge: {notebook: '08_evaluation.ipynb', cell: 15, kind: 'run', find: 'eval_prompt = ChatPromptTemplate.from_template(', contains: 'pref_score', result: '질문별 Synth Evaluation 판정이 출력됩니다. 이 셀이 끝난 뒤 집계 코드를 실행합니다.'},
+  score: {notebook: '08_evaluation.ipynb', cell: 17, kind: 'replace', find: 'pref_score = sum(("[2]" in score) for score in pref_score) / len(pref_score)', contains: 'Preference Score:', result: '“전체 판정”, “유효 판정”, “사전 점검용 선호 비율”이 나옵니다. 09번 노트북으로 이동합니다.'},
+  server: {notebook: '09_langserve.ipynb', cell: 4, kind: 'replace', find: '%%writefile server_app.py', contains: 'from fastapi import FastAPI', result: 'Writing server_app.py 또는 Overwriting server_app.py가 출력됩니다. 파일을 따로 만들거나 코드를 .py 편집기에 붙일 필요가 없습니다. 다음 단계에서 서버를 실행합니다.'},
+  terminal: {notebook: 'JupyterLab → Launcher → Terminal', kind: 'terminal', find: '명령을 입력하는 줄 · $ 또는 프롬프트 뒤', result: 'Application startup complete와 Uvicorn running on …:9012가 표시됩니다. Terminal은 실행 중인 상태로 그대로 둡니다.'},
+  check: {notebook: '09_langserve.ipynb', kind: 'append', find: '맨 아래에 새로 추가한 빈 Code 셀', result: '기본 모델 응답 → 검색 문서 수 → RAG 답변이 차례로 나옵니다. 이어서 Gradio Frontend의 Evaluate를 실행합니다.'},
+};
+
 export const certificationSteps = [
-  {id: 'prepare', short: '준비', title: '07번에서 만든 문서 인덱스 준비', place: 'DLI JupyterLab · 파일 브라우저', goal: '내가 검색할 문서가 준비됐는지 확인합니다.'},
+  {id: 'prepare', short: '08 · 시작', title: '08번을 열고 설정 셀 실행하기', place: '08_evaluation.ipynb · 기존 노트북을 열어 그대로 작업', goal: '첫 코드 셀을 실행해 수업 모델 연결 설정을 준비합니다.'},
   {id: 'load', short: '08 · 불러오기', title: '설정 실행 → 문서 불러오기', place: '08_evaluation.ipynb · 원본 셀 3 → 셀 7', goal: 'embedder와 문서 목록 docs가 준비되면 다음으로 넘어갑니다.'},
   {id: 'evaluate', short: '08 · 점검', title: 'RAG 답변을 만들고 사전 점검하기', place: '08_evaluation.ipynb · 셀 9 → 11 → 13 → 15 → 17', goal: '질문마다 실제 검색 자료에 근거한 답변이 나오는지 확인합니다.'},
-  {id: 'server', short: '09 · 서버', title: '검색·답변 기능을 서버 파일로 만들기', place: '09_langserve.ipynb 복제본 · 원본 셀 4 전체 교체', goal: 'server_app.py 파일 하나에 서버에 필요한 정의를 모두 담습니다.'},
-  {id: 'connect', short: '09 · 연결', title: '서버를 켜 둔 채 세 기능 확인하기', place: 'JupyterLab Terminal → 09번 복제본의 새 코드 셀', goal: '기본 대화·문서 검색·답변 생성이 모두 연결되는지 확인합니다.'},
+  {id: 'server', short: '09 · 붙여넣기', title: '09번의 코드 셀 하나를 전체 교체하기', place: '09_langserve.ipynb · %%writefile server_app.py 셀', goal: '아래 코드를 노트북 셀에 붙여넣어 실행하면 서버 파일이 자동으로 만들어집니다.'},
+  {id: 'connect', short: '09 · 실행', title: '서버 실행 → 새 코드 셀에서 확인', place: 'JupyterLab Terminal → 09_langserve.ipynb의 새 Code 셀', goal: 'Terminal에서 서버를 켜 두고, 노트북에서 연결 확인 코드를 실행합니다.'},
   {id: 'assess', short: '최종 평가', title: 'Evaluate → Assess Task', place: '수업 Gradio Frontend → NVIDIA 강좌의 환경 런처', goal: '실제 평가를 통과한 뒤 플랫폼에 완료 결과를 반영합니다.'},
   {id: 'certificate', short: '인증서', title: 'My Learning에서 인증서 확인', place: '수강한 계정의 NVIDIA My Learning', goal: '이 강좌의 완료 상태와 발급된 인증서를 확인합니다.'},
 ];
