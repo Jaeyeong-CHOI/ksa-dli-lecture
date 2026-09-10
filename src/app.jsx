@@ -2,11 +2,13 @@ import React, {useEffect, useRef, useState} from 'react';
 import {createRoot} from 'react-dom/client';
 import {ArrowRight, ArrowLeft, ArrowUpRight, Check, CheckCircle2, ChevronRight, Code2, Download, Menu, MessageCircle, Search, Terminal, X} from 'lucide-react';
 import {notes} from '../content/notes.mjs';
+import {buildLessonSteps, stepFromHash} from '../content/lesson-steps.mjs';
 import notebookCode from '../content/notebook-code.json';
 import {CodeBlock, MemoryDemo, Chat} from './shared.jsx';
 import {LessonVisual} from './lesson-visuals.jsx';
 import {API} from './api.js';
 import './styles.css';
+import './reader.css';
 
 const PDF = '/downloads/Introduction-to-LLM.pdf';
 const COURSE = 'Building RAG Agents with LLMs';
@@ -54,12 +56,13 @@ function NotebookList({done}) {
   </main>;
 }
 function CodeCell({block}) {
+  const [highlightedLine, setHighlightedLine] = useState(null);
   return <details className="code-cell" id={'cell-' + block.cell}>
     <summary><span>셀 {String(block.cell).padStart(2, '0')}</span><strong>{block.title}</strong><Code2 size={17}/></summary>
     <div className="code-cell-body">
       {block.notice && <p className="cell-notice">{block.notice}</p>}
-      {block.code && <><CodeBlock code={block.code} label={'원본 발췌 · 셀 ' + block.cell}/><h3>핵심 코드 해설</h3>
-        <div className="code-explanations">{block.annotations.map((annotation, i) => <div key={i}><span>{annotation.line}행</span><div><code>{annotation.token}</code><p>{annotation.text}</p></div></div>)}</div>
+      {block.code && <><CodeBlock code={block.code} label={'원본 발췌 · 셀 ' + block.cell} highlightedLine={highlightedLine}/><h3>핵심 코드 해설</h3>
+        <div className="code-explanations">{block.annotations.map((annotation, i) => <div key={i}><button className="annotation-line" type="button" onClick={() => setHighlightedLine(annotation.line)} aria-label={annotation.line + '행 코드 보기'}>{annotation.line}행</button><div><code>{annotation.token}</code><p>{annotation.text}</p></div></div>)}</div>
       </>}
     </div>
   </details>;
@@ -71,7 +74,7 @@ function CodeGroup({blocks, extra = false}) {
     <div className="context-code-body">{blocks.map(block => <CodeCell block={block} key={block.cell}/>)}</div>
   </details>;
 }
-function useCellAnchor(slug) {
+function useCellAnchor(slug, active) {
   useEffect(() => {
     let frame;
     function reveal() {
@@ -90,21 +93,23 @@ function useCellAnchor(slug) {
     reveal();
     addEventListener('hashchange', reveal);
     return () => { cancelAnimationFrame(frame); removeEventListener('hashchange', reveal); };
-  }, [slug]);
+  }, [slug, active]);
 }
 function NotePage({note, done, mark}) {
   const source = notebookCode[note.slug], index = notes.indexOf(note), next = notes[index + 1];
-  const used = new Set();
-  const sectionBlocks = note.sections.map(section => (section.cells || []).flatMap(cell => {
-    const block = source?.blocks.find(b => b.cell === cell);
-    if (!block || used.has(cell)) return [];
-    used.add(cell); return [block];
-  }));
-  const extraBlocks = source?.blocks.filter(block => !used.has(block.cell)) || [];
-  useCellAnchor(note.slug);
-  return <div className="learning-layout">
+  const {sectionBlocks, extraBlocks, steps, targets} = buildLessonSteps(note, source);
+  const [active, setActive] = useState(() => stepFromHash(location.hash, targets));
+  const activeIndex = steps.findIndex(step => step.id === active), currentStep = steps[activeIndex];
+  useEffect(() => {
+    const sync = () => setActive(stepFromHash(location.hash, targets));
+    addEventListener('hashchange', sync); addEventListener('popstate', sync);
+    return () => { removeEventListener('hashchange', sync); removeEventListener('popstate', sync); };
+  }, [note.slug]);
+  useCellAnchor(note.slug, active);
+  const navigation = steps.map((step, i) => <a key={step.id} href={'#' + step.id} aria-current={active === step.id ? 'step' : undefined} className={active === step.id ? 'current-step' : ''}><span>{String(i + 1).padStart(2, '0')}</span><span><small>{step.kind}</small>{step.title}</span></a>);
+  return <div className="learning-layout stepped-layout">
     <aside className="course-sidebar">
-      <div className="sidebar-title">학습 순서<small>{done.length} / {notes.length} 완료</small></div>
+      <div className="sidebar-title">전체 챕터<small>{done.length} / {notes.length} 완료</small></div>
       <div className="progress-track"><i style={{width: done.length / notes.length * 100 + '%'}}/></div>
       <nav className="course-nav" aria-label="학습 노트 목록">{notes.map(n => <React.Fragment key={n.slug}>
         {['PPT', '00', '03', '05'].includes(n.no) && <span className="nav-group">{n.kind === 'slides' ? 'LLM 이해하기' : n.no === '00' ? '환경과 모델 호출' : n.no === '03' ? '체인과 대화 상태' : 'RAG 구현과 평가'}</span>}
@@ -115,40 +120,47 @@ function NotePage({note, done, mark}) {
       {note.kind === 'slides' ? <div className="course-context"><span>2026년 충청권 ICT이노베이션스퀘어 확산사업</span><p>{PROGRAM}</p><strong>{COURSE}</strong></div> : <div className="breadcrumb"><Link to="/">LLM 이해하기</Link><ChevronRight size={14}/><span>실습 {note.no}</span></div>}
       <div className="eyebrow">{note.kind === 'slides' ? '첫 강의 · LLM 이해하기' : '실습 ' + note.no}</div>
       <h1>{note.title}</h1><p className="lesson-lead">{note.summary}</p>
-      <div className="reading-start"><span>이번 노트의 핵심</span><p>{note.takeaway}</p><ol className="concept-flow" aria-label="핵심 학습 흐름">{note.flow.map((step, i) => <li key={step}><span>{i + 1}</span>{step}</li>)}</ol></div>
-      {source && <p className="execution-context">수업의 DLI JupyterLab에서 {note.filename}을 열고 따라 해 보세요. 관련 코드는 각 설명 아래에서 펼칠 수 있습니다.</p>}
-      <details className="mobile-outline"><summary>이 노트의 차례</summary><nav aria-label="모바일 노트 차례">{note.sections.map((section, i) => <a key={i} href={'#section-' + i}>{section.title}</a>)}<a href="#exercises">직접 풀어보기</a><a href="#review">핵심 정리</a></nav></details>
-      <div className="lesson-prose" id="explanation">{note.sections.map((section, i) => <section key={i} id={'section-' + i}>
-        <span className="section-no">{String(i + 1).padStart(2, '0')}</span><h2>{section.title}</h2>
-        {section.text.split('\n\n').map((paragraph, j) => <p key={j}>{paragraph}</p>)}
+      <section className="chapter-goals" aria-label="챕터 학습 목표"><div><span>LEARNING GOALS</span><h2>이 챕터에서 배울 내용은?</h2></div><ul>{note.goals.map(goal => <li key={goal}><CheckCircle2 size={17}/><span>{goal}</span></li>)}</ul><p>{note.sections.length}개 소주제와 {note.exercises.length}개 실습을 한 단계씩 따라갑니다.</p></section>
+      {source && <p className="execution-context">코드 실행은 수업의 DLI JupyterLab에서 진행합니다. {note.filename}을 열고 따라 해 보세요.</p>}
+      <details className="chapter-contents"><summary>이 챕터의 학습 순서<span>{activeIndex + 1} / {steps.length}</span></summary><nav aria-label="챕터 소주제 목록">{navigation}</nav></details>
+      <div className="step-meter" aria-label="현재 학습 단계"><span>{currentStep.kind} <b>{String(activeIndex + 1).padStart(2, '0')}</b><small> / {steps.length}</small></span><p>한 번에 하나씩, 이해하고 넘어가세요.</p><div><i style={{width: (activeIndex + 1) / steps.length * 100 + '%'}}/></div></div>
+      <div className="lesson-prose" id="explanation">{note.sections.map((section, i) => <section className="lesson-step concept-step" key={i} id={'section-' + i} hidden={active !== 'section-' + i}>
+        <span className="section-no">소주제 {String(i + 1).padStart(2, '0')}</span><h2>{section.title}</h2>
+        {section.text.split('\n\n').map((paragraph, j) => <p key={j}><ConceptText text={paragraph}/></p>)}
         <LessonVisual slug={note.slug} section={i}/>
         {section.reference && <span className="source-location">{note.kind === 'slides' ? '슬라이드 ' : '원본 '} {section.reference}</span>}
         <CodeGroup blocks={sectionBlocks[i]}/>
         {note.kind === 'slides' && i === note.sections.length - 1 && <MemoryDemo/>}
       </section>)}</div>
-      {source && <div id="source-code"><CodeGroup blocks={extraBlocks} extra/></div>}
-      <section className="exercise-section" id="exercises">
-        <div className="eyebrow">배운 내용을 코드로</div><h2>직접 풀어보기</h2>
-        <p className="section-intro">먼저 풀이 순서대로 작성해 본 뒤, 예시 코드와 비교하세요. 예시는 학습을 위한 해설이며 공식 Solutions 파일은 아닙니다.</p>
-        {note.exercises.map((exercise, i) => <article className="notebook-exercise" key={i}>
-          <span className="exercise-location">{exercise.location}</span><h3>{exercise.title}</h3><p>{exercise.goal}</p>
-          <ol>{exercise.steps.map(step => <li key={step}>{step}</li>)}</ol>
-          <details className="solution"><summary>풀이 예시 확인하기<Code2 size={16}/></summary><CodeBlock code={exercise.code} label="해설용 풀이 예시 · Python"/></details>
-          <div className="solution-check"><CheckCircle2 size={19}/><div><strong>실행 후 확인</strong><p>{exercise.check}</p></div></div>
-        </article>)}
+      {extraBlocks.length > 0 && <section className="lesson-step preparation-step" id="source-code" hidden={active !== 'source-code'}><span className="section-no">실습 준비</span><h2>실습 준비와 추가 코드</h2><p>환경 설정과 보조 셀입니다. 필요한 부분을 확인한 뒤 실습으로 넘어가세요.</p><CodeGroup blocks={extraBlocks} extra/></section>}
+      {note.exercises.map((exercise, i) => { const id = i === 0 ? 'exercises' : 'exercise-' + i; return <section className="lesson-step practice-step" id={id} hidden={active !== id} key={id}>
+        <span className="section-no">직접 해보기 {i + 1}</span><h2>{exercise.title}</h2>
+        <article className="notebook-exercise"><span className="exercise-location">{exercise.location}</span><div className="practice-goal"><span>이번 실습의 목표</span><p><ConceptText text={exercise.goal}/></p></div>
+          <h3>이 순서대로 풀어보세요</h3><ol>{exercise.steps.map(step => <li key={step}><ConceptText text={step}/></li>)}</ol>
+          <details className="solution"><summary>풀이 예시와 비교하기<Code2 size={16}/></summary><p className="solution-context">학습을 위한 해설용 예시이며 공식 Solutions 파일은 아닙니다.</p><CodeBlock code={exercise.code} label="해설용 풀이 예시 · Python"/></details>
+          <div className="solution-check"><CheckCircle2 size={19}/><div><strong>실행 후 이렇게 확인하세요</strong><p><ConceptText text={exercise.check}/></p></div></div>
+        </article>
+      </section>; })}
+      <section className="lesson-step recap-step" id="review" hidden={active !== 'review'}>
+        <span className="section-no">챕터 마무리</span><h2>이제 이렇게 설명할 수 있어요</h2>
+        <div className="chapter-takeaway"><span>기억할 핵심</span><p>{note.takeaway}</p></div>
+        <div className="review-section"><h3>스스로 확인해 보세요</h3><ul>{note.review.map(question => <li key={question}><ConceptText text={question}/></li>)}</ul></div>
+        <section className="troubleshooting" id="troubleshooting"><h3>막혔을 때 확인하기</h3>{note.troubleshooting.map(([question, answer]) => <details key={question}><summary>{question}</summary><p><ConceptText text={answer}/></p></details>)}</section>
+        <details className="references" id="references"><summary>참고자료 · 원본 정보</summary>{source ? <p className="source-filename">{note.filename} · 본문의 셀 번호는 원본 노트북 기준입니다.</p> : <a className="text-button" href={PDF} target="_blank" rel="noreferrer">Introduction to LLM · 63쪽 PDF<ArrowUpRight size={15}/></a>}<p>강연 제공: Jae Y. CHOI · 제공 자료를 바탕으로 재구성한 한국어 해설입니다.</p></details>
+        <section className="lesson-transition"><span className="eyebrow">{next ? '다음 챕터로 연결하기' : '과정 돌아보기'}</span><p>{note.bridge}</p><div className="lesson-complete"><button className="outline-button" onClick={() => mark(note.slug)}><Check size={17}/>{done.includes(note.slug) ? '학습 완료됨 · 취소' : '이 노트 학습 완료'}</button>{next && <Link className="primary-button next-lesson" to={noteUrl(next)}>{next.title}<ArrowRight size={17}/></Link>}</div></section>
       </section>
-      <section className="review-section" id="review"><span className="eyebrow">다음으로 넘어가기 전에</span><h2>핵심을 설명해 보세요</h2><ul>{note.review.map(question => <li key={question}>{question}</li>)}</ul></section>
-      <section className="troubleshooting" id="troubleshooting"><h2>막혔을 때 확인하기</h2>{note.troubleshooting.map(([question, answer]) => <details key={question}><summary>{question}</summary><p>{answer}</p></details>)}</section>
-      <details className="references"><summary>참고자료 · 원본 정보</summary>
-        {source ? <p className="source-filename">{note.filename} · 본문의 셀 번호는 원본 노트북 기준입니다.</p> : <a className="text-button" href={PDF} target="_blank" rel="noreferrer">Introduction to LLM · 63쪽 PDF<ArrowUpRight size={15}/></a>}
-        <p>강연 제공: Jae Y. CHOI · 제공 자료를 바탕으로 재구성한 한국어 해설입니다.</p>
-      </details>
-      <section className="lesson-transition"><span className="eyebrow">{next ? '다음 학습으로 연결하기' : '과정 돌아보기'}</span><p>{note.bridge}</p>
-        <div className="lesson-complete"><button className="outline-button" onClick={() => mark(note.slug)}><Check size={17}/>{done.includes(note.slug) ? '학습 완료됨 · 취소' : '이 노트 학습 완료'}</button>{next && <Link className="primary-button next-lesson" to={noteUrl(next)}>{next.title}<ArrowRight size={17}/></Link>}</div>
-      </section>
+      <nav className="step-pagination" aria-label="소주제 이동">
+        {steps[activeIndex - 1] ? <a className="previous-step" href={'#' + steps[activeIndex - 1].id}><ArrowLeft size={17}/><span><small>이전 단계</small>{steps[activeIndex - 1].title}</span></a> : <span className="first-step-label">이 챕터의 첫 소주제입니다.</span>}
+        {steps[activeIndex + 1] && <a className="following-step" href={'#' + steps[activeIndex + 1].id}><span><small>다음 단계</small>{steps[activeIndex + 1].title}</span><ArrowRight size={18}/></a>}
+      </nav>
     </main>
-    <aside className="lesson-outline"><span>이 노트의 차례</span>{note.sections.map((section, i) => <a key={i} href={'#section-' + i}>{section.title}</a>)}<a href="#exercises">직접 풀어보기</a><a href="#review">핵심 정리</a></aside>
+    <aside className="lesson-outline chapter-outline"><span>이 챕터의 학습 순서</span><nav aria-label="데스크톱 소주제 목록">{navigation}</nav></aside>
   </div>;
+}
+function ConceptText({text}) {
+  const names = /\b(RunnableAssign|RunnableLambda|RunnablePassthrough|RunnableParallel|ChatPromptTemplate|StrOutputParser|ChatNVIDIA|RemoteRunnable|RExtract|RSummarizer|DocumentSummaryBase|KnowledgeBase|RecursiveCharacterTextSplitter|LongContextReorder|NVIDIARerank|Document|FAISS|docs2str|know_base|info_base|page_content|metadata|retrieval_chain|generator_chain|context|history|input|topic|chain1|chain2|embed_query|embed_documents)\b/g;
+  const parts = text.split(names);
+  return parts.map((part, i) => i % 2 ? <code className="concept-code" key={i}>{part}</code> : part);
 }
 function Resources() {
   return <main id="main" className="wide-page resources-page"><div className="eyebrow">{COURSE}</div><h1>강의자료</h1><p className="page-lead">복습할 때 원본 슬라이드를 내려받아 확인하세요.</p>
@@ -183,7 +195,7 @@ function App() {
       <div className="header-actions"><button className="search-button" onClick={() => setSearch(true)} aria-label="학습 내용 검색"><Search size={18}/><span>검색</span></button><button className="ask-button" onClick={ask} aria-label="자료 도우미 열기"><MessageCircle size={16}/><span>질문하기</span></button><button className="menu-toggle icon-button" onClick={() => setMenu(!menu)} aria-expanded={menu} aria-label="메뉴 열기">{menu ? <X/> : <Menu/>}</button></div>
     </header>
     {current ? <NotePage key={current.slug} note={current} done={done} mark={mark}/> : path === '/notebooks' || path === '/practice' ? <NotebookList done={done}/> : path === '/resources' ? <Resources/> : <main id="main" className="wide-page"><h1>학습 노트를 찾을 수 없어요.</h1><Link to="/" className="primary-button">첫 강의로 이동<ArrowRight size={16}/></Link></main>}
-    <footer className="site-footer"><div><strong>{COURSE}</strong><p>{PROGRAM}<br/>강연 제공: Jae Y. CHOI · NVIDIA DLI Certified Instructor & University Ambassador</p></div><div><span>2026년 충청권 ICT이노베이션스퀘어 확산사업</span><span>제공 자료를 바탕으로 구성한 한국어 학습 노트</span></div></footer>
+    <footer className="site-footer"><div><strong>{COURSE}</strong><p>{PROGRAM}</p></div><div><span>2026년 충청권 ICT이노베이션스퀘어 확산사업</span></div></footer>
     <SearchNotes open={search} close={() => setSearch(false)}/><Chat open={chat} close={() => setChat(false)} prefill={prefill} status={status}/>
   </>;
 }
