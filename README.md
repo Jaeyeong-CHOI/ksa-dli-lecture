@@ -10,6 +10,10 @@
 
 핵심 개념 → 설명 옆의 관련 코드 → 직접 풀이 → 확인 질문 → 다음 노트 순으로 읽습니다. 원본 셀 해설은 필요할 때 펼치며, 셀 직접 링크는 해당 코드를 자동으로 엽니다. Google Drive 바로가기는 제공하지 않고 원본 파일명·셀 번호와 강연자 출처를 남깁니다.
 
+## 시각자료
+
+설명과 원본 코드 사이에 7개의 인터랙티브 도식을 배치했습니다. 학습과 RAG의 차이, 순차·병렬 연결, 체인의 자료형 변화, 상태 갱신, 청크 겹침, 임베딩 유사도, 검색부터 답변 생성까지의 흐름을 비교할 수 있습니다. 도식은 HTML/CSS/SVG 기반 학습용 예시이며 실제 모델을 호출하지 않습니다.
+
 ## 학습 구성
 
 - Introduction to LLM PPT 해설 노트 1개 — LLM 원리·학습·멀티모달·메모리의 핵심을 연결
@@ -43,6 +47,8 @@ React + Vite. `main` 브랜치 push 시 GitHub Actions가 정적 사이트를 �
 - `content/notebook-code.json`: 출력·인증 셀을 제외한 코드 발췌와 줄별 해설
 - `src/app.jsx`, `src/shared.jsx`: 페이지와 도우미 UI
 - `src/styles.css`: NVIDIA 로고·흰색·그린 기반 디자인
+- `src/lesson-visuals.jsx`, `src/lesson-visuals.css`: 설명 옆의 인터랙티브 시각자료
+- `content/visual-models.mjs`: 시각자료 배치와 학습용 계산/예시
 
 ## 출처
 

@@ -4,6 +4,7 @@ import {ArrowRight, ArrowLeft, ArrowUpRight, Check, CheckCircle2, ChevronRight, 
 import {notes} from '../content/notes.mjs';
 import notebookCode from '../content/notebook-code.json';
 import {CodeBlock, MemoryDemo, Chat} from './shared.jsx';
+import {LessonVisual} from './lesson-visuals.jsx';
 import {API} from './api.js';
 import './styles.css';
 
@@ -120,6 +121,7 @@ function NotePage({note, done, mark}) {
       <div className="lesson-prose" id="explanation">{note.sections.map((section, i) => <section key={i} id={'section-' + i}>
         <span className="section-no">{String(i + 1).padStart(2, '0')}</span><h2>{section.title}</h2>
         {section.text.split('\n\n').map((paragraph, j) => <p key={j}>{paragraph}</p>)}
+        <LessonVisual slug={note.slug} section={i}/>
         {section.reference && <span className="source-location">{note.kind === 'slides' ? '슬라이드 ' : '원본 '} {section.reference}</span>}
         <CodeGroup blocks={sectionBlocks[i]}/>
         {note.kind === 'slides' && i === note.sections.length - 1 && <MemoryDemo/>}
