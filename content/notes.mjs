@@ -90,7 +90,7 @@ section('Part 5 · 요약도 확인이 필요해요','각 청크를 누적해서
 {slug:'06-embeddings',no:'06',kind:'notebook',filename:'06_embeddings.ipynb',title:'임베딩과 유사도 비교',summary:'질문·문서 벡터를 비교하고, 짧은 답을 긴 문서로 바꾸는 체인을 완성합니다.',goals:['embed_query와 embed_documents의 입출력 구분하기','유사도 행렬을 읽고 긴 문서 실험하기'],sections:[
 section('Part 1–2 · 질문과 문서는 같은 역할이 아니에요','embed_query(문자열)는 벡터 하나, embed_documents(문자열 목록)는 벡터 목록을 반환합니다. 원본의 course/embedding은 수업 서버의 모델 별칭입니다. 모델에 따라 질문·문서 인코딩 경로가 다를 수 있으며 인덱스를 만들 때와 검색할 때는 호환되는 동일 임베딩 구성을 사용해야 합니다.',[6,7,9,11]),
 section('유사도 행렬 읽기','코사인 유사도는 벡터 방향의 가까움을 비교합니다. 행과 열이 각각 무엇인지 축 라벨과 함수 인자 순서로 확인합니다. 대응하는 질문·문서 쌍의 값이 상대적으로 높은지 보는 실험이지 대각선 값이 무조건 최대여야 한다는 규칙은 아닙니다. 값이 높다고 사실인 문서라는 뜻도 아닙니다.',[13,15]),
-section('Part 3 · 긴 문서 만들기','expound_prompt는 전체 questions와 집중할 질문 q1을 입력받습니다. expound_chain의 빈 {} 대신 prompt | llm | StrOutputParser()를 연결하고, 질문마다 두 키를 전달합니다. 생성한 긴 글에 답이 실제로 포함되는지도 확인해야 합니다.',[17,19]),
+section('Part 3 · 긴 문서 만들기','expound_prompt는 전체 questions와 집중할 질문 q1을 입력받습니다. expound_chain의 빈 {} 대신 expound_prompt | instruct_llm | StrOutputParser()를 연결하고, 질문마다 두 키를 전달합니다. 생성한 긴 글에 답이 실제로 포함되는지도 확인해야 합니다.',[17,19]),
 section('Part 4 · 가드레일 실습 범위','원본은 시맨틱 가드레일 과제를 64_guardrails.ipynb로 안내합니다. 현재 받은 한글 노트북 10개에는 이 파일이 없으므로 정답이나 구체 코드를 만들어 원본 과제처럼 제시하지 않습니다. 이 노트에서는 관련성 유사도를 안전성의 완전한 판정으로 쓰면 안 된다는 점까지 기억하세요.')],exercises:[exercise('긴 문서 생성 체인 완성','셀 17 · 두 TODO 교체','앞에서 정의한 expound_prompt와 instruct_llm을 사용합니다.',['StrOutputParser로 문자열을 얻습니다.','questions에는 전체 질문 목록을 넣습니다.','q1에는 현재 반복 중인 q를 넣습니다.'],`expound_chain = expound_prompt | instruct_llm | StrOutputParser()
 longer_docs = []
 for q in queries:
