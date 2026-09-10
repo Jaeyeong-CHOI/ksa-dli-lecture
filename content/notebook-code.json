@@ -1,0 +1,2354 @@
+{
+  "00-jupyterlab": {
+    "filename": "00_jupyterlab.ipynb",
+    "url": "https://drive.google.com/file/d/1oGq4LeT_iNKiWr8v7eJpvK36PXPPpzrF/view",
+    "totalCells": 11,
+    "blocks": [
+      {
+        "cell": 3,
+        "title": "🌐 언어 선택",
+        "code": "from pathlib import Path\n\nLANGUAGE = Path(\"composer/default_language.txt\").read_text().strip()  # Change to: en, tw, zh, ja\n\n# Then run this cell (Shift+Enter)\n!python3 composer/switch_language.py $LANGUAGE",
+        "annotations": [
+          {
+            "line": 3,
+            "token": "read_text()",
+            "text": "파일을 문자열로 읽습니다. 상대 경로는 현재 작업 디렉터리를 기준으로 합니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 5,
+        "title": "참고 사항:",
+        "code": "# Highlight this cell and click [Shift+Enter] to execute\nprint('This is just a simple print statement')",
+        "annotations": [
+          {
+            "line": 2,
+            "token": "print(",
+            "text": "현재 값이나 진행 상태를 화면에 표시합니다. 반환값을 다음 체인으로 전달하는 것과는 다릅니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 7,
+        "title": "특수 문법",
+        "code": "first_name = input(\"Enter your name: \")\nprint(f\"Hello {first_name}\\n\")",
+        "annotations": [
+          {
+            "line": 1,
+            "token": "input(",
+            "text": "사용자의 문자열 입력을 기다립니다. 뒤 셀에서 쓸 변수라면 먼저 이 셀을 실행하세요."
+          },
+          {
+            "line": 2,
+            "token": "print(",
+            "text": "현재 값이나 진행 상태를 화면에 표시합니다. 반환값을 다음 체인으로 전달하는 것과는 다릅니다."
+          }
+        ],
+        "notice": "원본의 비밀 값 입력·출력 데모는 생략하고 이름 입력 부분만 발췌했습니다."
+      },
+      {
+        "cell": 9,
+        "title": "특수 문법",
+        "code": "################################################################################\n## Implicit string concatenation. Interpretted as `print( \"Hello\" \"World\" )`\nprint(\n    \"Hello\" \"World\"\n)\n\n################################################################################\n## Implicit string concatenation. Interpretted as `print( \"5\" \" \" \"8\" )`\nprint((\n    \"5\" \" \"\n    \"8\"\n))\n\nprint(\n    5 +\n    6\n)\n\n################################################################################\n## The below line is considered bad syntax, and the cell will fail to evaluate\n# 5 +\n# 6\n\n################################################################################\n## The following forcefully tries to run contents of the following line:\ntry:\n    eval(\"5 + \\n6\")\nexcept Exception as e:\n    print(e)\n\n################################################################################\n## Useful example, where lines can be commented out to remove functionality:\n(\n    f\"Hello {first_name}\"\n        .upper()\n        + '!!'\n        # '!!!'    ## Uncomment to add even more. Useful for organizing\n        ' It\\'s so nice to meet you!'\n\n)",
+        "annotations": [
+          {
+            "line": 3,
+            "token": "print(",
+            "text": "현재 값이나 진행 상태를 화면에 표시합니다. 반환값을 다음 체인으로 전달하는 것과는 다릅니다."
+          }
+        ],
+        "notice": ""
+      }
+    ]
+  },
+  "01-microservices": {
+    "filename": "01_microservices.ipynb",
+    "url": "https://drive.google.com/file/d/1PVLofjfBPqehRW7qmGXkTf504gQzPclZ/view",
+    "totalCells": 32,
+    "blocks": [
+      {
+        "cell": 15,
+        "title": "Jupyter Labs 마이크로서비스 바깥에서 상호작용하기",
+        "code": "'''\nSchematic output; inspect composer/deploy/docker-compose.yml for exact names and ports.\n> docker ps --format \"table {{.Names}}\\t{{.Image}}\\t{{.Ports}}\"\nNAMES                     IMAGE     PORTS\njupyter-notebook-server   ...       ...\nllm_client                ...       ...\nfrontend                  ...       ...\n... optional services vary by locale and deployment overrides\n'''",
+        "annotations": [
+          {
+            "line": 1,
+            "token": "셀의 입력과 결과",
+            "text": "위 셀에서 정의한 변수·함수를 사용합니다. 할당문은 값을 저장하고 마지막 식은 Jupyter 결과 영역에 표시됩니다. 셀 실행 순서와 반환 자료형을 함께 확인하세요."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 18,
+        "title": "Jupyter Labs 마이크로서비스 안에서 상호작용하기",
+        "code": "## Should fail\n!docker ps -a",
+        "annotations": [
+          {
+            "line": 1,
+            "token": "셀의 입력과 결과",
+            "text": "위 셀에서 정의한 변수·함수를 사용합니다. 할당문은 값을 저장하고 마지막 식은 Jupyter 결과 영역에 표시됩니다. 셀 실행 순서와 반환 자료형을 함께 확인하세요."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 20,
+        "title": "Jupyter Labs 마이크로서비스 안에서 상호작용하기",
+        "code": "## Should fail in colab, will work in course environment\n!curl -v docker_router:8070/help",
+        "annotations": [
+          {
+            "line": 1,
+            "token": "셀의 입력과 결과",
+            "text": "위 셀에서 정의한 변수·함수를 사용합니다. 할당문은 값을 저장하고 마지막 식은 Jupyter 결과 영역에 표시됩니다. 셀 실행 순서와 반환 자료형을 함께 확인하세요."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 22,
+        "title": "Jupyter Labs 마이크로서비스 안에서 상호작용하기",
+        "code": "## Should fail in colab, will work in course environment\nimport requests\n\n## Curl request. Best for shell environments\n# !curl -v docker_router:8070/containers\n\n## Print all running containers\n# requests.get(\"http://docker_router:8070/containers\", timeout=10).json()\n\n## Print the running microservices\nfor entry in requests.get(\"http://docker_router:8070/containers\", timeout=10).json():\n    if entry.get(\"status\") == 'running':\n        print(entry.get(\"name\"))",
+        "annotations": [
+          {
+            "line": 11,
+            "token": "requests.get(",
+            "text": "서버에 HTTP GET 요청을 보냅니다. 상태 코드와 응답 형식을 확인한 뒤 본문을 읽습니다."
+          },
+          {
+            "line": 11,
+            "token": ".json()",
+            "text": "HTTP 응답 본문을 JSON으로 해석합니다. HTML 오류 페이지라면 파싱에 실패합니다."
+          },
+          {
+            "line": 13,
+            "token": "print(",
+            "text": "현재 값이나 진행 상태를 화면에 표시합니다. 반환값을 다음 체인으로 전달하는 것과는 다릅니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 27,
+        "title": "Part 4: 프론트엔드 확인하기",
+        "code": "## Commented out by default since it will yield a lot of output\n# !curl -v frontend:8090",
+        "annotations": [
+          {
+            "line": 1,
+            "token": "셀의 입력과 결과",
+            "text": "위 셀에서 정의한 변수·함수를 사용합니다. 할당문은 값을 저장하고 마지막 식은 Jupyter 결과 영역에 표시됩니다. 셀 실행 순서와 반환 자료형을 함께 확인하세요."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 29,
+        "title": "Part 4: 프론트엔드 확인하기",
+        "code": "# %%js\n# // Manual Access Without NGINX\n# var url = 'http://'+window.location.host+':8090';\n# element.innerHTML = '<a style=\"color:green;\" target=\"_blank\" href='+url+'><h1>< Link To Gradio Frontend ></h1></a>';",
+        "annotations": [
+          {
+            "line": 1,
+            "token": "셀의 입력과 결과",
+            "text": "위 셀에서 정의한 변수·함수를 사용합니다. 할당문은 값을 저장하고 마지막 식은 Jupyter 결과 영역에 표시됩니다. 셀 실행 순서와 반환 자료형을 함께 확인하세요."
+          }
+        ],
+        "notice": ""
+      }
+    ]
+  },
+  "02-llms": {
+    "filename": "02_llms.ipynb",
+    "url": "https://drive.google.com/file/d/1oNwMvHGwwrtPuGu1lCtBoHExBy-IMfEE/view",
+    "totalCells": 37,
+    "blocks": [
+      {
+        "cell": 15,
+        "title": "Part 4: [실습] Foundation Model Endpoint 사용해 보기",
+        "code": "",
+        "annotations": [],
+        "notice": "인증 설정·요청 진단 또는 인덱스 역직렬화가 포함된 셀입니다. 원본 수업 환경에서 설정을 확인하고, 인증 정보나 전체 요청을 출력·공유하지 마세요. 이 셀은 복사 코드에서 제외했습니다."
+      },
+      {
+        "cell": 18,
+        "title": "4.1. 수동 Python 요청",
+        "code": "import requests\n\nservice_url = \"http://llm_client:9000\"\nheaders = {\"content-type\": \"application/json\"}\n\nservice = requests.get(f\"{service_url}/health\", headers=headers, timeout=10).json()\nservice",
+        "annotations": [
+          {
+            "line": 6,
+            "token": "requests.get(",
+            "text": "서버에 HTTP GET 요청을 보냅니다. 상태 코드와 응답 형식을 확인한 뒤 본문을 읽습니다."
+          },
+          {
+            "line": 6,
+            "token": ".json()",
+            "text": "HTTP 응답 본문을 JSON으로 해석합니다. HTML 오류 페이지라면 파싱에 실패합니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 19,
+        "title": "4.1. 수동 Python 요청",
+        "code": "models_url = f\"{service_url}/v1/models\"\ncourse_models = requests.get(models_url, headers=headers, timeout=10).json()[\"data\"]\nall_models = requests.get(\n    models_url, headers=headers, params={\"scope\": \"all\"}, timeout=10\n).json()[\"data\"]\n\nprint(\"Course chat models:\")\nfor model in course_models:\n    print(\" -\", model[\"id\"])\n\nlocal_models = [\n    model for model in all_models if model.get(\"owned_by\") == \"course-runtime\"\n]\nprint(f\"\\nFull exploration catalog: {len(all_models)} models\")\nprint(\"Local retrieval models:\")\nfor model in local_models:\n    print(f\" - {model['model_type']}: {model['id']}\")\n\n# Evaluate all_models when you want to inspect the complete catalog.\ncourse_models[0] if course_models else service",
+        "annotations": [
+          {
+            "line": 2,
+            "token": "requests.get(",
+            "text": "서버에 HTTP GET 요청을 보냅니다. 상태 코드와 응답 형식을 확인한 뒤 본문을 읽습니다."
+          },
+          {
+            "line": 2,
+            "token": ".json()",
+            "text": "HTTP 응답 본문을 JSON으로 해석합니다. HTML 오류 페이지라면 파싱에 실패합니다."
+          },
+          {
+            "line": 7,
+            "token": "print(",
+            "text": "현재 값이나 진행 상태를 화면에 표시합니다. 반환값을 다음 체인으로 전달하는 것과는 다릅니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 21,
+        "title": "4.1. 수동 Python 요청",
+        "code": "",
+        "annotations": [],
+        "notice": "인증 설정·요청 진단 또는 인덱스 역직렬화가 포함된 셀입니다. 원본 수업 환경에서 설정을 확인하고, 인증 정보나 전체 요청을 출력·공유하지 마세요. 이 셀은 복사 코드에서 제외했습니다."
+      },
+      {
+        "cell": 22,
+        "title": "4.1. 수동 Python 요청",
+        "code": "import requests\nimport json\n\n## Use requests.post to send the header (streaming meta-info) the payload to the endpoint\n## Make sure streaming is enabled, and expect the response to have an iter_lines response.\nresponse = requests.post(invoke_url, headers=headers, json=payload, stream=True, timeout=(10, 300))\n\n## If your response is an error message, this will raise an exception in Python\ntry: \n    response.raise_for_status()  ## If not 200 or similar, this will raise an exception\nexcept Exception as e:\n    # print(response.json())\n    print(response.json())\n    raise e\n\n## Custom utility to make live a bit easier\ndef get_stream_token(entry: bytes):\n    \"\"\"Utility: Coerces out ['choices'][0]['delta'][content] from the bytestream\"\"\"\n    if not entry: return \"\"\n    entry = entry.decode('utf-8')\n    if entry.startswith('data: '):\n        try: entry = json.loads(entry[5:])\n        except ValueError: return \"\"\n    return (entry.get('choices') or [{}])[0].get('delta', {}).get('content') or \"\"\n\n## If the post request is honored, you should be able to iterate over \nfor line in response.iter_lines():\n    \n    ## Without Processing: data: {\"id\":\"...\", ... \"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"content\":\"\"}...}...\n    # if line: print(line.decode(\"utf-8\"))\n\n    ## With Processing: An actual stream of tokens printed one-after-the-other as they come in\n    print(get_stream_token(line), end=\"\")",
+        "annotations": [
+          {
+            "line": 6,
+            "token": "requests.post(",
+            "text": "본문을 포함한 HTTP POST 요청을 보냅니다. 모델 입력 형식과 스트리밍 여부를 확인하세요."
+          },
+          {
+            "line": 13,
+            "token": ".json()",
+            "text": "HTTP 응답 본문을 JSON으로 해석합니다. HTML 오류 페이지라면 파싱에 실패합니다."
+          },
+          {
+            "line": 13,
+            "token": "print(",
+            "text": "현재 값이나 진행 상태를 화면에 표시합니다. 반환값을 다음 체인으로 전달하는 것과는 다릅니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 25,
+        "title": "4.2. OpenAI 클라이언트 요청",
+        "code": "",
+        "annotations": [],
+        "notice": "인증 설정·요청 진단 또는 인덱스 역직렬화가 포함된 셀입니다. 원본 수업 환경에서 설정을 확인하고, 인증 정보나 전체 요청을 출력·공유하지 마세요. 이 셀은 복사 코드에서 제외했습니다."
+      },
+      {
+        "cell": 26,
+        "title": "4.2. OpenAI 클라이언트 요청",
+        "code": "## Non-Streaming: Results come from server when they're all ready\ncompletion = client.chat.completions.create(\n    model=\"nvidia/nemotron-3.5-lightning-30b-a3b\",\n    # model=\"gpt-4-turbo-2024-04-09\",\n    messages=[{\"role\":\"user\",\"content\":\"Hello World\"}],\n    temperature=1,\n    top_p=1,\n    max_tokens=1024,\n    stream=False,\n    extra_body={\"chat_template_kwargs\": {\"enable_thinking\": False}},\n)\n\ncompletion",
+        "annotations": [
+          {
+            "line": 1,
+            "token": "셀의 입력과 결과",
+            "text": "위 셀에서 정의한 변수·함수를 사용합니다. 할당문은 값을 저장하고 마지막 식은 Jupyter 결과 영역에 표시됩니다. 셀 실행 순서와 반환 자료형을 함께 확인하세요."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 28,
+        "title": "4.3. ChatNVIDIA 클라이언트 요청",
+        "code": "",
+        "annotations": [],
+        "notice": "인증 설정·요청 진단 또는 인덱스 역직렬화가 포함된 셀입니다. 원본 수업 환경에서 설정을 확인하고, 인증 정보나 전체 요청을 출력·공유하지 마세요. 이 셀은 복사 코드에서 제외했습니다."
+      },
+      {
+        "cell": 29,
+        "title": "4.3. ChatNVIDIA 클라이언트 요청",
+        "code": "",
+        "annotations": [],
+        "notice": "인증 설정·요청 진단 또는 인덱스 역직렬화가 포함된 셀입니다. 원본 수업 환경에서 설정을 확인하고, 인증 정보나 전체 요청을 출력·공유하지 마세요. 이 셀은 복사 코드에서 제외했습니다."
+      },
+      {
+        "cell": 30,
+        "title": "4.3. ChatNVIDIA 클라이언트 요청",
+        "code": "",
+        "annotations": [],
+        "notice": "인증 설정·요청 진단 또는 인덱스 역직렬화가 포함된 셀입니다. 원본 수업 환경에서 설정을 확인하고, 인증 정보나 전체 요청을 출력·공유하지 마세요. 이 셀은 복사 코드에서 제외했습니다."
+      },
+      {
+        "cell": 32,
+        "title": "[참고]",
+        "code": "",
+        "annotations": [],
+        "notice": "인증 설정·요청 진단 또는 인덱스 역직렬화가 포함된 셀입니다. 원본 수업 환경에서 설정을 확인하고, 인증 정보나 전체 요청을 출력·공유하지 마세요. 이 셀은 복사 코드에서 제외했습니다."
+      },
+      {
+        "cell": 34,
+        "title": "[참고]",
+        "code": "from langchain_nvidia_ai_endpoints import ChatNVIDIA\n\nmodel_list = [\"nvidia/nemotron-3.5-lightning-30b-a3b\"]\n\nfor model_name in model_list:\n    llm = ChatNVIDIA(\n        model=model_name,\n        timeout=300,\n        temperature=1,\n        top_p=0.95,\n        max_completion_tokens=1536,\n        model_kwargs={\n            \"chat_template_kwargs\": {\"enable_thinking\": True},\n            \"reasoning_budget\": 1024,\n        },\n    )\n    print(f\"TRIAL: {model_name}\")\n    try: \n        last = -1\n        for chunk in llm.stream(\"Tell me about yourself! 2 sentences.\"):\n            ## SOME CHUNKS MAY CARRY FINAL RESPONSES\n            if chunk.content: \n                if last != 0: \n                    print(\"[ RESPONSE  ] \", end=\"\")\n                    last = 0\n                print(chunk.content, end=\"\")\n            ## SOME CHUNKS MAY CARRY REASONING (PRE-RESPONSE) DATA\n            elif chunk.additional_kwargs.get(\"reasoning_content\"): \n                if last != 1:\n                    print(\"[ REASONING ] \", end=\"\")\n                    last = 1\n                print(chunk.additional_kwargs.get(\"reasoning_content\"), end=\"\")\n            ## AND SOME CHUNKS MAY CARRY ADDITIONAL METADATA, LIKE USAGE/STATUS\n            else: \n                if last != 2:\n                    print()\n                    last = 2\n                # print(\" - \", repr(chunk))\n                print(\"[ METADATA  ]\", {k:v for k,v in chunk.__dict__.items() if bool(v)})\n    except Exception as e: \n        print(f\"EXCEPTION: {e}\")    ## If some models fail, feel free to use others\n    except KeyboardInterrupt:\n        print(f\"Stopped manually\")  ## Feel free to hit square while running\n        break\n    print(\"\\n\\n\" + \"=\"*84)",
+        "annotations": [
+          {
+            "line": 6,
+            "token": "ChatNVIDIA(",
+            "text": "수업의 NVIDIA 모델 클라이언트를 구성합니다. 생성 자체는 invoke/stream 등 호출 시 일어납니다."
+          },
+          {
+            "line": 17,
+            "token": "print(",
+            "text": "현재 값이나 진행 상태를 화면에 표시합니다. 반환값을 다음 체인으로 전달하는 것과는 다릅니다."
+          },
+          {
+            "line": 20,
+            "token": ".stream(",
+            "text": "완성 결과를 기다리는 대신 출력 조각을 순서대로 받습니다. 각 조각의 자료형을 확인하세요."
+          }
+        ],
+        "notice": ""
+      }
+    ]
+  },
+  "03-langchain-intro": {
+    "filename": "03_langchain_intro.ipynb",
+    "url": "https://drive.google.com/file/d/1NwJa-PldbQqvuMMo0ENAVYFaMA6zfO9e/view",
+    "totalCells": 32,
+    "blocks": [
+      {
+        "cell": 3,
+        "title": "학습 목표:",
+        "code": "",
+        "annotations": [],
+        "notice": "인증 설정·요청 진단 또는 인덱스 역직렬화가 포함된 셀입니다. 원본 수업 환경에서 설정을 확인하고, 인증 정보나 전체 요청을 출력·공유하지 마세요. 이 셀은 복사 코드에서 제외했습니다."
+      },
+      {
+        "cell": 9,
+        "title": "Part 2: Chain과 Runnable",
+        "code": "from langchain_core.runnables import RunnableLambda, RunnablePassthrough\nfrom functools import partial\n\n################################################################################\n## Very simple \"take input and return it\"\nidentity = RunnableLambda(lambda x: x)  ## Or RunnablePassthrough works\n\n################################################################################\n## Given an arbitrary function, you can make a runnable with it\ndef print_and_return(x, preface=\"\"):\n    print(f\"{preface}{x}\")\n    return x\n\nrprint0 = RunnableLambda(print_and_return)\n\n################################################################################\n## You can also pre-fill some of values using functools.partial\nrprint1 = RunnableLambda(partial(print_and_return, preface=\"1: \"))\n\n################################################################################\n## And you can use the same idea to make your own custom Runnable generator\ndef RPrint(preface=\"\"):\n    return RunnableLambda(partial(print_and_return, preface=preface))\n\n################################################################################\n## Chaining two runnables\nchain1 = identity | rprint0\nchain1.invoke(\"Hello World!\")\nprint()\n\n################################################################################\n## Chaining that one in as well\noutput = (\n    chain1           ## Prints \"Welcome Home!\" & passes \"Welcome Home!\" onward\n    | rprint1        ## Prints \"1: Welcome Home!\" & passes \"Welcome Home!\" onward\n    | RPrint(\"2: \")  ## Prints \"2: Welcome Home!\" & passes \"Welcome Home!\" onward\n).invoke(\"Welcome Home!\")\n\n## Final Output Is Preserved As \"Welcome Home!\"\nprint(\"\\nOutput:\", output)",
+        "annotations": [
+          {
+            "line": 1,
+            "token": "RunnableLambda",
+            "text": "Python 함수를 Runnable로 감싸 invoke/stream 및 파이프 연결 인터페이스를 제공합니다."
+          },
+          {
+            "line": 1,
+            "token": "RunnablePassthrough",
+            "text": "입력을 바꾸지 않고 전달합니다. 다른 분기가 계산되는 동안 원래 값을 보존할 때 사용합니다."
+          },
+          {
+            "line": 11,
+            "token": "print(",
+            "text": "현재 값이나 진행 상태를 화면에 표시합니다. 반환값을 다음 체인으로 전달하는 것과는 다릅니다."
+          },
+          {
+            "line": 28,
+            "token": ".invoke(",
+            "text": "앞서 구성한 체인을 주어진 입력으로 한 번 실행하고 완료 결과를 받습니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 12,
+        "title": "예제 1: 간단한 LLM Chain",
+        "code": "from langchain_nvidia_ai_endpoints import ChatNVIDIA\nfrom langchain_core.output_parsers import StrOutputParser\nfrom langchain_core.prompts import ChatPromptTemplate\n\n## Simple Chat Pipeline\nchat_llm = ChatNVIDIA(model=\"nvidia/nemotron-3.5-lightning-30b-a3b\", timeout=300, model_kwargs={\"chat_template_kwargs\": {\"enable_thinking\": False}})\n\nprompt = ChatPromptTemplate.from_messages([\n    (\"system\", \"Only respond in rhymes\"),\n    (\"user\", \"{input}\")\n])\n\nrhyme_chain = prompt | chat_llm | StrOutputParser()\n\nprint(rhyme_chain.invoke({\"input\" : \"Tell me about birds!\"}))",
+        "annotations": [
+          {
+            "line": 2,
+            "token": "StrOutputParser",
+            "text": "모델의 메시지 객체를 문자열로 바꾸어 다음 함수나 화면에서 사용할 수 있게 합니다."
+          },
+          {
+            "line": 3,
+            "token": "ChatPromptTemplate",
+            "text": "중괄호 변수에 입력 값을 넣어 모델용 메시지를 구성합니다. 필요한 키가 없으면 호출 전에 실패합니다."
+          },
+          {
+            "line": 6,
+            "token": "ChatNVIDIA(",
+            "text": "수업의 NVIDIA 모델 클라이언트를 구성합니다. 생성 자체는 invoke/stream 등 호출 시 일어납니다."
+          },
+          {
+            "line": 15,
+            "token": ".invoke(",
+            "text": "앞서 구성한 체인을 주어진 입력으로 한 번 실행하고 완료 결과를 받습니다."
+          },
+          {
+            "line": 15,
+            "token": "print(",
+            "text": "현재 값이나 진행 상태를 화면에 표시합니다. 반환값을 다음 체인으로 전달하는 것과는 다릅니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 14,
+        "title": "예제 1: 간단한 LLM Chain",
+        "code": "import gradio as gr\n\n#######################################################\n## Non-streaming Interface like that shown above\n\n# def rhyme_chat(message, history):\n#     return rhyme_chain.invoke({\"input\" : message})\n\n# gr.ChatInterface(rhyme_chat).launch()\n\n#######################################################\n## Streaming Interface\n\ndef rhyme_chat_stream(message, history):\n    ## This is a generator function, where each call will yield the next entry\n    buffer = \"\"\n    for token in rhyme_chain.stream({\"input\" : message}):\n        buffer += token\n        yield buffer\n\n## Uncomment when you're ready to try this.\ndemo = gr.ChatInterface(rhyme_chat_stream).queue()\nwindow_kwargs = {} # or {\"server_name\": \"0.0.0.0\", \"root_path\": \"/7860/\"}\ndemo.launch(share=True, debug=True, **window_kwargs) \n\n## IMPORTANT!! When you're done, please click the Square button (twice to be safe) to stop the session.",
+        "annotations": [
+          {
+            "line": 17,
+            "token": ".stream(",
+            "text": "완성 결과를 기다리는 대신 출력 조각을 순서대로 받습니다. 각 조각의 자료형을 확인하세요."
+          },
+          {
+            "line": 19,
+            "token": "yield ",
+            "text": "함수를 즉시 끝내지 않고 결과 조각을 내보낸 뒤 다음 반복에서 이어갑니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 16,
+        "title": "예제 2: 내부 응답",
+        "code": "from langchain_nvidia_ai_endpoints import ChatNVIDIA\nfrom langchain_core.output_parsers import StrOutputParser\nfrom langchain_core.prompts import ChatPromptTemplate\n\n## Feel free to try out some more models and see if there are better lightweight options\n## https://build.nvidia.com\ninstruct_llm = ChatNVIDIA(model=\"nvidia/nemotron-3.5-lightning-30b-a3b\", timeout=300, model_kwargs={\"chat_template_kwargs\": {\"enable_thinking\": False}})\n\nsys_msg = (\n    \"Choose the most likely topic classification given the sentence as context.\"\n    \" Only one word, no explanation.\\n[Options : {options}]\"\n)\n\n## Zero-shot classification prompt with explicit format assumptions.\nzsc_prompt = ChatPromptTemplate.from_messages([\n    (\"system\", sys_msg),\n    (\"user\", \"[[{input}]]\"),\n])\n\nzsc_chain = zsc_prompt | instruct_llm | StrOutputParser()\n\ndef zsc_call(input, options=[\"car\", \"boat\", \"airplane\", \"bike\"]):\n    return zsc_chain.invoke({\"input\" : input, \"options\" : options}).split()[0]\n\nprint(\"-\" * 80)\nprint(zsc_call(\"Should I take the next exit, or keep going to the next one?\"))\n\nprint(\"-\" * 80)\nprint(zsc_call(\"I get seasick, so I think I'll pass on the trip\"))\n\nprint(\"-\" * 80)\nprint(zsc_call(\"I'm scared of heights, so flying probably isn't for me\"))",
+        "annotations": [
+          {
+            "line": 2,
+            "token": "StrOutputParser",
+            "text": "모델의 메시지 객체를 문자열로 바꾸어 다음 함수나 화면에서 사용할 수 있게 합니다."
+          },
+          {
+            "line": 3,
+            "token": "ChatPromptTemplate",
+            "text": "중괄호 변수에 입력 값을 넣어 모델용 메시지를 구성합니다. 필요한 키가 없으면 호출 전에 실패합니다."
+          },
+          {
+            "line": 7,
+            "token": "ChatNVIDIA(",
+            "text": "수업의 NVIDIA 모델 클라이언트를 구성합니다. 생성 자체는 invoke/stream 등 호출 시 일어납니다."
+          },
+          {
+            "line": 23,
+            "token": ".invoke(",
+            "text": "앞서 구성한 체인을 주어진 입력으로 한 번 실행하고 완료 결과를 받습니다."
+          },
+          {
+            "line": 25,
+            "token": "print(",
+            "text": "현재 값이나 진행 상태를 화면에 표시합니다. 반환값을 다음 체인으로 전달하는 것과는 다릅니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 18,
+        "title": "예제 3: 다중 구성 요소 체인",
+        "code": "from langchain_core.runnables import RunnableLambda, RunnablePassthrough\nfrom functools import partial\n\n################################################################################\n## Example of dictionary enforcement methods\ndef make_dictionary(v, key):\n    if isinstance(v, dict):\n        return v\n    return {key : v}\n\ndef RInput(key='input'):\n    '''Coercing method to mold a value (i.e. string) to in-like dict'''\n    return RunnableLambda(partial(make_dictionary, key=key))\n\ndef ROutput(key='output'):\n    '''Coercing method to mold a value (i.e. string) to out-like dict'''\n    return RunnableLambda(partial(make_dictionary, key=key))\n\ndef RPrint(preface=\"\"):\n    return RunnableLambda(partial(print_and_return, preface=preface))\n\n################################################################################\n## Common LCEL utility for pulling values from dictionaries\nfrom operator import itemgetter\n\nup_and_down = (\n    RPrint(\"A: \")\n    ## Custom ensure-dictionary process\n    | RInput()\n    | RPrint(\"B: \")\n    ## Pull-values-from-dictionary utility\n    | itemgetter(\"input\")\n    | RPrint(\"C: \")\n    ## Anything-in Dictionary-out implicit map\n    | {\n        'word1' : (lambda x : x.split()[0]),\n        'word2' : (lambda x : x.split()[1]),\n        'words' : (lambda x: x),  ## <- == to RunnablePassthrough()\n    }\n    | RPrint(\"D: \")\n    | itemgetter(\"word1\")\n    | RPrint(\"E: \")\n    ## Anything-in anything-out lambda application\n    | RunnableLambda(lambda x: x.upper())\n    | RPrint(\"F: \")\n    ## Custom ensure-dictionary process\n    | ROutput()\n)\n\nup_and_down.invoke({\"input\" : \"Hello World\"})",
+        "annotations": [
+          {
+            "line": 1,
+            "token": "RunnableLambda",
+            "text": "Python 함수를 Runnable로 감싸 invoke/stream 및 파이프 연결 인터페이스를 제공합니다."
+          },
+          {
+            "line": 1,
+            "token": "RunnablePassthrough",
+            "text": "입력을 바꾸지 않고 전달합니다. 다른 분기가 계산되는 동안 원래 값을 보존할 때 사용합니다."
+          },
+          {
+            "line": 32,
+            "token": "itemgetter(",
+            "text": "입력 딕셔너리에서 지정한 키의 값만 선택합니다. 다음 단계가 문자열을 기대하는지 확인하세요."
+          },
+          {
+            "line": 50,
+            "token": ".invoke(",
+            "text": "앞서 구성한 체인을 주어진 입력으로 한 번 실행하고 완료 결과를 받습니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 19,
+        "title": "예제 3: 다중 구성 요소 체인",
+        "code": "## NOTE how the dictionary enforcement methods make it easy to make the following syntax equivalent\nup_and_down.invoke(\"Hello World\")",
+        "annotations": [
+          {
+            "line": 2,
+            "token": ".invoke(",
+            "text": "앞서 구성한 체인을 주어진 입력으로 한 번 실행하고 완료 결과를 받습니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 21,
+        "title": "Part 4: [실습] 운율 주제 바꾸기 챗봇",
+        "code": "from langchain_nvidia_ai_endpoints import ChatNVIDIA\n\ninstruct_llm = ChatNVIDIA(model=\"nvidia/nemotron-3.5-lightning-30b-a3b\", timeout=300, model_kwargs={\"chat_template_kwargs\": {\"enable_thinking\": False}})\n[model.id for model in instruct_llm.available_models]",
+        "annotations": [
+          {
+            "line": 3,
+            "token": "ChatNVIDIA(",
+            "text": "수업의 NVIDIA 모델 클라이언트를 구성합니다. 생성 자체는 invoke/stream 등 호출 시 일어납니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 22,
+        "title": "Part 4: [실습] 운율 주제 바꾸기 챗봇",
+        "code": "from langchain_core.output_parsers import StrOutputParser\nfrom langchain_core.prompts import ChatPromptTemplate\nfrom copy import deepcopy\n\nprompt1 = ChatPromptTemplate.from_messages([(\"user\", (\n    \"INSTRUCTION: Only respond in rhymes\"\n    \"\\n\\nPROMPT: {input}\"\n))])\n\nprompt2 =  ChatPromptTemplate.from_messages([(\"user\", (\n    \"INSTRUCTION: Only responding in rhyme, change the topic of the input poem to be about {topic}!\"\n    \" Make it happy! Try to keep the same sentence structure, but make sure it's easy to recite!\"\n    \" Try not to rhyme a word with itself.\"\n    \"\\n\\nOriginal Poem: {input}\"\n    \"\\n\\nNew Topic: {topic}\"\n))])\n\n## These are the main chains, constructed here as modules of functionality.\nchain1 = prompt1 | instruct_llm | StrOutputParser()  ## only expects input\nchain2 = prompt2 | instruct_llm | StrOutputParser()  ## expects both input and topic\n\n################################################################################\n## SUMMARY OF TASK: chain1 currently gets invoked for the first input.\n##  Please invoke chain2 for subsequent invocations.\n\ndef rhyme_chat2_stream(message, history, return_buffer=True):\n    '''This is a generator function, where each call will yield the next entry'''\n\n    first_poem = None\n    # Updated to handle the dictionary messaging scheme\n    for entry in history:\n        if entry.get(\"role\") == \"assistant\":\n            content = entry.get(\"content\", \"\")\n            # Logic to extract the poem from previous assistant response\n            if \"Let me think!\" in content:\n                # Splits by the \"think\" preface and the \"rewrite\" suffix\n                parts = content.split(\"\\n\\n\")\n                if len(parts) > 2:\n                    first_poem = parts[1]\n                    break\n\n    if first_poem is None:\n        ## First Case: Generate the initial poem using chain1\n        buffer = \"Oh! I can make a wonderful poem about that! Let me think!\\n\\n\"\n        yield buffer if return_buffer else buffer\n\n        inst_out = \"\"\n        chat_gen = chain1.stream({\"input\" : message})\n        for token in chat_gen:\n            inst_out += token\n            buffer += token\n            yield buffer if return_buffer else token\n\n        passage = \"\\n\\nNow let me rewrite it with a different focus! What should the new focus be?\"\n        buffer += passage\n        yield buffer if return_buffer else passage\n\n    else:\n        ## Subsequent Cases: There is a poem to start with. Generate a similar one with a new topic!\n\n        yield f\"Not Implemented!!!\"; return ## <- TODO: Comment this out\n        \n        ########################################################################\n        ## TODO: Invoke the second chain to generate the new rhymes.\n\n        # buffer = f\"Sure! Here you go!\\n\\n\" ## <- TODO: Uncomment these lines\n        # yield buffer\n        \n        ## TODO: Iterate over stream generator for second generation (using chain2)\n\n        ## END TODO\n        ########################################################################\n\n        passage = \"\\n\\nThis is fun! Give me another topic!\"\n        buffer += passage\n        yield buffer if return_buffer else passage\n\n################################################################################\n## Below: This is a small-scale simulation of the gradio routine.\n\ndef queue_fake_streaming_gradio(chat_stream, history=[], max_questions=3):\n\n    ## Print starter messages\n    for entry in history:\n        role = entry.get(\"role\").capitalize()\n        print(f\"\\n[ {role} ]:\", entry.get(\"content\"))\n\n    ## Mimic the loop\n    for _ in range(max_questions):\n        user_input = input(\"\\n[ Human ]: \")\n        \n        # Add user message to history in dict format\n        history.append({\"role\": \"user\", \"content\": user_input})\n        \n        print(\"\\n[ Agent ]: \")\n        full_response = \"\"\n        \n        # Generator loop\n        for token in chat_stream(user_input, history, return_buffer=False):\n            print(token, end='')\n            full_response += token\n            \n        # Add assistant message to history in dict format\n        history.append({\"role\": \"assistant\", \"content\": full_response})\n        print(\"\\n\")\n\n## history is of format [[User response 0, Bot response 0], ...]\nhistory = [{\"role\": \"assistant\", \"content\": \"Let me help you make a poem! What would you like for me to write?\"}]\n\n## Simulating the queueing of a streaming gradio interface, using python input\nqueue_fake_streaming_gradio(\n    chat_stream = rhyme_chat2_stream,\n    history = history\n)",
+        "annotations": [
+          {
+            "line": 1,
+            "token": "StrOutputParser",
+            "text": "모델의 메시지 객체를 문자열로 바꾸어 다음 함수나 화면에서 사용할 수 있게 합니다."
+          },
+          {
+            "line": 2,
+            "token": "ChatPromptTemplate",
+            "text": "중괄호 변수에 입력 값을 넣어 모델용 메시지를 구성합니다. 필요한 키가 없으면 호출 전에 실패합니다."
+          },
+          {
+            "line": 26,
+            "token": "return_buffer",
+            "text": "화면에는 누적 문자열, 터미널에는 새 조각만 보내기 위한 분기 플래그입니다."
+          },
+          {
+            "line": 27,
+            "token": "yield ",
+            "text": "함수를 즉시 끝내지 않고 결과 조각을 내보낸 뒤 다음 반복에서 이어갑니다."
+          },
+          {
+            "line": 48,
+            "token": ".stream(",
+            "text": "완성 결과를 기다리는 대신 출력 조각을 순서대로 받습니다. 각 조각의 자료형을 확인하세요."
+          },
+          {
+            "line": 61,
+            "token": "TODO",
+            "text": "학습자가 구현할 원본 빈칸입니다. 위의 문제 풀이에서 입력·출력과 교체할 위치를 확인하세요."
+          },
+          {
+            "line": 86,
+            "token": "print(",
+            "text": "현재 값이나 진행 상태를 화면에 표시합니다. 반환값을 다음 체인으로 전달하는 것과는 다릅니다."
+          },
+          {
+            "line": 90,
+            "token": "input(",
+            "text": "사용자의 문자열 입력을 기다립니다. 뒤 셀에서 쓸 변수라면 먼저 이 셀을 실행하세요."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 23,
+        "title": "Part 4: [실습] 운율 주제 바꾸기 챗봇",
+        "code": "## Simple way to initialize history for the ChatInterface\nchatbot = gr.Chatbot(value = [{\"role\": \"assistant\", \"content\": \"Let me help you make a poem! What would you like for me to write?\"}])\n\n## IF USING COLAB: Share=False is faster\ngr.ChatInterface(rhyme_chat2_stream, chatbot=chatbot).queue().launch(debug=True, share=True)",
+        "annotations": [
+          {
+            "line": 1,
+            "token": "셀의 입력과 결과",
+            "text": "위 셀에서 정의한 변수·함수를 사용합니다. 할당문은 값을 저장하고 마지막 식은 Jupyter 결과 영역에 표시됩니다. 셀 실행 순서와 반환 자료형을 함께 확인하세요."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 25,
+        "title": "Part 5: [실습] 더 깊은 LangChain 통합 사용하기",
+        "code": "from langserve import RemoteRunnable\nfrom langchain_core.output_parsers import StrOutputParser\nfrom langchain_nvidia_ai_endpoints import ChatNVIDIA\n\nllm = RemoteRunnable(\"http://0.0.0.0:9012/basic_chat/\") | StrOutputParser()\nfor token in llm.stream(\"Hello World! How is it going?\"):\n    print(token, end='')\n\n## Equivalent to the following, assuming you're using the same model\n# llm = ChatNVIDIA(model=\"nvidia/nemotron-3.5-lightning-30b-a3b\", timeout=300, model_kwargs={\"chat_template_kwargs\": {\"enable_thinking\": False}}) | StrOutputParser()\n# for token in llm.stream(\"Hello World! How is it going?\"):\n#     print(token, end='')",
+        "annotations": [
+          {
+            "line": 2,
+            "token": "StrOutputParser",
+            "text": "모델의 메시지 객체를 문자열로 바꾸어 다음 함수나 화면에서 사용할 수 있게 합니다."
+          },
+          {
+            "line": 5,
+            "token": "RemoteRunnable(",
+            "text": "HTTP 서버에 있는 Runnable을 원격 호출할 클라이언트를 만듭니다."
+          },
+          {
+            "line": 6,
+            "token": ".stream(",
+            "text": "완성 결과를 기다리는 대신 출력 조각을 순서대로 받습니다. 각 조각의 자료형을 확인하세요."
+          },
+          {
+            "line": 7,
+            "token": "print(",
+            "text": "현재 값이나 진행 상태를 화면에 표시합니다. 반환값을 다음 체인으로 전달하는 것과는 다릅니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 28,
+        "title": "Necessary Endpoints",
+        "code": "# %%js\n# // Manual Access Without NGINX\n# var url = 'http://'+window.location.host+':8090';\n# element.innerHTML = '<a style=\"color:green;\" target=\"_blank\" href='+url+'><h1>< Link To Gradio Frontend ></h1></a>';",
+        "annotations": [
+          {
+            "line": 1,
+            "token": "셀의 입력과 결과",
+            "text": "위 셀에서 정의한 변수·함수를 사용합니다. 할당문은 값을 저장하고 마지막 식은 Jupyter 결과 영역에 표시됩니다. 셀 실행 순서와 반환 자료형을 함께 확인하세요."
+          }
+        ],
+        "notice": ""
+      }
+    ]
+  },
+  "04-running-state": {
+    "filename": "04_running_state.ipynb",
+    "url": "https://drive.google.com/file/d/1f4MjRHdMimUSmrbiK2-NCP1BGCcwArCk/view",
+    "totalCells": 42,
+    "blocks": [
+      {
+        "cell": 3,
+        "title": "학습 목표:",
+        "code": "",
+        "annotations": [],
+        "notice": "인증 설정·요청 진단 또는 인덱스 역직렬화가 포함된 셀입니다. 원본 수업 환경에서 설정을 확인하고, 인증 정보나 전체 요청을 출력·공유하지 마세요. 이 셀은 복사 코드에서 제외했습니다."
+      },
+      {
+        "cell": 4,
+        "title": "학습 목표:",
+        "code": "from langchain_nvidia_ai_endpoints import ChatNVIDIA\n# ChatNVIDIA.get_available_models()",
+        "annotations": [
+          {
+            "line": 1,
+            "token": "셀의 입력과 결과",
+            "text": "위 셀에서 정의한 변수·함수를 사용합니다. 할당문은 값을 저장하고 마지막 식은 Jupyter 결과 영역에 표시됩니다. 셀 실행 순서와 반환 자료형을 함께 확인하세요."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 5,
+        "title": "학습 목표:",
+        "code": "## Useful utility method for printing intermediate states\nfrom langchain_core.runnables import RunnableLambda\nfrom functools import partial\n\ndef RPrint(preface=\"State: \"):\n    def print_and_return(x, preface=\"\"):\n        print(f\"{preface}{x}\")\n        return x\n    return RunnableLambda(partial(print_and_return, preface=preface))\n\ndef PPrint(preface=\"State: \"):\n    def print_and_return(x, preface=\"\"):\n        pprint(preface, x)\n        return x\n    return RunnableLambda(partial(print_and_return, preface=preface))",
+        "annotations": [
+          {
+            "line": 2,
+            "token": "RunnableLambda",
+            "text": "Python 함수를 Runnable로 감싸 invoke/stream 및 파이프 연결 인터페이스를 제공합니다."
+          },
+          {
+            "line": 7,
+            "token": "print(",
+            "text": "현재 값이나 진행 상태를 화면에 표시합니다. 반환값을 다음 체인으로 전달하는 것과는 다릅니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 7,
+        "title": "Part 1: 변수가 계속 흐르게 하기",
+        "code": "# %%time\n## ^^ This notebook is timed, which will print out how long it all took\n\nfrom langchain_core.runnables import RunnableLambda\nfrom langchain_nvidia_ai_endpoints import ChatNVIDIA\nfrom langchain_core.output_parsers import StrOutputParser\nfrom langchain_core.prompts import ChatPromptTemplate\nfrom typing import List, Union\nfrom operator import itemgetter\n\n## Zero-shot classification prompt and chain\nsys_msg = (\n    \"Choose the most likely topic classification given the sentence as context.\"\n    \" Only one word, no explanation.\\n[Options : {options}]\"\n)\n\nzsc_prompt = ChatPromptTemplate.from_messages([\n    (\"system\", sys_msg),\n    (\"user\", \"[[{input}]]\"),\n])\n\n## Define your simple instruct_model\ninstruct_chat = ChatNVIDIA(model=\"nvidia/nemotron-3.5-lightning-30b-a3b\", timeout=300, model_kwargs={\"chat_template_kwargs\": {\"enable_thinking\": False}})\ninstruct_llm = instruct_chat | StrOutputParser()\n\nzsc_chain = zsc_prompt | instruct_llm\n\n## Function that just prints out the first word of the output. With early stopping bind\ndef zsc_call(input, options=[\"car\", \"boat\", \"airplane\", \"bike\"]):\n    return zsc_chain.invoke({\"input\" : input, \"options\" : options}).split()[0]\n\nprint(\"-\" * 80)\nprint(zsc_call(\"Should I take the next exit, or keep going to the next one?\"))\n\nprint(\"-\" * 80)\nprint(zsc_call(\"I get seasick, so I think I'll pass on the trip\"))\n\nprint(\"-\" * 80)\nprint(zsc_call(\"I'm scared of heights, so flying probably isn't for me\"))",
+        "annotations": [
+          {
+            "line": 4,
+            "token": "RunnableLambda",
+            "text": "Python 함수를 Runnable로 감싸 invoke/stream 및 파이프 연결 인터페이스를 제공합니다."
+          },
+          {
+            "line": 6,
+            "token": "StrOutputParser",
+            "text": "모델의 메시지 객체를 문자열로 바꾸어 다음 함수나 화면에서 사용할 수 있게 합니다."
+          },
+          {
+            "line": 7,
+            "token": "ChatPromptTemplate",
+            "text": "중괄호 변수에 입력 값을 넣어 모델용 메시지를 구성합니다. 필요한 키가 없으면 호출 전에 실패합니다."
+          },
+          {
+            "line": 23,
+            "token": "ChatNVIDIA(",
+            "text": "수업의 NVIDIA 모델 클라이언트를 구성합니다. 생성 자체는 invoke/stream 등 호출 시 일어납니다."
+          },
+          {
+            "line": 30,
+            "token": ".invoke(",
+            "text": "앞서 구성한 체인을 주어진 입력으로 한 번 실행하고 완료 결과를 받습니다."
+          },
+          {
+            "line": 32,
+            "token": "print(",
+            "text": "현재 값이나 진행 상태를 화면에 표시합니다. 반환값을 다음 체인으로 전달하는 것과는 다릅니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 9,
+        "title": "Part 1: 변수가 계속 흐르게 하기",
+        "code": "%%time\n## ^^ This notebook is timed, which will print out how long it all took\ngen_prompt = ChatPromptTemplate.from_template(\n    \"Make a new sentence about the the following topic: {topic}. Be creative!\"\n)\n\ngen_chain = gen_prompt | instruct_llm\n\ninput_msg = \"I get seasick, so I think I'll pass on the trip\"\noptions = [\"car\", \"boat\", \"airplane\", \"bike\"]\n\nchain = (\n    ## -> {\"input\", \"options\"}\n    {'topic' : zsc_chain}\n    | PPrint()\n    ## -> {**, \"topic\"}\n    | gen_chain\n    ## -> string\n)\n\nchain.invoke({\"input\" : input_msg, \"options\" : options})",
+        "annotations": [
+          {
+            "line": 1,
+            "token": "%%time",
+            "text": "셀 전체 실행 시간을 측정하는 Jupyter 매직입니다. 일반 .py 파일에서는 제거해야 합니다."
+          },
+          {
+            "line": 3,
+            "token": "ChatPromptTemplate",
+            "text": "중괄호 변수에 입력 값을 넣어 모델용 메시지를 구성합니다. 필요한 키가 없으면 호출 전에 실패합니다."
+          },
+          {
+            "line": 21,
+            "token": ".invoke(",
+            "text": "앞서 구성한 체인을 주어진 입력으로 한 번 실행하고 완료 결과를 받습니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 11,
+        "title": "Part 1: 변수가 계속 흐르게 하기",
+        "code": "%%time\n## ^^ This notebook is timed, which will print out how long it all took\n\nfrom langchain_core.runnables import RunnableBranch, RunnablePassthrough\nfrom langchain_core.runnables.passthrough import RunnableAssign\nfrom functools import partial\n\nbig_chain = (\n    PPrint()\n    ## Manual mapping. Can be useful sometimes and inside branch chains\n    | {'input' : lambda d: d.get('input'), 'topic' : zsc_chain}\n    | PPrint()\n    ## RunnableAssign passing. Better for running state chains by default\n    | RunnableAssign({'generation' : gen_chain})\n    | PPrint()\n    ## Using the input and generation together\n    | RunnableAssign({'combination' : (\n        ChatPromptTemplate.from_template(\n            \"Consider the following passages:\"\n            \"\\nP1: {input}\"\n            \"\\nP2: {generation}\"\n            \"\\n\\nCombine the ideas from both sentences into one simple one.\"\n        )\n        | instruct_llm\n    )})\n)\n\noutput = big_chain.invoke({\n    \"input\" : \"I get seasick, so I think I'll pass on the trip\",\n    \"options\" : [\"car\", \"boat\", \"airplane\", \"bike\", \"unknown\"]\n})\npprint(\"Final Output: \", output)",
+        "annotations": [
+          {
+            "line": 1,
+            "token": "%%time",
+            "text": "셀 전체 실행 시간을 측정하는 Jupyter 매직입니다. 일반 .py 파일에서는 제거해야 합니다."
+          },
+          {
+            "line": 4,
+            "token": "RunnablePassthrough",
+            "text": "입력을 바꾸지 않고 전달합니다. 다른 분기가 계산되는 동안 원래 값을 보존할 때 사용합니다."
+          },
+          {
+            "line": 4,
+            "token": "RunnableBranch",
+            "text": "조건을 순서대로 확인해 해당 분기를 실행합니다. 어떤 분기도 맞지 않으면 기본 분기를 실행합니다."
+          },
+          {
+            "line": 5,
+            "token": "RunnableAssign",
+            "text": "기존 딕셔너리를 유지하면서 계산 결과를 지정한 키에 합칩니다. 뒤 단계는 갱신된 상태를 받습니다."
+          },
+          {
+            "line": 18,
+            "token": "ChatPromptTemplate",
+            "text": "중괄호 변수에 입력 값을 넣어 모델용 메시지를 구성합니다. 필요한 키가 없으면 호출 전에 실패합니다."
+          },
+          {
+            "line": 28,
+            "token": ".invoke(",
+            "text": "앞서 구성한 체인을 주어진 입력으로 한 번 실행하고 완료 결과를 받습니다."
+          },
+          {
+            "line": 32,
+            "token": "print(",
+            "text": "현재 값이나 진행 상태를 화면에 표시합니다. 반환값을 다음 체인으로 전달하는 것과는 다릅니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 17,
+        "title": "지식 베이스 정의하기",
+        "code": "from pydantic import BaseModel, Field\nfrom typing import Dict, Union, Optional\n\ninstruct_chat = ChatNVIDIA(model=\"nvidia/nemotron-3.5-lightning-30b-a3b\", timeout=300, model_kwargs={\"chat_template_kwargs\": {\"enable_thinking\": False}})\n\nclass KnowledgeBase(BaseModel):\n    ## Fields of the BaseModel, which will be validated/assigned when the knowledge base is constructed\n    topic: str = Field('general', description=\"Current conversation topic\")\n    user_preferences: Dict[str, Union[str, int]] = Field({}, description=\"User preferences and choices\")\n    session_notes: list = Field([], description=\"Notes on the ongoing session\")\n    unresolved_queries: list = Field([], description=\"Unresolved user queries\")\n    action_items: list = Field([], description=\"Actionable items identified during the conversation\")\n\nprint(repr(KnowledgeBase(topic = \"Travel\")))",
+        "annotations": [
+          {
+            "line": 1,
+            "token": "BaseModel",
+            "text": "구조화된 지식·요약 상태를 표현하는 Pydantic 모델을 정의하거나 참조합니다."
+          },
+          {
+            "line": 4,
+            "token": "ChatNVIDIA(",
+            "text": "수업의 NVIDIA 모델 클라이언트를 구성합니다. 생성 자체는 invoke/stream 등 호출 시 일어납니다."
+          },
+          {
+            "line": 8,
+            "token": "Field(",
+            "text": "스키마 필드의 기본값과 설명을 지정합니다. 모르는 값은 임의로 채우지 않습니다."
+          },
+          {
+            "line": 14,
+            "token": "print(",
+            "text": "현재 값이나 진행 상태를 화면에 표시합니다. 반환값을 다음 체인으로 전달하는 것과는 다릅니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 19,
+        "title": "지식 베이스 정의하기",
+        "code": "from langchain_core.output_parsers import PydanticOutputParser\n\ninstruct_string = PydanticOutputParser(pydantic_object=KnowledgeBase).get_format_instructions()\npprint(instruct_string)",
+        "annotations": [
+          {
+            "line": 1,
+            "token": "PydanticOutputParser",
+            "text": "모델 텍스트를 지정한 Pydantic 스키마로 파싱합니다. 형식 검증과 사실 검증은 별개입니다."
+          },
+          {
+            "line": 3,
+            "token": "get_format_instructions",
+            "text": "모델이 따라야 할 JSON 필드와 출력 형식 설명을 생성합니다."
+          },
+          {
+            "line": 4,
+            "token": "print(",
+            "text": "현재 값이나 진행 상태를 화면에 표시합니다. 반환값을 다음 체인으로 전달하는 것과는 다릅니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 22,
+        "title": "Runnable 추출 모듈",
+        "code": "################################################################################\n## Definition of RExtract\ndef RExtract(pydantic_class, llm, prompt):\n    '''\n    Runnable Extraction module\n    Returns a knowledge dictionary populated by slot-filling extraction\n    '''\n    parser = PydanticOutputParser(pydantic_object=pydantic_class)\n    instruct_merge = RunnableAssign({'format_instructions' : lambda x: parser.get_format_instructions()})\n    def preparse(string):\n        if '{' not in string: string = '{' + string\n        if '}' not in string: string = string + '}'\n        string = (string\n            .replace(\"\\\\_\", \"_\")\n            .replace(\"\\n\", \" \")\n            .replace(\"\\]\", \"]\")\n            .replace(\"\\[\", \"[\")\n        )\n        # print(string)  ## Good for diagnostics\n        return string\n    return instruct_merge | prompt | llm | preparse | parser\n\n################################################################################\n## Practical Use of RExtract\n\nparser_prompt = ChatPromptTemplate.from_template(\n    \"Update the knowledge base: {format_instructions}. Only use information from the input.\"\n    \"\\n\\nNEW MESSAGE: {input}\"\n)\n\nextractor = RExtract(KnowledgeBase, instruct_llm, parser_prompt)\n\nknowledge = extractor.invoke({'input' : \"I love flowers so much! The orchids are amazing! Can you buy me some?\"})\npprint(knowledge)",
+        "annotations": [
+          {
+            "line": 8,
+            "token": "PydanticOutputParser",
+            "text": "모델 텍스트를 지정한 Pydantic 스키마로 파싱합니다. 형식 검증과 사실 검증은 별개입니다."
+          },
+          {
+            "line": 9,
+            "token": "RunnableAssign",
+            "text": "기존 딕셔너리를 유지하면서 계산 결과를 지정한 키에 합칩니다. 뒤 단계는 갱신된 상태를 받습니다."
+          },
+          {
+            "line": 9,
+            "token": "get_format_instructions",
+            "text": "모델이 따라야 할 JSON 필드와 출력 형식 설명을 생성합니다."
+          },
+          {
+            "line": 26,
+            "token": "ChatPromptTemplate",
+            "text": "중괄호 변수에 입력 값을 넣어 모델용 메시지를 구성합니다. 필요한 키가 없으면 호출 전에 실패합니다."
+          },
+          {
+            "line": 33,
+            "token": ".invoke(",
+            "text": "앞서 구성한 체인을 주어진 입력으로 한 번 실행하고 완료 결과를 받습니다."
+          },
+          {
+            "line": 34,
+            "token": "print(",
+            "text": "현재 값이나 진행 상태를 화면에 표시합니다. 반환값을 다음 체인으로 전달하는 것과는 다릅니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 25,
+        "title": "동적 지식 베이스 갱신",
+        "code": "class KnowledgeBase(BaseModel):\n    firstname: str = Field('unknown', description=\"Chatting user's first name, unknown if unknown\")\n    lastname: str = Field('unknown', description=\"Chatting user's last name, unknown if unknown\")\n    location: str = Field('unknown', description=\"Where the user is located\")\n    summary: str = Field('unknown', description=\"Running summary of conversation. Update this with new input\")\n    response: str = Field('unknown', description=\"An ideal response to the user based on their new message\")\n\n\nparser_prompt = ChatPromptTemplate.from_template(\n    \"You are chatting with a user. The user just responded ('input'). Please update the knowledge base.\"\n    \" Record your response in the 'response' tag to continue the conversation.\"\n    \" Do not hallucinate any details, and make sure the knowledge base is not redundant.\"\n    \" Update the entries frequently to adapt to the conversation flow.\"\n    \"\\n{format_instructions}\"\n    \"\\n\\nOLD KNOWLEDGE BASE: {know_base}\"\n    \"\\n\\nNEW MESSAGE: {input}\"\n    \"\\n\\nNEW KNOWLEDGE BASE:\"\n)\n\n## Use the course text model for extraction\ninstruct_llm = ChatNVIDIA(model=\"nvidia/nemotron-3.5-lightning-30b-a3b\", timeout=300, model_kwargs={\"chat_template_kwargs\": {\"enable_thinking\": False}}) | StrOutputParser()\n\nextractor = RExtract(KnowledgeBase, instruct_llm, parser_prompt)\ninfo_update = RunnableAssign({'know_base' : extractor})\n\n## Initialize the knowledge base and see what you get\nstate = {'know_base' : KnowledgeBase()}\nstate['input'] = \"My name is Carmen Sandiego! Guess where I am! Hint: It's somewhere in the United States.\"\nstate = info_update.invoke(state)\npprint(state)",
+        "annotations": [
+          {
+            "line": 1,
+            "token": "BaseModel",
+            "text": "구조화된 지식·요약 상태를 표현하는 Pydantic 모델을 정의하거나 참조합니다."
+          },
+          {
+            "line": 2,
+            "token": "Field(",
+            "text": "스키마 필드의 기본값과 설명을 지정합니다. 모르는 값은 임의로 채우지 않습니다."
+          },
+          {
+            "line": 9,
+            "token": "ChatPromptTemplate",
+            "text": "중괄호 변수에 입력 값을 넣어 모델용 메시지를 구성합니다. 필요한 키가 없으면 호출 전에 실패합니다."
+          },
+          {
+            "line": 21,
+            "token": "StrOutputParser",
+            "text": "모델의 메시지 객체를 문자열로 바꾸어 다음 함수나 화면에서 사용할 수 있게 합니다."
+          },
+          {
+            "line": 21,
+            "token": "ChatNVIDIA(",
+            "text": "수업의 NVIDIA 모델 클라이언트를 구성합니다. 생성 자체는 invoke/stream 등 호출 시 일어납니다."
+          },
+          {
+            "line": 24,
+            "token": "RunnableAssign",
+            "text": "기존 딕셔너리를 유지하면서 계산 결과를 지정한 키에 합칩니다. 뒤 단계는 갱신된 상태를 받습니다."
+          },
+          {
+            "line": 29,
+            "token": ".invoke(",
+            "text": "앞서 구성한 체인을 주어진 입력으로 한 번 실행하고 완료 결과를 받습니다."
+          },
+          {
+            "line": 30,
+            "token": "print(",
+            "text": "현재 값이나 진행 상태를 화면에 표시합니다. 반환값을 다음 체인으로 전달하는 것과는 다릅니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 26,
+        "title": "동적 지식 베이스 갱신",
+        "code": "state['input'] = \"I'm in a place considered the birthplace of Jazz.\"\nstate = info_update.invoke(state)\npprint(state)",
+        "annotations": [
+          {
+            "line": 2,
+            "token": ".invoke(",
+            "text": "앞서 구성한 체인을 주어진 입력으로 한 번 실행하고 완료 결과를 받습니다."
+          },
+          {
+            "line": 3,
+            "token": "print(",
+            "text": "현재 값이나 진행 상태를 화면에 표시합니다. 반환값을 다음 체인으로 전달하는 것과는 다릅니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 27,
+        "title": "동적 지식 베이스 갱신",
+        "code": "state['input'] = \"Yeah, I'm in New Orleans... How did you know?\"\nstate = info_update.invoke(state)\npprint(state)",
+        "annotations": [
+          {
+            "line": 2,
+            "token": ".invoke(",
+            "text": "앞서 구성한 체인을 주어진 입력으로 한 번 실행하고 완료 결과를 받습니다."
+          },
+          {
+            "line": 3,
+            "token": "print(",
+            "text": "현재 값이나 진행 상태를 화면에 표시합니다. 반환값을 다음 체인으로 전달하는 것과는 다릅니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 30,
+        "title": "Part 4: [실습] 항공사 고객 서비스 봇",
+        "code": "#######################################################################################\n## Function that can be queried for information. Implementation details not important\ndef get_flight_info(d: dict) -> str:\n    \"\"\"\n    Example of a retrieval function which takes a dictionary as key. Resembles SQL DB Query\n    \"\"\"\n    req_keys = ['first_name', 'last_name', 'confirmation']\n    assert all((key in d) for key in req_keys), f\"Expected dictionary with keys {req_keys}, got {d}\"\n\n    ## Static dataset. get_key and get_val can be used to work with it, and db is your variable\n    keys = req_keys + [\"departure\", \"destination\", \"departure_time\", \"arrival_time\", \"flight_day\"]\n    values = [\n        [\"Jane\", \"Doe\", 12345, \"San Jose\", \"New Orleans\", \"12:30 PM\", \"9:30 PM\", \"tomorrow\"],\n        [\"John\", \"Smith\", 54321, \"New York\", \"Los Angeles\", \"8:00 AM\", \"11:00 AM\", \"Sunday\"],\n        [\"Alice\", \"Johnson\", 98765, \"Chicago\", \"Miami\", \"7:00 PM\", \"11:00 PM\", \"next week\"],\n        [\"Bob\", \"Brown\", 56789, \"Dallas\", \"Seattle\", \"1:00 PM\", \"4:00 PM\", \"yesterday\"],\n    ]\n    get_key = lambda d: \"|\".join([d['first_name'], d['last_name'], str(d['confirmation'])])\n    get_val = lambda l: {k:v for k,v in zip(keys, l)}\n    db = {get_key(get_val(entry)) : get_val(entry) for entry in values}\n\n    # Search for the matching entry\n    data = db.get(get_key(d))\n    if not data:\n        return (\n            f\"Based on {req_keys} = {get_key(d)}) from your knowledge base, no info on the user flight was found.\"\n            \" This process happens every time new info is learned. If it's important, ask them to confirm this info.\"\n        )\n    return (\n        f\"{data['first_name']} {data['last_name']}'s flight from {data['departure']} to {data['destination']}\"\n        f\" departs at {data['departure_time']} {data['flight_day']} and lands at {data['arrival_time']}.\"\n    )\n\n#######################################################################################\n## Usage example. Actually important\n\nprint(get_flight_info({\"first_name\" : \"Jane\", \"last_name\" : \"Doe\", \"confirmation\" : 12345}))",
+        "annotations": [
+          {
+            "line": 19,
+            "token": "zip(",
+            "text": "여러 목록을 같은 위치끼리 묶습니다. 가장 짧은 목록까지만 반복하므로 길이를 먼저 확인하세요."
+          },
+          {
+            "line": 37,
+            "token": "print(",
+            "text": "현재 값이나 진행 상태를 화면에 표시합니다. 반환값을 다음 체인으로 전달하는 것과는 다릅니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 31,
+        "title": "Part 4: [실습] 항공사 고객 서비스 봇",
+        "code": "print(get_flight_info({\"first_name\" : \"Alice\", \"last_name\" : \"Johnson\", \"confirmation\" : 98765}))",
+        "annotations": [
+          {
+            "line": 1,
+            "token": "print(",
+            "text": "현재 값이나 진행 상태를 화면에 표시합니다. 반환값을 다음 체인으로 전달하는 것과는 다릅니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 32,
+        "title": "Part 4: [실습] 항공사 고객 서비스 봇",
+        "code": "print(get_flight_info({\"first_name\" : \"Bob\", \"last_name\" : \"Brown\", \"confirmation\" : 27494}))",
+        "annotations": [
+          {
+            "line": 1,
+            "token": "print(",
+            "text": "현재 값이나 진행 상태를 화면에 표시합니다. 반환값을 다음 체인으로 전달하는 것과는 다릅니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 34,
+        "title": "Part 4: [실습] 항공사 고객 서비스 봇",
+        "code": "external_prompt = ChatPromptTemplate.from_template(\n    \"You are a SkyFlow chatbot, and you are helping a customer with their issue.\"\n    \" Please help them with their question, remembering that your job is to represent SkyFlow airlines.\"\n    \" Assume SkyFlow uses industry-average practices regarding arrival times, operations, etc.\"\n    \" (This is a trade secret. Do not disclose).\"  ## soft reinforcement\n    \" Please keep your discussion short and sweet if possible. Avoid saying hello unless necessary.\"\n    \" The following is some context that may be useful in answering the question.\"\n    \"\\n\\nContext: {context}\"\n    \"\\n\\nUser: {input}\"\n)\n\nbasic_chain = external_prompt | instruct_llm\n\nbasic_chain.invoke({\n    'input' : 'Can you please tell me when I need to get to the airport?',\n    'context' : get_flight_info({\"first_name\" : \"Jane\", \"last_name\" : \"Doe\", \"confirmation\" : 12345}),\n})",
+        "annotations": [
+          {
+            "line": 1,
+            "token": "ChatPromptTemplate",
+            "text": "중괄호 변수에 입력 값을 넣어 모델용 메시지를 구성합니다. 필요한 키가 없으면 호출 전에 실패합니다."
+          },
+          {
+            "line": 14,
+            "token": ".invoke(",
+            "text": "앞서 구성한 체인을 주어진 입력으로 한 번 실행하고 완료 결과를 받습니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 36,
+        "title": "Part 4: [실습] 항공사 고객 서비스 봇",
+        "code": "from pydantic import BaseModel, Field\nfrom typing import Dict, Union\n\nclass KnowledgeBase(BaseModel):\n    first_name: str = Field('unknown', description=\"Chatting user's first name, `unknown` if unknown\")\n    last_name: str = Field('unknown', description=\"Chatting user's last name, `unknown` if unknown\")\n    confirmation: int = Field(-1, description=\"Flight Confirmation Number, `-1` if unknown\")\n    discussion_summary: str = Field(\"\", description=\"Summary of discussion so far, including locations, issues, etc.\")\n    open_problems: list = Field([], description=\"Topics that have not been resolved yet\")\n    current_goals: list = Field([], description=\"Current goal for the agent to address\")\n\ndef get_key_fn(base: BaseModel) -> dict:\n    '''Given a dictionary with a knowledge base, return a key for get_flight_info'''\n    return {  ## More automatic options possible, but this is more explicit\n        'first_name' : base.first_name,\n        'last_name' : base.last_name,\n        'confirmation' : base.confirmation,\n    }\n\nknow_base = KnowledgeBase(first_name = \"Jane\", last_name = \"Doe\", confirmation = 12345)\n\n# get_flight_info(get_key_fn(know_base))\n\nget_key = RunnableLambda(get_key_fn)\n(get_key | get_flight_info).invoke(know_base)",
+        "annotations": [
+          {
+            "line": 1,
+            "token": "BaseModel",
+            "text": "구조화된 지식·요약 상태를 표현하는 Pydantic 모델을 정의하거나 참조합니다."
+          },
+          {
+            "line": 5,
+            "token": "Field(",
+            "text": "스키마 필드의 기본값과 설명을 지정합니다. 모르는 값은 임의로 채우지 않습니다."
+          },
+          {
+            "line": 24,
+            "token": "RunnableLambda",
+            "text": "Python 함수를 Runnable로 감싸 invoke/stream 및 파이프 연결 인터페이스를 제공합니다."
+          },
+          {
+            "line": 25,
+            "token": ".invoke(",
+            "text": "앞서 구성한 체인을 주어진 입력으로 한 번 실행하고 완료 결과를 받습니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 38,
+        "title": "목표:",
+        "code": "from langchain_core.runnables import (\n    RunnableBranch,\n    RunnableLambda,\n    RunnableMap,       ## Wrap an implicit \"dictionary\" runnable\n    RunnablePassthrough,\n)\nfrom langchain_core.runnables.passthrough import RunnableAssign\n\nfrom langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder\nfrom langchain_core.messages import BaseMessage, SystemMessage, ChatMessage, AIMessage\nfrom typing import Iterable\nimport gradio as gr\n\nexternal_prompt = ChatPromptTemplate.from_messages([\n    (\"system\", (\n        \"You are a chatbot for SkyFlow Airlines, and you are helping a customer with their issue.\"\n        \" Please chat with them! Stay concise and clear!\"\n        \" Your running knowledge base is: {know_base}.\"\n        \" This is for you only; Do not mention it!\"\n        \" \\nUsing that, we retrieved the following: {context}\\n\"\n        \" If they provide info and the retrieval fails, ask to confirm their first/last name and confirmation.\"\n        \" Do not ask them any other personal info.\"\n        \" If it's not important to know about their flight, do not ask.\"\n        \" The checking happens automatically; you cannot check manually.\"\n    )),\n    (\"assistant\", \"{output}\"),\n    (\"user\", \"{input}\"),\n])\n\n##########################################################################\n## Knowledge Base Things\n\nclass KnowledgeBase(BaseModel):\n    first_name: str = Field('unknown', description=\"Chatting user's first name, `unknown` if unknown\")\n    last_name: str = Field('unknown', description=\"Chatting user's last name, `unknown` if unknown\")\n    confirmation: Optional[int] = Field(None, description=\"Flight Confirmation Number, `-1` if unknown\")\n    discussion_summary: str = Field(\"\", description=\"Summary of discussion so far, including locations, issues, etc.\")\n    open_problems: str = Field(\"\", description=\"Topics that have not been resolved yet\")\n    current_goals: str = Field(\"\", description=\"Current goal for the agent to address\")\n\nparser_prompt = ChatPromptTemplate.from_template(\n    \"You are a chat assistant representing the airline SkyFlow, and are trying to track info about the conversation.\"\n    \" You have just received a message from the user. Please fill in the schema based on the chat.\"\n    \"\\n\\n{format_instructions}\"\n    \"\\n\\nOLD KNOWLEDGE BASE: {know_base}\"\n    \"\\n\\nASSISTANT RESPONSE: {output}\"\n    \"\\n\\nUSER MESSAGE: {input}\"\n    \"\\n\\nNEW KNOWLEDGE BASE: \"\n)\n\n## Your goal is to invoke the following through natural conversation\n# get_flight_info({\"first_name\" : \"Jane\", \"last_name\" : \"Doe\", \"confirmation\" : 12345}) ->\n#     \"Jane Doe's flight from San Jose to New Orleans departs at 12:30 PM tomorrow and lands at 9:30 PM.\"\n\nchat_llm = ChatNVIDIA(model=\"nvidia/nemotron-3.5-lightning-30b-a3b\", timeout=300, model_kwargs={\"chat_template_kwargs\": {\"enable_thinking\": False}}) | StrOutputParser()\ninstruct_llm = ChatNVIDIA(model=\"nvidia/nemotron-3.5-lightning-30b-a3b\", timeout=300, model_kwargs={\"chat_template_kwargs\": {\"enable_thinking\": False}}) | StrOutputParser()\n\nexternal_chain = external_prompt | chat_llm\n\n#####################################################################################\n## START TODO: Define the extractor and internal chain to satisfy the objective\n\n## TODO: Make a chain that will populate your knowledge base based on provided context\nknowbase_getter = lambda x: KnowledgeBase()\n\n## TODO: Make a chain to pull d[\"know_base\"] and outputs a retrieval from db\ndatabase_getter = lambda x: \"Not implemented\"\n\n## These components integrate to make your internal chain\ninternal_chain = (\n    RunnableAssign({'know_base' : knowbase_getter})\n    | RunnableAssign({'context' : database_getter})\n)\n\n## END TODO\n#####################################################################################\n\nstate = {'know_base' : KnowledgeBase()}\n\ndef chat_gen(message, history=[], return_buffer=True):\n\n    ## Pulling in, updating, and printing the state\n    global state\n    state['input'] = message\n    state['history'] = history\n\n    ## Logic to extract the last assistant message from dictionary history\n    last_assistant_msg = \"\"\n    for entry in reversed(history):\n        if entry.get(\"role\") == \"assistant\":\n            last_assistant_msg = entry.get(\"content\", \"\")\n            break\n    state['output'] = last_assistant_msg\n\n    ## Generating the new state from the internal chain\n    state = internal_chain.invoke(state)\n    \n    print(\"\\n--- Internal State Update ---\")\n    pprint({k:v for k,v in state.items() if k != \"history\"})\n    \n    ## Streaming the results\n    buffer = \"\"\n    for token in external_chain.stream(state):\n        buffer += token\n        yield buffer if return_buffer else token\n\ndef queue_fake_streaming_gradio(chat_stream, history = [], max_questions=8):\n\n    ## Mimic of the gradio initialization routine, where a set of starter messages can be printed off\n    for entry in history:\n        role = entry.get(\"role\", \"unknown\").capitalize()\n        print(f\"\\n[ {role} ]:\", entry.get(\"content\"))\n\n    ## Mimic of the gradio loop with an initial message from the agent.\n    for _ in range(max_questions):\n        message = input(\"\\n[ Human ]: \")\n        # Append User Message\n        history.append({\"role\": \"user\", \"content\": message})\n        \n        print(\"\\n[ Agent ]: \")\n        full_response = \"\"\n        for token in chat_stream(message, history, return_buffer=False):\n            print(token, end='')\n            full_response += token\n        \n        # Append Assistant Message\n        history.append({\"role\": \"assistant\", \"content\": full_response})\n        print(\"\\n\")\n\n## history is of format [[User response 0, Bot response 0], ...]\nchat_history = [{\"role\": \"assistant\", \"content\": \"Hello! I'm your SkyFlow agent! How can I help you?\"}]\n\nqueue_fake_streaming_gradio(\n    chat_stream = chat_gen,\n    history = chat_history\n)",
+        "annotations": [
+          {
+            "line": 2,
+            "token": "RunnableBranch",
+            "text": "조건을 순서대로 확인해 해당 분기를 실행합니다. 어떤 분기도 맞지 않으면 기본 분기를 실행합니다."
+          },
+          {
+            "line": 3,
+            "token": "RunnableLambda",
+            "text": "Python 함수를 Runnable로 감싸 invoke/stream 및 파이프 연결 인터페이스를 제공합니다."
+          },
+          {
+            "line": 5,
+            "token": "RunnablePassthrough",
+            "text": "입력을 바꾸지 않고 전달합니다. 다른 분기가 계산되는 동안 원래 값을 보존할 때 사용합니다."
+          },
+          {
+            "line": 7,
+            "token": "RunnableAssign",
+            "text": "기존 딕셔너리를 유지하면서 계산 결과를 지정한 키에 합칩니다. 뒤 단계는 갱신된 상태를 받습니다."
+          },
+          {
+            "line": 9,
+            "token": "ChatPromptTemplate",
+            "text": "중괄호 변수에 입력 값을 넣어 모델용 메시지를 구성합니다. 필요한 키가 없으면 호출 전에 실패합니다."
+          },
+          {
+            "line": 33,
+            "token": "BaseModel",
+            "text": "구조화된 지식·요약 상태를 표현하는 Pydantic 모델을 정의하거나 참조합니다."
+          },
+          {
+            "line": 34,
+            "token": "Field(",
+            "text": "스키마 필드의 기본값과 설명을 지정합니다. 모르는 값은 임의로 채우지 않습니다."
+          },
+          {
+            "line": 55,
+            "token": "StrOutputParser",
+            "text": "모델의 메시지 객체를 문자열로 바꾸어 다음 함수나 화면에서 사용할 수 있게 합니다."
+          },
+          {
+            "line": 55,
+            "token": "ChatNVIDIA(",
+            "text": "수업의 NVIDIA 모델 클라이언트를 구성합니다. 생성 자체는 invoke/stream 등 호출 시 일어납니다."
+          },
+          {
+            "line": 61,
+            "token": "TODO",
+            "text": "학습자가 구현할 원본 빈칸입니다. 위의 문제 풀이에서 입력·출력과 교체할 위치를 확인하세요."
+          },
+          {
+            "line": 80,
+            "token": "return_buffer",
+            "text": "화면에는 누적 문자열, 터미널에는 새 조각만 보내기 위한 분기 플래그입니다."
+          },
+          {
+            "line": 96,
+            "token": ".invoke(",
+            "text": "앞서 구성한 체인을 주어진 입력으로 한 번 실행하고 완료 결과를 받습니다."
+          },
+          {
+            "line": 98,
+            "token": "print(",
+            "text": "현재 값이나 진행 상태를 화면에 표시합니다. 반환값을 다음 체인으로 전달하는 것과는 다릅니다."
+          },
+          {
+            "line": 103,
+            "token": ".stream(",
+            "text": "완성 결과를 기다리는 대신 출력 조각을 순서대로 받습니다. 각 조각의 자료형을 확인하세요."
+          },
+          {
+            "line": 105,
+            "token": "yield ",
+            "text": "함수를 즉시 끝내지 않고 결과 조각을 내보낸 뒤 다음 반복에서 이어갑니다."
+          },
+          {
+            "line": 116,
+            "token": "input(",
+            "text": "사용자의 문자열 입력을 기다립니다. 뒤 셀에서 쓸 변수라면 먼저 이 셀을 실행하세요."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 39,
+        "title": "목표:",
+        "code": "# state = {'know_base' : KnowledgeBase()}\n\n# chatbot = gr.Chatbot(value=chat_history)\n# demo = gr.ChatInterface(chat_gen, chatbot=chatbot).queue().launch(debug=True, share=True)",
+        "annotations": [
+          {
+            "line": 1,
+            "token": "셀의 입력과 결과",
+            "text": "위 셀에서 정의한 변수·함수를 사용합니다. 할당문은 값을 저장하고 마지막 식은 Jupyter 결과 영역에 표시됩니다. 셀 실행 순서와 반환 자료형을 함께 확인하세요."
+          }
+        ],
+        "notice": ""
+      }
+    ]
+  },
+  "05-documents": {
+    "filename": "05_documents.ipynb",
+    "url": "https://drive.google.com/file/d/1Bk_3G_sBFuZ0pcT2lhzajrjSJX3aLpqL/view",
+    "totalCells": 27,
+    "blocks": [
+      {
+        "cell": 3,
+        "title": "학습 목표:",
+        "code": "",
+        "annotations": [],
+        "notice": "인증 설정·요청 진단 또는 인덱스 역직렬화가 포함된 셀입니다. 원본 수업 환경에서 설정을 확인하고, 인증 정보나 전체 요청을 출력·공유하지 마세요. 이 셀은 복사 코드에서 제외했습니다."
+      },
+      {
+        "cell": 4,
+        "title": "학습 목표:",
+        "code": "from langchain_nvidia_ai_endpoints import ChatNVIDIA\n[m.id for m in ChatNVIDIA.get_available_models() if \"nvidia\" in m.id]",
+        "annotations": [
+          {
+            "line": 1,
+            "token": "셀의 입력과 결과",
+            "text": "위 셀에서 정의한 변수·함수를 사용합니다. 할당문은 값을 저장하고 마지막 식은 Jupyter 결과 영역에 표시됩니다. 셀 실행 순서와 반환 자료형을 함께 확인하세요."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 5,
+        "title": "학습 목표:",
+        "code": "## Useful utility method for printing intermediate states\nfrom langchain_core.runnables import RunnableLambda\nfrom functools import partial\n\ndef RPrint(preface=\"State: \"):\n    def print_and_return(x, preface=\"\"):\n        print(f\"{preface}{x}\")\n        return x\n    return RunnableLambda(partial(print_and_return, preface=preface))\n\ndef PPrint(preface=\"State: \"):\n    def print_and_return(x, preface=\"\"):\n        pprint(preface, x)\n        return x\n    return RunnableLambda(partial(print_and_return, preface=preface))",
+        "annotations": [
+          {
+            "line": 2,
+            "token": "RunnableLambda",
+            "text": "Python 함수를 Runnable로 감싸 invoke/stream 및 파이프 연결 인터페이스를 제공합니다."
+          },
+          {
+            "line": 7,
+            "token": "print(",
+            "text": "현재 값이나 진행 상태를 화면에 표시합니다. 반환값을 다음 체인으로 전달하는 것과는 다릅니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 8,
+        "title": "Part 2: 문서 로딩",
+        "code": "%%time\nfrom langchain_community.document_loaders import UnstructuredFileLoader\nfrom langchain_community.document_loaders import ArxivLoader, PyMuPDFLoader\nfrom pathlib import Path\n\n## Loading in the file\n\n## Unstructured File Loader: Good for arbitrary \"probably good enough\" loader\n# documents = UnstructuredFileLoader(\"llama2_paper.pdf\").load()\n\n## More specialized loader, won't work for everything, but simple API and usually better results\ntry:\n    documents = ArxivLoader(query=\"2210.03629\").load()  ## ReAct\nexcept Exception as error:\n    cached_paper = Path(\"cached_papers/2210.03629v3.pdf\")\n    if not cached_paper.is_file():\n        raise RuntimeError(\"Live arXiv retrieval failed and the cached ReAct paper is missing.\") from error\n    print(\"Live arXiv retrieval was unavailable; loading the cached ReAct paper.\")\n    documents = PyMuPDFLoader(str(cached_paper)).load()\n# documents = ArxivLoader(query=\"2404.03622\").load()  ## Visualization-of-Thought\n# documents = ArxivLoader(query=\"2404.19756\").load()  ## KAN: Kolmogorov-Arnold Networks\n# documents = ArxivLoader(query=\"2404.07143\").load()  ## Infini-Attention\n# documents = ArxivLoader(query=\"2210.03629\").load()  ## ReAct",
+        "annotations": [
+          {
+            "line": 1,
+            "token": "%%time",
+            "text": "셀 전체 실행 시간을 측정하는 Jupyter 매직입니다. 일반 .py 파일에서는 제거해야 합니다."
+          },
+          {
+            "line": 18,
+            "token": "print(",
+            "text": "현재 값이나 진행 상태를 화면에 표시합니다. 반환값을 다음 체인으로 전달하는 것과는 다릅니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 10,
+        "title": "Part 2: 문서 로딩",
+        "code": "## Printing out a sample of the content\nprint(\"Number of Documents Retrieved:\", len(documents))\nprint(f\"Sample of Document 1 Content (Total Length: {len(documents[0].page_content)}):\")\nprint(documents[0].page_content[:1000])",
+        "annotations": [
+          {
+            "line": 2,
+            "token": "print(",
+            "text": "현재 값이나 진행 상태를 화면에 표시합니다. 반환값을 다음 체인으로 전달하는 것과는 다릅니다."
+          },
+          {
+            "line": 3,
+            "token": ".page_content",
+            "text": "Document에서 실제 본문 텍스트를 읽습니다. 제목 등 메타데이터와 구분하세요."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 12,
+        "title": "Part 2: 문서 로딩",
+        "code": "pprint(documents[0].metadata)",
+        "annotations": [
+          {
+            "line": 1,
+            "token": ".metadata",
+            "text": "제목·출처 등의 메타데이터를 읽습니다. 자료마다 존재하는 키가 다를 수 있습니다."
+          },
+          {
+            "line": 1,
+            "token": "print(",
+            "text": "현재 값이나 진행 상태를 화면에 표시합니다. 반환값을 다음 체인으로 전달하는 것과는 다릅니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 15,
+        "title": "Part 3: 문서 변환하기",
+        "code": "from langchain_text_splitters import RecursiveCharacterTextSplitter\n\ntext_splitter = RecursiveCharacterTextSplitter(\n    chunk_size=1200,\n    chunk_overlap=100,\n    separators=[\"\\n\\n\", \"\\n\", \".\", \";\", \",\", \" \", \"\"],\n)\n\n## Some nice custom preprocessing\n# documents[0].page_content = documents[0].page_content.replace(\". .\", \"\")\ndocs_split = text_splitter.split_documents(documents)\n\n# def include_doc(doc):\n#     ## Some chunks will be overburdened with useless numerical data, so we'll filter it out\n#     string = doc.page_content\n#     if len([l for l in string if l.isalpha()]) < (len(string)//2):\n#         return False\n#     return True\n\n# docs_split = [doc for doc in docs_split if include_doc(doc)]\nprint(len(docs_split))",
+        "annotations": [
+          {
+            "line": 3,
+            "token": "RecursiveCharacterTextSplitter(",
+            "text": "긴 문서를 지정된 경계와 크기로 나누는 분할기를 설정합니다."
+          },
+          {
+            "line": 5,
+            "token": "chunk_overlap=",
+            "text": "이웃 청크가 공유하는 문맥 길이입니다. 너무 큰 overlap은 중복과 인덱스 비용을 늘립니다."
+          },
+          {
+            "line": 11,
+            "token": ".split_documents(",
+            "text": "본문을 나누되 메타데이터를 가진 Document 객체 목록을 만듭니다."
+          },
+          {
+            "line": 21,
+            "token": "print(",
+            "text": "현재 값이나 진행 상태를 화면에 표시합니다. 반환값을 다음 체인으로 전달하는 것과는 다릅니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 16,
+        "title": "Part 3: 문서 변환하기",
+        "code": "for i in (0, 1, 2, 15, -1):\n    pprint(f\"[Document {i}]\")\n    print(docs_split[i].page_content)\n    pprint(\"=\"*64)",
+        "annotations": [
+          {
+            "line": 2,
+            "token": "print(",
+            "text": "현재 값이나 진행 상태를 화면에 표시합니다. 반환값을 다음 체인으로 전달하는 것과는 다릅니다."
+          },
+          {
+            "line": 3,
+            "token": ".page_content",
+            "text": "Document에서 실제 본문 텍스트를 읽습니다. 제목 등 메타데이터와 구분하세요."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 19,
+        "title": "Part 4: [실습] 요약 정제하기",
+        "code": "from langchain_core.runnables import RunnableLambda\nfrom langchain_core.runnables.passthrough import RunnableAssign\nfrom langchain_core.prompts import ChatPromptTemplate\nfrom langchain_core.output_parsers import StrOutputParser\nfrom langchain_core.output_parsers import PydanticOutputParser\n\nfrom langchain_nvidia_ai_endpoints import ChatNVIDIA\n\nfrom pydantic import BaseModel, Field\nfrom typing import List\nfrom IPython.display import clear_output\n\n\nclass DocumentSummaryBase(BaseModel):\n    running_summary: str = Field(\"\", description=\"Running description of the document. Do not override; only update!\")\n    main_ideas: List[str] = Field([], description=\"Most important information from the document (max 3)\")\n    loose_ends: List[str] = Field([], description=\"Open questions that would be good to incorporate into summary, but that are yet unknown (max 3)\")\n\n\nsummary_prompt = ChatPromptTemplate.from_template(\n    \"You are generating a running summary of the document. Make it readable by a technical user.\"\n    \" After this, the old knowledge base will be replaced by the new one. Make sure a reader can still understand everything.\"\n    \" Keep it short, but as dense and useful as possible! The information should flow from chunk to (loose ends or main ideas) to running_summary.\"\n    \" The updated knowledge base keep all of the information from running_summary here: {info_base}.\"\n    \"\\n\\n{format_instructions}. Follow the format precisely, including quotations and commas\"\n    \"\\n\\nWithout losing any of the info, update the knowledge base with the following: {input}\"\n)",
+        "annotations": [
+          {
+            "line": 1,
+            "token": "RunnableLambda",
+            "text": "Python 함수를 Runnable로 감싸 invoke/stream 및 파이프 연결 인터페이스를 제공합니다."
+          },
+          {
+            "line": 2,
+            "token": "RunnableAssign",
+            "text": "기존 딕셔너리를 유지하면서 계산 결과를 지정한 키에 합칩니다. 뒤 단계는 갱신된 상태를 받습니다."
+          },
+          {
+            "line": 3,
+            "token": "ChatPromptTemplate",
+            "text": "중괄호 변수에 입력 값을 넣어 모델용 메시지를 구성합니다. 필요한 키가 없으면 호출 전에 실패합니다."
+          },
+          {
+            "line": 4,
+            "token": "StrOutputParser",
+            "text": "모델의 메시지 객체를 문자열로 바꾸어 다음 함수나 화면에서 사용할 수 있게 합니다."
+          },
+          {
+            "line": 5,
+            "token": "PydanticOutputParser",
+            "text": "모델 텍스트를 지정한 Pydantic 스키마로 파싱합니다. 형식 검증과 사실 검증은 별개입니다."
+          },
+          {
+            "line": 9,
+            "token": "BaseModel",
+            "text": "구조화된 지식·요약 상태를 표현하는 Pydantic 모델을 정의하거나 참조합니다."
+          },
+          {
+            "line": 15,
+            "token": "Field(",
+            "text": "스키마 필드의 기본값과 설명을 지정합니다. 모르는 값은 임의로 채우지 않습니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 21,
+        "title": "Part 4: [실습] 요약 정제하기",
+        "code": "def RExtract(pydantic_class, llm, prompt):\n    '''\n    Runnable Extraction module\n    Returns a knowledge dictionary populated by slot-filling extraction\n    '''\n    parser = PydanticOutputParser(pydantic_object=pydantic_class)\n    instruct_merge = RunnableAssign({'format_instructions' : lambda x: parser.get_format_instructions()})\n    def preparse(string):\n        if '{' not in string: string = '{' + string\n        if '}' not in string: string = string + '}'\n        string = (string\n            .replace(\"\\\\_\", \"_\")\n            .replace(\"\\n\", \" \")\n            .replace(\"\\]\", \"]\")\n            .replace(\"\\[\", \"[\")\n        )\n        # print(string)  ## Good for diagnostics\n        return string\n    return instruct_merge | prompt | llm | preparse | parser",
+        "annotations": [
+          {
+            "line": 6,
+            "token": "PydanticOutputParser",
+            "text": "모델 텍스트를 지정한 Pydantic 스키마로 파싱합니다. 형식 검증과 사실 검증은 별개입니다."
+          },
+          {
+            "line": 7,
+            "token": "RunnableAssign",
+            "text": "기존 딕셔너리를 유지하면서 계산 결과를 지정한 키에 합칩니다. 뒤 단계는 갱신된 상태를 받습니다."
+          },
+          {
+            "line": 7,
+            "token": "get_format_instructions",
+            "text": "모델이 따라야 할 JSON 필드와 출력 형식 설명을 생성합니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 23,
+        "title": "Part 4: [실습] 요약 정제하기",
+        "code": "latest_summary = \"\"\n\n## TODO: Use the techniques from the previous notebook to complete the exercise\ndef RSummarizer(knowledge, llm, prompt, verbose=False):\n    '''\n    Exercise: Create a chain that summarizes\n    '''\n    ###########################################################################################\n    ## START TODO:\n\n    def summarize_docs(docs):        \n        ## TODO: Initialize the parse_chain appropriately; should include an RExtract instance.\n        ## HINT: You can get a class using the <object>.__class__ attribute...\n        parse_chain = RunnableAssign({'info_base' : (lambda x: None)})\n        ## TODO: Initialize a valid starting state. Should be similar to notebook 4\n        state = {}\n\n        global latest_summary  ## If your loop crashes, you can check out the latest_summary\n        \n        for i, doc in enumerate(docs):\n            ## TODO: Update the state as appropriate using your parse_chain component\n\n            assert 'info_base' in state \n            if verbose:\n                print(f\"Considered {i+1} documents\")\n                pprint(state['info_base'])\n                latest_summary = state['info_base']\n                clear_output(wait=True)\n\n        return state['info_base']\n        \n    ## END TODO\n    ###########################################################################################\n    \n    return RunnableLambda(summarize_docs)\n\ninstruct_model = ChatNVIDIA(model=\"nvidia/nemotron-3.5-lightning-30b-a3b\", timeout=300, model_kwargs={\"chat_template_kwargs\": {\"enable_thinking\": False}}).bind(max_tokens=4096)\ninstruct_llm = instruct_model | StrOutputParser()\n\n## Take the first 10 document chunks and accumulate a DocumentSummaryBase\nsummarizer = RSummarizer(DocumentSummaryBase(), instruct_llm, summary_prompt, verbose=True)\nsummary = summarizer.invoke(docs_split[:15])",
+        "annotations": [
+          {
+            "line": 3,
+            "token": "TODO",
+            "text": "학습자가 구현할 원본 빈칸입니다. 위의 문제 풀이에서 입력·출력과 교체할 위치를 확인하세요."
+          },
+          {
+            "line": 14,
+            "token": "RunnableAssign",
+            "text": "기존 딕셔너리를 유지하면서 계산 결과를 지정한 키에 합칩니다. 뒤 단계는 갱신된 상태를 받습니다."
+          },
+          {
+            "line": 25,
+            "token": "print(",
+            "text": "현재 값이나 진행 상태를 화면에 표시합니다. 반환값을 다음 체인으로 전달하는 것과는 다릅니다."
+          },
+          {
+            "line": 35,
+            "token": "RunnableLambda",
+            "text": "Python 함수를 Runnable로 감싸 invoke/stream 및 파이프 연결 인터페이스를 제공합니다."
+          },
+          {
+            "line": 37,
+            "token": "ChatNVIDIA(",
+            "text": "수업의 NVIDIA 모델 클라이언트를 구성합니다. 생성 자체는 invoke/stream 등 호출 시 일어납니다."
+          },
+          {
+            "line": 38,
+            "token": "StrOutputParser",
+            "text": "모델의 메시지 객체를 문자열로 바꾸어 다음 함수나 화면에서 사용할 수 있게 합니다."
+          },
+          {
+            "line": 42,
+            "token": ".invoke(",
+            "text": "앞서 구성한 체인을 주어진 입력으로 한 번 실행하고 완료 결과를 받습니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 24,
+        "title": "Part 4: [실습] 요약 정제하기",
+        "code": "pprint(latest_summary)",
+        "annotations": [
+          {
+            "line": 1,
+            "token": "print(",
+            "text": "현재 값이나 진행 상태를 화면에 표시합니다. 반환값을 다음 체인으로 전달하는 것과는 다릅니다."
+          }
+        ],
+        "notice": ""
+      }
+    ]
+  },
+  "06-embeddings": {
+    "filename": "06_embeddings.ipynb",
+    "url": "https://drive.google.com/file/d/1d8wWT9pm95GhIRFc1kDvTqFaIKr9qRzG/view",
+    "totalCells": 23,
+    "blocks": [
+      {
+        "cell": 3,
+        "title": "학습 목표:",
+        "code": "",
+        "annotations": [],
+        "notice": "인증 설정·요청 진단 또는 인덱스 역직렬화가 포함된 셀입니다. 원본 수업 환경에서 설정을 확인하고, 인증 정보나 전체 요청을 출력·공유하지 마세요. 이 셀은 복사 코드에서 제외했습니다."
+      },
+      {
+        "cell": 6,
+        "title": "Part 2: 코스 임베딩 모델 접근하기",
+        "code": "from langchain_nvidia_ai_endpoints import NVIDIAEmbeddings\n\nembedding_model = \"course/embedding\"\nembedding_model",
+        "annotations": [
+          {
+            "line": 1,
+            "token": "셀의 입력과 결과",
+            "text": "위 셀에서 정의한 변수·함수를 사용합니다. 할당문은 값을 저장하고 마지막 식은 Jupyter 결과 영역에 표시됩니다. 셀 실행 순서와 반환 자료형을 함께 확인하세요."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 7,
+        "title": "Part 2: 코스 임베딩 모델 접근하기",
+        "code": "from langchain_nvidia_ai_endpoints import ChatNVIDIA\n\nembedder = NVIDIAEmbeddings(\n    model=embedding_model,\n    base_url=\"http://llm_client:9000/v1\",\n)\n\n# In Colab, replace the service client above with:\n# from langchain_community.embeddings import FastEmbedEmbeddings\n# embedder = FastEmbedEmbeddings(model_name=\"sentence-transformers/all-MiniLM-L6-v2\")\n\n# ChatNVIDIA.get_available_models()\ninstruct_llm = ChatNVIDIA(model=\"nvidia/nemotron-3.5-lightning-30b-a3b\", timeout=300, model_kwargs={\"chat_template_kwargs\": {\"enable_thinking\": False}})",
+        "annotations": [
+          {
+            "line": 3,
+            "token": "NVIDIAEmbeddings(",
+            "text": "문자열을 숫자 벡터로 바꿀 임베딩 클라이언트를 구성합니다. 수업 서버의 모델 별칭을 사용합니다."
+          },
+          {
+            "line": 13,
+            "token": "ChatNVIDIA(",
+            "text": "수업의 NVIDIA 모델 클라이언트를 구성합니다. 생성 자체는 invoke/stream 등 호출 시 일어납니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 9,
+        "title": "쿼리와 문서를 로컬에서 임베딩하기",
+        "code": "# Example queries and documents\nqueries = [\n    \"What's the weather like in Rocky Mountains?\",\n    \"What kinds of food is Italy known for?\",\n    \"What's my name? I bet you don't remember...\",\n    \"What's the point of life anyways?\",\n    \"The point of life is to have fun :D\"\n]\n\ndocuments = [\n    \"Komchatka's weather is cold, with long, severe winters.\",\n    \"Italy is famous for pasta, pizza, gelato, and espresso.\",\n    \"I can't recall personal names, only provide information.\",\n    \"Life's purpose varies, often seen as personal fulfillment.\",\n    \"Enjoying life's moments is indeed a wonderful approach.\",\n]",
+        "annotations": [
+          {
+            "line": 1,
+            "token": "셀의 입력과 결과",
+            "text": "위 셀에서 정의한 변수·함수를 사용합니다. 할당문은 값을 저장하고 마지막 식은 Jupyter 결과 영역에 표시됩니다. 셀 실행 순서와 반환 자료형을 함께 확인하세요."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 11,
+        "title": "쿼리와 문서를 로컬에서 임베딩하기",
+        "code": "%%time\n# Embedding the queries\nq_embeddings = [embedder.embed_query(query) for query in queries]\n\n# Embedding the documents\nd_embeddings = embedder.embed_documents(documents)",
+        "annotations": [
+          {
+            "line": 1,
+            "token": "%%time",
+            "text": "셀 전체 실행 시간을 측정하는 Jupyter 매직입니다. 일반 .py 파일에서는 제거해야 합니다."
+          },
+          {
+            "line": 3,
+            "token": ".embed_query(",
+            "text": "질문 문자열 하나를 벡터 하나로 변환합니다. 반환값은 숫자 목록입니다."
+          },
+          {
+            "line": 6,
+            "token": ".embed_documents(",
+            "text": "문서 문자열 목록을 벡터 목록으로 변환합니다. 문서 인덱싱용 경로입니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 13,
+        "title": "쿼리와 문서를 로컬에서 임베딩하기",
+        "code": "import numpy as np\nimport matplotlib.pyplot as plt\nfrom sklearn.metrics.pairwise import cosine_similarity\n\ndef plot_cross_similarity_matrix(emb1, emb2):\n    # Compute the similarity matrix between embeddings1 and embeddings2\n    cross_similarity_matrix = cosine_similarity(np.array(emb1), np.array(emb2))\n\n    # Plotting the cross-similarity matrix\n    plt.imshow(cross_similarity_matrix, cmap='Greens', interpolation='nearest')\n    plt.colorbar()\n    plt.gca().invert_yaxis()\n    plt.title(\"Cross-Similarity Matrix\")\n    plt.grid(True)\n\nplt.figure(figsize=(8, 6))\nplot_cross_similarity_matrix(q_embeddings, d_embeddings)\nplt.xlabel(\"Query Embeddings\")\nplt.ylabel(\"Document Embeddings\")\nplt.show()\n\n# queries = [\n#     \"What's the weather like in the Rocky Mountains?\",\n#     \"What kinds of food is Italy known for?\",\n#     \"What's my name? I bet you don't remember...\",\n#     \"What's the point of life anyways?\",\n#     \"The point of life is to have fun :D\"]\n# documents = [\n#     \"Komchatka's weather is cold, with long, severe winters.\",\n#     \"Italy is famous for pasta, pizza, gelato, and espresso.\",\n#     \"I can't recall personal names, only provide information.\",\n#     \"Life's purpose varies, often seen as personal fulfillment.\",\n#     \"Enjoying life's moments is indeed a wonderful approach.\"]",
+        "annotations": [
+          {
+            "line": 7,
+            "token": "cosine_similarity(",
+            "text": "두 벡터 묶음의 방향 유사도를 쌍별로 계산합니다. 행·열이 각각 무엇인지 확인하세요."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 15,
+        "title": "Part 3: [실습] 합성이지만 더 현실적인 예제",
+        "code": "plt.figure(figsize=(8, 6))\nplot_cross_similarity_matrix(\n    q_embeddings,\n    [embedder.embed_query(doc) for doc in documents]\n)\nplt.xlabel(\"Query Embeddings (of queries)\")\nplt.ylabel(\"Query Embeddings (of documents)\")\nplt.show()",
+        "annotations": [
+          {
+            "line": 4,
+            "token": ".embed_query(",
+            "text": "질문 문자열 하나를 벡터 하나로 변환합니다. 반환값은 숫자 목록입니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 17,
+        "title": "Part 3: [실습] 합성이지만 더 현실적인 예제",
+        "code": "from langchain_nvidia_ai_endpoints import ChatNVIDIA\nfrom langchain_core.prompts import ChatPromptTemplate\nfrom langchain_core.output_parsers import StrOutputParser\nfrom operator import itemgetter\nfrom pprint import pprint\n\nexpound_prompt = ChatPromptTemplate.from_template(\n    \"Generate part of a longer story that could reasonably answer all\"\n    \" of these questions somewhere in its contents: {questions}\\n\"\n    \" Make sure the passage only answers the following concretely: {q1}.\"\n    \" Give it some weird formatting, and try not to answer the others.\"\n    \" Do not include any commentary like 'Here is your response'\"\n)\n\n###############################################################################################\n## BEGIN TODO\n\nexpound_chain = (\n    ## TODO: flesh out documents into a more verbose form by implementing the expound_chain \n    ##  which takes advantage of the prompt and llm provided above.\n    {}\n)\n\nlonger_docs = []\nfor i, q in enumerate(queries):\n    ## TODO: Invoke the expound_chain pipeline as appropriate\n    longer_doc = \"\"\n    pprint(f\"\\n\\n[Query {i+1}]\")\n    print(q)\n    pprint(f\"\\n\\n[Document {i+1}]\")\n    print(longer_doc)\n    pprint(\"-\"*64)\n    longer_docs += [longer_doc]\n\n## END TODO\n###############################################################################################",
+        "annotations": [
+          {
+            "line": 2,
+            "token": "ChatPromptTemplate",
+            "text": "중괄호 변수에 입력 값을 넣어 모델용 메시지를 구성합니다. 필요한 키가 없으면 호출 전에 실패합니다."
+          },
+          {
+            "line": 3,
+            "token": "StrOutputParser",
+            "text": "모델의 메시지 객체를 문자열로 바꾸어 다음 함수나 화면에서 사용할 수 있게 합니다."
+          },
+          {
+            "line": 16,
+            "token": "TODO",
+            "text": "학습자가 구현할 원본 빈칸입니다. 위의 문제 풀이에서 입력·출력과 교체할 위치를 확인하세요."
+          },
+          {
+            "line": 28,
+            "token": "print(",
+            "text": "현재 값이나 진행 상태를 화면에 표시합니다. 반환값을 다음 체인으로 전달하는 것과는 다릅니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 19,
+        "title": "Part 3: [실습] 합성이지만 더 현실적인 예제",
+        "code": "## At the time of writing, our embedding model supports up to 2048 tokens...\nlonger_docs_cut = [doc[:2048] for doc in longer_docs]\n\nq_long_embs = [embedder.embed_query(doc) for doc in longer_docs_cut]\nd_long_embs = embedder.embed_documents(longer_docs_cut)\n\n## The difference for any particular example may be very small.\n## We've raised the similarity matrix to the power of 5 to try and spot a difference.\nplt.figure(figsize=(12, 6))\nplt.subplot(1, 2, 1)\nplot_cross_similarity_matrix(q_embeddings, q_long_embs)\nplt.xlabel(\"Query Embeddings (of queries)\")\nplt.ylabel(\"Query Embeddings (of long documents)\")\n\nplt.subplot(1, 2, 2)\nplot_cross_similarity_matrix(q_embeddings, d_long_embs)\nplt.xlabel(\"Query Embeddings (of queries)\")\nplt.ylabel(\"Document Embeddings (of long documents)\")\nplt.show()",
+        "annotations": [
+          {
+            "line": 4,
+            "token": ".embed_query(",
+            "text": "질문 문자열 하나를 벡터 하나로 변환합니다. 반환값은 숫자 목록입니다."
+          },
+          {
+            "line": 5,
+            "token": ".embed_documents(",
+            "text": "문서 문자열 목록을 벡터 목록으로 변환합니다. 문서 인덱싱용 경로입니다."
+          }
+        ],
+        "notice": ""
+      }
+    ]
+  },
+  "07-vectorstores": {
+    "filename": "07_vectorstores.ipynb",
+    "url": "https://drive.google.com/file/d/1Z3WUqnY1JxdF08fJrKewpv7s3p5-vpOz/view",
+    "totalCells": 48,
+    "blocks": [
+      {
+        "cell": 3,
+        "title": "학습 목표:",
+        "code": "# %%capture\n## ^^ Comment out if you want to see the pip install process\n\n## Necessary for Colab, not necessary for course environment\n# %pip install -q langchain langchain-nvidia-ai-endpoints fastembed gradio rich\n# %pip install -q arxiv pymupdf faiss-cpu\n# !mkdir -p cached_papers && test -s cached_papers/2210.03629v3.pdf || wget -q --tries=3 --timeout=20 -O cached_papers/2210.03629v3.pdf https://arxiv.org/pdf/2210.03629v3\n\n## If you encounter a typing-extensions issue, restart your runtime and try again\n# from langchain_nvidia_ai_endpoints import ChatNVIDIA\n# ChatNVIDIA.get_available_models()\n\nfrom functools import partial\nfrom rich.console import Console\nfrom rich.style import Style\nfrom rich.theme import Theme\n\nconsole = Console()\nbase_style = Style(color=\"#76B900\", bold=True)\npprint = partial(console.print, style=base_style)",
+        "annotations": [
+          {
+            "line": 1,
+            "token": "셀의 입력과 결과",
+            "text": "위 셀에서 정의한 변수·함수를 사용합니다. 할당문은 값을 저장하고 마지막 식은 Jupyter 결과 영역에 표시됩니다. 셀 실행 순서와 반환 자료형을 함께 확인하세요."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 4,
+        "title": "학습 목표:",
+        "code": "from langchain_nvidia_ai_endpoints import ChatNVIDIA, NVIDIAEmbeddings\n\nembedder = NVIDIAEmbeddings(\n    model=\"course/embedding\",\n    base_url=\"http://llm_client:9000/v1\",\n)\n\n# In Colab, replace the service client above with:\n# from langchain_community.embeddings import FastEmbedEmbeddings\n# embedder = FastEmbedEmbeddings(model_name=\"sentence-transformers/all-MiniLM-L6-v2\")\n\n# ChatNVIDIA.get_available_models()\ninstruct_llm = ChatNVIDIA(model=\"nvidia/nemotron-3.5-lightning-30b-a3b\", timeout=300, model_kwargs={\"chat_template_kwargs\": {\"enable_thinking\": False}})",
+        "annotations": [
+          {
+            "line": 3,
+            "token": "NVIDIAEmbeddings(",
+            "text": "문자열을 숫자 벡터로 바꿀 임베딩 클라이언트를 구성합니다. 수업 서버의 모델 별칭을 사용합니다."
+          },
+          {
+            "line": 13,
+            "token": "ChatNVIDIA(",
+            "text": "수업의 NVIDIA 모델 클라이언트를 구성합니다. 생성 자체는 invoke/stream 등 호출 시 일어납니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 9,
+        "title": "Step 1: 대화 얻기",
+        "code": "conversation = [  ## This conversation was generated partially by an AI system, and modified to exhibit desirable properties\n    \"[User]  Hello! My name is Beras, and I'm a big blue bear! Can you please tell me about the rocky mountains?\",\n    \"[Agent] The Rocky Mountains are a beautiful and majestic range of mountains that stretch across North America\",\n    \"[Beras] Wow, that sounds amazing! Ive never been to the Rocky Mountains before, but Ive heard many great things about them.\",\n    \"[Agent] I hope you get to visit them someday, Beras! It would be a great adventure for you!\",\n    \"[Beras] Thank you for the suggestion! Ill definitely keep it in mind for the future.\",\n    \"[Agent] In the meantime, you can learn more about the Rocky Mountains by doing some research online or watching documentaries about them.\",\n    \"[Beras] I live in the arctic, so I'm not used to the warm climate there. I was just curious, ya know!\",\n    \"[Agent] Absolutely! Lets continue the conversation and explore more about the Rocky Mountains and their significance!\"\n]",
+        "annotations": [
+          {
+            "line": 1,
+            "token": "셀의 입력과 결과",
+            "text": "위 셀에서 정의한 변수·함수를 사용합니다. 할당문은 값을 저장하고 마지막 식은 Jupyter 결과 영역에 표시됩니다. 셀 실행 순서와 반환 자료형을 함께 확인하세요."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 14,
+        "title": "Step 2: Vector Store Retriever 구성하기",
+        "code": "%%time\n## ^^ This cell will be timed to see how long the conversation embedding takes\nfrom langchain_community.vectorstores import FAISS\n\n## Streamlined from_texts FAISS vectorstore construction from text list\nconvstore = FAISS.from_texts(conversation, embedding=embedder)\nretriever = convstore.as_retriever()",
+        "annotations": [
+          {
+            "line": 1,
+            "token": "%%time",
+            "text": "셀 전체 실행 시간을 측정하는 Jupyter 매직입니다. 일반 .py 파일에서는 제거해야 합니다."
+          },
+          {
+            "line": 6,
+            "token": "FAISS.from_texts(",
+            "text": "텍스트를 임베딩하고 FAISS 벡터 인덱스에 저장합니다."
+          },
+          {
+            "line": 7,
+            "token": ".as_retriever(",
+            "text": "벡터 저장소를 질문 → 관련 Document 목록 인터페이스로 바꿉니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 16,
+        "title": "Step 2: Vector Store Retriever 구성하기",
+        "code": "pprint(retriever.invoke(\"What is your name?\"))",
+        "annotations": [
+          {
+            "line": 1,
+            "token": ".invoke(",
+            "text": "앞서 구성한 체인을 주어진 입력으로 한 번 실행하고 완료 결과를 받습니다."
+          },
+          {
+            "line": 1,
+            "token": "print(",
+            "text": "현재 값이나 진행 상태를 화면에 표시합니다. 반환값을 다음 체인으로 전달하는 것과는 다릅니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 17,
+        "title": "Step 2: Vector Store Retriever 구성하기",
+        "code": "pprint(retriever.invoke(\"Where are the Rocky Mountains?\"))",
+        "annotations": [
+          {
+            "line": 1,
+            "token": ".invoke(",
+            "text": "앞서 구성한 체인을 주어진 입력으로 한 번 실행하고 완료 결과를 받습니다."
+          },
+          {
+            "line": 1,
+            "token": "print(",
+            "text": "현재 값이나 진행 상태를 화면에 표시합니다. 반환값을 다음 체인으로 전달하는 것과는 다릅니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 20,
+        "title": "선택 단계: 검색된 후보 리랭킹(Reranking)",
+        "code": "from langchain_nvidia_ai_endpoints import NVIDIARerank\n\nrerank_query = \"Where are the Rocky Mountains?\"\ncandidates = retriever.invoke(rerank_query)\nreranker = NVIDIARerank(\n    model=\"course/reranker\",\n    base_url=\"http://llm_client:9000/v1\",\n    top_n=len(candidates),\n)\nreranked = reranker.compress_documents(candidates, query=rerank_query)\n\nfor rank, document in enumerate(reranked, start=1):\n    score = document.metadata[\"relevance_score\"]\n    print(f\"{rank}. {score:.3f}  {document.page_content}\")",
+        "annotations": [
+          {
+            "line": 4,
+            "token": ".invoke(",
+            "text": "앞서 구성한 체인을 주어진 입력으로 한 번 실행하고 완료 결과를 받습니다."
+          },
+          {
+            "line": 5,
+            "token": "NVIDIARerank(",
+            "text": "기존 검색 후보를 질문과 함께 다시 평가하는 리랭커를 구성합니다."
+          },
+          {
+            "line": 13,
+            "token": ".metadata",
+            "text": "제목·출처 등의 메타데이터를 읽습니다. 자료마다 존재하는 키가 다를 수 있습니다."
+          },
+          {
+            "line": 14,
+            "token": ".page_content",
+            "text": "Document에서 실제 본문 텍스트를 읽습니다. 제목 등 메타데이터와 구분하세요."
+          },
+          {
+            "line": 14,
+            "token": "print(",
+            "text": "현재 값이나 진행 상태를 화면에 표시합니다. 반환값을 다음 체인으로 전달하는 것과는 다릅니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 22,
+        "title": "Step 3: 대화 검색을 체인에 통합하기",
+        "code": "from langchain_community.document_transformers import LongContextReorder\nfrom langchain_core.prompts import ChatPromptTemplate\nfrom langchain_core.output_parsers import StrOutputParser\nfrom langchain_core.runnables import RunnableLambda\nfrom langchain_core.runnables.passthrough import RunnableAssign\nfrom langchain_nvidia_ai_endpoints import ChatNVIDIA\n\nfrom functools import partial\nfrom operator import itemgetter\n\n########################################################################\n## Utility Runnables/Methods\ndef RPrint(preface=\"\"):\n    \"\"\"Simple passthrough \"prints, then returns\" chain\"\"\"\n    def print_and_return(x, preface):\n        if preface: print(preface, end=\"\")\n        pprint(x)\n        return x\n    return RunnableLambda(partial(print_and_return, preface=preface))\n\ndef docs2str(docs, title=\"Document\"):\n    \"\"\"Useful utility for making chunks into context string. Optional, but useful\"\"\"\n    out_str = \"\"\n    for doc in docs:\n        doc_name = getattr(doc, 'metadata', {}).get('Title', title)\n        if doc_name:\n            out_str += f\"[Quote from {doc_name}] \"\n        out_str += getattr(doc, 'page_content', str(doc)) + \"\\n\"\n    return out_str\n\n## Optional; Reorders longer documents to center of output text\nlong_reorder = RunnableLambda(LongContextReorder().transform_documents)",
+        "annotations": [
+          {
+            "line": 1,
+            "token": "LongContextReorder",
+            "text": "검색된 문서의 문맥 배치를 바꿉니다. 임베딩 검색이나 모델 기반 리랭킹 자체와는 다릅니다."
+          },
+          {
+            "line": 2,
+            "token": "ChatPromptTemplate",
+            "text": "중괄호 변수에 입력 값을 넣어 모델용 메시지를 구성합니다. 필요한 키가 없으면 호출 전에 실패합니다."
+          },
+          {
+            "line": 3,
+            "token": "StrOutputParser",
+            "text": "모델의 메시지 객체를 문자열로 바꾸어 다음 함수나 화면에서 사용할 수 있게 합니다."
+          },
+          {
+            "line": 4,
+            "token": "RunnableLambda",
+            "text": "Python 함수를 Runnable로 감싸 invoke/stream 및 파이프 연결 인터페이스를 제공합니다."
+          },
+          {
+            "line": 5,
+            "token": "RunnableAssign",
+            "text": "기존 딕셔너리를 유지하면서 계산 결과를 지정한 키에 합칩니다. 뒤 단계는 갱신된 상태를 받습니다."
+          },
+          {
+            "line": 16,
+            "token": "print(",
+            "text": "현재 값이나 진행 상태를 화면에 표시합니다. 반환값을 다음 체인으로 전달하는 것과는 다릅니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 23,
+        "title": "Step 3: 대화 검색을 체인에 통합하기",
+        "code": "context_prompt = ChatPromptTemplate.from_template(\n    \"Answer the question using only the context\"\n    \"\\n\\nRetrieved Context: {context}\"\n    \"\\n\\nUser Question: {question}\"\n    \"\\nAnswer the user conversationally. User is not aware of context.\"\n)\n\nchain = (\n    {\n        'context': convstore.as_retriever() | long_reorder | docs2str,\n        'question': (lambda x:x)\n    }\n    | context_prompt\n    # | RPrint()\n    | instruct_llm\n    | StrOutputParser()\n)\n\npprint(chain.invoke(\"Where does Beras live?\"))",
+        "annotations": [
+          {
+            "line": 1,
+            "token": "ChatPromptTemplate",
+            "text": "중괄호 변수에 입력 값을 넣어 모델용 메시지를 구성합니다. 필요한 키가 없으면 호출 전에 실패합니다."
+          },
+          {
+            "line": 10,
+            "token": ".as_retriever(",
+            "text": "벡터 저장소를 질문 → 관련 Document 목록 인터페이스로 바꿉니다."
+          },
+          {
+            "line": 16,
+            "token": "StrOutputParser",
+            "text": "모델의 메시지 객체를 문자열로 바꾸어 다음 함수나 화면에서 사용할 수 있게 합니다."
+          },
+          {
+            "line": 19,
+            "token": ".invoke(",
+            "text": "앞서 구성한 체인을 주어진 입력으로 한 번 실행하고 완료 결과를 받습니다."
+          },
+          {
+            "line": 19,
+            "token": "print(",
+            "text": "현재 값이나 진행 상태를 화면에 표시합니다. 반환값을 다음 체인으로 전달하는 것과는 다릅니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 25,
+        "title": "Step 3: 대화 검색을 체인에 통합하기",
+        "code": "pprint(chain.invoke(\"Where are the Rocky Mountains?\"))",
+        "annotations": [
+          {
+            "line": 1,
+            "token": ".invoke(",
+            "text": "앞서 구성한 체인을 주어진 입력으로 한 번 실행하고 완료 결과를 받습니다."
+          },
+          {
+            "line": 1,
+            "token": "print(",
+            "text": "현재 값이나 진행 상태를 화면에 표시합니다. 반환값을 다음 체인으로 전달하는 것과는 다릅니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 26,
+        "title": "Step 3: 대화 검색을 체인에 통합하기",
+        "code": "pprint(chain.invoke(\"Where are the Rocky Mountains? Are they close to California?\"))",
+        "annotations": [
+          {
+            "line": 1,
+            "token": ".invoke(",
+            "text": "앞서 구성한 체인을 주어진 입력으로 한 번 실행하고 완료 결과를 받습니다."
+          },
+          {
+            "line": 1,
+            "token": "print(",
+            "text": "현재 값이나 진행 상태를 화면에 표시합니다. 반환값을 다음 체인으로 전달하는 것과는 다릅니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 27,
+        "title": "Step 3: 대화 검색을 체인에 통합하기",
+        "code": "pprint(chain.invoke(\"How far away is Beras from the Rocky Mountains?\"))",
+        "annotations": [
+          {
+            "line": 1,
+            "token": ".invoke(",
+            "text": "앞서 구성한 체인을 주어진 입력으로 한 번 실행하고 완료 결과를 받습니다."
+          },
+          {
+            "line": 1,
+            "token": "print(",
+            "text": "현재 값이나 진행 상태를 화면에 표시합니다. 반환값을 다음 체인으로 전달하는 것과는 다릅니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 30,
+        "title": "Step 4: 자동 대화 저장",
+        "code": "from langchain_core.prompts import ChatPromptTemplate\nfrom langchain_core.output_parsers import StrOutputParser\nfrom operator import itemgetter\n\n########################################################################\n## Reset knowledge base and define what it means to add more messages.\nconvstore = FAISS.from_texts(conversation, embedding=embedder)\n\ndef save_memory_and_get_output(d, vstore):\n    \"\"\"Accepts 'input'/'output' dictionary and saves to convstore\"\"\"\n    vstore.add_texts([f\"User said {d.get('input')}\", f\"Agent said {d.get('output')}\"])\n    return d.get('output')\n\n########################################################################\n\n# instruct_llm = ChatNVIDIA(model=\"nvidia/nemotron-3.5-lightning-30b-a3b\", timeout=300, model_kwargs={\"chat_template_kwargs\": {\"enable_thinking\": False}})\n\nchat_prompt = ChatPromptTemplate.from_template(\n    \"Answer the question using only the context\"\n    \"\\n\\nRetrieved Context: {context}\"\n    \"\\n\\nUser Question: {input}\"\n    \"\\nAnswer the user conversationally. Make sure the conversation flows naturally.\\n\"\n    \"[Agent]\"\n)\n\n\nconv_chain = (\n    {\n        'context': convstore.as_retriever() | long_reorder | docs2str,\n        'input': (lambda x:x)\n    }\n    | RunnableAssign({'output' : chat_prompt | instruct_llm | StrOutputParser()})\n    | partial(save_memory_and_get_output, vstore=convstore)\n)\n\npprint(conv_chain.invoke(\"I'm glad you agree! I can't wait to get some ice cream there! It's such a good food!\"))\nprint()\npprint(conv_chain.invoke(\"Can you guess what my favorite food is?\"))\nprint()\npprint(conv_chain.invoke(\"Actually, my favorite is honey! Not sure where you got that idea?\"))\nprint()\npprint(conv_chain.invoke(\"I see! Fair enough! Do you know my favorite food now?\"))",
+        "annotations": [
+          {
+            "line": 1,
+            "token": "ChatPromptTemplate",
+            "text": "중괄호 변수에 입력 값을 넣어 모델용 메시지를 구성합니다. 필요한 키가 없으면 호출 전에 실패합니다."
+          },
+          {
+            "line": 2,
+            "token": "StrOutputParser",
+            "text": "모델의 메시지 객체를 문자열로 바꾸어 다음 함수나 화면에서 사용할 수 있게 합니다."
+          },
+          {
+            "line": 7,
+            "token": "FAISS.from_texts(",
+            "text": "텍스트를 임베딩하고 FAISS 벡터 인덱스에 저장합니다."
+          },
+          {
+            "line": 11,
+            "token": ".add_texts(",
+            "text": "새 텍스트를 임베딩해 저장소에 추가합니다. 이 실습에서는 대화 기록 저장에도 사용합니다."
+          },
+          {
+            "line": 29,
+            "token": ".as_retriever(",
+            "text": "벡터 저장소를 질문 → 관련 Document 목록 인터페이스로 바꿉니다."
+          },
+          {
+            "line": 32,
+            "token": "RunnableAssign",
+            "text": "기존 딕셔너리를 유지하면서 계산 결과를 지정한 키에 합칩니다. 뒤 단계는 갱신된 상태를 받습니다."
+          },
+          {
+            "line": 36,
+            "token": ".invoke(",
+            "text": "앞서 구성한 체인을 주어진 입력으로 한 번 실행하고 완료 결과를 받습니다."
+          },
+          {
+            "line": 36,
+            "token": "print(",
+            "text": "현재 값이나 진행 상태를 화면에 표시합니다. 반환값을 다음 체인으로 전달하는 것과는 다릅니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 34,
+        "title": "Task 1: 문서 로딩 및 청킹",
+        "code": "from langchain_nvidia_ai_endpoints import ChatNVIDIA\n\nfrom langchain_text_splitters import RecursiveCharacterTextSplitter\nfrom langchain_community.vectorstores import FAISS\nfrom langchain_community.document_loaders import ArxivLoader, PyMuPDFLoader\nfrom langchain_community.retrievers import ArxivRetriever\nfrom langchain_core.documents import Document\nfrom IPython.display import display, Markdown\nfrom pathlib import Path\n\ntext_splitter = RecursiveCharacterTextSplitter(\n    chunk_size=1000, chunk_overlap=200,\n    separators=[\"\\n\\n\", \"\\n\", \".\", \";\", \",\", \" \"],\n)    \n\n## TODO: Please pick some papers and add them to the list as you'd like\nprint(\"Loading Documents\")\npaper_ids = [\n    # \"1706.03762\",  ## Attention Is All You Need — transformer foundation\n    # \"1810.04805\",  ## BERT — retrieval/embedding foundation\n    # \"2103.00020\",  ## CLIP — multimodal representation learning\n    # \"2112.10752\",  ## Latent Diffusion — generative modeling milestone\n    \"2005.11401\",  ## Original RAG paper\n    \"2210.03629\",  ## ReAct — reasoning + acting / agent foundation\n    # \"2310.06825\",  ## Mistral 7B — strong modern open LLM\n    \"2306.05685\",  ## Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena\n\n    \"2602.06176\",  ## Large Language Model Reasoning Failures — Feb 2026 survey\n    # \"2601.01828\",  ## Emergent Introspective Awareness in Large Language Models\n    \"2603.18272\",  ## Retrieval-Augmented LLM Agents: Learning to Learn from \n]\ntry:\n    docs = [doc[0] for doc in ArxivRetriever(get_full_documents=True, doc_content_chars_max=1000000).batch(paper_ids, config={\"max_concurrency\": 1})]\nexcept Exception as error:\n    cached_paper = Path(\"cached_papers/2210.03629v3.pdf\")\n    if not cached_paper.is_file():\n        raise RuntimeError(\"Live arXiv retrieval failed and the cached ReAct paper is missing.\") from error\n    print(\"Live arXiv retrieval was unavailable; loading a cached ReAct paper to keep the workflow available.\")\n    cached_pages = PyMuPDFLoader(str(cached_paper)).load()\n    docs = [Document(\n        page_content=\"\\n\\n\".join(page.page_content for page in cached_pages),\n        metadata={\"Title\": \"ReAct: Synergizing Reasoning and Acting in Language Models\", \"entry_id\": \"2210.03629v3\"},\n    )]\n\n## Cut the paper short if references is included.\n## This is a standard string in papers.\nfor doc in docs:\n    content = doc.page_content\n    if \"References\" in content:\n        doc.page_content = content[:content.index(\"References\")]\n\n## Split the documents and also filter out stubs (overly short chunks)\nprint(\"Chunking Documents\")\ndocs_chunks = [text_splitter.split_documents([doc]) for doc in docs]\ndocs_chunks = [[c for c in dchunks if len(c.page_content) > 200] for dchunks in docs_chunks]\n\n## Make some custom Chunks to give big-picture details\ndoc_string = \"Available Documents:\"\ndoc_metadata = []\nfor chunks in docs_chunks:\n    metadata = getattr(chunks[0], 'metadata', {})\n    doc_string += \"\\n - \" + metadata.get('Title')\n    doc_metadata += [str(metadata)]\n\nextra_chunks = [doc_string] + doc_metadata\n\n## Printing out some summary information for reference\npprint(doc_string, '\\n')\nfor i, chunks in enumerate(docs_chunks):\n    print(f\"Document {i}\")\n    print(f\" - # Chunks: {len(chunks)}\")\n    print(f\" - Metadata: \")\n    pprint(chunks[0].metadata)\n    display(Markdown(f\"<details><summary>Chunk 0</summary>{chunks}</details>\"))\n    print()",
+        "annotations": [
+          {
+            "line": 11,
+            "token": "RecursiveCharacterTextSplitter(",
+            "text": "긴 문서를 지정된 경계와 크기로 나누는 분할기를 설정합니다."
+          },
+          {
+            "line": 12,
+            "token": "chunk_overlap=",
+            "text": "이웃 청크가 공유하는 문맥 길이입니다. 너무 큰 overlap은 중복과 인덱스 비용을 늘립니다."
+          },
+          {
+            "line": 16,
+            "token": "TODO",
+            "text": "학습자가 구현할 원본 빈칸입니다. 위의 문제 풀이에서 입력·출력과 교체할 위치를 확인하세요."
+          },
+          {
+            "line": 17,
+            "token": "print(",
+            "text": "현재 값이나 진행 상태를 화면에 표시합니다. 반환값을 다음 체인으로 전달하는 것과는 다릅니다."
+          },
+          {
+            "line": 33,
+            "token": ".batch(",
+            "text": "입력 목록에 체인을 적용합니다. 요청 수와 max_concurrency를 확인하세요."
+          },
+          {
+            "line": 41,
+            "token": ".page_content",
+            "text": "Document에서 실제 본문 텍스트를 읽습니다. 제목 등 메타데이터와 구분하세요."
+          },
+          {
+            "line": 54,
+            "token": ".split_documents(",
+            "text": "본문을 나누되 메타데이터를 가진 Document 객체 목록을 만듭니다."
+          },
+          {
+            "line": 73,
+            "token": ".metadata",
+            "text": "제목·출처 등의 메타데이터를 읽습니다. 자료마다 존재하는 키가 다를 수 있습니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 36,
+        "title": "Task 2: 문서 Vector Store 구성하기",
+        "code": "%%time\nprint(\"Constructing Vector Stores\")\nvecstores = [FAISS.from_texts(extra_chunks, embedder)]\nvecstores += [FAISS.from_documents(doc_chunks, embedder) for doc_chunks in docs_chunks]",
+        "annotations": [
+          {
+            "line": 1,
+            "token": "%%time",
+            "text": "셀 전체 실행 시간을 측정하는 Jupyter 매직입니다. 일반 .py 파일에서는 제거해야 합니다."
+          },
+          {
+            "line": 2,
+            "token": "print(",
+            "text": "현재 값이나 진행 상태를 화면에 표시합니다. 반환값을 다음 체인으로 전달하는 것과는 다릅니다."
+          },
+          {
+            "line": 3,
+            "token": "FAISS.from_texts(",
+            "text": "텍스트를 임베딩하고 FAISS 벡터 인덱스에 저장합니다."
+          },
+          {
+            "line": 4,
+            "token": "FAISS.from_documents(",
+            "text": "본문과 메타데이터를 가진 Document 목록으로 검색 인덱스를 만듭니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 38,
+        "title": "Task 2: 문서 Vector Store 구성하기",
+        "code": "from faiss import IndexFlatL2\nfrom langchain_community.docstore.in_memory import InMemoryDocstore\n\nembed_dims = len(embedder.embed_query(\"test\"))\ndef default_FAISS():\n    '''Useful utility for making an empty FAISS vectorstore'''\n    return FAISS(\n        embedding_function=embedder,\n        index=IndexFlatL2(embed_dims),\n        docstore=InMemoryDocstore(),\n        index_to_docstore_id={},\n        normalize_L2=False\n    )\n\ndef aggregate_vstores(vectorstores):\n    ## Initialize an empty FAISS Index and merge others into it\n    ## We'll use default_faiss for simplicity, though it's tied to your embedder by reference\n    agg_vstore = default_FAISS()\n    for vstore in vectorstores:\n        agg_vstore.merge_from(vstore)\n    return agg_vstore\n\n## Unintuitive optimization; merge_from seems to optimize constituent vector stores away\ndocstore = aggregate_vstores(vecstores)\n\nprint(f\"Constructed aggregate docstore with {len(docstore.docstore._dict)} chunks\")",
+        "annotations": [
+          {
+            "line": 4,
+            "token": ".embed_query(",
+            "text": "질문 문자열 하나를 벡터 하나로 변환합니다. 반환값은 숫자 목록입니다."
+          },
+          {
+            "line": 20,
+            "token": ".merge_from(",
+            "text": "다른 인덱스의 문서와 벡터를 합칩니다. 임베딩 모델과 차원이 호환되어야 합니다."
+          },
+          {
+            "line": 26,
+            "token": "print(",
+            "text": "현재 값이나 진행 상태를 화면에 표시합니다. 반환값을 다음 체인으로 전달하는 것과는 다릅니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 40,
+        "title": "Task 3: [실습] RAG Chain 구현하기",
+        "code": "from langchain_community.document_transformers import LongContextReorder\nfrom langchain_core.runnables import RunnableLambda\nfrom langchain_core.runnables.passthrough import RunnableAssign\nfrom langchain_nvidia_ai_endpoints import ChatNVIDIA\n\nfrom langchain_core.prompts import ChatPromptTemplate\nfrom langchain_core.output_parsers import StrOutputParser\n\nimport gradio as gr\nfrom functools import partial\nfrom operator import itemgetter\n\ninstruct_llm = ChatNVIDIA(model=\"nvidia/nemotron-3.5-lightning-30b-a3b\", timeout=300, model_kwargs={\"chat_template_kwargs\": {\"enable_thinking\": False}})\n\nconvstore = default_FAISS()\n\ndef save_memory_and_get_output(d, vstore):\n    \"\"\"Accepts 'input'/'output' dictionary and saves to convstore\"\"\"\n    vstore.add_texts([\n        f\"User previously responded with {d.get('input')}\",\n        f\"Agent previously responded with {d.get('output')}\"\n    ])\n    return d.get('output')\n\ninitial_msg = (\n    \"Hello! I am a document chat agent here to help the user!\"\n    f\" I have access to the following documents: {doc_string}\\n\\nHow can I help you?\"\n)\n\nchat_prompt = ChatPromptTemplate.from_messages([(\"system\",\n    \"You are a document chatbot. Help the user as they ask questions about documents.\"\n    \" User messaged just asked: {input}\\n\\n\"\n    \" From this, we have retrieved the following potentially-useful info: \"\n    \" Conversation History Retrieval:\\n{history}\\n\\n\"\n    \" Document Retrieval:\\n{context}\\n\\n\"\n    \" (Answer only from retrieval. Only cite sources that are used. Make your response conversational.)\"\n), ('user', '{input}')])\n\nstream_chain = chat_prompt| RPrint() | instruct_llm | StrOutputParser()\n\n################################################################################################\n## BEGIN TODO: Implement the retrieval chain to make your system work!\n\nretrieval_chain = (\n    {'input' : (lambda x: x)}\n    ## TODO: Make sure to retrieve history & context from convstore & docstore, respectively.\n    ## HINT: Our solution uses RunnableAssign, itemgetter, long_reorder, and docs2str\n    | RunnableAssign({'history' : lambda d: None})\n    | RunnableAssign({'context' : lambda d: None})\n)\n\n## END TODO\n################################################################################################\n\ndef chat_gen(message, history=[], return_buffer=True):\n    buffer = \"\"\n    ## First perform the retrieval based on the input message\n    retrieval = retrieval_chain.invoke(message)\n    line_buffer = \"\"\n\n    ## Then, stream the results of the stream_chain\n    for token in stream_chain.stream(retrieval):\n        buffer += token\n        ## If you're using standard print, keep line from getting too long\n        yield buffer if return_buffer else token\n\n    ## Lastly, save the chat exchange to the conversation memory buffer\n    save_memory_and_get_output({'input':  message, 'output': buffer}, convstore)\n\n\n## Start of Agent Event Loop\ntest_question = \"Tell me about RAG!\"  ## <- modify as desired\n\n## Before you launch your gradio interface, make sure your thing works\nfor response in chat_gen(test_question, return_buffer=False):\n    print(response, end='')",
+        "annotations": [
+          {
+            "line": 1,
+            "token": "LongContextReorder",
+            "text": "검색된 문서의 문맥 배치를 바꿉니다. 임베딩 검색이나 모델 기반 리랭킹 자체와는 다릅니다."
+          },
+          {
+            "line": 2,
+            "token": "RunnableLambda",
+            "text": "Python 함수를 Runnable로 감싸 invoke/stream 및 파이프 연결 인터페이스를 제공합니다."
+          },
+          {
+            "line": 3,
+            "token": "RunnableAssign",
+            "text": "기존 딕셔너리를 유지하면서 계산 결과를 지정한 키에 합칩니다. 뒤 단계는 갱신된 상태를 받습니다."
+          },
+          {
+            "line": 6,
+            "token": "ChatPromptTemplate",
+            "text": "중괄호 변수에 입력 값을 넣어 모델용 메시지를 구성합니다. 필요한 키가 없으면 호출 전에 실패합니다."
+          },
+          {
+            "line": 7,
+            "token": "StrOutputParser",
+            "text": "모델의 메시지 객체를 문자열로 바꾸어 다음 함수나 화면에서 사용할 수 있게 합니다."
+          },
+          {
+            "line": 13,
+            "token": "ChatNVIDIA(",
+            "text": "수업의 NVIDIA 모델 클라이언트를 구성합니다. 생성 자체는 invoke/stream 등 호출 시 일어납니다."
+          },
+          {
+            "line": 19,
+            "token": ".add_texts(",
+            "text": "새 텍스트를 임베딩해 저장소에 추가합니다. 이 실습에서는 대화 기록 저장에도 사용합니다."
+          },
+          {
+            "line": 42,
+            "token": "TODO",
+            "text": "학습자가 구현할 원본 빈칸입니다. 위의 문제 풀이에서 입력·출력과 교체할 위치를 확인하세요."
+          },
+          {
+            "line": 55,
+            "token": "return_buffer",
+            "text": "화면에는 누적 문자열, 터미널에는 새 조각만 보내기 위한 분기 플래그입니다."
+          },
+          {
+            "line": 58,
+            "token": ".invoke(",
+            "text": "앞서 구성한 체인을 주어진 입력으로 한 번 실행하고 완료 결과를 받습니다."
+          },
+          {
+            "line": 62,
+            "token": ".stream(",
+            "text": "완성 결과를 기다리는 대신 출력 조각을 순서대로 받습니다. 각 조각의 자료형을 확인하세요."
+          },
+          {
+            "line": 65,
+            "token": "yield ",
+            "text": "함수를 즉시 끝내지 않고 결과 조각을 내보낸 뒤 다음 반복에서 이어갑니다."
+          },
+          {
+            "line": 76,
+            "token": "print(",
+            "text": "현재 값이나 진행 상태를 화면에 표시합니다. 반환값을 다음 체인으로 전달하는 것과는 다릅니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 42,
+        "title": "Task 4: Gradio 챗봇과 상호작용하기",
+        "code": "# chatbot = gr.Chatbot(value = [{\"role\": \"user\", \"content\": initial_msg}])\n# demo = gr.ChatInterface(chat_gen, chatbot=chatbot).queue()\n\n# try:\n#     demo.launch(debug=True, share=True, show_api=False)\n#     demo.close()\n# except Exception as e:\n#     demo.close()\n#     print(e)\n#     raise e",
+        "annotations": [
+          {
+            "line": 1,
+            "token": "셀의 입력과 결과",
+            "text": "위 셀에서 정의한 변수·함수를 사용합니다. 할당문은 값을 저장하고 마지막 식은 Jupyter 결과 영역에 표시됩니다. 셀 실행 순서와 반환 자료형을 함께 확인하세요."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 44,
+        "title": "Part 4: 평가를 위해 인덱스 저장하기",
+        "code": "## Save and compress your index\ndocstore.save_local(\"docstore_index\")\n!tar czvf docstore_index.tgz docstore_index\n\n!rm -rf docstore_index",
+        "annotations": [
+          {
+            "line": 2,
+            "token": ".save_local(",
+            "text": "메모리의 벡터 인덱스·문서 저장소를 파일로 저장합니다. 후속 노트에서 재사용합니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 46,
+        "title": "Part 4: 평가를 위해 인덱스 저장하기",
+        "code": "",
+        "annotations": [],
+        "notice": "인증 설정·요청 진단 또는 인덱스 역직렬화가 포함된 셀입니다. 원본 수업 환경에서 설정을 확인하고, 인증 정보나 전체 요청을 출력·공유하지 마세요. 이 셀은 복사 코드에서 제외했습니다."
+      }
+    ]
+  },
+  "08-evaluation": {
+    "filename": "08_evaluation.ipynb",
+    "url": "https://drive.google.com/file/d/1wOL64k3IPJXX8z5e25H7O-eSEkoEpSNF/view",
+    "totalCells": 23,
+    "blocks": [
+      {
+        "cell": 3,
+        "title": "학습 목표:",
+        "code": "# %pip install -q langchain langchain-nvidia-ai-endpoints fastembed gradio rich\n# %pip install -q arxiv pymupdf faiss-cpu ragas\n\n## If you encounter a typing-extensions issue, restart your runtime and try again\n# from langchain_nvidia_ai_endpoints import ChatNVIDIA\n# ChatNVIDIA.get_available_models()\n\nfrom functools import partial\nfrom rich.console import Console\nfrom rich.style import Style\nfrom rich.theme import Theme\n\nconsole = Console()\nbase_style = Style(color=\"#76B900\", bold=True)\nnorm_style = Style(bold=True)\npprint = partial(console.print, style=base_style)\npprint2 = partial(console.print, style=norm_style)\n\nfrom langchain_nvidia_ai_endpoints import ChatNVIDIA, NVIDIAEmbeddings\n\nembedder = NVIDIAEmbeddings(\n    model=\"course/embedding\",\n    base_url=\"http://llm_client:9000/v1\",\n)\n\n# In Colab, replace the service client above with:\n# from langchain_community.embeddings import FastEmbedEmbeddings\n# embedder = FastEmbedEmbeddings(model_name=\"sentence-transformers/all-MiniLM-L6-v2\")\n\n# ChatNVIDIA.get_available_models(base_url=\"http://llm_client:9000/v1\")\ninstruct_llm = ChatNVIDIA(model=\"nvidia/nemotron-3.5-lightning-30b-a3b\", timeout=300, model_kwargs={\"chat_template_kwargs\": {\"enable_thinking\": False}})",
+        "annotations": [
+          {
+            "line": 21,
+            "token": "NVIDIAEmbeddings(",
+            "text": "문자열을 숫자 벡터로 바꿀 임베딩 클라이언트를 구성합니다. 수업 서버의 모델 별칭을 사용합니다."
+          },
+          {
+            "line": 31,
+            "token": "ChatNVIDIA(",
+            "text": "수업의 NVIDIA 모델 클라이언트를 구성합니다. 생성 자체는 invoke/stream 등 호출 시 일어납니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 7,
+        "title": "Task 1: 문서 검색 인덱스 가져오기",
+        "code": "",
+        "annotations": [],
+        "notice": "인증 설정·요청 진단 또는 인덱스 역직렬화가 포함된 셀입니다. 원본 수업 환경에서 설정을 확인하고, 인증 정보나 전체 요청을 출력·공유하지 마세요. 이 셀은 복사 코드에서 제외했습니다."
+      },
+      {
+        "cell": 9,
+        "title": "Task 2: [실습] RAG Chain 가져오기",
+        "code": "from langchain_core.output_parsers import StrOutputParser\nfrom langchain_core.prompts import ChatPromptTemplate\nfrom langchain_core.runnables import RunnableLambda, RunnableBranch\nfrom langchain_core.runnables.passthrough import RunnableAssign\nfrom langchain_community.document_transformers import LongContextReorder\n\nfrom langchain_nvidia_ai_endpoints import ChatNVIDIA\n\nfrom functools import partial\nfrom operator import itemgetter\n\nimport gradio as gr\n\n#####################################################################\n\n\n# ChatNVIDIA.get_available_models()\ninstruct_llm = ChatNVIDIA(model=\"nvidia/nemotron-3.5-lightning-30b-a3b\", timeout=300, model_kwargs={\"chat_template_kwargs\": {\"enable_thinking\": False}})\nllm = instruct_llm | StrOutputParser()\n\n#####################################################################\n\ndef docs2str(docs, title=\"Document\"):\n    \"\"\"Useful utility for making chunks into context string. Optional, but useful\"\"\"\n    out_str = \"\"\n    for doc in docs:\n        doc_name = getattr(doc, 'metadata', {}).get('Title', title)\n        if doc_name: out_str += f\"[Quote from {doc_name}] \"\n        out_str += getattr(doc, 'page_content', str(doc)) + \"\\n\"\n    return out_str\n\nchat_prompt = ChatPromptTemplate.from_template(\n    \"You are a document chatbot. Help the user as they ask questions about documents.\"\n    \" User messaged just asked you a question: {input}\\n\\n\"\n    \" The following information may be useful for your response: \"\n    \" Document Retrieval:\\n{context}\\n\\n\"\n    \" (Answer only from retrieval. Only cite sources that are used. Make your response conversational)\"\n    \"\\n\\nUser Question: {input}\"\n)\n\ndef output_puller(inputs):\n    \"\"\"\"Output generator. Useful if your chain returns a dictionary with key 'output'\"\"\"\n    if isinstance(inputs, dict):\n        inputs = [inputs]\n    for token in inputs:\n        if token.get('output'):\n            yield token.get('output')\n\n#####################################################################\n## TODO: Pull in your desired RAG Chain. Memory not necessary\n\n## Chain 1 Specs: \"Hello World\" -> retrieval_chain \n##   -> {'input': <str>, 'context' : <str>}\nlong_reorder = RunnableLambda(LongContextReorder().transform_documents)  ## GIVEN\ncontext_getter = RunnableLambda(lambda x: x)  ## TODO\nretrieval_chain = {'input' : (lambda x: x)} | RunnableAssign({'context' : context_getter})\n\n## Chain 2 Specs: retrieval_chain -> generator_chain \n##   -> {\"output\" : <str>, ...} -> output_puller\ngenerator_chain = RunnableLambda(lambda x: x)  ## TODO\ngenerator_chain = {'output' : generator_chain} | RunnableLambda(output_puller)  ## GIVEN\n\n## END TODO\n#####################################################################\n\nrag_chain = retrieval_chain | generator_chain\n\n# pprint(rag_chain.invoke(\"Tell me something interesting!\"))\nfor token in rag_chain.stream(\"Tell me something interesting!\"):\n    print(token, end=\"\")",
+        "annotations": [
+          {
+            "line": 1,
+            "token": "StrOutputParser",
+            "text": "모델의 메시지 객체를 문자열로 바꾸어 다음 함수나 화면에서 사용할 수 있게 합니다."
+          },
+          {
+            "line": 2,
+            "token": "ChatPromptTemplate",
+            "text": "중괄호 변수에 입력 값을 넣어 모델용 메시지를 구성합니다. 필요한 키가 없으면 호출 전에 실패합니다."
+          },
+          {
+            "line": 3,
+            "token": "RunnableLambda",
+            "text": "Python 함수를 Runnable로 감싸 invoke/stream 및 파이프 연결 인터페이스를 제공합니다."
+          },
+          {
+            "line": 3,
+            "token": "RunnableBranch",
+            "text": "조건을 순서대로 확인해 해당 분기를 실행합니다. 어떤 분기도 맞지 않으면 기본 분기를 실행합니다."
+          },
+          {
+            "line": 4,
+            "token": "RunnableAssign",
+            "text": "기존 딕셔너리를 유지하면서 계산 결과를 지정한 키에 합칩니다. 뒤 단계는 갱신된 상태를 받습니다."
+          },
+          {
+            "line": 5,
+            "token": "LongContextReorder",
+            "text": "검색된 문서의 문맥 배치를 바꿉니다. 임베딩 검색이나 모델 기반 리랭킹 자체와는 다릅니다."
+          },
+          {
+            "line": 18,
+            "token": "ChatNVIDIA(",
+            "text": "수업의 NVIDIA 모델 클라이언트를 구성합니다. 생성 자체는 invoke/stream 등 호출 시 일어납니다."
+          },
+          {
+            "line": 47,
+            "token": "yield ",
+            "text": "함수를 즉시 끝내지 않고 결과 조각을 내보낸 뒤 다음 반복에서 이어갑니다."
+          },
+          {
+            "line": 50,
+            "token": "TODO",
+            "text": "학습자가 구현할 원본 빈칸입니다. 위의 문제 풀이에서 입력·출력과 교체할 위치를 확인하세요."
+          },
+          {
+            "line": 69,
+            "token": ".stream(",
+            "text": "완성 결과를 기다리는 대신 출력 조각을 순서대로 받습니다. 각 조각의 자료형을 확인하세요."
+          },
+          {
+            "line": 70,
+            "token": "print(",
+            "text": "현재 값이나 진행 상태를 화면에 표시합니다. 반환값을 다음 체인으로 전달하는 것과는 다릅니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 11,
+        "title": "Step 3: 합성 질문-답변 쌍 생성하기",
+        "code": "import random\nimport re\n\nnum_questions = 3\nsynth_questions = []\nsynth_answers = []\n\nsimple_prompt = ChatPromptTemplate.from_messages([('system', '{system}'), ('user', 'INPUT: {input}')])\n\nfor i in range(num_questions):\n    doc1, doc2 = random.sample(docs, 2)\n    sys_msg = (\n        \"Use the documents provided by the user to generate an interesting question-answer pair.\"\n        \" Try to use both documents if possible, and rely more on the document bodies than the summary.\"\n        \" Use the format:\\nQuestion: (good question, 1-3 sentences, detailed)\\n\\nAnswer: (answer derived from the documents)\"\n        \" DO NOT SAY: \\\"Here is an interesting question pair\\\" or similar. FOLLOW FORMAT!\"\n    )\n    usr_msg = (\n        f\"Document1: {format_chunk(doc1)}\\n\\n\"\n        f\"Document2: {format_chunk(doc2)}\"\n    )\n\n    qa_pair = (simple_prompt | llm).invoke({'system': sys_msg, 'input': usr_msg})\n    match = re.search(r\"(?:(?:\\*\\*)?(?:Question|質問|问题|問題)(?:\\*\\*)?\\s*[:：](?:\\*\\*)?\\s*)?(.*?)\\s*(?:\\*\\*)?(?:Answer|回答|答案)(?:\\*\\*)?\\s*[:：](?:\\*\\*)?\\s*(.*)\", qa_pair, flags=re.DOTALL)\n    if not match:\n        raise ValueError(\"The generated response did not contain an Answer section. Please rerun this cell.\")\n    synth_questions += [\"Question: \" + match.group(1).strip()]\n    synth_answers += [\"Answer: \" + match.group(2).strip()]\n    pprint2(f\"QA Pair {i+1}\")\n    pprint2(synth_questions[-1])\n    pprint(synth_answers[-1])\n    print()",
+        "annotations": [
+          {
+            "line": 8,
+            "token": "ChatPromptTemplate",
+            "text": "중괄호 변수에 입력 값을 넣어 모델용 메시지를 구성합니다. 필요한 키가 없으면 호출 전에 실패합니다."
+          },
+          {
+            "line": 23,
+            "token": ".invoke(",
+            "text": "앞서 구성한 체인을 주어진 입력으로 한 번 실행하고 완료 결과를 받습니다."
+          },
+          {
+            "line": 31,
+            "token": "print(",
+            "text": "현재 값이나 진행 상태를 화면에 표시합니다. 반환값을 다음 체인으로 전달하는 것과는 다릅니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 13,
+        "title": "Step 4: 합성 질문에 답하기",
+        "code": "## TODO: Generate some synthetic answers to the questions above.\n##   Try to use the same syntax as the cell above\nrag_answers = []\nfor i, q in enumerate(synth_questions):\n    ## TODO: Compute the RAG Answer\n    rag_answer = \"\"\n    rag_answers += [rag_answer]\n    pprint2(f\"QA Pair {i+1}\", q, \"\", sep=\"\\n\")\n    pprint(f\"RAG Answer: {rag_answer}\", \"\", sep='\\n')",
+        "annotations": [
+          {
+            "line": 1,
+            "token": "TODO",
+            "text": "학습자가 구현할 원본 빈칸입니다. 위의 문제 풀이에서 입력·출력과 교체할 위치를 확인하세요."
+          },
+          {
+            "line": 9,
+            "token": "print(",
+            "text": "현재 값이나 진행 상태를 화면에 표시합니다. 반환값을 다음 체인으로 전달하는 것과는 다릅니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 15,
+        "title": "Step 5: 사람 선호 지표 구현하기",
+        "code": "## TODO: Adapt this prompt for whichever LLM you're actually interested in using. \n## If it's llama, maybe system message would be good?\neval_prompt = ChatPromptTemplate.from_template(\"\"\"INSTRUCTION: \nEvaluate the following Question-Answer pair for human preference and consistency.\nAssume the first answer is a ground truth answer and has to be correct.\nAssume the second answer may or may not be true.\n[1] The second answer lies, does not answer the question, or is inferior to the first answer.\n[2] The second answer is better than the first and does not introduce any inconsistencies.\n\nOutput Format:\n[Score] Justification\n\n{qa_trio}\n\nEVALUATION: \n\"\"\")\n\npref_score = []\n\ntrio_gen = zip(synth_questions, synth_answers, rag_answers)\nfor i, (q, a_synth, a_rag) in enumerate(trio_gen):\n    pprint2(f\"Set {i+1}\\n\\nQuestion: {q}\\n\\n\")\n\n    qa_trio = f\"Question: {q}\\n\\nAnswer 1 (Ground Truth): {a_synth}\\n\\n Answer 2 (New Answer): {a_rag}\"\n    pref_score += [(eval_prompt | llm).invoke({'qa_trio': qa_trio})]\n    pprint(f\"Synth Answer: {a_synth}\\n\\n\")\n    pprint(f\"RAG Answer: {a_rag}\\n\\n\")\n    pprint2(f\"Synth Evaluation: {pref_score[-1]}\\n\\n\")",
+        "annotations": [
+          {
+            "line": 1,
+            "token": "TODO",
+            "text": "학습자가 구현할 원본 빈칸입니다. 위의 문제 풀이에서 입력·출력과 교체할 위치를 확인하세요."
+          },
+          {
+            "line": 3,
+            "token": "ChatPromptTemplate",
+            "text": "중괄호 변수에 입력 값을 넣어 모델용 메시지를 구성합니다. 필요한 키가 없으면 호출 전에 실패합니다."
+          },
+          {
+            "line": 20,
+            "token": "zip(",
+            "text": "여러 목록을 같은 위치끼리 묶습니다. 가장 짧은 목록까지만 반복하므로 길이를 먼저 확인하세요."
+          },
+          {
+            "line": 25,
+            "token": ".invoke(",
+            "text": "앞서 구성한 체인을 주어진 입력으로 한 번 실행하고 완료 결과를 받습니다."
+          },
+          {
+            "line": 26,
+            "token": "print(",
+            "text": "현재 값이나 진행 상태를 화면에 표시합니다. 반환값을 다음 체인으로 전달하는 것과는 다릅니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 17,
+        "title": "Step 5: 사람 선호 지표 구현하기",
+        "code": "pref_score = sum((\"[2]\" in score) for score in pref_score) / len(pref_score)\nprint(f\"Preference Score: {pref_score}\")",
+        "annotations": [
+          {
+            "line": 2,
+            "token": "print(",
+            "text": "현재 값이나 진행 상태를 화면에 표시합니다. 반환값을 다음 체인으로 전달하는 것과는 다릅니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 21,
+        "title": "Part 5: [평가] 학점 인정을 위한 평가",
+        "code": "# %%js\n# // Manual Access Without NGINX\n# var url = 'http://'+window.location.host+':8090';\n# element.innerHTML = '<a style=\"color:green;\" target=\"_blank\" href='+url+'><h1>< Link To Gradio Frontend ></h1></a>';",
+        "annotations": [
+          {
+            "line": 1,
+            "token": "셀의 입력과 결과",
+            "text": "위 셀에서 정의한 변수·함수를 사용합니다. 할당문은 값을 저장하고 마지막 식은 Jupyter 결과 영역에 표시됩니다. 셀 실행 순서와 반환 자료형을 함께 확인하세요."
+          }
+        ],
+        "notice": ""
+      }
+    ]
+  },
+  "09-langserve": {
+    "filename": "09_langserve.ipynb",
+    "url": "https://drive.google.com/file/d/19Pb-WEsIR35vQUl0LL5muVNb72Ivt15o/view",
+    "totalCells": 12,
+    "blocks": [
+      {
+        "cell": 4,
+        "title": "Part 1: /basic_chat 엔드포인트 제공하기",
+        "code": "%%writefile server_app.py\n# https://python.langchain.com/docs/langserve#server\nfrom fastapi import FastAPI\nfrom langchain_nvidia_ai_endpoints import ChatNVIDIA, NVIDIAEmbeddings\nfrom langserve import add_routes\n\n## May be useful later\nfrom langchain_core.output_parsers import StrOutputParser\nfrom langchain_core.prompts import ChatPromptTemplate, PromptTemplate\nfrom langchain_core.prompt_values import ChatPromptValue\nfrom langchain_core.runnables import RunnableLambda, RunnableBranch, RunnablePassthrough\nfrom langchain_core.runnables.passthrough import RunnableAssign\nfrom langchain_community.document_transformers import LongContextReorder\nfrom functools import partial\nfrom operator import itemgetter\n\nfrom langchain_community.vectorstores import FAISS\n\n## TODO: Make sure to pick your LLM and do your prompt engineering as necessary for the final assessment\nembedder = NVIDIAEmbeddings(\n    model=\"course/embedding\",\n    base_url=\"http://llm_client:9000/v1\",\n)\n\n# In Colab, replace the service client above with:\n# from langchain_community.embeddings import FastEmbedEmbeddings\n# embedder = FastEmbedEmbeddings(model_name=\"sentence-transformers/all-MiniLM-L6-v2\")\ninstruct_llm = ChatNVIDIA(model=\"nvidia/nemotron-3.5-lightning-30b-a3b\", timeout=300, model_kwargs={\"chat_template_kwargs\": {\"enable_thinking\": False}})\n\napp = FastAPI(\n  title=\"LangChain Server\",\n  version=\"1.0\",\n  description=\"A simple api server using Langchain's Runnable interfaces\",\n)\n\n## PRE-ASSESSMENT: Run as-is and see the basic chain in action\n\nadd_routes(\n    app,\n    instruct_llm,\n    path=\"/basic_chat\",\n)\n\n## ASSESSMENT TODO: Implement these components as appropriate\n\nadd_routes(\n    app,\n    RunnableLambda(lambda x: \"Not Implemented\"),\n    path=\"/generator\",\n)\n\nadd_routes(\n    app,\n    RunnableLambda(lambda x: []),\n    path=\"/retriever\",\n)\n\n## Might be encountered if this were for a standalone python file...\nif __name__ == \"__main__\":\n    import uvicorn\n    uvicorn.run(app, host=\"0.0.0.0\", port=9012)",
+        "annotations": [
+          {
+            "line": 1,
+            "token": "%%writefile",
+            "text": "아래 내용을 파일로 저장하는 Jupyter 셀 매직입니다. 현재 커널에서 코드가 실행되는 것은 아닙니다."
+          },
+          {
+            "line": 8,
+            "token": "StrOutputParser",
+            "text": "모델의 메시지 객체를 문자열로 바꾸어 다음 함수나 화면에서 사용할 수 있게 합니다."
+          },
+          {
+            "line": 9,
+            "token": "ChatPromptTemplate",
+            "text": "중괄호 변수에 입력 값을 넣어 모델용 메시지를 구성합니다. 필요한 키가 없으면 호출 전에 실패합니다."
+          },
+          {
+            "line": 11,
+            "token": "RunnableLambda",
+            "text": "Python 함수를 Runnable로 감싸 invoke/stream 및 파이프 연결 인터페이스를 제공합니다."
+          },
+          {
+            "line": 11,
+            "token": "RunnablePassthrough",
+            "text": "입력을 바꾸지 않고 전달합니다. 다른 분기가 계산되는 동안 원래 값을 보존할 때 사용합니다."
+          },
+          {
+            "line": 11,
+            "token": "RunnableBranch",
+            "text": "조건을 순서대로 확인해 해당 분기를 실행합니다. 어떤 분기도 맞지 않으면 기본 분기를 실행합니다."
+          },
+          {
+            "line": 12,
+            "token": "RunnableAssign",
+            "text": "기존 딕셔너리를 유지하면서 계산 결과를 지정한 키에 합칩니다. 뒤 단계는 갱신된 상태를 받습니다."
+          },
+          {
+            "line": 13,
+            "token": "LongContextReorder",
+            "text": "검색된 문서의 문맥 배치를 바꿉니다. 임베딩 검색이나 모델 기반 리랭킹 자체와는 다릅니다."
+          },
+          {
+            "line": 19,
+            "token": "TODO",
+            "text": "학습자가 구현할 원본 빈칸입니다. 위의 문제 풀이에서 입력·출력과 교체할 위치를 확인하세요."
+          },
+          {
+            "line": 20,
+            "token": "NVIDIAEmbeddings(",
+            "text": "문자열을 숫자 벡터로 바꿀 임베딩 클라이언트를 구성합니다. 수업 서버의 모델 별칭을 사용합니다."
+          },
+          {
+            "line": 28,
+            "token": "ChatNVIDIA(",
+            "text": "수업의 NVIDIA 모델 클라이언트를 구성합니다. 생성 자체는 invoke/stream 등 호출 시 일어납니다."
+          },
+          {
+            "line": 38,
+            "token": "add_routes(",
+            "text": "Runnable을 FastAPI의 특정 HTTP 경로로 연결합니다. 입력·출력 계약을 유지하세요."
+          },
+          {
+            "line": 61,
+            "token": "uvicorn.run(",
+            "text": "FastAPI 서버를 지정한 주소·포트로 실행합니다. 수정 후에는 서버 재시작이 필요합니다."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 5,
+        "title": "Part 1: /basic_chat 엔드포인트 제공하기",
+        "code": "## Works, but will block the notebook.\n!python server_app.py  \n\n## Will technically work, but not recommended in a notebook. \n## You may be surprised at the interesting side effects...\n# import os\n# os.system(\"python server_app.py &\")",
+        "annotations": [
+          {
+            "line": 1,
+            "token": "셀의 입력과 결과",
+            "text": "위 셀에서 정의한 변수·함수를 사용합니다. 할당문은 값을 저장하고 마지막 식은 Jupyter 결과 영역에 표시됩니다. 셀 실행 순서와 반환 자료형을 함께 확인하세요."
+          }
+        ],
+        "notice": ""
+      },
+      {
+        "cell": 9,
+        "title": "Part 3: 최종 평가",
+        "code": "# %%js\n# // Manual Access Without NGINX\n# var url = 'http://'+window.location.host+':8090';\n# element.innerHTML = '<a style=\"color:green;\" target=\"_blank\" href='+url+'><h1>< Link To Gradio Frontend ></h1></a>';",
+        "annotations": [
+          {
+            "line": 1,
+            "token": "셀의 입력과 결과",
+            "text": "위 셀에서 정의한 변수·함수를 사용합니다. 할당문은 값을 저장하고 마지막 식은 Jupyter 결과 영역에 표시됩니다. 셀 실행 순서와 반환 자료형을 함께 확인하세요."
+          }
+        ],
+        "notice": ""
+      }
+    ]
+  }
+}

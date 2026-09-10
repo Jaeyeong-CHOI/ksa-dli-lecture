@@ -1,0 +1,15 @@
+node_modules/
+dist/
+sources/private/
+evidence/
+state/
+.env*
+!.env.example
+*.pem
+*.key
+*.log
+
+runtime/
+tutor/
+server/llm-config.json
+.venv/
