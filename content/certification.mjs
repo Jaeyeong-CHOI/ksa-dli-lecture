@@ -1,4 +1,5 @@
 // Authored walkthrough for the supplied DLI environment, not official Solutions.
+import {certification07Code, certification07Actions, certification07Steps} from './certification-07.mjs';
 export const promptCode = String.raw`chat_prompt = ChatPromptTemplate.from_messages([
     ("system",
      "You are a document assistant. Answer using only the retrieved context. "
@@ -10,6 +11,20 @@ export const promptCode = String.raw`chat_prompt = ChatPromptTemplate.from_messa
 ])`;
 
 export const certificationCode = {
+  ...certification07Code,
+  setup: String.raw`# Get Certification · 08번 설정
+from functools import partial
+from rich.console import Console
+from rich.style import Style
+from langchain_nvidia_ai_endpoints import NVIDIAEmbeddings
+
+console = Console()
+pprint = partial(console.print, style=Style(color="#76B900", bold=True))
+pprint2 = partial(console.print, style=Style(bold=True))
+embedder = NVIDIAEmbeddings(
+    model="course/embedding", base_url="http://llm_client:9000/v1"
+)
+print("08번 설정 완료 · 다음 셀에서 저장한 인덱스를 불러옵니다.")`,
   load: String.raw`from pathlib import Path
 import subprocess
 from langchain_community.vectorstores import FAISS
@@ -50,6 +65,7 @@ from langchain_nvidia_ai_endpoints import ChatNVIDIA
 
 instruct_llm = ChatNVIDIA(
     model="nvidia/nemotron-3.5-lightning-30b-a3b",
+    base_url="http://llm_client:9000/v1",
     timeout=300,
     model_kwargs={"chat_template_kwargs": {"enable_thinking": False}},
 )
@@ -137,6 +153,7 @@ if len(docstore.docstore._dict) < 2:
 
 instruct_llm = ChatNVIDIA(
     model="nvidia/nemotron-3.5-lightning-30b-a3b",
+    base_url="http://llm_client:9000/v1",
     timeout=300,
     model_kwargs={"chat_template_kwargs": {"enable_thinking": False}},
 )
@@ -184,7 +201,8 @@ print("RAG 답변:", answer)`,
 };
 
 export const certificationActions = {
-  setup: {notebook: '08_evaluation.ipynb', cell: 3, kind: 'run', find: 'from functools import partial', contains: 'embedder = NVIDIAEmbeddings(', result: '빨간 오류 없이 실행이 끝나면 됩니다. 이 셀은 설정을 만드는 단계라 별도 출력이 없을 수 있습니다.'},
+  ...certification07Actions,
+  setup: {notebook: '08_evaluation.ipynb', cell: 3, kind: 'replace', find: 'from functools import partial', contains: 'embedder = NVIDIAEmbeddings(', result: '08번 설정 완료가 출력됩니다. 08번 커널에서 embedder, pprint, pprint2가 준비된 상태입니다.'},
   load: {notebook: '08_evaluation.ipynb', cell: 7, kind: 'replace', find: 'from langchain_community.vectorstores import FAISS', contains: '!tar xzvf docstore_index.tgz', result: '“현재 작업 폴더”, “문서 조각 수”와 실제 문서 내용이 셀 아래에 출력됩니다.'},
   rag: {notebook: '08_evaluation.ipynb', cell: 9, kind: 'replace', find: 'from langchain_core.output_parsers import StrOutputParser', contains: 'context_getter =', result: '질문에 대한 답변이 셀 아래에 출력됩니다. 이 코드가 끝나야 다음 질문 생성 셀을 실행합니다.'},
   questions: {notebook: '08_evaluation.ipynb', cell: 11, kind: 'run', find: 'import random', contains: 'num_questions = 3', result: '질문과 기준 답변 3쌍이 출력될 때까지 기다립니다. 실행 표시 [*]가 끝난 뒤 다음 셀로 이동합니다.'},
@@ -197,7 +215,8 @@ export const certificationActions = {
 };
 
 export const certificationSteps = [
-  {id: 'prepare', short: '08 · 시작', title: '08번을 열고 설정 셀 실행하기', place: '08_evaluation.ipynb · 기존 노트북을 열어 그대로 작업', goal: '첫 코드 셀을 실행해 수업 모델 연결 설정을 준비합니다.'},
+  ...certification07Steps,
+  {id: 'prepare', short: '08 · 시작', title: '08번 설정 코드를 붙여넣고 실행', place: '08_evaluation.ipynb · 원본 셀 3 전체 교체', goal: '07번과 별개인 08번 커널에서 설정 코드를 실행합니다.'},
   {id: 'load', short: '08 · 불러오기', title: '설정 실행 → 문서 불러오기', place: '08_evaluation.ipynb · 원본 셀 3 → 셀 7', goal: 'embedder와 문서 목록 docs가 준비되면 다음으로 넘어갑니다.'},
   {id: 'evaluate', short: '08 · 점검', title: 'RAG 답변을 만들고 사전 점검하기', place: '08_evaluation.ipynb · 셀 9 → 11 → 13 → 15 → 17', goal: '질문마다 실제 검색 자료에 근거한 답변이 나오는지 확인합니다.'},
   {id: 'server', short: '09 · 붙여넣기', title: '09번의 코드 셀 하나를 전체 교체하기', place: '09_langserve.ipynb · %%writefile server_app.py 셀', goal: '아래 코드를 노트북 셀에 붙여넣어 실행하면 서버 파일이 자동으로 만들어집니다.'},
@@ -207,7 +226,11 @@ export const certificationSteps = [
 ];
 
 export const certificationErrors = [
-  ['docstore_index가 없거나 파일을 찾지 못해요', '08번 불러오기 코드의 “현재 작업 폴더”를 확인하세요. 07번에서 만든 docstore_index.tgz를 그 폴더에 업로드하고 08번 셀 7을 다시 실행합니다. 압축 안에는 docstore_index/index.faiss와 index.pkl이 있어야 합니다. 09번에서는 server_app.py 바로 옆에 이 폴더가 있어야 합니다. 빈 파일이나 빈 인덱스로 대신하면 검색·평가가 되지 않습니다.'],
+  ['07-A에서 ModuleNotFoundError 또는 모델 연결 오류가 나요', '개인 PC가 아니라 NVIDIA 강좌의 JupyterLab인지, Code 셀의 커널이 수업 Python 환경인지 확인합니다. 환경 시작 직후라면 서비스 준비가 끝날 때까지 기다린 뒤 07-A만 다시 실행하세요. 필요한 패키지는 수업 환경에 포함되어 있습니다. 계속 모듈이 없으면 작업을 저장하고 강좌 런처에서 환경을 다시 실행하거나 강사에게 오류 마지막 줄을 보여 주세요. 키를 채팅이나 이 사이트에 입력하지 마세요.'],
+  ['07-B에서 arXiv 다운로드 오류가 나요', 'cached_papers/2210.03629v3.pdf가 있으면 네트워크 다운로드 없이 사용합니다. 캐시가 없고 외부 다운로드가 차단되었다면 논문 PDF(https://arxiv.org/pdf/2210.03629v3)를 브라우저에서 받은 뒤, JupyterLab 왼쪽의 cached_papers 폴더를 열고 Upload Files 버튼으로 2210.03629v3.pdf라는 이름으로 올립니다. 다시 07-B부터 실행하세요. HTML 오류 화면을 PDF로 이름만 바꾸면 안 됩니다.'],
+  ['07-C의 진행 숫자가 멈추거나 중간에 실패했어요', '임베딩 모델이 문서 조각을 처리 중인지 먼저 기다려 봅니다. 실제 오류가 나면 연결 상태를 확인한 뒤 07-C를 다시 실행하세요. 이 셀은 메모리 인덱스를 비우고 처음부터 다시 만들므로, 실패한 일부 결과를 그대로 저장하지 않습니다. 07-C 완료를 본 뒤에만 07-D로 넘어가세요.'],
+  ['07번을 재시작한 뒤 work_dir / chunks / docstore가 없다고 나와요', '커널을 다시 시작하면 07-A~D의 변수도 사라집니다. 아직 저장 전이면 같은 07번 노트북에서 07-A → 07-B → 07-C → 07-D 순서로 다시 실행하세요. 이미 07-D 완료 후 인덱스 폴더와 압축 파일이 남아 있다면 08번 설정·불러오기 단계부터 이어갈 수 있습니다.'],
+  ['docstore_index가 없거나 파일을 찾지 못해요', '처음 시작한 랩이면 이 페이지의 07-A → 07-B → 07-C → 07-D를 먼저 실행하세요. 07-D에서 저장 후 검색 OK를 확인한 뒤 같은 폴더의 08번으로 넘어갑니다. 이미 저장했다면 07-A와 08번 불러오기에 표시된 작업 폴더가 같은지 확인하세요. 압축 안에는 docstore_index/index.faiss와 index.pkl이 있어야 합니다. 09번에서는 server_app.py 바로 옆에 이 폴더가 있어야 합니다. 빈 파일이나 빈 인덱스로 대신하면 검색·평가가 되지 않습니다.'],
   ['NameError: embedder / docs / rag_chain / synth_questions', '앞에서 만든 변수를 현재 커널이 기억하지 못한다는 뜻입니다. 08번은 셀 3 → 7 → 9 → 11 → 13 → 15 → 17 순으로 실행하세요. 다른 노트북의 변수는 자동으로 공유되지 않습니다. 커널을 재시작했다면 필요한 앞쪽 셀부터 다시 실행합니다.'],
   ['FAISS 차원 오류 / AssertionError가 나요', '07번의 저장 임베딩과 현재 검색 임베딩이 같은지 확인하세요. 이 가이드는 course/embedding 수업 서비스를 기준으로 합니다. 다른 모델로 만든 인덱스라면 이름만 바꾸지 말고 동일한 모델 설정으로 문서 인덱스를 다시 만들어야 합니다.'],
   ['Address already in use · 9012 포트가 사용 중이에요', '이미 켜 둔 server_app.py가 있습니다. 해당 Terminal에서 Ctrl+C로 내 서버를 종료하고 한 번만 다시 실행하세요. 이전에 09번 셀 5에서 실행했다면 그 노트북의 정지(■) 버튼을 누르고, 종료되지 않을 때만 해당 Kernel을 재시작하세요. 모든 Python 프로세스를 종료할 필요는 없습니다.'],

@@ -14,7 +14,7 @@
 
 ## Get Certification
 
-`/get-certification`은 07번 문서 인덱스 준비 → 08번 사전 점검 → 09번 서버 구현·연결 → Gradio Evaluate → 강좌 Assess Task → My Learning 인증서 확인을 안내합니다. 파일 복제 없이 기존 노트북에서 작업합니다. 코드 블록마다 열 노트북·찾을 코드 첫 줄·전체 교체 또는 새 Code 셀 추가·실행 키·확인할 출력을 표시합니다. 수정 없이 실행할 원본 셀도 별도로 구분하며 7개 코드 복사 블록을 제공합니다. 화면·서버·커널·수업 환경의 재시작을 구분한 오류 대처도 포함합니다. 실제 평가는 수업 DLI 환경에서 수행합니다.
+`/get-certification`은 새 DLI 랩 실행 → 07번 환경 확인·실제 논문 읽기·청킹·FAISS 생성·저장·재검색 → 08번 사전 점검 → 09번 서버 구현·연결 → Gradio Evaluate → 강좌 Assess Task → My Learning 인증서 확인을 안내합니다. 파일 복제 없이 기존 노트북에서 작업합니다. 코드 블록마다 열 노트북·찾을 코드 첫 줄·전체 교체 또는 새 Code 셀 추가·실행 키·확인할 출력을 표시합니다. 수정 없이 실행할 원본 셀도 별도로 구분하며 12개 코드 복사 블록을 제공합니다. 화면·서버·커널·수업 환경의 재시작을 구분한 오류 대처도 포함합니다. 12단계 안에서 07번의 새 Code 셀 4개(07-A~D)를 순서대로 실행하고, 저장한 인덱스를 08·09번에서 다시 읽습니다. 임베딩과 ChatNVIDIA는 수업 내부 주소를 명시하므로 이전 노트북의 환경변수를 요구하지 않습니다. 실제 평가는 수업 DLI 환경에서 수행합니다.
 
 Q&A의 **새 대화** 버튼은 메시지·입력·오류를 비우고 진행 중인 요청을 취소합니다. 초기화 전의 늦은 응답은 무시하며, 다음 질문에는 이전 대화 기록을 보내지 않습니다. 이용 제한용 세션 쿠키는 초기화하지 않습니다.
 
@@ -56,6 +56,7 @@ React + Vite. `main` 브랜치 push 시 GitHub Actions가 정적 사이트를 �
 ## 콘텐츠 수정
 
 - `content/notes.mjs`: PPT·노트북별 한국어 해설, 문제 풀이, 오류 해결
+- `content/certification-07.mjs`, `src/certification-07.jsx`: 새 랩에서 문서 준비·인덱스 생성·저장·검증
 - `content/certification.mjs`, `src/certification.jsx`, `src/certification.css`: 수료 실행 가이드·복사 코드·오류 대처
 - `content/notebook-code.json`: 출력·인증 셀을 제외한 코드 발췌와 줄별 해설
 - `src/app.jsx`, `src/shared.jsx`: 페이지와 도우미 UI
