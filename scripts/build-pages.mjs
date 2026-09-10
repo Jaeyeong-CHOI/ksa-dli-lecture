@@ -1,7 +1,7 @@
 import {readFileSync,writeFileSync,mkdirSync} from 'node:fs';
 import {notes} from '../content/notes.mjs';
 const html=readFileSync('dist/index.html','utf8');
-const routes=['notebooks','resources','practice',...notes.map(n=>'notes/'+n.slug)];
+const routes=['get-certification','notebooks','resources','practice',...notes.map(n=>'notes/'+n.slug)];
 for(const route of routes){mkdirSync('dist/'+route,{recursive:true});writeFileSync('dist/'+route+'/index.html',html)}
 writeFileSync('dist/404.html',html);writeFileSync('dist/.nojekyll','');
 writeFileSync('dist/CNAME','ksa.dli-lecture.com\n');

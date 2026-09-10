@@ -7,6 +7,7 @@ import notebookCode from '../content/notebook-code.json';
 import {CodeBlock, Chat} from './shared.jsx';
 import {LessonVisual} from './lesson-visuals.jsx';
 import {API} from './api.js';
+import {Certification} from './certification.jsx';
 import './styles.css';
 import './reader.css';
 
@@ -189,15 +190,15 @@ function App() {
     fetch(API + '/api/status', {credentials: 'include'}).then(response => { if (!response.ok) throw Error(); return response.json(); }).then(setStatus).catch(() => {});
     return () => { removeEventListener('popstate', pop); removeEventListener('keydown', key); };
   }, []);
-  useEffect(() => { document.title = (current ? current.title + ' · ' : slides ? 'Introduction to LLM · ' : '') + COURSE; }, [path]);
+  useEffect(() => { document.title = (current ? current.title + ' · ' : slides ? 'Introduction to LLM · ' : path === '/get-certification' ? 'Get Certification · ' : '') + COURSE; }, [path]);
   function ask() { setPrefill(current ? `${current.filename}에서 궁금한 점이 있어요. ` : slides ? 'Introduction to LLM 강의자료에서 궁금한 점이 있어요. ' : ''); setChat(true); }
   function mark(slug) { const next = done.includes(slug) ? done.filter(value => value !== slug) : [...done, slug]; setDone(next); try { localStorage.setItem('ksa-notes-v2', JSON.stringify(next)); } catch {} }
   return <><a href="#main" className="skip-link">본문으로 건너뛰기</a>
     <header className="site-header"><Link to="/" className="brand"><img src="/nvidia-dli-logo.png" alt="NVIDIA Deep Learning Institute"/><span className="brand-course"><b>{COURSE}</b><small>산업 AI 전환(AX) 챌린지</small></span></Link>
-      <nav className={menu ? 'open' : ''} aria-label="주 메뉴"><Link to="/" className={slides ? 'active' : ''}>LLM 이해하기</Link><Link to="/notebooks" className={current?.kind === 'notebook' || path === '/notebooks' ? 'active' : ''}>실습 노트</Link></nav>
+      <nav className={menu ? 'open' : ''} aria-label="주 메뉴"><Link to="/" className={slides ? 'active' : ''}>LLM 이해하기</Link><Link to="/notebooks" className={current?.kind === 'notebook' || path === '/notebooks' ? 'active' : ''}>실습 노트</Link><Link to="/get-certification" className={path === '/get-certification' ? 'active' : ''}>Get Certification</Link></nav>
       <div className="header-actions"><button className="search-button" onClick={() => setSearch(true)} aria-label="학습 내용 검색"><Search size={18}/><span>검색</span></button><button className="ask-button" onClick={ask} aria-label="자료 도우미 열기"><MessageCircle size={16}/><span>질문하기</span></button><button className="menu-toggle icon-button" onClick={() => setMenu(!menu)} aria-expanded={menu} aria-label="메뉴 열기">{menu ? <X/> : <Menu/>}</button></div>
     </header>
-    {slides ? <LectureSlides/> : current ? <NotePage key={current.slug} note={current} done={done} mark={mark}/> : path === '/notebooks' || path === '/practice' ? <NotebookList done={done}/> : <main id="main" className="wide-page"><h1>학습 노트를 찾을 수 없어요.</h1><Link to="/" className="primary-button">강의자료로 이동<ArrowRight size={16}/></Link></main>}
+    {slides ? <LectureSlides/> : path === '/get-certification' ? <Certification/> : current ? <NotePage key={current.slug} note={current} done={done} mark={mark}/> : path === '/notebooks' || path === '/practice' ? <NotebookList done={done}/> : <main id="main" className="wide-page"><h1>학습 노트를 찾을 수 없어요.</h1><Link to="/" className="primary-button">강의자료로 이동<ArrowRight size={16}/></Link></main>}
     <footer className="site-footer"><div><strong>{COURSE}</strong><p>{PROGRAM}</p></div><div><span>2026년 충청권 ICT이노베이션스퀘어 확산사업</span></div></footer>
     <SearchNotes open={search} close={() => setSearch(false)}/><Chat open={chat} close={() => setChat(false)} prefill={prefill} status={status}/>
   </>;
