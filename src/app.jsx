@@ -10,9 +10,10 @@ import {API} from './api.js';
 import {Certification} from './certification.jsx';
 import './styles.css';
 import './reader.css';
+import {lectures} from '../content/lectures.mjs';
+import {LectureLibrary} from './lecture-library.jsx';
 
 const notes = allNotes.filter(note => note.kind === 'notebook');
-const PDF = '/downloads/Introduction-to-LLM.pdf';
 const COURSE = 'Building RAG Agents with LLMs';
 const PROGRAM = 'NVIDIA DLI 기반 산업 AI 전환(AX) 챌린지';
 const route = () => location.pathname.replace(/\/$/, '') || '/';
@@ -164,13 +165,6 @@ function ConceptText({text}) {
   const parts = text.split(names);
   return parts.map((part, i) => i % 2 ? <code className="concept-code" key={i}>{part}</code> : part);
 }
-function LectureSlides() {
-  return <main id="main" className="slides-page">
-    <div className="course-context"><span>2026년 충청권 ICT이노베이션스퀘어 확산사업</span><p>{PROGRAM}</p><strong>{COURSE}</strong></div>
-    <div className="slides-heading"><div><div className="eyebrow">LLM 이해하기 · 강의 슬라이드</div><h1>Introduction to LLM</h1><p>강의자료 PDF · 63쪽</p></div><div className="slides-actions"><a className="outline-button" href={PDF} target="_blank" rel="noreferrer">PDF 열기<ArrowUpRight size={16}/></a><a className="primary-button" href={PDF} download><Download size={17}/>다운로드</a></div></div>
-    <object className="lecture-pdf" data={PDF + '#view=FitH'} type="application/pdf" aria-label="Introduction to LLM 강의 슬라이드 PDF"><div className="pdf-fallback"><img src="/intro-cover.webp" alt="Introduction to LLM 강의 슬라이드 표지"/><p>위의 PDF 열기 또는 다운로드로 강의자료를 확인하세요.</p></div></object>
-  </main>;
-}
 function SearchNotes({open, close}) {
   const dialog = useRef(), input = useRef();
   const [query, setQuery] = useState('');
@@ -182,7 +176,8 @@ function App() {
   const [path, setPath] = useState(route), [done, setDone] = useState(progress), [menu, setMenu] = useState(false);
   const [search, setSearch] = useState(false), [chat, setChat] = useState(false), [prefill, setPrefill] = useState(''), [status, setStatus] = useState({ready: false});
   const current = notes.find(note => path === '/notes/' + note.slug);
-  const slides = ['/', '/notes/introduction-to-llm', '/resources'].includes(path);
+  const lecture = lectures.find(item => path === '/lectures/' + item.slug) || (['/', '/notes/introduction-to-llm', '/resources'].includes(path) ? lectures[0] : null);
+  const slides = Boolean(lecture);
   useEffect(() => {
     const pop = () => { setPath(route()); setMenu(false); };
     const key = event => { if ((event.metaKey || event.ctrlKey) && event.key === 'k') { event.preventDefault(); setSearch(true); } };
@@ -190,17 +185,17 @@ function App() {
     fetch(API + '/api/status', {credentials: 'include'}).then(response => { if (!response.ok) throw Error(); return response.json(); }).then(setStatus).catch(() => {});
     return () => { removeEventListener('popstate', pop); removeEventListener('keydown', key); };
   }, []);
-  useEffect(() => { document.title = (current ? current.title + ' · ' : slides ? 'Introduction to LLM · ' : path === '/get-certification' ? 'Get Certification · ' : '') + COURSE; }, [path]);
-  function ask() { setPrefill(current ? `${current.filename}에서 궁금한 점이 있어요. ` : slides ? 'Introduction to LLM 강의자료에서 궁금한 점이 있어요. ' : ''); setChat(true); }
+  useEffect(() => { document.title = (current ? current.title + ' · ' : slides ? lecture.label + ' · ' : path === '/get-certification' ? 'Get Certification · ' : '') + COURSE; }, [path]);
+  function ask() { setPrefill(current ? `${current.filename}에서 궁금한 점이 있어요. ` : slides ? `${lecture.label} 강의자료에서 궁금한 점이 있어요. ` : ''); setChat(true); }
   function mark(slug) { const next = done.includes(slug) ? done.filter(value => value !== slug) : [...done, slug]; setDone(next); try { localStorage.setItem('ksa-notes-v2', JSON.stringify(next)); } catch {} }
   return <><a href="#main" className="skip-link">본문으로 건너뛰기</a>
     <header className="site-header"><Link to="/" className="brand"><img src="/nvidia-dli-logo.png" alt="NVIDIA Deep Learning Institute"/><span className="brand-course"><b>{COURSE}</b><small>산업 AI 전환(AX) 챌린지</small></span></Link>
-      <nav className={menu ? 'open' : ''} aria-label="주 메뉴"><Link to="/" className={slides ? 'active' : ''}>LLM 이해하기</Link><Link to="/notebooks" className={current?.kind === 'notebook' || path === '/notebooks' ? 'active' : ''}>실습 노트</Link><Link to="/get-certification" className={path === '/get-certification' ? 'active' : ''}>Get Certification</Link></nav>
+      <nav className={menu ? 'open' : ''} aria-label="주 메뉴"><Link to="/" className={slides ? 'active' : ''}>강의자료</Link><Link to="/notebooks" className={current?.kind === 'notebook' || path === '/notebooks' ? 'active' : ''}>실습 노트</Link><Link to="/get-certification" className={path === '/get-certification' ? 'active' : ''}>Get Certification</Link></nav>
       <div className="header-actions"><button className="search-button" onClick={() => setSearch(true)} aria-label="학습 내용 검색"><Search size={18}/><span>검색</span></button><button className="ask-button" onClick={ask} aria-label="자료 도우미 열기"><MessageCircle size={16}/><span>질문하기</span></button><button className="menu-toggle icon-button" onClick={() => setMenu(!menu)} aria-expanded={menu} aria-label="메뉴 열기">{menu ? <X/> : <Menu/>}</button></div>
     </header>
-    {slides ? <LectureSlides/> : path === '/get-certification' ? <Certification/> : current ? <NotePage key={current.slug} note={current} done={done} mark={mark}/> : path === '/notebooks' || path === '/practice' ? <NotebookList done={done}/> : <main id="main" className="wide-page"><h1>학습 노트를 찾을 수 없어요.</h1><Link to="/" className="primary-button">강의자료로 이동<ArrowRight size={16}/></Link></main>}
+    {slides ? <LectureLibrary lecture={lecture} Link={Link} course={COURSE} program={PROGRAM}/> : path === '/get-certification' ? <Certification/> : current ? <NotePage key={current.slug} note={current} done={done} mark={mark}/> : path === '/notebooks' || path === '/practice' ? <NotebookList done={done}/> : <main id="main" className="wide-page"><h1>학습 노트를 찾을 수 없어요.</h1><Link to="/" className="primary-button">강의자료로 이동<ArrowRight size={16}/></Link></main>}
     <footer className="site-footer"><div><strong>{COURSE}</strong><p>{PROGRAM}</p></div><div><span>2026년 충청권 ICT이노베이션스퀘어 확산사업</span></div></footer>
-    <SearchNotes open={search} close={() => setSearch(false)}/><Chat open={chat} close={() => setChat(false)} prefill={prefill} status={status}/>
+    <SearchNotes open={search} close={() => setSearch(false)}/><Chat open={chat} close={() => setChat(false)} prefill={prefill} status={status} initialMode={slides ? 'lecture' : 'notebook'}/>
   </>;
 }
 createRoot(document.getElementById('root')).render(<App/>);

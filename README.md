@@ -6,7 +6,7 @@
 
 ## 학습 흐름
 
-첫 화면(`/`)의 **LLM 이해하기**는 Introduction to LLM 원본 강의 PDF 열람·다운로드 전용입니다. 설명 노트는 넣지 않습니다. 기존 `/notes/introduction-to-llm`과 `/resources` 주소도 같은 PDF 화면으로 연결합니다.
+첫 화면(`/`)은 **강의자료 6종**의 PDF 열람·다운로드 화면입니다. 순서는 Introduction to LLM → DLI → RAGAS → QuCo → Recent RAG → Product Building입니다. 최신 Drive 원본의 PDF와 표지, 페이지 수, 원본 수정일을 함께 제공합니다. 각 자료는 `/lectures/<slug>`로 직접 열 수 있고, 기존 `/notes/introduction-to-llm`과 `/resources`는 첫 자료로 연결됩니다. 별도 강의 해설 노트는 넣지 않습니다.
 
 설명 자료는 **JupyterLab 노트북 00–09번, 10개**에만 제공합니다. 42개 소주제를 초심자 관점에서 용어의 뜻·쉬운 비유·입출력·코드 읽는 순서로 풀어썼습니다. 각 노트에는 처음 만나는 용어 3개도 정리합니다.
 
@@ -16,7 +16,9 @@
 
 `/get-certification`은 새 DLI 랩 실행 → 07번 기존 설정·Task 1 문서·Task 2 생성/통합·Task 3 RAG TODO·Part 4 저장/재검색 → 08번 사전 점검 → 09번 서버 구현·연결 → Gradio Evaluate → 강좌 Assess Task → My Learning 인증서 확인을 안내합니다. 파일 복제 없이 기존 노트북에서 작업합니다. 코드 블록마다 열 노트북·찾을 코드 첫 줄·전체 교체 또는 새 Code 셀 추가·실행 키·확인할 출력을 표시합니다. 수정 없이 실행할 원본 셀도 별도로 구분하며 15개 코드 복사 블록을 제공합니다. 화면·서버·커널·수업 환경의 재시작을 구분한 오류 대처도 포함합니다. 15단계 안에서 07번의 기존 셀 4 → 34 → 36 → 38 → 40 → 44 → 46을 전체 교체해 실행하고, 저장한 인덱스를 08·09번에서 다시 읽습니다. 임베딩과 ChatNVIDIA는 수업 내부 주소를 명시하므로 이전 노트북의 환경변수를 요구하지 않습니다. 실제 평가는 수업 DLI 환경에서 수행합니다.
 
-Q&A의 **새 대화** 버튼은 메시지·입력·오류를 비우고 진행 중인 요청을 취소합니다. 초기화 전의 늦은 응답은 무시하며, 다음 질문에는 이전 대화 기록을 보내지 않습니다. 이용 제한용 세션 쿠키는 초기화하지 않습니다.
+Q&A는 **강의자료 기반 / 실습노트 기반**으로 구분합니다. 강의자료 모드는 최신 슬라이드 6종과 관련 원논문 9편(RAGAS, QuCo-RAG, ReSearch, Search-R1, ReasonRAG, WebThinker, DeepResearcher, RAG, ReAct)을 근거로 답합니다. 논문 참고 옵션을 끄면 슬라이드만 사용하며, 옵션 변경 시 현재 대화를 초기화합니다. 등록한 논문을 검색하는 방식이며 실시간 웹 검색은 하지 않습니다. 실습노트 모드는 노트북 10개·해설·Get Certification만 사용합니다. 답변 출처에 자료 종류와 PDF 페이지 또는 노트북 위치를 표시합니다.
+
+두 모드의 대화 기록은 브라우저 메모리에서 따로 유지합니다. 모드 전환은 진행 요청을 취소하고 늦은 응답을 무시합니다. **새 대화** 버튼은 현재 모드의 메시지·입력·오류를 비우고 진행 중인 요청을 취소합니다. 초기화 전의 늦은 응답은 무시하며, 다음 질문에는 이전 대화 기록을 보내지 않습니다. 이용 제한용 세션 쿠키는 초기화하지 않습니다.
 
 ## 코드 읽기
 
@@ -28,11 +30,11 @@ highlight.js 기반의 밝은 코드 뷰어를 사용합니다. Python·셸·JSO
 
 ## 학습 구성
 
-- Introduction to LLM 원본 PPT의 PDF 열람·다운로드
+- 최신 강의 슬라이드 6종의 PDF 열람·다운로드
 - JupyterLab 노트북 00–09번별 해설 노트 10개
 - 셀 번호로 연결되는 원본 코드 105개·핵심 연산 해설, 노트북 풀이·확인 예제 14개
-- Introduction to LLM PDF 다운로드만 제공 (추가 강연은 추후 공개)
-- 제공된 Drive 자료와 한국어 해설에 근거한 Q&A 도우미
+- NVIDIA 공식 심볼 파비콘
+- 강의자료+관련 논문 / 실습노트로 구분된 Q&A 도우미
 
 해설용 풀이는 공식 Solutions 파일이 아닙니다. 원본 실습에는 DLI 내부 서비스와 수업 패키지가 필요합니다. 이 사이트에서 코드를 실행하거나 수료 평가를 제출하지 않습니다. 노트북 원본 출력 및 인증 설정은 저장소에 포함하지 않습니다.
 
@@ -59,7 +61,9 @@ React + Vite. `main` 브랜치 push 시 GitHub Actions가 정적 사이트를 �
 - `content/certification-07.mjs`, `src/certification-07.jsx`: 새 랩에서 문서 준비·인덱스 생성·저장·검증
 - `content/certification.mjs`, `src/certification.jsx`, `src/certification.css`: 수료 실행 가이드·복사 코드·오류 대처
 - `content/notebook-code.json`: 출력·인증 셀을 제외한 코드 발췌와 줄별 해설
-- `src/app.jsx`, `src/shared.jsx`: 페이지와 도우미 UI
+- `content/lectures.mjs`, `content/papers.mjs`: 최신 강의자료와 원논문 메타데이터
+- `src/lecture-library.jsx`, `src/lecture-library.css`: 강의자료 선택·PDF 뷰어·다운로드
+- `src/app.jsx`, `src/shared.jsx`, `src/chat-modes.css`: 페이지와 두 모드 도우미 UI
 - `src/styles.css`: NVIDIA 로고·흰색·그린 기반 디자인
 - `src/lesson-visuals.jsx`, `src/lesson-visuals.css`: 설명 옆의 인터랙티브 시각자료
 - `src/beginner-visuals.jsx`, `src/beginner-visuals.css`: 초심자를 위한 실행 환경·요청·평가 도식
@@ -69,4 +73,4 @@ React + Vite. `main` 브랜치 push 시 GitHub Actions가 정적 사이트를 �
 
 ## 출처
 
-강연과 노트북의 출처는 각 노트의 참고자료 및 셀 번호에 표기합니다. 원본 강연자료·NVIDIA 로고의 권리는 각 권리자에게 있습니다. Pretendard는 SIL Open Font License이며 `public/fonts/OFL.txt`에 라이선스가 포함되어 있습니다.
+강연과 노트북의 출처는 각 노트의 참고자료 및 셀 번호에 표기합니다. 원본 강연자료·NVIDIA 로고의 권리는 각 권리자에게 있습니다. 파비콘은 NVIDIA 공식 사이트의 심볼을 사용합니다. 논문은 원 출판사·arXiv로 연결하며 원문 파일과 검색 인덱스는 공개 저장소에 넣지 않습니다. Pretendard는 SIL Open Font License이며 `public/fonts/OFL.txt`에 라이선스가 포함되어 있습니다.
