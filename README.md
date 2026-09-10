@@ -1,12 +1,18 @@
-# NVIDIA DLI · KSA 학습 노트
+# Building RAG Agents with LLMs
 
 **https://ksa.dli-lecture.com**
 
-NVIDIA DLI 강연자료를 따라 읽는 한국어 학습 보조 사이트입니다. 강연 제공: Jae Y. CHOI.
+2026년 충청권 ICT이노베이션스퀘어 확산사업의 **NVIDIA DLI 기반 산업 AI 전환(AX) 챌린지** 교육과정용 한국어 학습 노트입니다. 강좌명: Building RAG Agents with LLMs. 강연 제공: Jae Y. CHOI.
+
+## 학습 흐름
+
+첫 화면(`/`)은 Introduction to LLM 강의 노트입니다. 기존 `/notes/introduction-to-llm` 주소도 유지합니다. 별도 소개용 랜딩 페이지는 사용하지 않습니다.
+
+핵심 개념 → 설명 옆의 관련 코드 → 직접 풀이 → 확인 질문 → 다음 노트 순으로 읽습니다. 원본 셀 해설은 필요할 때 펼치며, 셀 직접 링크는 해당 코드를 자동으로 엽니다. Google Drive 바로가기는 제공하지 않고 원본 파일명·셀 번호와 강연자 출처를 남깁니다.
 
 ## 학습 구성
 
-- Introduction to LLM PPT 해설 노트 1개 — 원본 63쪽의 다섯 파트를 순서대로 설명
+- Introduction to LLM PPT 해설 노트 1개 — LLM 원리·학습·멀티모달·메모리의 핵심을 연결
 - JupyterLab 노트북 00–09번별 해설 노트 10개
 - 셀 번호로 연결되는 원본 코드 발췌·핵심 연산 해설, 15개 풀이·확인 예제
 - Introduction to LLM PDF 다운로드만 제공 (추가 강연은 추후 공개)
@@ -40,4 +46,4 @@ React + Vite. `main` 브랜치 push 시 GitHub Actions가 정적 사이트를 �
 
 ## 출처
 
-강연과 노트북은 페이지의 수업 Google Drive 및 원본 링크를 참고하세요. 원본 강연자료·NVIDIA 로고의 권리는 각 권리자에게 있습니다. Pretendard는 SIL Open Font License이며 `public/fonts/OFL.txt`에 라이선스가 포함되어 있습니다.
+강연과 노트북의 출처는 각 노트의 참고자료 및 셀 번호에 표기합니다. 원본 강연자료·NVIDIA 로고의 권리는 각 권리자에게 있습니다. Pretendard는 SIL Open Font License이며 `public/fonts/OFL.txt`에 라이선스가 포함되어 있습니다.
