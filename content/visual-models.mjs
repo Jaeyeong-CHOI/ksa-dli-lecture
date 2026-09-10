@@ -1,13 +1,25 @@
 // Deterministic teaching models, not actual LLM calls or embeddings.
 export const visualPlacements = {
-  'introduction-to-llm:3': 'learning-rag',
+  '00-jupyterlab:0': 'kernel',
+  '01-microservices:0': 'services',
+  '01-microservices:2': 'service-address',
+  '02-llms:2': 'streaming',
   '03-langchain-intro:0': 'composition',
   '03-langchain-intro:1': 'chain-types',
   '04-running-state:0': 'state',
   '05-documents:1': 'chunks',
   '06-embeddings:1': 'embeddings',
   '07-vectorstores:3': 'rag',
+  '08-evaluation:2': 'evaluation-pairs',
+  '09-langserve:0': 'processes',
 };
+
+export const serviceExamples = [
+  {title:'컨테이너 목록',host:'docker_router',port:8070,path:'/containers',help:'수업 컨테이너 목록을 조회하는 기능입니다. 모델에게 질문하는 경로가 아닙니다.',request:'현재 실행 상태와 이름 등을 조회합니다.',result:'JSON 목록 · 상태와 이름'},
+  {title:'모델 목록',host:'llm_client',port:9000,path:'/v1/models',help:'사용할 수 있는 모델 ID 목록을 조회하는 기능입니다. 답변 생성은 별도의 요청입니다.',request:'호출할 수 있는 모델 이름을 조회합니다.',result:'JSON · data 안의 모델 목록'},
+  {title:'웹 화면',host:'frontend',port:8090,path:'/',help:'브라우저에 보여 줄 웹 화면을 요청하는 경로입니다.',request:'웹 화면을 구성할 문서를 요청합니다.',result:'HTML · 웹 화면 문서'},
+];
+export const streamParts = ['문서를 ', '검색해 ', '근거를 ', '읽습니다.'];
 
 export function compositionResult(input, mode) {
   return mode === 'sequence' ? (input + 2) * 10 : {plus: input + 2, times: input * 10};

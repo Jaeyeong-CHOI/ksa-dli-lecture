@@ -2,6 +2,7 @@ import React, {useId, useState} from 'react';
 import {ArrowRight, Check, Code2, Database, FileText, Layers, MessageCircle} from 'lucide-react';
 import {visualPlacements, compositionResult, chunkText, splitForDemo, embeddingDocuments, embeddingQueries, rankDemoDocuments, ragExamples} from '../content/visual-models.mjs';
 import './lesson-visuals.css';
+import {beginnerVisuals} from './beginner-visuals.jsx';
 
 function Frame({name, title, description, children, footnote}) {
   const id = useId();
@@ -18,20 +19,6 @@ function Node({label, value, icon: Icon, active = false}) {
   return <div className={'visual-node' + (active ? ' is-active' : '')}>{Icon && <Icon size={18} aria-hidden="true"/>}<span>{label}</span><strong>{value}</strong></div>;
 }
 function Connector() { return <ArrowRight className="visual-connector" size={18} aria-hidden="true"/>; }
-
-function LearningRag() {
-  const [selected, setSelected] = useState(1);
-  const training = selected === 0;
-  return <Frame name="learning-rag" title="모델을 바꿀까요, 참고할 자료를 더할까요?" description="두 방식을 바꾸어 보며, 정보가 어디에 반영되는지 비교하세요.">
-    <Choices label="학습과 RAG 비교" items={['모델 학습', 'RAG']} selected={selected} onChange={setSelected}/>
-    <div className="visual-lane" aria-live="polite">
-      <Node label={training ? '배울 내용' : '답변할 근거'} value={training ? '학습 데이터' : '검색한 문서'} icon={FileText}/><Connector/>
-      <Node label={training ? '예측 → 손실 → 갱신' : '질문과 함께 입력'} value={training ? '학습 과정' : '프롬프트 문맥'} icon={Layers} active/><Connector/>
-      <Node label={training ? '모델 자체가 달라짐' : '모델은 자료를 읽음'} value={training ? '가중치 갱신' : '가중치 유지'} icon={Database}/>
-    </div>
-    <p className="visual-insight"><Check size={16}/>{training ? '학습은 파라미터를 갱신해 모델의 행동을 바꿉니다.' : '일반적인 RAG는 가중치를 바꾸지 않고, 답할 때 참고할 문서를 더합니다.'}</p>
-  </Frame>;
-}
 
 function Composition() {
   const [selected, setSelected] = useState(0), [input, setInput] = useState(3);
@@ -133,7 +120,7 @@ function RagFlow() {
   </Frame>;
 }
 
-const components = {'learning-rag': LearningRag, composition: Composition, 'chain-types': ChainTypes, state: StateFlow, chunks: Chunking, embeddings: Embeddings, rag: RagFlow};
+const components = {...beginnerVisuals, composition: Composition, 'chain-types': ChainTypes, state: StateFlow, chunks: Chunking, embeddings: Embeddings, rag: RagFlow};
 export function LessonVisual({slug, section}) {
   const Component = components[visualPlacements[`${slug}:${section}`]];
   return Component ? <Component/> : null;
