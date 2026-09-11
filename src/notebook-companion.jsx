@@ -6,6 +6,8 @@ import locations from '../content/notebook-locations.json';
 import sources from '../content/notebook-code.json';
 import {CodeBlock} from './shared.jsx';
 import './notebook-companion.css';
+import captures from '../content/notebook-captures.json';
+import {Screenshots} from './annotated-captures.jsx';
 import {NotebookDownloadLink} from './notebook-downloads.jsx';
 
 export function ReaderModes({original=true}) {
@@ -43,6 +45,7 @@ export function NotebookCompanion({note,notes,done,mark,Link,hash,askCell}) {
     <span className="eyebrow">학습의 출발점</span><h2>이 노트가 끝나면 무엇을 할 수 있나요?</h2><ol className="observable-goals">{guide.outcomes.map(([title,evidence],i)=><li key={title}><span>{i+1}</span><div><h3>{title}</h3><p>{evidence}</p></div></li>)}</ol>
     <div className="companion-prerequisite"><strong>시작 전에</strong><p>{guide.before}</p></div>
     <div className="companion-howto"><h3>원본과 나란히 보는 방법</h3><ol><li>JupyterLab에서 <strong>{note.filename}</strong>을 엽니다.</li><li>모르는 제목이나 코드 한 줄을 위 검색창에서 찾습니다.</li><li>이곳의 설명을 읽고 원본 셀을 실행한 뒤, “실행 후 확인”과 비교합니다.</li></ol><p>코드는 이 사이트가 아니라 수업 JupyterLab에서 실행합니다. <b>TODO</b>는 직접 채울 부분, <b>선택</b>은 필요할 때 볼 부분입니다.</p></div>
+    <Screenshots items={captures[note.filename]?.overview}/>
     <a className="primary-button" href={'#cell-'+source.blocks[0].cell}>첫 코드부터 보기<ArrowRight size={17}/></a>
     <section className="concept-shortcuts"><h3>개념부터 이해하고 싶다면</h3><p>코드가 없는 원본 설명 구간도 여기에서 연결해 읽을 수 있습니다.</p>{note.sections.map((s,i)=><a href={'#section-'+i} key={i}>{s.title}<ArrowRight size={15}/></a>)}</section>
     <section className="companion-course-link"><h3>다음 단계와의 연결</h3><p>{note.bridge}</p></section>
@@ -50,6 +53,7 @@ export function NotebookCompanion({note,notes,done,mark,Link,hash,askCell}) {
     <div className="cell-position"><span>코드 {position+1} / {source.blocks.length}</span><span className={'cell-kind kind-'+detail.kind}>{detail.kind}</span><button className="cell-jump-search" onClick={()=>{lookupRef.current?.scrollIntoView({block:'center'});lookupRef.current?.focus();}}>다른 셀 찾기</button><a href="#overview">학습 목표</a></div>
     <h2>{detail.title}</h2>
     <div className="original-location"><span>{note.filename} · 원본 셀 {cell}</span><strong>{location.path.join(' › ')}</strong><code>{location.firstLine}</code>{location.firstLine!==location.matchLine&&<p>같은 셀 안: <code>{location.matchLine}</code></p>}</div>
+    <Screenshots items={captures[note.filename]?.cells?.[cell]}/>
     <section className="cell-purpose"><h3>이 셀은 왜 필요한가요?</h3><p>{detail.process}</p></section>
     <div className="cell-before"><strong>먼저 준비할 것</strong><p>{detail.before}</p></div>
     <div className="cell-data-flow" aria-label="이 셀의 입력과 결과"><div><span>들어오는 것</span><p>{detail.input}</p></div><ArrowRight size={20}/><div><span>남는 것</span><p>{detail.output}</p></div></div>

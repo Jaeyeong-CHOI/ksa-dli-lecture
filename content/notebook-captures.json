@@ -1,0 +1,184 @@
+{
+  "00_jupyterlab.ipynb": {
+    "overview": [
+      {
+        "src": "/images/certification/00-notebook-location.png",
+        "width": 3840,
+        "height": 1526,
+        "alt": "00_jupyterlab.ipynb의 실제 파일·코드 위치",
+        "caption": "실제 DLI 랩에서 00_jupyterlab.ipynb을 연 화면입니다. 영어 화면과 한국어 파일은 제목·주석이 다를 수 있으니 파일명과 코드의 역할을 함께 확인하세요.",
+        "callouts": [
+          {
+            "fromX": 10,
+            "x": 6.748250325520833,
+            "y": 33.299885321100916,
+            "note": "왼쪽 파일 목록에서 00_jupyterlab.ipynb을 두 번 눌러 엽니다."
+          },
+          {
+            "fromX": 60,
+            "x": 22.472330729166668,
+            "y": 66.3233125819135,
+            "note": "LANGUAGE 셀은 모든 노트북의 언어를 바꾸는 도구입니다. 수정 중인 파일이 있다면 실행하지 않고 아래 JupyterLab 사용 설명부터 읽습니다."
+          }
+        ]
+      }
+    ],
+    "cells": {}
+  },
+  "01_microservices.ipynb": {
+    "overview": [
+      {
+        "src": "/images/certification/01-notebook-location.png",
+        "width": 3840,
+        "height": 1526,
+        "alt": "01_microservices.ipynb의 실제 파일·코드 위치",
+        "caption": "실제 DLI 랩에서 01_microservices.ipynb을 연 화면입니다. 영어 화면과 한국어 파일은 제목·주석이 다를 수 있으니 파일명과 코드의 역할을 함께 확인하세요.",
+        "callouts": [
+          {
+            "fromX": 10,
+            "x": 7.2265625,
+            "y": 36.44536369593709,
+            "note": "왼쪽 파일 목록에서 01_microservices.ipynb을 두 번 눌러 엽니다."
+          },
+          {
+            "fromX": 60,
+            "x": 22.472330729166668,
+            "y": 42.06770150720839,
+            "note": "작은따옴표 세 개 안의 내용은 서비스 목록 예시입니다. 실제 명령 실행 결과와 구분해서 읽습니다."
+          }
+        ]
+      }
+    ],
+    "cells": {}
+  },
+  "02_llms.ipynb": {
+    "overview": [
+      {
+        "src": "/images/certification/02-notebook-location.png",
+        "width": 3840,
+        "height": 1526,
+        "alt": "02_llms.ipynb의 실제 파일·코드 위치",
+        "caption": "실제 DLI 랩에서 02_llms.ipynb을 연 화면입니다. 영어 화면과 한국어 파일은 제목·주석이 다를 수 있으니 파일명과 코드의 역할을 함께 확인하세요.",
+        "callouts": [
+          {
+            "fromX": 10,
+            "x": 5.799560546875,
+            "y": 39.59084207077326,
+            "note": "왼쪽 파일 목록에서 02_llms.ipynb을 두 번 눌러 엽니다."
+          },
+          {
+            "fromX": 60,
+            "x": 22.472330729166668,
+            "y": 50.42902195281783,
+            "note": "여기는 개인 환경의 API 설정을 설명하는 주석 예시입니다. 수업 랩에서는 아래 From Your Course Environment 설명으로 이어집니다."
+          }
+        ]
+      }
+    ],
+    "cells": {}
+  },
+  "03_langchain_intro.ipynb": {
+    "overview": [
+      {
+        "src": "/images/certification/03-notebook-location.png",
+        "width": 3840,
+        "height": 1526,
+        "alt": "03_langchain_intro.ipynb의 실제 파일·코드 위치",
+        "caption": "실제 DLI 랩에서 03_langchain_intro.ipynb을 연 화면입니다. 영어 화면과 한국어 파일은 제목·주석이 다를 수 있으니 파일명과 코드의 역할을 함께 확인하세요.",
+        "callouts": [
+          {
+            "fromX": 10,
+            "x": 7.2265625,
+            "y": 42.73632044560944,
+            "note": "왼쪽 파일 목록에서 03_langchain_intro.ipynb을 두 번 눌러 엽니다."
+          },
+          {
+            "fromX": 60,
+            "x": 22.472330729166668,
+            "y": 42.05951015727392,
+            "note": "실습 노트의 첫 코드 줄과 화면의 코드를 비교해 위치를 찾습니다. 코드는 이 노트북에서 실행합니다."
+          }
+        ]
+      }
+    ],
+    "cells": {}
+  },
+  "04_running_state.ipynb": {
+    "overview": [
+      {
+        "src": "/images/certification/04-notebook-location.png",
+        "width": 3840,
+        "height": 1526,
+        "alt": "04_running_state.ipynb의 실제 파일·코드 위치",
+        "caption": "실제 DLI 랩에서 04_running_state.ipynb을 연 화면입니다. 영어 화면과 한국어 파일은 제목·주석이 다를 수 있으니 파일명과 코드의 역할을 함께 확인하세요.",
+        "callouts": [
+          {
+            "fromX": 10,
+            "x": 7.2265625,
+            "y": 45.88179882044561,
+            "note": "왼쪽 파일 목록에서 04_running_state.ipynb을 두 번 눌러 엽니다."
+          },
+          {
+            "fromX": 60,
+            "x": 22.472330729166668,
+            "y": 36.14945117955439,
+            "note": "실습 노트의 첫 코드 줄과 화면의 코드를 비교해 위치를 찾습니다. 코드는 이 노트북에서 실행합니다."
+          }
+        ]
+      }
+    ],
+    "cells": {}
+  },
+  "05_documents.ipynb": {
+    "overview": [
+      {
+        "src": "/images/certification/05-notebook-location.png",
+        "width": 3840,
+        "height": 1526,
+        "alt": "05_documents.ipynb의 실제 파일·코드 위치",
+        "caption": "실제 DLI 랩에서 05_documents.ipynb을 연 화면입니다. 영어 화면과 한국어 파일은 제목·주석이 다를 수 있으니 파일명과 코드의 역할을 함께 확인하세요.",
+        "callouts": [
+          {
+            "fromX": 10,
+            "x": 6.912434895833333,
+            "y": 49.02727719528178,
+            "note": "왼쪽 파일 목록에서 05_documents.ipynb을 두 번 눌러 엽니다."
+          },
+          {
+            "fromX": 60,
+            "x": 22.472330729166668,
+            "y": 33.724811598951504,
+            "note": "실습 노트의 첫 코드 줄과 화면의 코드를 비교해 위치를 찾습니다. 코드는 이 노트북에서 실행합니다."
+          }
+        ]
+      }
+    ],
+    "cells": {}
+  },
+  "06_embeddings.ipynb": {
+    "overview": [
+      {
+        "src": "/images/certification/06-notebook-location.png",
+        "width": 3840,
+        "height": 1526,
+        "alt": "06_embeddings.ipynb의 실제 파일·코드 위치",
+        "caption": "실제 DLI 랩에서 06_embeddings.ipynb을 연 화면입니다. 영어 화면과 한국어 파일은 제목·주석이 다를 수 있으니 파일명과 코드의 역할을 함께 확인하세요.",
+        "callouts": [
+          {
+            "fromX": 10,
+            "x": 7.099405924479167,
+            "y": 52.17275557011796,
+            "note": "왼쪽 파일 목록에서 06_embeddings.ipynb을 두 번 눌러 엽니다."
+          },
+          {
+            "fromX": 60,
+            "x": 22.472330729166668,
+            "y": 34.95658584534731,
+            "note": "실습 노트의 첫 코드 줄과 화면의 코드를 비교해 위치를 찾습니다. 코드는 이 노트북에서 실행합니다."
+          }
+        ]
+      }
+    ],
+    "cells": {}
+  }
+}

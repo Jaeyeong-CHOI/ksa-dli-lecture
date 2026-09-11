@@ -22,7 +22,11 @@
 
 ## Get Certification
 
-`/get-certification`은 새 DLI 랩 실행 → 07번 기존 설정·Task 1 문서·Task 2 생성/통합·Task 3 RAG TODO·Part 4 저장/재검색 → 08번 사전 점검 → 09번 서버 구현·연결 → Gradio Evaluate → 강좌 Assess Task → My Learning 인증서 확인을 안내합니다. 파일 복제 없이 기존 노트북에서 작업합니다. 코드 블록마다 열 노트북·찾을 코드 첫 줄·전체 교체 또는 새 Code 셀 추가·실행 키·확인할 출력을 표시합니다. 수정 없이 실행할 원본 셀도 별도로 구분하며 15개 코드 복사 블록을 제공합니다. 화면·서버·커널·수업 환경의 재시작을 구분한 오류 대처도 포함합니다. 15단계 안에서 07번의 기존 셀 4 → 34 → 36 → 38 → 40 → 44 → 46을 전체 교체해 실행하고, 저장한 인덱스를 08·09번에서 다시 읽습니다. 임베딩과 ChatNVIDIA는 수업 내부 주소를 명시하므로 이전 노트북의 환경변수를 요구하지 않습니다. 실제 평가는 수업 DLI 환경에서 수행합니다.
+`/get-certification`은 07번 문서 준비·검색·저장 → 08번 답변 사전 점검 → 09번 서버 연결 → Evaluate → 강좌 Assess Task → 인증서 확인을 **19개의 작은 단계**로 안내합니다. 첫 단계는 실제 Instructor-Led 수업 화면의 START → Confirm → LOADING → Launch와 환경 초기화·백업 안내를 포함합니다. 매 단계에서 목적, 선행 조건, 원본 제목·셀 첫 줄, 수정할 정확한 구간, 정답 코드, 실행 순서, 정상 결과를 보여줍니다.
+
+원본 셀 전체를 교체하지 않습니다. **14개 부분 수정 + 같은 셀 안에 삽입 1개 + Terminal 명령 1개**만 복사하며, **원본 셀 8개는 수정 없이 실행**합니다. 위치 확인용 원본 코드에는 복사 버튼이 없고, 정답 구간만 복사됩니다. 기존 함수·반복문·서버 틀을 유지하고 TODO와 필수 설정만 바꾸는 방식입니다.
+
+07번은 같은 노트북에서 셀 3 → 4 → 22 → 34 → 36 → 38 → 40 → 44 → 46, 08번은 3 → 7 → 9 → 11 → 13 → 15 → 17 순서로 안내합니다. 셀 번호는 Markdown을 포함한 파일 위치이며 Jupyter의 실행 횟수와 다릅니다. 09번은 원래 writefile 셀의 지정된 위치만 수정한 뒤 저장하고 Terminal에서 서버를 켭니다. 오류 대처는 문서 다운로드, 인덱스 재생성, 질문·답변 순서, 점수 변수 재실행, 화면·커널·서버 재시작을 구분합니다. 실제 실행과 평가는 DLI 수업 환경에서 수행합니다.
 
 Q&A는 **강의자료 기반 / 실습노트 기반**으로 구분합니다. 강의자료 모드는 최신 슬라이드 6종과 관련 원논문 9편(RAGAS, QuCo-RAG, ReSearch, Search-R1, ReasonRAG, WebThinker, DeepResearcher, RAG, ReAct)을 근거로 답합니다. 논문 참고 옵션을 끄면 슬라이드만 사용하며, 옵션 변경 시 현재 대화를 초기화합니다. 등록한 논문을 검색하는 방식이며 실시간 웹 검색은 하지 않습니다. 실습노트 모드는 노트북 10개·해설·Get Certification만 사용합니다. 답변 출처에 자료 종류와 PDF 페이지 또는 노트북 위치를 표시합니다.
 
@@ -79,8 +83,8 @@ React + Vite. `main` 브랜치 push 시 GitHub Actions가 정적 사이트를 �
 - `public/downloads/agentic-coding/`: 공개 실습 ZIP 및 개별 교육용 예시; `node scripts/build-agentic-files.mjs`로 JSON의 개별 예시와 3파일 ZIP 갱신
 - `node --test scripts/test-agentic-practice.mjs`: 진행 기록·대상 치환·예시 일치·ZIP 내용 검증
 - `content/notes.mjs`: PPT·노트북별 한국어 해설, 문제 풀이, 오류 해결
-- `content/certification-07.mjs`, `src/certification-07.jsx`: 새 랩에서 문서 준비·인덱스 생성·저장·검증
-- `content/certification.mjs`, `src/certification.jsx`, `src/certification.css`: 수료 실행 가이드·복사 코드·오류 대처
+- `content/certification-guide.json`: 원본 부분 수정 가이드의 단계·위치·정답·실행 순서·오류 대처
+- `src/certification.jsx`, `src/certification.css`, `src/certification-patches.css`: 19단계 가이드와 수정 전/정답 구간 뷰어
 - `content/notebook-companion.mjs`, `content/notebook-locations.json`, `content/notebook-lookup.mjs`: 셀별 해설·학습 목표·원본 위치·검색
 - `src/notebook-companion.jsx`, `src/notebook-companion.css`: 원본 순서 탐색·셀 해설 화면
 - `content/notebook-downloads.json`, `src/notebook-downloads.jsx`, `src/notebook-downloads.css`: 한국어 노트북 다운로드 목록·사용법·노트별 연결
