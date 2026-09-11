@@ -1,0 +1,110 @@
+{
+  "notebooks": [
+    {
+      "no": "00",
+      "slug": "00-jupyterlab",
+      "title": "JupyterLab 사용법",
+      "filename": "00_jupyterlab.ipynb",
+      "url": "/downloads/notebooks/00_jupyterlab.ipynb",
+      "bytes": 8146,
+      "cells": 11,
+      "updatedAt": "2026-09-02T21:39:42.000Z"
+    },
+    {
+      "no": "01",
+      "slug": "01-microservices",
+      "title": "마이크로서비스와 수업 환경",
+      "filename": "01_microservices.ipynb",
+      "url": "/downloads/notebooks/01_microservices.ipynb",
+      "bytes": 24943,
+      "cells": 32,
+      "updatedAt": "2026-09-02T21:39:42.000Z"
+    },
+    {
+      "no": "02",
+      "slug": "02-llms",
+      "title": "LLM 엔드포인트 호출하기",
+      "filename": "02_llms.ipynb",
+      "url": "/downloads/notebooks/02_llms.ipynb",
+      "bytes": 41348,
+      "cells": 37,
+      "updatedAt": "2026-09-02T21:39:42.000Z"
+    },
+    {
+      "no": "03",
+      "slug": "03-langchain-intro",
+      "title": "LangChain과 시 바꾸기 챗봇",
+      "filename": "03_langchain_intro.ipynb",
+      "url": "/downloads/notebooks/03_langchain_intro.ipynb",
+      "bytes": 37510,
+      "cells": 32,
+      "updatedAt": "2026-09-02T21:39:42.000Z"
+    },
+    {
+      "no": "04",
+      "slug": "04-running-state",
+      "title": "대화 상태와 항공편 조회",
+      "filename": "04_running_state.ipynb",
+      "url": "/downloads/notebooks/04_running_state.ipynb",
+      "bytes": 47513,
+      "cells": 42,
+      "updatedAt": "2026-09-02T21:39:42.000Z"
+    },
+    {
+      "no": "05",
+      "slug": "05-documents",
+      "title": "문서 로딩과 누적 요약",
+      "filename": "05_documents.ipynb",
+      "url": "/downloads/notebooks/05_documents.ipynb",
+      "bytes": 35570,
+      "cells": 27,
+      "updatedAt": "2026-09-02T21:39:42.000Z"
+    },
+    {
+      "no": "06",
+      "slug": "06-embeddings",
+      "title": "임베딩과 유사도 비교",
+      "filename": "06_embeddings.ipynb",
+      "url": "/downloads/notebooks/06_embeddings.ipynb",
+      "bytes": 26599,
+      "cells": 23,
+      "updatedAt": "2026-09-02T21:39:42.000Z"
+    },
+    {
+      "no": "07",
+      "slug": "07-vectorstores",
+      "title": "벡터 검색과 RAG 챗봇",
+      "filename": "07_vectorstores.ipynb",
+      "url": "/downloads/notebooks/07_vectorstores.ipynb",
+      "bytes": 43485,
+      "cells": 48,
+      "updatedAt": "2026-09-02T21:39:42.000Z"
+    },
+    {
+      "no": "08",
+      "slug": "08-evaluation",
+      "title": "RAG 평가와 답변 비교",
+      "filename": "08_evaluation.ipynb",
+      "url": "/downloads/notebooks/08_evaluation.ipynb",
+      "bytes": 34209,
+      "cells": 23,
+      "updatedAt": "2026-09-02T21:39:42.000Z"
+    },
+    {
+      "no": "09",
+      "slug": "09-langserve",
+      "title": "LangServe로 체인 제공하기",
+      "filename": "09_langserve.ipynb",
+      "url": "/downloads/notebooks/09_langserve.ipynb",
+      "bytes": 10968,
+      "cells": 12,
+      "updatedAt": "2026-09-02T21:39:42.000Z"
+    }
+  ],
+  "bundle": {
+    "url": "/downloads/Building-RAG-Agents-Korean-Notebooks.zip",
+    "filename": "Building-RAG-Agents-Korean-Notebooks.zip",
+    "bytes": 101208
+  },
+  "preparedAt": "2026-09-11"
+}

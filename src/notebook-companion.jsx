@@ -6,6 +6,7 @@ import locations from '../content/notebook-locations.json';
 import sources from '../content/notebook-code.json';
 import {CodeBlock} from './shared.jsx';
 import './notebook-companion.css';
+import {NotebookDownloadLink} from './notebook-downloads.jsx';
 
 export function ReaderModes({original=true}) {
  return <nav className="reader-modes" aria-label="실습 노트 읽는 방식"><a href="#overview" aria-current={original?'page':undefined}><BookOpen size={16}/>원본 순서로 찾기</a><a href="#section-0" aria-current={!original?'page':undefined}><Code2 size={16}/>개념별로 배우기</a></nav>;
@@ -29,7 +30,7 @@ export function NotebookCompanion({note,notes,done,mark,Link,hash,askCell}) {
   return <React.Fragment key={b.cell}>{(!previous||locations[note.slug][previous.cell].path[0]!==group)&&<p className="source-group">{group}</p>}<a href={'#cell-'+b.cell} aria-current={cell===b.cell?'location':undefined}><span>{String(meta.codeOrdinal).padStart(2,'0')}</span><span>{cellGuides[note.slug][b.cell].title}<small>{cellGuides[note.slug][b.cell].kind}</small></span></a></React.Fragment>;
  })}</>;
  return <div className="companion-page">
-  <div className="companion-heading"><div><div className="breadcrumb"><Link to="/notebooks">실습 노트</Link><ChevronRight size={14}/><span>{note.filename}</span></div><span className="eyebrow">실습 {note.no} · 노트북 옆에서 보는 해설</span><h1>{note.title}</h1><p>{guide.result}</p></div><label className="notebook-switch">다른 노트북<select aria-label="실습 노트북 선택" value={note.slug} onChange={e=>{history.pushState(null,'','/notes/'+e.target.value);dispatchEvent(new PopStateEvent('popstate'));window.scrollTo(0,0);}}>{notes.map(n=><option key={n.slug} value={n.slug}>{n.filename}</option>)}</select></label></div>
+  <div className="companion-heading"><div><div className="breadcrumb"><Link to="/notebooks">실습 노트</Link><ChevronRight size={14}/><span>{note.filename}</span></div><span className="eyebrow">실습 {note.no} · 노트북 옆에서 보는 해설</span><h1>{note.title}</h1><p>{guide.result}</p><NotebookDownloadLink slug={note.slug}/></div><label className="notebook-switch">다른 노트북<select aria-label="실습 노트북 선택" value={note.slug} onChange={e=>{history.pushState(null,'','/notes/'+e.target.value);dispatchEvent(new PopStateEvent('popstate'));window.scrollTo(0,0);}}>{notes.map(n=><option key={n.slug} value={n.slug}>{n.filename}</option>)}</select></label></div>
   <ReaderModes/>
   <div className="companion-layout"><aside className="source-outline" ref={outlineRef}><span>원본 코드 순서</span><nav aria-label="원본 코드 목차">{outline}</nav></aside>
   <main id="main" className="companion-main">

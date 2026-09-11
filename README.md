@@ -10,6 +10,8 @@
 
 설명 자료는 **JupyterLab 노트북 00–09번, 10개**에만 제공합니다. 42개 소주제를 초심자 관점에서 용어의 뜻·쉬운 비유·입출력·코드 읽는 순서로 풀어썼습니다. 각 노트에는 처음 만나는 용어 3개도 정리합니다.
 
+**한국어 실습 노트북**(`/notebook-downloads`)에서는 00–09번 ipynb를 개별로 받거나, 사용 안내가 포함된 전체 ZIP으로 받을 수 있습니다. 강의자료 화면의 탭과 실습 노트 목록에서 연결하며, 각 노트에서도 현재 파일을 바로 내려받습니다. 다운로드 사본은 한국어 원문·코드·TODO·셀 순서를 유지하고 실행 출력과 편집기 메타데이터를 정리했습니다. 내부 서비스·환경 파일은 포함하지 않으며 DLI 수업 환경이 필요합니다. 원본의 그림은 인터넷으로 불러옵니다.
+
 기본 화면은 **원본 순서로 찾기**입니다. 각 노트의 관찰 가능한 학습 목표 3개와 선행 조건을 확인한 뒤, ipynb의 제목·코드 첫 줄·변수 이름으로 해당 셀을 찾습니다. 원본 코드 셀 105개 모두에 목적, 선행 조건, 입력과 결과, 실행 후 확인, 흔한 혼동을 개별 설명합니다. 설정·실행·TODO·선택·예상 실패를 구분하며, 코드가 생략된 설정/진단 셀도 원본 위치와 역할은 안내합니다. Jupyter 왼쪽 실행 횟수와 파일 내 셀 위치의 차이도 설명합니다.
 
 **개념별로 배우기**에서는 기존 42개 소주제·시각자료·개별 풀이·핵심 정리를 한 단계씩 봅니다. 두 화면을 오갈 수 있고, 기존 `#cell-N`은 정확한 셀 해설로, `#section-N`·풀이·정리 주소는 기존 단계로 연결됩니다. 전역 검색도 노트와 코드 셀을 함께 찾습니다. “이 셀에 대해 질문하기”는 원본 파일·셀 위치를 보여 주고 사용자가 작성한 질문에 함께 전달하며 자동 전송하지 않습니다. 검색·진행 기록·목차는 노트북 10개 기준입니다. Google Drive 바로가기는 제공하지 않습니다.
@@ -34,11 +36,12 @@ highlight.js 기반의 밝은 코드 뷰어를 사용합니다. Python·셸·JSO
 
 - 최신 강의 슬라이드 6종의 PDF 열람·다운로드
 - JupyterLab 노트북 00–09번별 해설 노트 10개
+- 한국어 ipynb 10개 개별 다운로드와 전체 ZIP
 - 셀 번호로 연결되는 원본 코드 105개·핵심 연산 해설, 노트북 풀이·확인 예제 14개
 - NVIDIA 공식 심볼 파비콘
 - 강의자료+관련 논문 / 실습노트로 구분된 Q&A 도우미
 
-해설용 풀이는 공식 Solutions 파일이 아닙니다. 원본 실습에는 DLI 내부 서비스와 수업 패키지가 필요합니다. 이 사이트에서 코드를 실행하거나 수료 평가를 제출하지 않습니다. 노트북 원본 출력 및 인증 설정은 저장소에 포함하지 않습니다.
+해설용 풀이는 공식 Solutions 파일이 아닙니다. 원본 실습에는 DLI 내부 서비스와 수업 패키지가 필요합니다. 이 사이트에서 코드를 실행하거나 수료 평가를 제출하지 않습니다. 검토한 노트북 다운로드 사본만 공개하며, 원본 출력·실제 자격 증명·비공개 원본 폴더는 저장소에 포함하지 않습니다.
 
 ## 개발과 배포
 
@@ -64,6 +67,8 @@ React + Vite. `main` 브랜치 push 시 GitHub Actions가 정적 사이트를 �
 - `content/certification.mjs`, `src/certification.jsx`, `src/certification.css`: 수료 실행 가이드·복사 코드·오류 대처
 - `content/notebook-companion.mjs`, `content/notebook-locations.json`, `content/notebook-lookup.mjs`: 셀별 해설·학습 목표·원본 위치·검색
 - `src/notebook-companion.jsx`, `src/notebook-companion.css`: 원본 순서 탐색·셀 해설 화면
+- `content/notebook-downloads.json`, `src/notebook-downloads.jsx`, `src/notebook-downloads.css`: 한국어 노트북 다운로드 목록·사용법·노트별 연결
+- `public/downloads/notebooks/`, `public/downloads/Building-RAG-Agents-Korean-Notebooks.zip`: 검토한 한국어 ipynb 사본과 전체 묶음
 - `content/notebook-code.json`: 출력·인증 셀을 제외한 코드 발췌와 줄별 해설
 - `content/lectures.mjs`, `content/papers.mjs`: 최신 강의자료와 원논문 메타데이터
 - `src/lecture-library.jsx`, `src/lecture-library.css`: 강의자료 선택·PDF 뷰어·다운로드

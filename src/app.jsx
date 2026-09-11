@@ -16,6 +16,7 @@ import {NotebookCompanion,ReaderModes} from './notebook-companion.jsx';
 import {chapterBriefs} from '../content/notebook-companion.mjs';
 import {findNotebookCells,usesCompanion} from '../content/notebook-lookup.mjs';
 import notebookLocations from '../content/notebook-locations.json';
+import {NotebookDownloads,NotebookDownloadCallout,NotebookDownloadLink} from './notebook-downloads.jsx';
 
 const notes = allNotes.filter(note => note.kind === 'notebook');
 const COURSE = 'Building RAG Agents with LLMs';
@@ -56,6 +57,7 @@ function NotebookList({done}) {
     <div className="eyebrow">{COURSE}</div><h1>실습 노트</h1>
     <p className="page-lead">JupyterLab의 원본 노트북과 나란히 두고 보세요.<br/>파일을 고른 뒤 원본 제목·코드 한 줄로 해당 셀의 설명을 찾을 수 있습니다.</p>
     <div className="practice-notice"><Terminal size={22}/><div><strong>코드 실행은 수업의 DLI JupyterLab에서</strong><p>이곳에서는 설명을 읽고 코드를 복사합니다. 수업 내부 서버와 패키지가 필요한 코드는 DLI 환경에서 실행하세요.</p></div></div>
+    <NotebookDownloadCallout Link={Link}/>
     {stages.map((stage, i) => <section className="notebook-stage" key={stage.title}>
       <div className="module-heading"><span>{String(i + 1).padStart(2, '0')}</span><h2>{stage.title}</h2></div>
       <p>{stage.text}</p><div className="chapter-grid">{stage.notes.map(note => <NoteCard key={note.slug} note={note} done={done}/>)}</div>
@@ -131,7 +133,7 @@ function ConceptNotePage({note, done, mark}) {
     <main id="main" className="lesson-main">
       <div className="breadcrumb"><Link to="/notebooks">실습 노트</Link><ChevronRight size={14}/><span>실습 {note.no}</span></div>
       <div className="eyebrow">실습 {note.no}</div>
-      <h1>{note.title}</h1><p className="lesson-lead">{chapterBriefs[note.slug].result}</p><ReaderModes original={false}/>
+      <h1>{note.title}</h1><p className="lesson-lead">{chapterBriefs[note.slug].result}</p><NotebookDownloadLink slug={note.slug}/><ReaderModes original={false}/>
       <section className="chapter-goals" aria-label="챕터 학습 목표"><div><span>LEARNING GOALS</span><h2>이 챕터에서 배울 내용은?</h2></div><ul>{chapterBriefs[note.slug].outcomes.map(([goal,check]) => <li key={goal}><CheckCircle2 size={17}/><span><strong>{goal}</strong> — {check}</span></li>)}</ul><p>{note.sections.length}개 소주제와 {note.exercises.length}개 실습을 한 단계씩 따라갑니다.</p></section>
       {source && <p className="execution-context">코드 실행은 수업의 DLI JupyterLab에서 진행합니다. {note.filename}을 열고 따라 해 보세요.</p>}
       {note.glossary && <details className="chapter-glossary"><summary>처음 만나는 용어 <span>{note.glossary.length}개</span></summary><dl>{note.glossary.map(([term,definition]) => <div key={term}><dt>{term}</dt><dd>{definition}</dd></div>)}</dl></details>}
@@ -189,6 +191,7 @@ function App() {
   const current = notes.find(note => path === '/notes/' + note.slug);
   const lecture = lectures.find(item => path === '/lectures/' + item.slug) || (['/', '/notes/introduction-to-llm', '/resources'].includes(path) ? lectures[0] : null);
   const slides = Boolean(lecture);
+  const downloads = path === '/notebook-downloads';
   useEffect(() => {
     const pop = () => { setPath(route()); setMenu(false); };
     const key = event => { if ((event.metaKey || event.ctrlKey) && event.key === 'k') { event.preventDefault(); setSearch(true); } };
@@ -196,16 +199,16 @@ function App() {
     fetch(API + '/api/status', {credentials: 'include'}).then(response => { if (!response.ok) throw Error(); return response.json(); }).then(setStatus).catch(() => {});
     return () => { removeEventListener('popstate', pop); removeEventListener('keydown', key); };
   }, []);
-  useEffect(() => { document.title = (current ? current.title + ' · ' : slides ? lecture.label + ' · ' : path === '/get-certification' ? 'Get Certification · ' : '') + COURSE; }, [path]);
+  useEffect(() => { document.title = (current ? current.title + ' · ' : slides ? lecture.label + ' · ' : downloads ? '한국어 실습 노트북 · ' : path === '/get-certification' ? 'Get Certification · ' : '') + COURSE; }, [path]);
   function ask() { setQuestionContext(''); setPrefill(current ? `${current.filename}에서 궁금한 점이 있어요. ` : slides ? `${lecture.label} 강의자료에서 궁금한 점이 있어요. ` : ''); setChat(true); }
   function askCell(note,cell,title){setQuestionContext(`${note.filename} · 원본 셀 ${cell} · ${title}`);setPrefill('');setChat(true);}
   function mark(slug) { const next = done.includes(slug) ? done.filter(value => value !== slug) : [...done, slug]; setDone(next); try { localStorage.setItem('ksa-notes-v2', JSON.stringify(next)); } catch {} }
   return <><a href="#main" className="skip-link">본문으로 건너뛰기</a>
     <header className="site-header"><Link to="/" className="brand"><img src="/nvidia-dli-logo.png" alt="NVIDIA Deep Learning Institute"/><span className="brand-course"><b>{COURSE}</b><small>산업 AI 전환(AX) 챌린지</small></span></Link>
-      <nav className={menu ? 'open' : ''} aria-label="주 메뉴"><Link to="/" className={slides ? 'active' : ''}>강의자료</Link><Link to="/notebooks" className={current?.kind === 'notebook' || path === '/notebooks' ? 'active' : ''}>실습 노트</Link><Link to="/get-certification" className={path === '/get-certification' ? 'active' : ''}>Get Certification</Link></nav>
+      <nav className={menu ? 'open' : ''} aria-label="주 메뉴"><Link to="/" className={slides || downloads ? 'active' : ''}>강의자료</Link><Link to="/notebooks" className={current?.kind === 'notebook' || path === '/notebooks' ? 'active' : ''}>실습 노트</Link><Link to="/get-certification" className={path === '/get-certification' ? 'active' : ''}>Get Certification</Link></nav>
       <div className="header-actions"><button className="search-button" onClick={() => setSearch(true)} aria-label="학습 내용 검색"><Search size={18}/><span>검색</span></button><button className="ask-button" onClick={ask} aria-label="자료 도우미 열기"><MessageCircle size={16}/><span>질문하기</span></button><button className="menu-toggle icon-button" onClick={() => setMenu(!menu)} aria-expanded={menu} aria-label="메뉴 열기">{menu ? <X/> : <Menu/>}</button></div>
     </header>
-    {slides ? <LectureLibrary lecture={lecture} Link={Link} course={COURSE} program={PROGRAM}/> : path === '/get-certification' ? <Certification/> : current ? <NotePage key={current.slug} note={current} done={done} mark={mark} askCell={askCell}/> : path === '/notebooks' || path === '/practice' ? <NotebookList done={done}/> : <main id="main" className="wide-page"><h1>학습 노트를 찾을 수 없어요.</h1><Link to="/" className="primary-button">강의자료로 이동<ArrowRight size={16}/></Link></main>}
+    {downloads ? <NotebookDownloads Link={Link}/> : slides ? <LectureLibrary lecture={lecture} Link={Link} course={COURSE} program={PROGRAM}/> : path === '/get-certification' ? <Certification/> : current ? <NotePage key={current.slug} note={current} done={done} mark={mark} askCell={askCell}/> : path === '/notebooks' || path === '/practice' ? <NotebookList done={done}/> : <main id="main" className="wide-page"><h1>학습 노트를 찾을 수 없어요.</h1><Link to="/" className="primary-button">강의자료로 이동<ArrowRight size={16}/></Link></main>}
     <footer className="site-footer"><div><strong>{COURSE}</strong><p>{PROGRAM}</p></div><div><span>2026년 충청권 ICT이노베이션스퀘어 확산사업</span></div></footer>
     <SearchNotes open={search} close={() => setSearch(false)}/><Chat questionContext={questionContext} clearQuestionContext={()=>setQuestionContext('')} open={chat} close={() => setChat(false)} prefill={prefill} status={status} initialMode={slides ? 'lecture' : 'notebook'}/>
   </>;
