@@ -35,6 +35,7 @@ export function Certification(){
  },[]);
  return <main id="main" className="cert-page">
   <header className="cert-intro"><div className="eyebrow"><GraduationCap size={19}/>BUILDING RAG AGENTS WITH LLMS</div><h1>Get Certification</h1><p>원본 노트북을 열고, 필요한 빈칸만 채워 보세요.<br/>바꿀 구간과 정답, 실행 순서와 확인할 결과를 한 단계씩 안내합니다.</p><a className="cert-help-link" href="#recovery">실행 중 오류가 났나요?<ArrowRight size={15}/></a></header>
+  {guide.verification&&<aside className="cert-verified" aria-label="실제 랩 검수 결과"><CheckCircle2 size={22}/><div><strong>실제 ASSESS TASK · PASSED 확인</strong><p>{guide.verification.date} · 이 안내의 코드로 07 → 08 → 09 → Evaluate → ASSESS TASK를 검수했습니다.</p><a href="#assess">실제 통과 화면 보기</a><a href="#certificate">이미 PASSED라면 인증서 받기</a></div></aside>}
   <div className="cert-path" aria-label="수료 진행 흐름"><div><small>검색 자료 준비</small><strong>07 문서 → 저장</strong></div><ArrowRight/><div><small>내 답변 사전 점검</small><strong>08 RAG → 비교</strong></div><ArrowRight/><div><small>평가 화면 연결</small><strong>09 서버 → Evaluate</strong></div><ArrowRight/><div><small>강좌 완료 반영</small><strong>Assess Task → 인증서</strong></div></div>
   <div className="cert-edit-legend"><span><Play size={16}/>그대로 실행</span><span><Scissors size={16}/>특정 구간만 수정</span><span><Plus size={16}/>같은 셀 안에 추가</span><p>정답 코드에는 바꿀 부분만 들어 있습니다. 셀 전체를 지우지 마세요.</p></div>
   <label className="cert-mobile-step">현재 진행할 단계<select value={active} onChange={e=>{location.hash=e.target.value;}}>{steps.map((s,i)=><option value={s.id} key={s.id}>{i+1}. {s.phase} · {s.title}</option>)}</select></label>

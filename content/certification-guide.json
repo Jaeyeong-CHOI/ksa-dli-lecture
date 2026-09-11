@@ -456,15 +456,17 @@
       "phase": "인증서",
       "title": "발급된 인증서 확인·저장",
       "purpose": "수강한 NVIDIA 계정에서 강좌 완료 상태와 실제 발급 결과를 확인합니다.",
-      "needs": "Evaluate와 Assess Task 완료",
+      "needs": "NVIDIA 강좌의 ASSESS TASK 결과가 PASSED인 상태",
       "actions": [],
       "outcome": "이름과 강좌명이 맞는 인증서를 열어 저장했습니다.",
       "bullets": [
-        "같은 NVIDIA 계정의 My Learning에서 Certificates and Completed Courses 구역을 찾고, Building RAG Agents with LLMs를 누릅니다. Instructor Materials 항목이 아니라 수강한 강좌명을 확인하세요.",
-        "인증서 페이지에서 이름과 강좌명을 확인한 뒤 Download Certificate를 눌러 PDF를 저장합니다. 필수 미완료 항목이 표시되면 플랫폼의 안내를 먼저 마칩니다.",
-        "이 사이트의 학습 기록은 NVIDIA 플랫폼의 수료 상태와 별개입니다. 실제 평가 결과는 수업 플랫폼에서 확인합니다."
+        "아래 NVIDIA My Learning 열기를 누르고, 실습을 수행한 것과 같은 NVIDIA 계정으로 접속합니다.",
+        "Certificates and Completed Courses 구역에서 Building RAG Agents with LLMs를 누릅니다. Instructor Materials 항목이 아니라 수강한 강좌명입니다.",
+        "인증서에 표시된 이름과 강좌명을 확인한 뒤 Download Certificate를 누릅니다. 브라우저 인쇄 창이 열리면 대상에서 PDF로 저장(Save as PDF)을 선택하고 저장합니다.",
+        "인증서 항목이 바로 보이지 않으면 잠시 기다렸다가 My Learning을 새로고침합니다. 계속 보이지 않으면 같은 계정인지와 ASSESS TASK의 PASSED 결과를 확인합니다. 필수 미완료 항목이 있으면 플랫폼의 안내를 마칩니다.",
+        "이번 검수에서는 실제 ASSESS TASK 통과와 My Learning의 해당 강좌 인증서 페이지 열림까지 확인했습니다. 이 사이트의 학습 기록은 NVIDIA 수료 상태와 별개입니다."
       ],
-      "execute": ""
+      "execute": "My Learning → Certificates and Completed Courses → Building RAG Agents with LLMs → Download Certificate"
     }
   ],
   "actions": {
