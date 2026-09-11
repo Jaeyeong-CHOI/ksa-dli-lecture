@@ -180,5 +180,337 @@
       }
     ],
     "cells": {}
+  },
+  "07_vectorstores.ipynb": {
+    "overview": [
+      {
+        "src": "/images/certification/07-notebook-location.png",
+        "width": 3840,
+        "height": 1496,
+        "alt": "07_vectorstores.ipynb 파일과 코드 위치",
+        "caption": "07_vectorstores.ipynb 파일과 코드 위치",
+        "callouts": [
+          {
+            "fromX": 20,
+            "x": 7.069498697916667,
+            "y": 53.75376002673797,
+            "note": "왼쪽 목록에서 07_vectorstores.ipynb을 엽니다."
+          },
+          {
+            "fromX": 65,
+            "x": 22.732747395833332,
+            "y": 3.342245989304813,
+            "note": "오른쪽은 이 노트북의 실제 코드입니다. 해설에서 제목·첫 줄로 현재 위치를 찾습니다."
+          }
+        ]
+      }
+    ],
+    "cells": {
+      "4": [
+        {
+          "src": "/images/certification/07-model-after.png",
+          "width": 2954,
+          "height": 630,
+          "alt": "모델 설정 줄의 앞부분에 서버 주소를 추가한 실제 화면",
+          "caption": "실제 DLI 랩 화면입니다. 셀 전체가 아니라 표시한 구간만 수정합니다.",
+          "callouts": [
+            {
+              "fromX": 25,
+              "x": 2.572782667569397,
+              "y": 94.97519841269842,
+              "note": "ChatNVIDIA( 뒤에 base_url을 넣었습니다. model=부터 뒤에 있던 옵션은 유지합니다."
+            }
+          ]
+        }
+      ],
+      "34": [
+        {
+          "src": "/images/certification/07-papers-after.png",
+          "width": 2954,
+          "height": 960,
+          "alt": "07번 Task 1의 paper_ids 목록만 수정한 실제 화면",
+          "caption": "실제 DLI 랩 화면입니다. 셀 전체가 아니라 표시한 구간만 수정합니다.",
+          "callouts": [
+            {
+              "fromX": 25,
+              "x": 2.572782667569397,
+              "y": 15.712890625,
+              "note": "paper_ids 목록만 RAG·ReAct 논문으로 바꿉니다. 아래 문서 읽기·청킹 코드는 그대로 실행합니다."
+            }
+          ]
+        }
+      ],
+      "40": [
+        {
+          "src": "/images/certification/07-retrieval-before.png",
+          "width": 2954,
+          "height": 630,
+          "alt": "07번 Task 3의 원래 history·context TODO 위치",
+          "caption": "실제 DLI 랩 화면입니다. 셀 전체가 아니라 표시한 구간만 수정합니다.",
+          "callouts": [
+            {
+              "fromX": 25,
+              "x": 2.572782667569397,
+              "y": 66.55505952380952,
+              "note": "BEGIN TODO와 END TODO 사이의 RunnableAssign 두 줄이 수정할 위치입니다."
+            }
+          ]
+        },
+        {
+          "src": "/images/certification/07-retrieval-after.png",
+          "width": 2954,
+          "height": 630,
+          "alt": "07번 Task 3의 history·context 두 줄을 채운 실제 화면",
+          "caption": "실제 DLI 랩 화면입니다. 셀 전체가 아니라 표시한 구간만 수정합니다.",
+          "callouts": [
+            {
+              "fromX": 25,
+              "x": 2.572782667569397,
+              "y": 66.55505952380952,
+              "note": "history는 대화 저장소, context는 문서 저장소를 검색합니다. 위 입력 처리와 아래 생성 코드는 유지했습니다."
+            }
+          ]
+        }
+      ],
+      "44": [
+        {
+          "src": "/images/certification/07-save-after.png",
+          "width": 2954,
+          "height": 934,
+          "alt": "인덱스 폴더를 지우는 줄에 #을 붙인 실제 화면",
+          "caption": "실제 수업 화면에서 표시한 부분만 수정합니다. 나머지 기본 코드는 유지하세요.",
+          "callouts": [
+            {
+              "fromX": 30,
+              "x": 2.572782667569397,
+              "y": 26.75630027257981,
+              "note": "이 삭제 줄만 주석 처리했습니다. save_local과 압축 명령은 그대로 실행합니다."
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "08_evaluation.ipynb": {
+    "overview": [
+      {
+        "src": "/images/certification/08-notebook-location.png",
+        "width": 3840,
+        "height": 1496,
+        "alt": "08_evaluation.ipynb 파일과 코드 위치",
+        "caption": "08_evaluation.ipynb 파일과 코드 위치",
+        "callouts": [
+          {
+            "fromX": 20,
+            "x": 6.758015950520833,
+            "y": 56.96231617647059,
+            "note": "왼쪽 목록에서 08_evaluation.ipynb을 엽니다."
+          },
+          {
+            "fromX": 65,
+            "x": 22.732747395833332,
+            "y": 8.622994652406417,
+            "note": "오른쪽은 이 노트북의 실제 코드입니다. 해설에서 제목·첫 줄로 현재 위치를 찾습니다."
+          }
+        ]
+      }
+    ],
+    "cells": {
+      "9": [
+        {
+          "src": "/images/certification/08-context-after.png",
+          "width": 2954,
+          "height": 630,
+          "alt": "08번 문서 검색 TODO를 채운 실제 화면",
+          "caption": "실제 수업 화면에서 표시한 부분만 수정합니다. 나머지 기본 코드는 유지하세요.",
+          "callouts": [
+            {
+              "fromX": 30,
+              "x": 2.572782667569397,
+              "y": 95.30753968253968,
+              "note": "context_getter의 자리표시자만 문서 검색과 문자열 변환으로 바꿉니다."
+            }
+          ]
+        },
+        {
+          "src": "/images/certification/08-generator-after.png",
+          "width": 2954,
+          "height": 630,
+          "alt": "08번 답변 생성 TODO를 채운 실제 화면",
+          "caption": "실제 수업 화면에서 표시한 부분만 수정합니다. 나머지 기본 코드는 유지하세요.",
+          "callouts": [
+            {
+              "fromX": 30,
+              "x": 2.572782667569397,
+              "y": 95.3000992063492,
+              "note": "첫 generator_chain에 프롬프트와 모델을 연결합니다. 아래 GIVEN 줄은 유지합니다."
+            }
+          ]
+        }
+      ],
+      "11": [
+        {
+          "src": "/images/certification/08-questions-after.png",
+          "width": 2998,
+          "height": 716,
+          "alt": "08번: 질문·기준 답변을 끝까지 받는 한 줄",
+          "caption": "08번: 질문·기준 답변을 끝까지 받는 한 줄",
+          "callouts": [
+            {
+              "fromX": 20,
+              "x": 4.622262516999359,
+              "y": 34.904775409585724,
+              "note": "qa_pair에 값을 넣는 호출 한 줄만 변경합니다. 아래 형식 검사·목록 저장 코드는 그대로 둡니다."
+            }
+          ]
+        }
+      ],
+      "13": [
+        {
+          "src": "/images/certification/08-answers-before.png",
+          "width": 2954,
+          "height": 960,
+          "alt": "08번 RAG 답변을 넣을 빈 줄",
+          "caption": "실제 수업 화면에서 표시한 부분만 수정합니다. 나머지 기본 코드는 유지하세요.",
+          "callouts": [
+            {
+              "fromX": 30,
+              "x": 2.572782667569397,
+              "y": 26.041666666666668,
+              "note": "rag_answer가 빈 문자열인 이 한 줄이 수정할 부분입니다."
+            }
+          ]
+        },
+        {
+          "src": "/images/certification/08-answers-after.png",
+          "width": 2954,
+          "height": 960,
+          "alt": "08번 RAG 답변 스트리밍을 연결한 실제 화면",
+          "caption": "실제 수업 화면에서 표시한 부분만 수정합니다. 나머지 기본 코드는 유지하세요.",
+          "callouts": [
+            {
+              "fromX": 30,
+              "x": 2.572782667569397,
+              "y": 26.041666666666668,
+              "note": "rag_chain.stream(q)의 문자열 조각을 합쳐 답변 목록에 넣습니다."
+            }
+          ]
+        }
+      ],
+      "15": [
+        {
+          "src": "/images/certification/08-judge-after.png",
+          "width": 3070,
+          "height": 660,
+          "alt": "08번: 비교 판정을 끝까지 받는 한 줄",
+          "caption": "08번: 비교 판정을 끝까지 받는 한 줄",
+          "callouts": [
+            {
+              "fromX": 20,
+              "x": 4.513401306551072,
+              "y": 37.787539558830474,
+              "note": "pref_score에 추가하는 호출만 바꿉니다. 평가 프롬프트와 [1]/[2] 판정 기준은 유지합니다."
+            }
+          ]
+        }
+      ],
+      "17": [
+        {
+          "src": "/images/certification/08-score-current.png",
+          "width": 2954,
+          "height": 860,
+          "alt": "08번: 점수 변수 이름과 실제 출력",
+          "caption": "08번: 점수 변수 이름과 실제 출력",
+          "callouts": [
+            {
+              "fromX": 20,
+              "x": 2.572782667569397,
+              "y": 29.004948969417907,
+              "note": "왼쪽 변수는 preference_score, 반복문 오른쪽 목록은 pref_score입니다. 출력 0.0은 이 실행의 진단 점수입니다."
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "09_langserve.ipynb": {
+    "overview": [
+      {
+        "src": "/images/certification/09-notebook-location.png",
+        "width": 3840,
+        "height": 1496,
+        "alt": "09_langserve.ipynb 파일과 코드 위치",
+        "caption": "09_langserve.ipynb 파일과 코드 위치",
+        "callouts": [
+          {
+            "fromX": 20,
+            "x": 6.689249674479167,
+            "y": 60.17087232620321,
+            "note": "왼쪽 목록에서 09_langserve.ipynb을 엽니다."
+          },
+          {
+            "fromX": 65,
+            "x": 22.732747395833332,
+            "y": 3.342245989304813,
+            "note": "오른쪽은 이 노트북의 실제 코드입니다. 해설에서 제목·첫 줄로 현재 위치를 찾습니다."
+          }
+        ]
+      }
+    ],
+    "cells": {
+      "4": [
+        {
+          "src": "/images/certification/09-async-stream-after.png",
+          "width": 2954,
+          "height": 960,
+          "alt": "09번: 생성기를 웹 서버의 두 응답 방식에 연결",
+          "caption": "09번: 생성기를 웹 서버의 두 응답 방식에 연결",
+          "callouts": [
+            {
+              "fromX": 20,
+              "x": 14,
+              "y": 18,
+              "note": "일반 응답 함수와 비동기 응답 함수를 모두 포함합니다."
+            },
+            {
+              "fromX": 65,
+              "x": 48,
+              "y": 29,
+              "note": "RunnableLambda의 afunc=astream_model 연결을 빠뜨리지 않습니다."
+            }
+          ]
+        },
+        {
+          "src": "/images/certification/09-generator-after.png",
+          "width": 2954,
+          "height": 714,
+          "alt": "09번: /generator의 자리표시자를 교체",
+          "caption": "09번: /generator의 자리표시자를 교체",
+          "callouts": [
+            {
+              "fromX": 20,
+              "x": 4.692260494245091,
+              "y": 34.964270885688684,
+              "note": "이 위치에 generator_chain만 넣습니다. add_routes와 path는 그대로 둡니다."
+            }
+          ]
+        },
+        {
+          "src": "/images/certification/09-retriever-after.png",
+          "width": 2954,
+          "height": 630,
+          "alt": "09번: /retriever의 자리표시자를 교체",
+          "caption": "09번: /retriever의 자리표시자를 교체",
+          "callouts": [
+            {
+              "fromX": 20,
+              "x": 4.692260494245091,
+              "y": 60.84573412698413,
+              "note": "이 위치에 retriever_chain만 넣습니다. 아래 서버 시작 코드를 지우지 않습니다."
+            }
+          ]
+        }
+      ]
+    }
   }
 }
