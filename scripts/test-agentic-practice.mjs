@@ -6,8 +6,8 @@ import {destinationValid,fillPrompt,restoreProgress,resolveStep} from '../src/ag
 const data=JSON.parse(readFileSync(new URL('../content/agentic-practice.json',import.meta.url)));
 const ids=data.steps.map(s=>s.id);
 test('bad saved progress and malformed deep links do not break the lesson',()=>{
- assert.deepEqual(restoreProgress({done:['deploy','unknown','deploy'],current:'unknown'},ids),{done:['deploy'],current:'prepare'});
- assert.deepEqual(restoreProgress('broken',ids),{done:[],current:'prepare'});
+ assert.deepEqual(restoreProgress({done:['deploy','unknown','deploy'],current:'unknown'},ids),{done:['deploy'],current:ids[0]});
+ assert.deepEqual(restoreProgress('broken',ids),{done:[],current:ids[0]});
  assert.equal(resolveStep('#%xy',ids,'prepare'),'prepare');assert.equal(resolveStep('#input-b',ids,'prepare'),'input-b');
 });
 test('deployment prompts need valid destinations and replace all target fields',()=>{
@@ -22,4 +22,14 @@ test('downloaded inputs and Skill example are identical to the onscreen source',
 test('the download ZIP contains exactly the three reviewed practice files',()=>{
  const p='public/downloads/agentic-coding/';const names=execFileSync('unzip',['-Z1',p+'Agentic-Coding-Practice.zip'],{encoding:'utf8'}).trim().split('\n').sort();assert.deepEqual(names,['EXAMPLES.md','PROMPTS.md','READ_ME.md']);
  for(const n of names)assert.deepEqual(execFileSync('unzip',['-p',p+'Agentic-Coding-Practice.zip',n]),readFileSync(p+n));
+});
+
+test('new concept steps preserve earlier learner progress and ship matching offline explanations',()=>{
+ assert.deepEqual(restoreProgress({done:['prepare','create-skill'],current:'connect-mcp'},ids),{done:['prepare','create-skill'],current:'connect-mcp'});
+ const concepts=JSON.parse(readFileSync('content/agentic-concepts.json','utf8')); const guide=readFileSync('public/downloads/agentic-coding/READ_ME.md','utf8');
+ for(const s of data.steps.filter(s=>s.lesson)){
+  const c=concepts[s.lesson]; assert.ok(c); assert.ok(c.quiz.answer>=0&&c.quiz.answer<c.quiz.options.length);
+  for(const p of c.parts){assert.ok(guide.includes(p.role));assert.ok(guide.includes(p.why));assert.ok(guide.includes(p.example))}
+ }
+ assert.equal(data.steps.filter(s=>s.lesson).length,3);
 });

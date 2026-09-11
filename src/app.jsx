@@ -10,6 +10,7 @@ import {API} from './api.js';
 import {Certification} from './certification.jsx';
 import {AgenticPractice} from './agentic-practice.jsx';
 import agenticPractice from '../content/agentic-practice.json';
+import agenticConcepts from '../content/agentic-concepts.json';
 import './styles.css';
 import './reader.css';
 import {lectures} from '../content/lectures.mjs';
@@ -183,7 +184,7 @@ function SearchNotes({open, close}) {
   const [query, setQuery] = useState('');
   useEffect(() => { if (open) { dialog.current.showModal(); input.current.focus(); } else dialog.current.close(); }, [open]);
   const result = notes.filter(note => (note.title + note.filename + note.summary + note.sections.map(s => s.title + s.text).join('') + note.exercises.map(e => e.title + e.code).join('')).toLowerCase().includes(query.toLowerCase()));
-  const practiceResults = query.trim() ? agenticPractice.steps.filter(s => (s.title+s.goal+s.actions.join('')).toLowerCase().includes(query.toLowerCase())) : [];
+  const practiceResults = query.trim() ? agenticPractice.steps.filter(s => (s.title+s.goal+s.actions.join('')+(s.lesson?JSON.stringify(agenticConcepts[s.lesson]):'')).toLowerCase().includes(query.toLowerCase())) : [];
   const cellResults = query.trim() ? findNotebookCells(query,notebookCode,notebookLocations) : [];
   return <dialog ref={dialog} className="search-dialog" onCancel={close} onClick={event => { if (event.target === dialog.current) close(); }}><div className="search-head"><Search size={20}/><input ref={input} value={query} onChange={event => setQuery(event.target.value)} placeholder="개념, 노트북, 코드 검색" aria-label="학습 내용 검색어"/><button className="icon-button" onClick={close} aria-label="검색 닫기"><X size={19}/></button></div><div className="search-results">{practiceResults.length>0&&<><small>에이전틱 코딩 실습 {practiceResults.length}개</small>{practiceResults.map(s=><Link key={s.id} to={'/agentic-coding#'+s.id} onClick={close}><Code2 size={16}/><div><strong>{s.title}</strong><p>{s.group}</p></div><ArrowRight size={16}/></Link>)}</>}<small>{result.length}개의 학습 노트</small>{result.map(note => <Link key={note.slug} to={noteUrl(note)} onClick={close}><span>{note.no}</span><div><strong>{note.title}</strong><p>{'실습 ' + note.no}</p></div><ArrowRight size={16}/></Link>)}{cellResults.length>0&&<><small className="global-cell-heading">원본 코드 위치 {cellResults.length}개 · 최대 40개 표시</small>{cellResults.slice(0,40).map(item=><Link className="global-cell-result" key={item.slug+'-'+item.cell} to={'/notes/'+item.slug+'#cell-'+item.cell} onClick={close}><Code2 size={16}/><div><strong>{item.guide.title}</strong><p>{item.filename} · 원본 셀 {item.cell}</p><code>{item.location.firstLine}</code></div><ArrowRight size={16}/></Link>)}</>}{!result.length&&!cellResults.length&&!practiceResults.length && <p>일치하는 내용이 없어요. 원본 파일명이나 변수 이름으로 찾아보세요.</p>}</div></dialog>;
 }

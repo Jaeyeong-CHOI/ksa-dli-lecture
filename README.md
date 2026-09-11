@@ -30,7 +30,7 @@ Q&A는 **강의자료 기반 / 실습노트 기반**으로 구분합니다. 강�
 
 ## 에이전틱 코딩 실습
 
-`/agentic-coding`은 상단의 네 번째 메뉴입니다. ChatGPT 데스크톱 Work에서 **Skill 만들기 → 입력 A/B로 재사용 → Vercel MCP 연결·조회 → Preview 배포·확인 → 한 가지 수정 후 재배포**를 10단계로 따라갑니다. 각 단계에는 실행 위치, 실행 순서, 복사할 요청문, 직접 확인할 성공 기준과 막혔을 때 대처가 있습니다. 실제 Skill 생성·OAuth·배포는 학습자의 ChatGPT와 Vercel에서 진행하며 이 사이트가 대신 실행하지 않습니다.
+`/agentic-coding`은 상단의 네 번째 메뉴입니다. ChatGPT 데스크톱 Work에서 **Skill 만들기 → 입력 A/B로 재사용 → Vercel MCP 연결·조회 → Preview 배포·확인 → 한 가지 수정 후 재배포**를 13단계(개념 3 + 실행 10)로 따라갑니다. 개념 단계에서는 프롬프트·LLM·Skill·MCP의 차이, Skill 필수/선택 파일, MCP의 Host/Client/Server·도구·인증을 인터랙티브 구성요소 탐색과 실행 흐름·확인 문제로 설명합니다. MCP 설정 및 배포 입력값의 역할도 해당 단계에서 찾아볼 수 있습니다. 시작 안내 다운로드에는 같은 개념 설명을 함께 담습니다. 각 단계에는 실행 위치, 실행 순서, 복사할 요청문, 직접 확인할 성공 기준과 막혔을 때 대처가 있습니다. 실제 Skill 생성·OAuth·배포는 학습자의 ChatGPT와 Vercel에서 진행하며 이 사이트가 대신 실행하지 않습니다.
 
 기존 PPT와 함께 쓰는 시작 안내·프롬프트·예시 3파일 ZIP과 개별 Skill/입력 예시를 내려받을 수 있습니다. 단계별 요청문은 화면 그대로 복사하거나 TXT로 받습니다. 배포 대상 입력은 요청문에만 반영하며 서버나 저장소로 전송하지 않습니다. 직접 확인한 단계만 브라우저에 저장하고, 단계별 주소·이전/다음·모바일 선택기와 전역 검색을 지원합니다.
 
@@ -47,7 +47,7 @@ highlight.js 기반의 밝은 코드 뷰어를 사용합니다. Python·셸·JSO
 - 최신 강의 슬라이드 6종의 PDF 열람·다운로드
 - JupyterLab 노트북 00–09번별 해설 노트 10개
 - 한국어 ipynb 10개 개별 다운로드와 전체 ZIP
-- Skill·MCP·Vercel을 연결하는 에이전틱 코딩 실습 10단계와 요청문·예시 다운로드
+- Skill·MCP·Vercel을 연결하는 에이전틱 코딩 실습 13단계와 요청문·예시 다운로드
 - 셀 번호로 연결되는 원본 코드 105개·핵심 연산 해설, 노트북 풀이·확인 예제 14개
 - NVIDIA 공식 심볼 파비콘
 - 강의자료+관련 논문 / 실습노트로 구분된 Q&A 도우미
@@ -74,6 +74,7 @@ React + Vite. `main` 브랜치 push 시 GitHub Actions가 정적 사이트를 �
 ## 콘텐츠 수정
 
 - `content/agentic-practice.json`, `src/agentic-practice.jsx`, `src/agentic-practice.css`: 에이전틱 코딩 단계별 안내·복사·다운로드 UI
+- `content/agentic-concepts.json`, `content/agentic-field-roles.mjs`, `src/agentic-concepts.jsx`, `src/agentic-concepts.css`: 초심자 개념·구성요소·실행 흐름·확인 문제; 다운로드 안내에도 같은 원문 반영
 - `src/agentic-practice-model.mjs`: 배포 대상 검증·요청문 치환·로컬 진행 기록
 - `public/downloads/agentic-coding/`: 공개 실습 ZIP 및 개별 교육용 예시; `node scripts/build-agentic-files.mjs`로 JSON의 개별 예시와 3파일 ZIP 갱신
 - `node --test scripts/test-agentic-practice.mjs`: 진행 기록·대상 치환·예시 일치·ZIP 내용 검증

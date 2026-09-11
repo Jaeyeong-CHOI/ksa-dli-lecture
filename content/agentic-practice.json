@@ -5,6 +5,25 @@
   "inputB": "Fictional practice page. Use a new task folder; do not overwrite Input A.\n- Name: Research Reading Circle\n- Audience: students who want to discuss research papers critically\n- Headline: Read closely. Ask better questions.\n- Description: A reading circle focused on claims, evidence, and limitations.\n- Topics: Research questions; experimental evidence; reproducibility\n- Format: Pick a claim; inspect the evidence; propose a follow-up\n- Primary action: Explore topics — jump to the Topics section\n- FAQ: Must I understand every equation? Bring one question and one observation from the paper.\n- FAQ: What should I share? One claim, supporting evidence, and a limitation.\n- No date, venue, price, registration, or contact details have been supplied. Do not add them.\n- Add a small \"Fictional workshop example\" label.\n- Visual direction: warm off-white, dark text, one blue accent; concise and readable.",
   "steps": [
     {
+      "id": "understand-basics",
+      "group": "개념",
+      "title": "요청·Skill·MCP 큰 그림",
+      "goal": "페이지 하나를 만들고 배포할 때 각 요소가 맡는 일을 구분합니다.",
+      "where": "이 페이지 · 개념 설명과 예시 탐색",
+      "actions": [
+        "아래 항목을 눌러 프롬프트·LLM·Skill·도구·MCP·Vercel의 역할을 비교합니다.",
+        "실행 흐름의 1–4를 눌러 파일 생성과 배포가 어디서 달라지는지 봅니다.",
+        "짧은 확인 문제를 풀고 준비 단계로 이동합니다."
+      ],
+      "check": [
+        "Skill은 반복 절차, MCP는 외부 기능과 주고받는 규칙이라고 설명할 수 있습니다.",
+        "파일 생성과 웹 배포를 구분할 수 있습니다.",
+        "둘을 항상 함께 써야 하는 것은 아님을 이해했습니다."
+      ],
+      "trouble": "모든 기능을 “GPT가 한다”로 묶지 말고, 누가 내용을 생각하고 누가 실제 기능을 실행하는지 나누어 보세요.",
+      "lesson": "overview"
+    },
+    {
       "id": "prepare",
       "group": "시작",
       "title": "실습 환경과 파일 준비",
@@ -26,8 +45,26 @@
         "guide",
         "examples",
         "prompts"
+      ]
+    },
+    {
+      "id": "understand-skill",
+      "group": "개념 · Skill",
+      "title": "Skill 파일의 각 부분 이해하기",
+      "goal": "이름·설명·본문과 선택적인 보조 파일의 역할을 읽습니다.",
+      "where": "이 페이지 · Skill 구성요소 탐색",
+      "actions": [
+        "SKILL.md, name, description, 본문을 차례대로 눌러 역할을 읽습니다.",
+        "scripts·references·assets는 어떤 경우에 추가하는지 비교합니다. 이번에는 만들지 않습니다.",
+        "skill-creator와 우리가 만들 brief-to-page가 어떻게 다른지 확인합니다."
       ],
-      "concept": true
+      "check": [
+        "name, description, 본문의 차이를 말할 수 있습니다.",
+        "이번에는 SKILL.md 중심의 instruction-only Skill을 만듭니다.",
+        "입력 예시와 Skill, 생성 파일을 구분할 수 있습니다."
+      ],
+      "trouble": "파일 구조를 모두 외우지 않아도 됩니다. 먼저 이름·적용 상황·작업 절차 세 가지를 읽고, 보조 폴더는 필요할 때 확인하세요.",
+      "lesson": "skill"
     },
     {
       "id": "create-skill",
@@ -119,10 +156,29 @@
       "prompt": "입력 A의 실제 index.html을 확인해 주세요.\n1. 제목과 문구가 입력 A와 맞는지\n2. Explore topics가 Topics로 이동하는지\n3. FAQ 두 개가 열리고 닫히는지\n4. 좁은 화면에서 잘림이 없는지\n5. Tab 키로 조작할 때 포커스가 보이는지\n문제가 있는 부분만 수정하고 같은 검사를 다시 해 주세요. 브라우저 검사가 불가능하면 미실행으로 표시하고 수동 확인 순서를 주세요. 아직 배포하지 마세요."
     },
     {
+      "id": "understand-mcp",
+      "group": "개념 · MCP",
+      "title": "MCP는 어떻게 도구를 연결하나요?",
+      "goal": "앱·클라이언트·서버·도구와 인증의 역할을 구분합니다.",
+      "where": "이 페이지 · 연결 구조와 요청/응답 흐름",
+      "actions": [
+        "Host부터 OAuth까지 눌러 구성요소별 역할을 읽습니다.",
+        "요청 흐름을 넘기며 팀 목록이 모델의 추측이 아니라 도구 결과에서 오는지 확인합니다.",
+        "연결과 실제 실행의 차이를 확인한 뒤 다음 단계에서 설정합니다."
+      ],
+      "check": [
+        "Host·Client·Server·Tool의 역할을 구분합니다.",
+        "서버 주소, 통신 방식, 계정 인증의 의미를 이해했습니다.",
+        "연결됨과 도구 실행 성공을 구분할 수 있습니다."
+      ],
+      "trouble": "Host는 앱, Client는 그 앱의 연결 담당, Server는 기능 제공 프로그램이라고 먼저 기억하세요. 이번에는 MCP 서버를 직접 개발하는 것이 아니라 Vercel 서버에 연결합니다.",
+      "lesson": "mcp"
+    },
+    {
       "id": "connect-mcp",
       "group": "MCP",
       "title": "Vercel MCP 연결하기",
-      "goal": "Skill에 없던 외부 서비스 도구를 연결합니다.",
+      "goal": "외부 서비스 도구를 연결하고, 어느 계정의 권한으로 사용하는지 확인합니다.",
       "where": "ChatGPT 데스크톱 · Settings → MCP servers",
       "actions": [
         "Add server를 열고 아래 설정값을 입력합니다. Name은 vercel, Type은 Streamable HTTP입니다.",
