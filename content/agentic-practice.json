@@ -1,0 +1,219 @@
+{
+  "version": "2026-09-11",
+  "skill": "---\nname: brief-to-page\ndescription: Turn a short public-facing brief into a responsive one-page static website. Use for club, workshop, project, or personal introduction pages; not for authenticated apps, payments, or data collection.\n---\n\n# Brief to page\n\n## Procedure\n1. Extract the audience, purpose, supplied facts, requested sections, and primary action. Separate facts from design choices. Ask about a missing fact only if it blocks a meaningful page; otherwise omit it or label it clearly as not specified.\n2. Produce a single self-contained index.html using semantic HTML and inline CSS. Use minimal JavaScript only when necessary. Do not add a framework, external fonts, tracking, login, database, or submission form.\n3. Use one clear heading, strong contrast, generous spacing, responsive layout, and visible keyboard focus. Make every link or button do what its label says. Prefer local section links and native details/summary for FAQs.\n4. Use only the supplied factual content. Never invent dates, venues, prices, sponsors, testimonials, contact details, or registration links. Do not imply a fictional example is a real service.\n5. Save the page in the current task's output folder. If the host cannot save files, provide the complete HTML and say that it was not saved. Never edit an unrelated project.\n6. Open and check the actual output when a browser is available: narrow and wide layouts, section links, FAQ toggles, and keyboard focus. Otherwise provide those manual checks and mark them not run.\n7. Return the file location and a short checked/not-checked summary. Do not deploy. Deployment is a separate, explicitly requested operation.",
+  "inputA": "Fictional practice page. This is not an existing product.\n- Name: AI Study Club\n- Audience: students who want to learn AI by building small things together\n- Headline: Learn AI. Build together.\n- Description: A study club for turning questions into small, testable projects.\n- Topics: RAG foundations; coding agents; useful evaluation\n- Format: Read one idea; build one example; share what worked\n- Primary action: Explore topics — jump to the Topics section on this page\n- FAQ: Do I need experience? Basic Python helps; beginners can start with guided examples.\n- FAQ: What will I make? A small working artifact and a short explanation of how you checked it.\n- No date, venue, price, registration, or contact details have been supplied. Do not add them.\n- Add a small \"Fictional workshop example\" label.\n- Visual direction: warm off-white, dark text, one green accent; concise and readable.",
+  "inputB": "Fictional practice page. Use a new task folder; do not overwrite Input A.\n- Name: Research Reading Circle\n- Audience: students who want to discuss research papers critically\n- Headline: Read closely. Ask better questions.\n- Description: A reading circle focused on claims, evidence, and limitations.\n- Topics: Research questions; experimental evidence; reproducibility\n- Format: Pick a claim; inspect the evidence; propose a follow-up\n- Primary action: Explore topics — jump to the Topics section\n- FAQ: Must I understand every equation? Bring one question and one observation from the paper.\n- FAQ: What should I share? One claim, supporting evidence, and a limitation.\n- No date, venue, price, registration, or contact details have been supplied. Do not add them.\n- Add a small \"Fictional workshop example\" label.\n- Visual direction: warm off-white, dark text, one blue accent; concise and readable.",
+  "steps": [
+    {
+      "id": "prepare",
+      "group": "시작",
+      "title": "실습 환경과 파일 준비",
+      "goal": "한 번 만든 Skill로 서로 다른 페이지를 만들고, 실제 Preview 주소까지 연결합니다.",
+      "where": "이 페이지 + ChatGPT 데스크톱 앱의 Work",
+      "actions": [
+        "아래에서 실습 파일 ZIP을 받고 압축을 풉니다. READ_ME.md부터 읽고, EXAMPLES.md와 PROMPTS.md를 텍스트 편집기에서 열어 둡니다.",
+        "ChatGPT 데스크톱 앱에서 Work를 열고, 이번 실습만 담을 새 작업 폴더를 선택합니다. 웹 브라우저의 일반 채팅과 구분해 주세요.",
+        "@를 입력했을 때 skill-creator가 있는지, Settings에 MCP servers가 있는지 확인합니다. Vercel 계정도 본인 브라우저에서 로그인할 준비를 합니다."
+      ],
+      "check": [
+        "Work에서 새 작업을 시작할 수 있습니다.",
+        "Skill 선택기와 MCP 설정 메뉴가 보입니다.",
+        "실습 파일 3개를 열어 볼 수 있습니다."
+      ],
+      "trouble": "메뉴가 다르면 앱 버전과 관리형 계정의 기능 허용을 확인하세요. 웹 ChatGPT의 플러그인 경로와 이 데스크톱 경로를 섞지 않습니다. 메뉴가 없으면 강사에게 환경 확인을 요청하고, 단순 프롬프트 실행을 Skill 설치 완료로 기록하지 마세요.",
+      "downloads": [
+        "bundle",
+        "guide",
+        "examples",
+        "prompts"
+      ],
+      "concept": true
+    },
+    {
+      "id": "create-skill",
+      "group": "Skill",
+      "title": "반복 절차를 Skill로 만들기",
+      "goal": "요청할 때마다 긴 절차를 다시 쓰지 않도록 brief-to-page라는 Skill을 만듭니다.",
+      "where": "ChatGPT Work · @ 선택기에서 skill-creator 선택",
+      "actions": [
+        "EXAMPLES.md 파일을 작업에 첨부합니다. 아래 프롬프트의 @skill-creator는 직접 @를 입력해 실제 선택기 항목으로 골라 주세요.",
+        "아래 요청문을 복사해 보냅니다. 추가 질문을 받으면 이름은 brief-to-page, 형태는 instruction-only로 지정합니다.",
+        "생성 결과에서 사용 목적·절차·제약을 읽고, Skills 목록에 brief-to-page가 생겼는지 확인합니다."
+      ],
+      "check": [
+        "이름으로 선택할 수 있는 brief-to-page가 있습니다.",
+        "입력에서 페이지를 만들고 확인하는 절차가 담겼습니다.",
+        "로그인·결제·데이터 수집·자동 배포는 포함하지 않습니다."
+      ],
+      "trouble": "파일을 첨부한 것만으로 설치되지는 않습니다. 생성 위치와 Skills 목록을 확인한 뒤 앱을 다시 시작해 보세요. 같은 이름의 Skill이 이미 있으면 덮어쓰기 전에 내용을 비교합니다.",
+      "prompt": "@skill-creator\n첨부한 EXAMPLES.md의 Skill body example을 사용해 brief-to-page Skill을 만들어 주세요.\n설명용 예시를 검토한 뒤 instruction-only로 구성해 주세요. 반복 절차는 공개용 소개 글 → index.html 작성 → 화면과 동작 확인입니다.\n계정 연결이나 배포는 Skill에 넣지 마세요. 실제로 생성한 위치와 선택기에서 호출하는 방법을 알려 주세요.",
+      "downloads": [
+        "examples",
+        "skill-example"
+      ],
+      "sample": "skill"
+    },
+    {
+      "id": "input-a",
+      "group": "Skill",
+      "title": "입력 A로 첫 페이지 만들기",
+      "goal": "Skill을 이름으로 호출해 AI Study Club 소개 페이지를 만듭니다.",
+      "where": "ChatGPT Work · 방금 만든 Skill과 새 작업 폴더",
+      "actions": [
+        "@ 선택기에서 brief-to-page를 고릅니다. 입력 A 파일을 첨부하거나 아래 입력 예시 전체를 함께 붙여넣습니다.",
+        "요청문을 보내고 index.html이 만들어질 때까지 기다립니다. 가상의 실습 예시라는 표시가 있는지 확인합니다.",
+        "반환된 파일을 브라우저로 열어 제목, Topics 링크, FAQ를 직접 확인합니다. 아직 배포하지 않습니다."
+      ],
+      "check": [
+        "index.html을 실제로 열 수 있습니다.",
+        "제목이 Learn AI. Build together.입니다.",
+        "Explore topics를 누르면 Topics로 이동하고 FAQ가 펼쳐집니다."
+      ],
+      "trouble": "파일을 만들었다는 답만 있고 파일이 없다면 실제 저장 경로 또는 완전한 HTML을 요청하세요. 화면이 예시와 똑같을 필요는 없습니다. 사실과 기능이 맞는지가 기준입니다.",
+      "prompt": "@brief-to-page\n첨부한 Input A를 사용해 AI Study Club 소개 페이지를 만들어 주세요.\n별도 프레임워크 없이 하나의 index.html로 저장하고, 실제 파일을 열어 확인해 주세요.\n주어진 문구만 사용하고 없는 일정·장소·연락처를 만들지 마세요. 배포하지 마세요.\n파일 위치와 실제로 확인한 항목, 확인하지 못한 항목을 나누어 알려 주세요.",
+      "downloads": [
+        "input-a"
+      ],
+      "sample": "a"
+    },
+    {
+      "id": "input-b",
+      "group": "Skill",
+      "title": "같은 Skill을 다른 입력에 재사용하기",
+      "goal": "절차는 유지하고 내용만 바뀌는지 확인합니다.",
+      "where": "ChatGPT Work · 입력 A와 다른 새 작업 폴더",
+      "actions": [
+        "입력 A 파일을 보존한 채 새 작업과 별도 폴더를 만듭니다. 같은 brief-to-page Skill을 선택합니다.",
+        "입력 B 파일을 첨부하거나 아래 예시를 붙여넣고 요청문을 실행합니다.",
+        "두 출력을 나란히 비교합니다. B의 제목·주제·FAQ가 바뀌었는지 보고, 다음 단계에서는 배포할 A 작업으로 돌아갑니다."
+      ],
+      "check": [
+        "B의 제목이 Read closely. Ask better questions.입니다.",
+        "B에 AI Study Club의 이전 문구가 섞이지 않았습니다.",
+        "입력 A의 파일은 그대로 남아 있습니다."
+      ],
+      "trouble": "A를 덮어썼다면 이전 파일 버전 또는 A 작업으로 돌아가 복구합니다. B를 A처럼 보이게 고치는 것이 아니라, 각 입력에 맞는 내용을 만드는 연습입니다.",
+      "prompt": "@brief-to-page\n이번에는 첨부한 Input B로 Research Reading Circle 소개 페이지를 만들어 주세요.\n현재의 새 작업 폴더에 별도 index.html로 저장하고 입력 A는 수정하지 마세요.\n제목·주제·FAQ에 입력 A의 내용이 남지 않았는지 확인해 주세요. 배포하지 마세요.",
+      "downloads": [
+        "input-b"
+      ],
+      "sample": "b"
+    },
+    {
+      "id": "check-page",
+      "group": "Skill",
+      "title": "배포할 파일 직접 확인하기",
+      "goal": "코드가 생긴 것과 쓸 수 있는 페이지가 된 것을 구분합니다.",
+      "where": "브라우저 + ChatGPT의 입력 A 작업",
+      "actions": [
+        "입력 A의 index.html을 엽니다. Explore topics 링크와 FAQ 두 개를 모두 눌러 봅니다.",
+        "브라우저 폭을 좁혀 글자·버튼 잘림과 가로 스크롤을 확인하고, Tab으로 이동할 때 포커스가 보이는지 확인합니다.",
+        "문제가 있으면 증상을 구체적으로 적어 아래 요청문을 보냅니다. 수정 뒤에는 같은 조작을 다시 수행합니다."
+      ],
+      "check": [
+        "페이지의 제목·Topics·FAQ가 입력 A와 맞습니다.",
+        "좁은 화면에서도 핵심 내용을 읽고 조작할 수 있습니다.",
+        "배포할 파일이 어느 폴더에 있는지 알고 있습니다."
+      ],
+      "trouble": "스크린샷만 보고 버튼이 작동한다고 판단하지 않습니다. 에이전트에게 브라우저 도구가 없다면 본인이 직접 조작하고, 실행하지 않은 검사는 미확인으로 남깁니다.",
+      "prompt": "입력 A의 실제 index.html을 확인해 주세요.\n1. 제목과 문구가 입력 A와 맞는지\n2. Explore topics가 Topics로 이동하는지\n3. FAQ 두 개가 열리고 닫히는지\n4. 좁은 화면에서 잘림이 없는지\n5. Tab 키로 조작할 때 포커스가 보이는지\n문제가 있는 부분만 수정하고 같은 검사를 다시 해 주세요. 브라우저 검사가 불가능하면 미실행으로 표시하고 수동 확인 순서를 주세요. 아직 배포하지 마세요."
+    },
+    {
+      "id": "connect-mcp",
+      "group": "MCP",
+      "title": "Vercel MCP 연결하기",
+      "goal": "Skill에 없던 외부 서비스 도구를 연결합니다.",
+      "where": "ChatGPT 데스크톱 · Settings → MCP servers",
+      "actions": [
+        "Add server를 열고 아래 설정값을 입력합니다. Name은 vercel, Type은 Streamable HTTP입니다.",
+        "Save 후 Restart를 선택합니다. Authenticate가 표시되면 눌러 Vercel의 로그인·허용 화면을 진행합니다.",
+        "입력 A 작업의 작성창에서 /mcp를 입력해 vercel 연결 상태를 확인합니다."
+      ],
+      "check": [
+        "MCP 목록에 vercel이 활성화되어 있습니다.",
+        "필요한 OAuth 로그인을 마쳤습니다.",
+        "다음 단계에서 실제 조회 도구를 호출할 준비가 되었습니다."
+      ],
+      "trouble": "설정 메뉴가 없으면 데스크톱 경로인지 먼저 확인하세요. 로그인 오류는 서버 주소·계정·팀 접근 권한을 확인합니다. 비밀번호나 인증 토큰을 프롬프트 또는 이 페이지에 입력하지 않습니다.",
+      "setting": true
+    },
+    {
+      "id": "read-tools",
+      "group": "MCP",
+      "title": "첫 도구 호출은 조회부터",
+      "goal": "연결됨 표시뿐 아니라 실제 도구가 실행되는지 확인합니다.",
+      "where": "ChatGPT Work · Vercel MCP가 연결된 입력 A 작업",
+      "actions": [
+        "아래 요청문으로 정적 페이지 배포 문서와 접근 가능한 팀을 조회합니다.",
+        "응답의 도구 호출 내역과 결과를 펼쳐 확인합니다. deploy_to_vercel이 사용 가능한지도 확인합니다.",
+        "배포할 팀의 이름과 ID를 확인하고, 기존 프로젝트와 겹치지 않는 새 실습 프로젝트 이름을 정합니다. 다음 단계의 두 칸에 사용합니다."
+      ],
+      "check": [
+        "Vercel 조회 도구가 실행된 기록이 있습니다.",
+        "배포할 팀의 이름과 ID를 확인했습니다.",
+        "직접 파일 배포 도구의 사용 가능 여부를 확인했습니다."
+      ],
+      "trouble": "일반 답변만 나오고 도구 호출이 없으면 MCP를 다시 확인합니다. 배포 도구가 없으면 생성 파일을 보존하고 사용 가능한 도구 목록과 오류를 강사에게 보여 주세요. 배포했다고 가정하고 다음 단계로 넘어가지 않습니다.",
+      "prompt": "Vercel MCP를 사용해 현재 정적 HTML 파일을 직접 배포하는 공식 문서를 찾아 주세요.\n접근 가능한 팀과 선택한 팀의 기존 프로젝트도 조회해 주세요. 여러 팀이 있으면 어느 팀을 사용할지 먼저 물어보세요.\ndeploy_to_vercel 도구가 사용 가능한지와 필요한 입력을 확인해 주세요.\n조회 결과의 팀 이름·ID를 보여 주세요. 아직 프로젝트를 만들거나 배포하지 마세요."
+    },
+    {
+      "id": "deploy",
+      "group": "배포",
+      "title": "Preview 주소 만들기",
+      "goal": "검토한 입력 A 파일을 지정한 팀의 새 실습 프로젝트로 배포합니다.",
+      "where": "ChatGPT Work · 입력 A 작업에서 Vercel MCP 실행",
+      "actions": [
+        "아래에 조회 결과의 팀 ID 또는 slug와 사용할 새 프로젝트 이름을 입력합니다. 비밀번호나 토큰을 넣는 칸이 아닙니다.",
+        "완성된 요청문을 복사해 보냅니다. 실행할 파일 목록·팀·프로젝트·preview 대상을 검토하고, 앱이 요청하는 도구 실행 확인을 진행합니다.",
+        "반환된 실제 deployment ID와 URL을 보관합니다. 파일 경로나 예시 URL을 배포 URL과 혼동하지 않습니다."
+      ],
+      "check": [
+        "대상이 지정한 실습 팀과 프로젝트입니다.",
+        "실제 deployment ID와 Preview URL을 받았습니다.",
+        "빌드가 진행 중이면 다음 단계에서 최종 상태를 확인합니다."
+      ],
+      "trouble": "이 경로는 파일을 직접 전달하므로 Git 저장소나 CLI가 먼저 필요하지 않습니다. 도구가 사용할 수 없거나 빌드가 실패하면 실제 오류를 확인합니다. 다른 배포 서비스나 기존 프로젝트로 임의 전환하지 마세요.",
+      "prompt": "Vercel MCP로 검토한 입력 A의 파일을 직접 배포해 주세요.\n팀: {{TEAM}}\n새 실습 프로젝트 이름: {{PROJECT}}\n대상: preview\n\n배포할 파일 목록과 이 대상을 먼저 보여 주세요. 기존에 같은 이름의 프로젝트가 있으면 멈추고 알려 주세요.\n배포 요청에는 완전한 파일 내용과 루트의 index.html을 포함해 주세요. 정적 사이트이며 프레임워크는 없습니다.\n실제 배포 ID·URL·현재 빌드 상태를 반환하세요. 다른 프로젝트·커스텀 도메인·보호 설정은 바꾸지 마세요.",
+      "destination": true
+    },
+    {
+      "id": "verify",
+      "group": "배포",
+      "title": "실제 URL에서 확인하기",
+      "goal": "빌드 성공, 페이지 열림, 기능 동작을 각각 확인합니다.",
+      "where": "ChatGPT + 브라우저의 새 Preview URL",
+      "actions": [
+        "아래 요청문으로 방금 생성한 배포의 상태를 확인합니다. 오류가 있으면 해당 배포 ID의 빌드 로그부터 읽습니다.",
+        "반환된 URL을 브라우저에서 직접 엽니다. Vercel 로그인을 요구하면 Preview 보호 여부와 자신의 접근 권한을 확인합니다.",
+        "제목·Topics 이동·FAQ·좁은 화면을 다시 확인합니다. URL이 생긴 것만으로 모든 동작이 검증된 것은 아닙니다."
+      ],
+      "check": [
+        "배포 상태가 성공으로 확인됩니다.",
+        "의도한 접근 환경에서 URL이 열립니다.",
+        "배포된 화면에서 링크와 FAQ를 직접 사용했습니다."
+      ],
+      "trouble": "로컬 파일은 정상인데 배포 화면이 다르면 최신 배포 ID, 파일 경로, 실제 포함된 파일을 확인하세요. Preview와 production은 모두 접근 제한이 있을 수 있습니다. 보호를 자동으로 끄지 않습니다.",
+      "prompt": "방금 만든 실제 배포 ID를 기준으로 Vercel MCP에서 최종 상태를 확인해 주세요.\n실패했다면 빌드 로그의 원인을 설명하고 그 오류만 수정해 주세요.\n성공했다면 실제 URL을 열어 제목, Topics 링크, FAQ 두 개, 좁은 화면과 키보드 조작을 확인해 주세요.\n상태 확인과 실제 브라우저 검사를 구분해 보고하고, 실행하지 못한 항목은 미확인으로 표시하세요. Preview 보호 설정을 자동으로 끄지 마세요."
+    },
+    {
+      "id": "update",
+      "group": "배포",
+      "title": "한 가지만 바꾸고 재배포하기",
+      "goal": "작은 변경 → 차이 검토 → 새 URL 확인까지 연결합니다.",
+      "where": "ChatGPT Work · 같은 입력 A 작업과 실습 프로젝트",
+      "actions": [
+        "이전 배포 ID와 URL을 남겨 둡니다. 아래 프롬프트로 제목 하나만 바꾸도록 요청합니다.",
+        "수정 전후 차이를 읽고 다른 내용이 바뀌지 않았는지 확인한 다음, 같은 프로젝트의 새 Preview로 배포합니다.",
+        "새 URL에서 Build small. Learn together.가 보이는지 확인합니다. Topics와 FAQ도 다시 사용하고 완료로 표시합니다."
+      ],
+      "check": [
+        "제목이 Build small. Learn together.로 바뀌었습니다.",
+        "동일 프로젝트에 새 배포 ID와 URL이 있습니다.",
+        "새 URL에서도 Topics와 FAQ가 동작합니다."
+      ],
+      "trouble": "제목이 그대로라면 이전 URL을 보고 있는지 확인하세요. 불필요한 변경이 섞였으면 해당 부분만 되돌리도록 요청하고, 이전 정상 배포 기록을 보존합니다.",
+      "prompt": "입력 A의 제목만 \"Learn AI. Build together.\"에서 \"Build small. Learn together.\"로 바꿔 주세요.\n나머지 문구·구조·스타일은 유지하고 변경 차이를 보여 주세요.\n검토한 파일을 Vercel MCP로 팀 {{TEAM}}, 프로젝트 {{PROJECT}}의 새 Preview에 배포해 주세요.\n새 deployment ID와 URL을 반환하고 새 URL에서 제목 변경·Topics·FAQ를 확인해 주세요.\n이전 배포를 삭제하거나 다른 프로젝트로 전환하지 마세요.",
+      "destination": true
+    }
+  ]
+}

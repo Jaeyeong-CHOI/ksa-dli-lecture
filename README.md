@@ -28,6 +28,12 @@ Q&A는 **강의자료 기반 / 실습노트 기반**으로 구분합니다. 강�
 
 두 모드의 대화 기록은 브라우저 메모리에서 따로 유지합니다. 모드 전환은 진행 요청을 취소하고 늦은 응답을 무시합니다. **새 대화** 버튼은 현재 모드의 메시지·입력·오류를 비우고 진행 중인 요청을 취소합니다. 초기화 전의 늦은 응답은 무시하며, 다음 질문에는 이전 대화 기록을 보내지 않습니다. 이용 제한용 세션 쿠키는 초기화하지 않습니다.
 
+## 에이전틱 코딩 실습
+
+`/agentic-coding`은 상단의 네 번째 메뉴입니다. ChatGPT 데스크톱 Work에서 **Skill 만들기 → 입력 A/B로 재사용 → Vercel MCP 연결·조회 → Preview 배포·확인 → 한 가지 수정 후 재배포**를 10단계로 따라갑니다. 각 단계에는 실행 위치, 실행 순서, 복사할 요청문, 직접 확인할 성공 기준과 막혔을 때 대처가 있습니다. 실제 Skill 생성·OAuth·배포는 학습자의 ChatGPT와 Vercel에서 진행하며 이 사이트가 대신 실행하지 않습니다.
+
+기존 PPT와 함께 쓰는 시작 안내·프롬프트·예시 3파일 ZIP과 개별 Skill/입력 예시를 내려받을 수 있습니다. 단계별 요청문은 화면 그대로 복사하거나 TXT로 받습니다. 배포 대상 입력은 요청문에만 반영하며 서버나 저장소로 전송하지 않습니다. 직접 확인한 단계만 브라우저에 저장하고, 단계별 주소·이전/다음·모바일 선택기와 전역 검색을 지원합니다.
+
 ## 코드 읽기
 
 highlight.js 기반의 밝은 코드 뷰어를 사용합니다. Python·셸·JSON 문법 강조, 줄 번호, 자동 줄바꿈 전환, 확대 보기, 원문 복사를 제공합니다. 핵심 코드 해설의 행 번호를 누르면 해당 코드 줄이 강조됩니다. 복사에는 줄 번호나 화면용 강조 표시가 포함되지 않습니다.
@@ -41,6 +47,7 @@ highlight.js 기반의 밝은 코드 뷰어를 사용합니다. Python·셸·JSO
 - 최신 강의 슬라이드 6종의 PDF 열람·다운로드
 - JupyterLab 노트북 00–09번별 해설 노트 10개
 - 한국어 ipynb 10개 개별 다운로드와 전체 ZIP
+- Skill·MCP·Vercel을 연결하는 에이전틱 코딩 실습 10단계와 요청문·예시 다운로드
 - 셀 번호로 연결되는 원본 코드 105개·핵심 연산 해설, 노트북 풀이·확인 예제 14개
 - NVIDIA 공식 심볼 파비콘
 - 강의자료+관련 논문 / 실습노트로 구분된 Q&A 도우미
@@ -66,6 +73,10 @@ React + Vite. `main` 브랜치 push 시 GitHub Actions가 정적 사이트를 �
 
 ## 콘텐츠 수정
 
+- `content/agentic-practice.json`, `src/agentic-practice.jsx`, `src/agentic-practice.css`: 에이전틱 코딩 단계별 안내·복사·다운로드 UI
+- `src/agentic-practice-model.mjs`: 배포 대상 검증·요청문 치환·로컬 진행 기록
+- `public/downloads/agentic-coding/`: 공개 실습 ZIP 및 개별 교육용 예시; `node scripts/build-agentic-files.mjs`로 JSON의 개별 예시와 3파일 ZIP 갱신
+- `node --test scripts/test-agentic-practice.mjs`: 진행 기록·대상 치환·예시 일치·ZIP 내용 검증
 - `content/notes.mjs`: PPT·노트북별 한국어 해설, 문제 풀이, 오류 해결
 - `content/certification-07.mjs`, `src/certification-07.jsx`: 새 랩에서 문서 준비·인덱스 생성·저장·검증
 - `content/certification.mjs`, `src/certification.jsx`, `src/certification.css`: 수료 실행 가이드·복사 코드·오류 대처
