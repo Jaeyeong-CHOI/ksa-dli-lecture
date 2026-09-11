@@ -1,0 +1,930 @@
+{
+  "00-jupyterlab": {
+    "3": {
+      "path": [
+        "🌐 언어 선택"
+      ],
+      "firstLine": "from pathlib import Path",
+      "matchLine": "LANGUAGE = Path(\"composer/default_language.txt\").read_text().strip()  # Change to: en, tw, zh, ja",
+      "codeOrdinal": 1
+    },
+    "5": {
+      "path": [
+        "🌐 언어 선택",
+        "참고 사항:"
+      ],
+      "firstLine": "# Highlight this cell and click [Shift+Enter] to execute",
+      "matchLine": "print('This is just a simple print statement')",
+      "codeOrdinal": 2
+    },
+    "7": {
+      "path": [
+        "특수 문법"
+      ],
+      "firstLine": "from getpass import getpass",
+      "matchLine": "first_name = input(\"Enter your name: \")",
+      "codeOrdinal": 3
+    },
+    "9": {
+      "path": [
+        "특수 문법"
+      ],
+      "firstLine": "################################################################################",
+      "matchLine": "print(",
+      "codeOrdinal": 4
+    }
+  },
+  "01-microservices": {
+    "15": {
+      "path": [
+        "Part 3: 호스트 입장에서 마이크로서비스와 상호작용하기",
+        "Jupyter Labs 마이크로서비스 바깥에서 상호작용하기"
+      ],
+      "firstLine": "'''",
+      "matchLine": "Schematic output; inspect composer/deploy/docker-compose.yml for exact names and ports.",
+      "codeOrdinal": 1
+    },
+    "18": {
+      "path": [
+        "Part 3: 호스트 입장에서 마이크로서비스와 상호작용하기",
+        "Jupyter Labs 마이크로서비스 안에서 상호작용하기"
+      ],
+      "firstLine": "## Should fail",
+      "matchLine": "!docker ps -a",
+      "codeOrdinal": 2
+    },
+    "20": {
+      "path": [
+        "Part 3: 호스트 입장에서 마이크로서비스와 상호작용하기",
+        "Jupyter Labs 마이크로서비스 안에서 상호작용하기"
+      ],
+      "firstLine": "## Should fail in colab, will work in course environment",
+      "matchLine": "!curl -v docker_router:8070/help",
+      "codeOrdinal": 3
+    },
+    "22": {
+      "path": [
+        "Part 3: 호스트 입장에서 마이크로서비스와 상호작용하기",
+        "Jupyter Labs 마이크로서비스 안에서 상호작용하기"
+      ],
+      "firstLine": "## Should fail in colab, will work in course environment",
+      "matchLine": "for entry in requests.get(\"http://docker_router:8070/containers\", timeout=10).json():",
+      "codeOrdinal": 4
+    },
+    "27": {
+      "path": [
+        "Part 4: 프론트엔드 확인하기"
+      ],
+      "firstLine": "## Commented out by default since it will yield a lot of output",
+      "matchLine": "## Commented out by default since it will yield a lot of output",
+      "codeOrdinal": 5
+    },
+    "29": {
+      "path": [
+        "Part 4: 프론트엔드 확인하기"
+      ],
+      "firstLine": "# %%js",
+      "matchLine": "# %%js",
+      "codeOrdinal": 6
+    }
+  },
+  "02-llms": {
+    "15": {
+      "path": [
+        "Part 4: [실습] Foundation Model Endpoint 사용해 보기"
+      ],
+      "firstLine": "# import os",
+      "matchLine": "# import os",
+      "codeOrdinal": 1
+    },
+    "18": {
+      "path": [
+        "Part 4: [실습] Foundation Model Endpoint 사용해 보기",
+        "4.1. 수동 Python 요청"
+      ],
+      "firstLine": "import requests",
+      "matchLine": "service_url = \"http://llm_client:9000\"",
+      "codeOrdinal": 2
+    },
+    "19": {
+      "path": [
+        "Part 4: [실습] Foundation Model Endpoint 사용해 보기",
+        "4.1. 수동 Python 요청"
+      ],
+      "firstLine": "models_url = f\"{service_url}/v1/models\"",
+      "matchLine": "models_url = f\"{service_url}/v1/models\"",
+      "codeOrdinal": 3
+    },
+    "21": {
+      "path": [
+        "Part 4: [실습] Foundation Model Endpoint 사용해 보기",
+        "4.1. 수동 Python 요청"
+      ],
+      "firstLine": "from getpass import getpass",
+      "matchLine": "invoke_url = \"http://llm_client:9000/v1/chat/completions\"",
+      "codeOrdinal": 4
+    },
+    "22": {
+      "path": [
+        "Part 4: [실습] Foundation Model Endpoint 사용해 보기",
+        "4.1. 수동 Python 요청"
+      ],
+      "firstLine": "import requests",
+      "matchLine": "response = requests.post(invoke_url, headers=headers, json=payload, stream=True, timeout=(10, 300))",
+      "codeOrdinal": 5
+    },
+    "25": {
+      "path": [
+        "Part 4: [실습] Foundation Model Endpoint 사용해 보기",
+        "4.2. OpenAI 클라이언트 요청"
+      ],
+      "firstLine": "## Using General OpenAI Client",
+      "matchLine": "client = OpenAI(",
+      "codeOrdinal": 6
+    },
+    "26": {
+      "path": [
+        "Part 4: [실습] Foundation Model Endpoint 사용해 보기",
+        "4.2. OpenAI 클라이언트 요청"
+      ],
+      "firstLine": "## Non-Streaming: Results come from server when they're all ready",
+      "matchLine": "completion = client.chat.completions.create(",
+      "codeOrdinal": 7
+    },
+    "28": {
+      "path": [
+        "Part 4: [실습] Foundation Model Endpoint 사용해 보기",
+        "4.3. ChatNVIDIA 클라이언트 요청"
+      ],
+      "firstLine": "## Using ChatNVIDIA",
+      "matchLine": "llm = ChatNVIDIA(model=\"nvidia/nemotron-3.5-lightning-30b-a3b\", timeout=300, model_kwargs={\"chat_template_kwargs\": {\"enable_thinking\": False}})",
+      "codeOrdinal": 8
+    },
+    "29": {
+      "path": [
+        "Part 4: [실습] Foundation Model Endpoint 사용해 보기",
+        "4.3. ChatNVIDIA 클라이언트 요청"
+      ],
+      "firstLine": "llm._client.last_inputs",
+      "matchLine": "llm._client.last_inputs",
+      "codeOrdinal": 9
+    },
+    "30": {
+      "path": [
+        "Part 4: [실습] Foundation Model Endpoint 사용해 보기",
+        "4.3. ChatNVIDIA 클라이언트 요청"
+      ],
+      "firstLine": "# llm._client.last_response",
+      "matchLine": "llm._client.last_response.json()",
+      "codeOrdinal": 10
+    },
+    "32": {
+      "path": [
+        "Part 4: [실습] Foundation Model Endpoint 사용해 보기",
+        "4.3. ChatNVIDIA 클라이언트 요청",
+        "[참고]"
+      ],
+      "firstLine": "import os",
+      "matchLine": "import os",
+      "codeOrdinal": 11
+    },
+    "34": {
+      "path": [
+        "Part 4: [실습] Foundation Model Endpoint 사용해 보기",
+        "4.3. ChatNVIDIA 클라이언트 요청",
+        "[참고]"
+      ],
+      "firstLine": "from langchain_nvidia_ai_endpoints import ChatNVIDIA",
+      "matchLine": "model_list = [\"nvidia/nemotron-3.5-lightning-30b-a3b\"]",
+      "codeOrdinal": 12
+    }
+  },
+  "03-langchain-intro": {
+    "3": {
+      "path": [
+        "시작 / 환경 설정"
+      ],
+      "firstLine": "## Necessary for Colab, not necessary for course environment",
+      "matchLine": "## Necessary for Colab, not necessary for course environment",
+      "codeOrdinal": 1
+    },
+    "9": {
+      "path": [
+        "Part 2: Chain과 Runnable"
+      ],
+      "firstLine": "from langchain_core.runnables import RunnableLambda, RunnablePassthrough",
+      "matchLine": "identity = RunnableLambda(lambda x: x)  ## Or RunnablePassthrough works",
+      "codeOrdinal": 2
+    },
+    "12": {
+      "path": [
+        "Part 3: 채팅 모델과 딕셔너리 파이프라인",
+        "예제 1: 간단한 LLM Chain"
+      ],
+      "firstLine": "from langchain_nvidia_ai_endpoints import ChatNVIDIA",
+      "matchLine": "chat_llm = ChatNVIDIA(model=\"nvidia/nemotron-3.5-lightning-30b-a3b\", timeout=300, model_kwargs={\"chat_template_kwargs\": {\"enable_thinking\": False}})",
+      "codeOrdinal": 3
+    },
+    "14": {
+      "path": [
+        "Part 3: 채팅 모델과 딕셔너리 파이프라인",
+        "예제 1: 간단한 LLM Chain"
+      ],
+      "firstLine": "import gradio as gr",
+      "matchLine": "def rhyme_chat_stream(message, history):",
+      "codeOrdinal": 4
+    },
+    "16": {
+      "path": [
+        "Part 3: 채팅 모델과 딕셔너리 파이프라인",
+        "예제 2: 내부 응답"
+      ],
+      "firstLine": "from langchain_nvidia_ai_endpoints import ChatNVIDIA",
+      "matchLine": "instruct_llm = ChatNVIDIA(model=\"nvidia/nemotron-3.5-lightning-30b-a3b\", timeout=300, model_kwargs={\"chat_template_kwargs\": {\"enable_thinking\": False}})",
+      "codeOrdinal": 5
+    },
+    "18": {
+      "path": [
+        "Part 3: 채팅 모델과 딕셔너리 파이프라인",
+        "예제 3: 다중 구성 요소 체인"
+      ],
+      "firstLine": "from langchain_core.runnables import RunnableLambda, RunnablePassthrough",
+      "matchLine": "def make_dictionary(v, key):",
+      "codeOrdinal": 6
+    },
+    "19": {
+      "path": [
+        "Part 3: 채팅 모델과 딕셔너리 파이프라인",
+        "예제 3: 다중 구성 요소 체인"
+      ],
+      "firstLine": "## NOTE how the dictionary enforcement methods make it easy to make the following syntax equivalent",
+      "matchLine": "up_and_down.invoke(\"Hello World\")",
+      "codeOrdinal": 7
+    },
+    "21": {
+      "path": [
+        "Part 4: [실습] 운율 주제 바꾸기 챗봇"
+      ],
+      "firstLine": "from langchain_nvidia_ai_endpoints import ChatNVIDIA",
+      "matchLine": "instruct_llm = ChatNVIDIA(model=\"nvidia/nemotron-3.5-lightning-30b-a3b\", timeout=300, model_kwargs={\"chat_template_kwargs\": {\"enable_thinking\": False}})",
+      "codeOrdinal": 8
+    },
+    "22": {
+      "path": [
+        "Part 4: [실습] 운율 주제 바꾸기 챗봇"
+      ],
+      "firstLine": "from langchain_core.output_parsers import StrOutputParser",
+      "matchLine": "prompt1 = ChatPromptTemplate.from_messages([(\"user\", (",
+      "codeOrdinal": 9
+    },
+    "23": {
+      "path": [
+        "Part 4: [실습] 운율 주제 바꾸기 챗봇"
+      ],
+      "firstLine": "## Simple way to initialize history for the ChatInterface",
+      "matchLine": "chatbot = gr.Chatbot(value = [{\"role\": \"assistant\", \"content\": \"Let me help you make a poem! What would you like for me to write?\"}])",
+      "codeOrdinal": 10
+    },
+    "25": {
+      "path": [
+        "Part 5: [실습] 더 깊은 LangChain 통합 사용하기"
+      ],
+      "firstLine": "from langserve import RemoteRunnable",
+      "matchLine": "llm = RemoteRunnable(\"http://0.0.0.0:9012/basic_chat/\") | StrOutputParser()",
+      "codeOrdinal": 11
+    },
+    "28": {
+      "path": [
+        "Part 5: [실습] 더 깊은 LangChain 통합 사용하기"
+      ],
+      "firstLine": "# %%js",
+      "matchLine": "# %%js",
+      "codeOrdinal": 12
+    }
+  },
+  "04-running-state": {
+    "3": {
+      "path": [
+        "시작 / 환경 설정"
+      ],
+      "firstLine": "## Necessary for Colab, not necessary for course environment",
+      "matchLine": "console = Console()",
+      "codeOrdinal": 1
+    },
+    "4": {
+      "path": [
+        "시작 / 환경 설정"
+      ],
+      "firstLine": "from langchain_nvidia_ai_endpoints import ChatNVIDIA",
+      "matchLine": "from langchain_nvidia_ai_endpoints import ChatNVIDIA",
+      "codeOrdinal": 2
+    },
+    "5": {
+      "path": [
+        "시작 / 환경 설정"
+      ],
+      "firstLine": "## Useful utility method for printing intermediate states",
+      "matchLine": "def RPrint(preface=\"State: \"):",
+      "codeOrdinal": 3
+    },
+    "7": {
+      "path": [
+        "Part 1: 변수가 계속 흐르게 하기"
+      ],
+      "firstLine": "# %%time",
+      "matchLine": "sys_msg = (",
+      "codeOrdinal": 4
+    },
+    "9": {
+      "path": [
+        "Part 1: 변수가 계속 흐르게 하기"
+      ],
+      "firstLine": "%%time",
+      "matchLine": "gen_prompt = ChatPromptTemplate.from_template(",
+      "codeOrdinal": 5
+    },
+    "11": {
+      "path": [
+        "Part 1: 변수가 계속 흐르게 하기"
+      ],
+      "firstLine": "%%time",
+      "matchLine": "big_chain = (",
+      "codeOrdinal": 6
+    },
+    "17": {
+      "path": [
+        "Part 3: Running State Chain으로 지식 베이스 구현하기",
+        "지식 베이스 정의하기"
+      ],
+      "firstLine": "from pydantic import BaseModel, Field",
+      "matchLine": "instruct_chat = ChatNVIDIA(model=\"nvidia/nemotron-3.5-lightning-30b-a3b\", timeout=300, model_kwargs={\"chat_template_kwargs\": {\"enable_thinking\": False}})",
+      "codeOrdinal": 7
+    },
+    "19": {
+      "path": [
+        "Part 3: Running State Chain으로 지식 베이스 구현하기",
+        "지식 베이스 정의하기"
+      ],
+      "firstLine": "from langchain_core.output_parsers import PydanticOutputParser",
+      "matchLine": "instruct_string = PydanticOutputParser(pydantic_object=KnowledgeBase).get_format_instructions()",
+      "codeOrdinal": 8
+    },
+    "22": {
+      "path": [
+        "Part 3: Running State Chain으로 지식 베이스 구현하기",
+        "Runnable 추출 모듈"
+      ],
+      "firstLine": "################################################################################",
+      "matchLine": "def RExtract(pydantic_class, llm, prompt):",
+      "codeOrdinal": 9
+    },
+    "25": {
+      "path": [
+        "Part 3: Running State Chain으로 지식 베이스 구현하기",
+        "동적 지식 베이스 갱신"
+      ],
+      "firstLine": "class KnowledgeBase(BaseModel):",
+      "matchLine": "class KnowledgeBase(BaseModel):",
+      "codeOrdinal": 10
+    },
+    "26": {
+      "path": [
+        "Part 3: Running State Chain으로 지식 베이스 구현하기",
+        "동적 지식 베이스 갱신"
+      ],
+      "firstLine": "state['input'] = \"I'm in a place considered the birthplace of Jazz.\"",
+      "matchLine": "state['input'] = \"I'm in a place considered the birthplace of Jazz.\"",
+      "codeOrdinal": 11
+    },
+    "27": {
+      "path": [
+        "Part 3: Running State Chain으로 지식 베이스 구현하기",
+        "동적 지식 베이스 갱신"
+      ],
+      "firstLine": "state['input'] = \"Yeah, I'm in New Orleans... How did you know?\"",
+      "matchLine": "state['input'] = \"Yeah, I'm in New Orleans... How did you know?\"",
+      "codeOrdinal": 12
+    },
+    "30": {
+      "path": [
+        "Part 4: [실습] 항공사 고객 서비스 봇"
+      ],
+      "firstLine": "#######################################################################################",
+      "matchLine": "def get_flight_info(d: dict) -> str:",
+      "codeOrdinal": 13
+    },
+    "31": {
+      "path": [
+        "Part 4: [실습] 항공사 고객 서비스 봇"
+      ],
+      "firstLine": "print(get_flight_info({\"first_name\" : \"Alice\", \"last_name\" : \"Johnson\", \"confirmation\" : 98765}))",
+      "matchLine": "print(get_flight_info({\"first_name\" : \"Alice\", \"last_name\" : \"Johnson\", \"confirmation\" : 98765}))",
+      "codeOrdinal": 14
+    },
+    "32": {
+      "path": [
+        "Part 4: [실습] 항공사 고객 서비스 봇"
+      ],
+      "firstLine": "print(get_flight_info({\"first_name\" : \"Bob\", \"last_name\" : \"Brown\", \"confirmation\" : 27494}))",
+      "matchLine": "print(get_flight_info({\"first_name\" : \"Bob\", \"last_name\" : \"Brown\", \"confirmation\" : 27494}))",
+      "codeOrdinal": 15
+    },
+    "34": {
+      "path": [
+        "Part 4: [실습] 항공사 고객 서비스 봇"
+      ],
+      "firstLine": "external_prompt = ChatPromptTemplate.from_template(",
+      "matchLine": "external_prompt = ChatPromptTemplate.from_template(",
+      "codeOrdinal": 16
+    },
+    "36": {
+      "path": [
+        "Part 4: [실습] 항공사 고객 서비스 봇"
+      ],
+      "firstLine": "from pydantic import BaseModel, Field",
+      "matchLine": "class KnowledgeBase(BaseModel):",
+      "codeOrdinal": 17
+    },
+    "38": {
+      "path": [
+        "Part 4: [실습] 항공사 고객 서비스 봇",
+        "목표:"
+      ],
+      "firstLine": "from langchain_core.runnables import (",
+      "matchLine": "RunnableBranch,",
+      "codeOrdinal": 18
+    },
+    "39": {
+      "path": [
+        "Part 4: [실습] 항공사 고객 서비스 봇",
+        "목표:"
+      ],
+      "firstLine": "# state = {'know_base' : KnowledgeBase()}",
+      "matchLine": "# state = {'know_base' : KnowledgeBase()}",
+      "codeOrdinal": 19
+    }
+  },
+  "05-documents": {
+    "3": {
+      "path": [
+        "시작 / 환경 설정"
+      ],
+      "firstLine": "## Necessary for Colab, not necessary for course environment",
+      "matchLine": "console = Console()",
+      "codeOrdinal": 1
+    },
+    "4": {
+      "path": [
+        "시작 / 환경 설정"
+      ],
+      "firstLine": "from langchain_nvidia_ai_endpoints import ChatNVIDIA",
+      "matchLine": "[m.id for m in ChatNVIDIA.get_available_models() if \"nvidia\" in m.id]",
+      "codeOrdinal": 2
+    },
+    "5": {
+      "path": [
+        "시작 / 환경 설정"
+      ],
+      "firstLine": "## Useful utility method for printing intermediate states",
+      "matchLine": "def RPrint(preface=\"State: \"):",
+      "codeOrdinal": 3
+    },
+    "8": {
+      "path": [
+        "Part 2: 문서 로딩"
+      ],
+      "firstLine": "%%time",
+      "matchLine": "documents = ArxivLoader(query=\"2210.03629\").load()  ## ReAct",
+      "codeOrdinal": 4
+    },
+    "10": {
+      "path": [
+        "Part 2: 문서 로딩"
+      ],
+      "firstLine": "## Printing out a sample of the content",
+      "matchLine": "print(\"Number of Documents Retrieved:\", len(documents))",
+      "codeOrdinal": 5
+    },
+    "12": {
+      "path": [
+        "Part 2: 문서 로딩"
+      ],
+      "firstLine": "pprint(documents[0].metadata)",
+      "matchLine": "pprint(documents[0].metadata)",
+      "codeOrdinal": 6
+    },
+    "15": {
+      "path": [
+        "Part 3: 문서 변환하기"
+      ],
+      "firstLine": "from langchain_text_splitters import RecursiveCharacterTextSplitter",
+      "matchLine": "text_splitter = RecursiveCharacterTextSplitter(",
+      "codeOrdinal": 7
+    },
+    "16": {
+      "path": [
+        "Part 3: 문서 변환하기"
+      ],
+      "firstLine": "for i in (0, 1, 2, 15, -1):",
+      "matchLine": "for i in (0, 1, 2, 15, -1):",
+      "codeOrdinal": 8
+    },
+    "19": {
+      "path": [
+        "Part 4: [실습] 요약 정제하기",
+        "DocumentSummaryBase 모델"
+      ],
+      "firstLine": "from langchain_core.runnables import RunnableLambda",
+      "matchLine": "class DocumentSummaryBase(BaseModel):",
+      "codeOrdinal": 9
+    },
+    "21": {
+      "path": [
+        "Part 4: [실습] 요약 정제하기",
+        "DocumentSummaryBase 모델"
+      ],
+      "firstLine": "def RExtract(pydantic_class, llm, prompt):",
+      "matchLine": "def RExtract(pydantic_class, llm, prompt):",
+      "codeOrdinal": 10
+    },
+    "23": {
+      "path": [
+        "Part 4: [실습] 요약 정제하기",
+        "DocumentSummaryBase 모델"
+      ],
+      "firstLine": "latest_summary = \"\"",
+      "matchLine": "latest_summary = \"\"",
+      "codeOrdinal": 11
+    },
+    "24": {
+      "path": [
+        "Part 4: [실습] 요약 정제하기",
+        "DocumentSummaryBase 모델"
+      ],
+      "firstLine": "pprint(latest_summary)",
+      "matchLine": "pprint(latest_summary)",
+      "codeOrdinal": 12
+    }
+  },
+  "06-embeddings": {
+    "3": {
+      "path": [
+        "시작 / 환경 설정"
+      ],
+      "firstLine": "## Necessary for Colab, not necessary for course environment",
+      "matchLine": "console = Console()",
+      "codeOrdinal": 1
+    },
+    "6": {
+      "path": [
+        "Part 2: 코스 임베딩 모델 접근하기",
+        "모델 구성하기"
+      ],
+      "firstLine": "from langchain_nvidia_ai_endpoints import NVIDIAEmbeddings",
+      "matchLine": "embedding_model = \"course/embedding\"",
+      "codeOrdinal": 2
+    },
+    "7": {
+      "path": [
+        "Part 2: 코스 임베딩 모델 접근하기",
+        "모델 구성하기"
+      ],
+      "firstLine": "from langchain_nvidia_ai_endpoints import ChatNVIDIA",
+      "matchLine": "embedder = NVIDIAEmbeddings(",
+      "codeOrdinal": 3
+    },
+    "9": {
+      "path": [
+        "Part 2: 코스 임베딩 모델 접근하기",
+        "쿼리와 문서를 로컬에서 임베딩하기",
+        "예시 \"쿼리\"와 \"문서\"로 탐색하기"
+      ],
+      "firstLine": "# Example queries and documents",
+      "matchLine": "queries = [",
+      "codeOrdinal": 4
+    },
+    "11": {
+      "path": [
+        "Part 2: 코스 임베딩 모델 접근하기",
+        "쿼리와 문서를 로컬에서 임베딩하기",
+        "예시 \"쿼리\"와 \"문서\"로 탐색하기"
+      ],
+      "firstLine": "%%time",
+      "matchLine": "q_embeddings = [embedder.embed_query(query) for query in queries]",
+      "codeOrdinal": 5
+    },
+    "13": {
+      "path": [
+        "Part 2: 코스 임베딩 모델 접근하기",
+        "쿼리와 문서를 로컬에서 임베딩하기",
+        "예시 \"쿼리\"와 \"문서\"로 탐색하기"
+      ],
+      "firstLine": "import numpy as np",
+      "matchLine": "def plot_cross_similarity_matrix(emb1, emb2):",
+      "codeOrdinal": 6
+    },
+    "15": {
+      "path": [
+        "Part 3: [실습] 합성이지만 더 현실적인 예제"
+      ],
+      "firstLine": "plt.figure(figsize=(8, 6))",
+      "matchLine": "plt.figure(figsize=(8, 6))",
+      "codeOrdinal": 7
+    },
+    "17": {
+      "path": [
+        "Part 3: [실습] 합성이지만 더 현실적인 예제"
+      ],
+      "firstLine": "from langchain_nvidia_ai_endpoints import ChatNVIDIA",
+      "matchLine": "expound_prompt = ChatPromptTemplate.from_template(",
+      "codeOrdinal": 8
+    },
+    "19": {
+      "path": [
+        "Part 3: [실습] 합성이지만 더 현실적인 예제"
+      ],
+      "firstLine": "## At the time of writing, our embedding model supports up to 2048 tokens...",
+      "matchLine": "longer_docs_cut = [doc[:2048] for doc in longer_docs]",
+      "codeOrdinal": 9
+    }
+  },
+  "07-vectorstores": {
+    "3": {
+      "path": [
+        "시작 / 환경 설정"
+      ],
+      "firstLine": "# %%capture",
+      "matchLine": "console = Console()",
+      "codeOrdinal": 1
+    },
+    "4": {
+      "path": [
+        "시작 / 환경 설정"
+      ],
+      "firstLine": "from langchain_nvidia_ai_endpoints import ChatNVIDIA, NVIDIAEmbeddings",
+      "matchLine": "embedder = NVIDIAEmbeddings(",
+      "codeOrdinal": 2
+    },
+    "9": {
+      "path": [
+        "Part 2: 대화 기록을 위한 RAG",
+        "Step 1: 대화 얻기"
+      ],
+      "firstLine": "conversation = [  ## This conversation was generated partially by an AI system, and modified to exhibit desirable properties",
+      "matchLine": "conversation = [  ## This conversation was generated partially by an AI system, and modified to exhibit desirable properties",
+      "codeOrdinal": 3
+    },
+    "14": {
+      "path": [
+        "Part 2: 대화 기록을 위한 RAG",
+        "Step 2: Vector Store Retriever 구성하기"
+      ],
+      "firstLine": "%%time",
+      "matchLine": "convstore = FAISS.from_texts(conversation, embedding=embedder)",
+      "codeOrdinal": 4
+    },
+    "16": {
+      "path": [
+        "Part 2: 대화 기록을 위한 RAG",
+        "Step 2: Vector Store Retriever 구성하기"
+      ],
+      "firstLine": "pprint(retriever.invoke(\"What is your name?\"))",
+      "matchLine": "pprint(retriever.invoke(\"What is your name?\"))",
+      "codeOrdinal": 5
+    },
+    "17": {
+      "path": [
+        "Part 2: 대화 기록을 위한 RAG",
+        "Step 2: Vector Store Retriever 구성하기"
+      ],
+      "firstLine": "pprint(retriever.invoke(\"Where are the Rocky Mountains?\"))",
+      "matchLine": "pprint(retriever.invoke(\"Where are the Rocky Mountains?\"))",
+      "codeOrdinal": 6
+    },
+    "20": {
+      "path": [
+        "Part 2: 대화 기록을 위한 RAG",
+        "선택 단계: 검색된 후보 리랭킹(Reranking)"
+      ],
+      "firstLine": "from langchain_nvidia_ai_endpoints import NVIDIARerank",
+      "matchLine": "rerank_query = \"Where are the Rocky Mountains?\"",
+      "codeOrdinal": 7
+    },
+    "22": {
+      "path": [
+        "Part 2: 대화 기록을 위한 RAG",
+        "Step 3: 대화 검색을 체인에 통합하기"
+      ],
+      "firstLine": "from langchain_community.document_transformers import LongContextReorder",
+      "matchLine": "def RPrint(preface=\"\"):",
+      "codeOrdinal": 8
+    },
+    "23": {
+      "path": [
+        "Part 2: 대화 기록을 위한 RAG",
+        "Step 3: 대화 검색을 체인에 통합하기"
+      ],
+      "firstLine": "context_prompt = ChatPromptTemplate.from_template(",
+      "matchLine": "context_prompt = ChatPromptTemplate.from_template(",
+      "codeOrdinal": 9
+    },
+    "25": {
+      "path": [
+        "Part 2: 대화 기록을 위한 RAG",
+        "Step 3: 대화 검색을 체인에 통합하기"
+      ],
+      "firstLine": "pprint(chain.invoke(\"Where are the Rocky Mountains?\"))",
+      "matchLine": "pprint(chain.invoke(\"Where are the Rocky Mountains?\"))",
+      "codeOrdinal": 10
+    },
+    "26": {
+      "path": [
+        "Part 2: 대화 기록을 위한 RAG",
+        "Step 3: 대화 검색을 체인에 통합하기"
+      ],
+      "firstLine": "pprint(chain.invoke(\"Where are the Rocky Mountains? Are they close to California?\"))",
+      "matchLine": "pprint(chain.invoke(\"Where are the Rocky Mountains? Are they close to California?\"))",
+      "codeOrdinal": 11
+    },
+    "27": {
+      "path": [
+        "Part 2: 대화 기록을 위한 RAG",
+        "Step 3: 대화 검색을 체인에 통합하기"
+      ],
+      "firstLine": "pprint(chain.invoke(\"How far away is Beras from the Rocky Mountains?\"))",
+      "matchLine": "pprint(chain.invoke(\"How far away is Beras from the Rocky Mountains?\"))",
+      "codeOrdinal": 12
+    },
+    "30": {
+      "path": [
+        "Part 2: 대화 기록을 위한 RAG",
+        "Step 4: 자동 대화 저장"
+      ],
+      "firstLine": "from langchain_core.prompts import ChatPromptTemplate",
+      "matchLine": "convstore = FAISS.from_texts(conversation, embedding=embedder)",
+      "codeOrdinal": 13
+    },
+    "34": {
+      "path": [
+        "Part 3 [실습]: 문서 청크 검색을 위한 RAG",
+        "Task 1: 문서 로딩 및 청킹"
+      ],
+      "firstLine": "from langchain_nvidia_ai_endpoints import ChatNVIDIA",
+      "matchLine": "text_splitter = RecursiveCharacterTextSplitter(",
+      "codeOrdinal": 14
+    },
+    "36": {
+      "path": [
+        "Part 3 [실습]: 문서 청크 검색을 위한 RAG",
+        "Task 2: 문서 Vector Store 구성하기"
+      ],
+      "firstLine": "%%time",
+      "matchLine": "print(\"Constructing Vector Stores\")",
+      "codeOrdinal": 15
+    },
+    "38": {
+      "path": [
+        "Part 3 [실습]: 문서 청크 검색을 위한 RAG",
+        "Task 2: 문서 Vector Store 구성하기"
+      ],
+      "firstLine": "from faiss import IndexFlatL2",
+      "matchLine": "embed_dims = len(embedder.embed_query(\"test\"))",
+      "codeOrdinal": 16
+    },
+    "40": {
+      "path": [
+        "Part 3 [실습]: 문서 청크 검색을 위한 RAG",
+        "Task 3: [실습] RAG Chain 구현하기"
+      ],
+      "firstLine": "from langchain_community.document_transformers import LongContextReorder",
+      "matchLine": "instruct_llm = ChatNVIDIA(model=\"nvidia/nemotron-3.5-lightning-30b-a3b\", timeout=300, model_kwargs={\"chat_template_kwargs\": {\"enable_thinking\": False}})",
+      "codeOrdinal": 17
+    },
+    "42": {
+      "path": [
+        "Part 3 [실습]: 문서 청크 검색을 위한 RAG",
+        "Task 4: Gradio 챗봇과 상호작용하기"
+      ],
+      "firstLine": "# chatbot = gr.Chatbot(value = [{\"role\": \"user\", \"content\": initial_msg}])",
+      "matchLine": "# chatbot = gr.Chatbot(value = [{\"role\": \"user\", \"content\": initial_msg}])",
+      "codeOrdinal": 18
+    },
+    "44": {
+      "path": [
+        "Part 4: 평가를 위해 인덱스 저장하기"
+      ],
+      "firstLine": "## Save and compress your index",
+      "matchLine": "docstore.save_local(\"docstore_index\")",
+      "codeOrdinal": 19
+    },
+    "46": {
+      "path": [
+        "Part 4: 평가를 위해 인덱스 저장하기"
+      ],
+      "firstLine": "from langchain_community.vectorstores import FAISS",
+      "matchLine": "!tar xzvf docstore_index.tgz",
+      "codeOrdinal": 20
+    }
+  },
+  "08-evaluation": {
+    "3": {
+      "path": [
+        "시작 / 환경 설정"
+      ],
+      "firstLine": "# %pip install -q langchain langchain-nvidia-ai-endpoints fastembed gradio rich",
+      "matchLine": "console = Console()",
+      "codeOrdinal": 1
+    },
+    "7": {
+      "path": [
+        "Part 3: [평가 준비] Pairwise Evaluator",
+        "Task 1: 문서 검색 인덱스 가져오기"
+      ],
+      "firstLine": "## Make sure you have docstore_index.tgz in your working directory",
+      "matchLine": "!tar xzvf docstore_index.tgz",
+      "codeOrdinal": 2
+    },
+    "9": {
+      "path": [
+        "Part 3: [평가 준비] Pairwise Evaluator",
+        "Task 2: [실습] RAG Chain 가져오기"
+      ],
+      "firstLine": "from langchain_core.output_parsers import StrOutputParser",
+      "matchLine": "instruct_llm = ChatNVIDIA(model=\"nvidia/nemotron-3.5-lightning-30b-a3b\", timeout=300, model_kwargs={\"chat_template_kwargs\": {\"enable_thinking\": False}})",
+      "codeOrdinal": 3
+    },
+    "11": {
+      "path": [
+        "Part 3: [평가 준비] Pairwise Evaluator",
+        "Step 3: 합성 질문-답변 쌍 생성하기"
+      ],
+      "firstLine": "import random",
+      "matchLine": "num_questions = 3",
+      "codeOrdinal": 4
+    },
+    "13": {
+      "path": [
+        "Part 3: [평가 준비] Pairwise Evaluator",
+        "Step 4: 합성 질문에 답하기"
+      ],
+      "firstLine": "## TODO: Generate some synthetic answers to the questions above.",
+      "matchLine": "rag_answers = []",
+      "codeOrdinal": 5
+    },
+    "15": {
+      "path": [
+        "Part 3: [평가 준비] Pairwise Evaluator",
+        "Step 5: 사람 선호 지표 구현하기"
+      ],
+      "firstLine": "## TODO: Adapt this prompt for whichever LLM you're actually interested in using.",
+      "matchLine": "eval_prompt = ChatPromptTemplate.from_template(\"\"\"INSTRUCTION:",
+      "codeOrdinal": 6
+    },
+    "17": {
+      "path": [
+        "Part 3: [평가 준비] Pairwise Evaluator",
+        "Step 5: 사람 선호 지표 구현하기"
+      ],
+      "firstLine": "pref_score = sum((\"[2]\" in score) for score in pref_score) / len(pref_score)",
+      "matchLine": "pref_score = sum((\"[2]\" in score) for score in pref_score) / len(pref_score)",
+      "codeOrdinal": 7
+    },
+    "21": {
+      "path": [
+        "Part 5: [평가] 학점 인정을 위한 평가"
+      ],
+      "firstLine": "# %%js",
+      "matchLine": "# %%js",
+      "codeOrdinal": 8
+    }
+  },
+  "09-langserve": {
+    "4": {
+      "path": [
+        "LangServe 서버 설정",
+        "Part 1: /basicchat 엔드포인트 제공하기"
+      ],
+      "firstLine": "%%writefile server_app.py",
+      "matchLine": "embedder = NVIDIAEmbeddings(",
+      "codeOrdinal": 1
+    },
+    "5": {
+      "path": [
+        "LangServe 서버 설정",
+        "Part 1: /basicchat 엔드포인트 제공하기"
+      ],
+      "firstLine": "## Works, but will block the notebook.",
+      "matchLine": "!python server_app.py",
+      "codeOrdinal": 2
+    },
+    "9": {
+      "path": [
+        "LangServe 서버 설정",
+        "Part 3: 최종 평가"
+      ],
+      "firstLine": "# %%js",
+      "matchLine": "# %%js",
+      "codeOrdinal": 3
+    }
+  }
+}
