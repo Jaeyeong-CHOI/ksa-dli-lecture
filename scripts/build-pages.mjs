@@ -1,6 +1,8 @@
 import {readFileSync,writeFileSync,mkdirSync} from 'node:fs';
 import {notes} from '../content/notes.mjs';
 import {lectures} from '../content/lectures.mjs';
+import {buildLectureFiles} from './build-lecture-files.mjs';
+console.log('Released lecture PDFs:',await buildLectureFiles());
 const html=readFileSync('dist/index.html','utf8');
 const routes=['notebook-downloads','get-certification','notebooks','resources','practice',...lectures.map(l=>'lectures/'+l.slug),...notes.map(n=>'notes/'+n.slug)];
 for(const route of routes){mkdirSync('dist/'+route,{recursive:true});writeFileSync('dist/'+route+'/index.html',html)}

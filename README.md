@@ -8,6 +8,10 @@
 
 첫 화면(`/`)은 **강의자료 6종**의 PDF 열람·다운로드 화면입니다. 순서는 Introduction to LLM → DLI → RAGAS → QuCo → Recent RAG → Product Building입니다. 최신 Drive 원본의 PDF와 표지, 페이지 수, 원본 수정일을 함께 제공합니다. 각 자료는 `/lectures/<slug>`로 직접 열 수 있고, 기존 `/notes/introduction-to-llm`과 `/resources`는 첫 자료로 연결됩니다. 별도 강의 해설 노트는 넣지 않습니다.
 
+강의 PDF는 한국시간 **2026년 9월 14일 18시(1번), 15일 18시(2번), 16일 18시(3·4·5번), 17일 18시(6번)**에 순서대로 공개됩니다. 공개 전에는 예정 시간과 잠금 화면만 표시합니다. 브라우저 시계가 아니라 서버에서 공개 여부를 판단하며, PDF 직접 요청과 챗봇의 미공개 슬라이드 검색을 제한합니다. 공개 논문 및 실습 자료는 계속 이용할 수 있습니다.
+
+예정 시각에는 맥미니의 시간 제한 PDF API가 열리고, GitHub Actions의 예약 배포가 공개된 PDF를 Pages에 복사합니다. Pages 반영 이후에는 API가 꺼져도 해당 PDF를 받을 수 있습니다. 최초 공개 시각은 GitHub 예약 작업의 지연에 의존하지 않습니다. 과거에 이미 내려받은 사본이나 이전 Git 이력은 회수하지 않습니다.
+
 설명 자료는 **JupyterLab 노트북 00–09번, 10개**에만 제공합니다. 42개 소주제를 초심자 관점에서 용어의 뜻·쉬운 비유·입출력·코드 읽는 순서로 풀어썼습니다. 각 노트에는 처음 만나는 용어 3개도 정리합니다.
 
 **한국어 실습 노트북**(`/notebook-downloads`)에서는 00–09번 ipynb를 개별로 받거나, 사용 안내가 포함된 전체 ZIP으로 받을 수 있습니다. 강의자료 화면의 탭과 실습 노트 목록에서 연결하며, 각 노트에서도 현재 파일을 바로 내려받습니다. 다운로드 사본은 한국어 원문·코드·TODO·셀 순서를 유지하고 실행 출력과 편집기 메타데이터를 정리했습니다. 내부 서비스·환경 파일은 포함하지 않으며 DLI 수업 환경이 필요합니다. 원본의 그림은 인터넷으로 불러옵니다.
@@ -58,7 +62,7 @@ React + Vite. `main` 브랜치 push 시 GitHub Actions가 정적 사이트를 �
 - API 주소만 공개 빌드 변수 `VITE_API_BASE_URL`로 지정합니다. API 키를 이 변수나 GitHub에 넣지 않습니다.
 - 모델은 서버에서 `gpt-5.6-sol`, reasoning `high`로 고정합니다.
 - 모델 자격 증명과 원문 검색 인덱스는 Mac mini의 보호 저장소/비공개 경로에 유지합니다. 이 저장소는 정적 프런트엔드만 배포합니다.
-- Mac mini가 꺼져 있어도 학습 노트와 PDF는 열리며, 챗봇만 사용할 수 없게 됩니다.
+- Mac mini가 꺼져 있어도 학습 노트·한국어 노트북 파일·Pages에 이미 반영된 PDF는 열립니다. 최초 예약 공개 시점부터 Pages 반영 전까지는 PDF API가 필요합니다.
 
 ## 콘텐츠 수정
 
@@ -70,6 +74,7 @@ React + Vite. `main` 브랜치 push 시 GitHub Actions가 정적 사이트를 �
 - `content/notebook-downloads.json`, `src/notebook-downloads.jsx`, `src/notebook-downloads.css`: 한국어 노트북 다운로드 목록·사용법·노트별 연결
 - `public/downloads/notebooks/`, `public/downloads/Building-RAG-Agents-Korean-Notebooks.zip`: 검토한 한국어 ipynb 사본과 전체 묶음
 - `content/notebook-code.json`: 출력·인증 셀을 제외한 코드 발췌와 줄별 해설
+- `content/lecture-release.mjs`, `src/lecture-access.js`, `scripts/build-lecture-files.mjs`: 공개 일정·서버 확인·공개 PDF만 정적 배포
 - `content/lectures.mjs`, `content/papers.mjs`: 최신 강의자료와 원논문 메타데이터
 - `src/lecture-library.jsx`, `src/lecture-library.css`: 강의자료 선택·PDF 뷰어·다운로드
 - `src/app.jsx`, `src/shared.jsx`, `src/chat-modes.css`: 페이지와 두 모드 도우미 UI

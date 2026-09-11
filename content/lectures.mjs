@@ -8,7 +8,9 @@ export const lectures = [
     "updatedAt": "2026-09-10T12:26:27.961Z",
     "pdf": "/downloads/Introduction-to-LLM.pdf",
     "cover": "/lecture-covers/introduction-to-llm.webp",
-    "bytes": 11698654
+    "bytes": 11698654,
+    "releaseAt": "2026-09-14T18:00:00+09:00",
+    "sha256": "6d80f79b4cf09463f0fecd23500243882ede80c7b43b6c55e9e36e33d3c7153c"
   },
   {
     "slug": "dli-rag",
@@ -19,7 +21,9 @@ export const lectures = [
     "updatedAt": "2026-09-03T06:15:42.437Z",
     "pdf": "/downloads/DLI-RAG.pdf",
     "cover": "/lecture-covers/dli-rag.webp",
-    "bytes": 12626267
+    "bytes": 12626267,
+    "releaseAt": "2026-09-15T18:00:00+09:00",
+    "sha256": "9bba22dcb786e458883d93e5c33c6f6cbdde91242c0a8fe12e57a0da3ec26556"
   },
   {
     "slug": "ragas",
@@ -30,7 +34,9 @@ export const lectures = [
     "updatedAt": "2026-09-10T12:01:38.222Z",
     "pdf": "/downloads/RAGAS.pdf",
     "cover": "/lecture-covers/ragas.webp",
-    "bytes": 1866551
+    "bytes": 1866551,
+    "releaseAt": "2026-09-16T18:00:00+09:00",
+    "sha256": "2b2b866b94a05b705dd1b25dd29816c1bc23ed047c605a9e908c8b7a78af0a90"
   },
   {
     "slug": "quco-rag",
@@ -41,7 +47,9 @@ export const lectures = [
     "updatedAt": "2026-09-10T12:38:41.207Z",
     "pdf": "/downloads/QuCo-RAG.pdf",
     "cover": "/lecture-covers/quco-rag.webp",
-    "bytes": 2380350
+    "bytes": 2380350,
+    "releaseAt": "2026-09-16T18:00:00+09:00",
+    "sha256": "be01ae72c4dd5656101646d6248e706cbf12d9cd708fdfe0200b4a8ac59308fa"
   },
   {
     "slug": "recent-rag",
@@ -52,7 +60,9 @@ export const lectures = [
     "updatedAt": "2026-09-10T12:40:22.706Z",
     "pdf": "/downloads/Recent-RAG.pdf",
     "cover": "/lecture-covers/recent-rag.webp",
-    "bytes": 3004002
+    "bytes": 3004002,
+    "releaseAt": "2026-09-16T18:00:00+09:00",
+    "sha256": "e51f75fe13877c26b40d78906bfea3b72b35eeb29cedd667daa0d838cb39bc98"
   },
   {
     "slug": "product-building",
@@ -63,6 +73,8 @@ export const lectures = [
     "updatedAt": "2026-09-10T16:59:34.116Z",
     "pdf": "/downloads/Product-Building.pdf",
     "cover": "/lecture-covers/product-building.webp",
-    "bytes": 3817888
+    "bytes": 3817888,
+    "releaseAt": "2026-09-17T18:00:00+09:00",
+    "sha256": "e4bdd2b9f981e9005472549493266904676bea261e7ff289dca85239167922b5"
   }
 ];
