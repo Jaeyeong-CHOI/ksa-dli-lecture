@@ -51,6 +51,7 @@ export function Certification(){
    </article>
   </div>
   <Recovery/>
+  {guide.verification&&<p className="cert-note"><strong>실제 랩 검수 · {guide.verification.date}</strong><br/>{guide.verification.summary}<br/>{guide.verification.scope}</p>}
   <p className="cert-source-note">제공된 07·08·09번 한국어 노트북 기준의 해설용 정답입니다. 공식 Solutions 파일이나 평가 통과 보장이 아니며, 실제 수료 결과는 NVIDIA 강좌 화면에서 확인합니다.</p>
  </main>;
 }
