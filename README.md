@@ -24,11 +24,11 @@
 
 ## Get Certification
 
-`/get-certification`은 07번 문서 준비·검색·저장 → 08번 답변 사전 점검 → 09번 서버 연결 → Evaluate → 강좌 Assess Task → 인증서 확인을 **19개의 작은 단계**로 안내합니다. 첫 단계는 실제 Instructor-Led 수업 화면의 START → Confirm → LOADING → Launch와 환경 초기화·백업 안내를 포함합니다. 매 단계에서 목적, 선행 조건, 원본 제목·셀 첫 줄, 수정할 정확한 구간, 정답 코드, 실행 순서, 정상 결과를 보여줍니다.
+`/get-certification`은 **07 인덱스 저장 → 09 서버 실행 → 평가 통과 → 인증서 받기**, 필수 4단계로 안내합니다. 한 번에 한 작업을 보여주고, 현재 단계의 작업 선택과 이전/다음으로 이동합니다. 정답은 기본 코드의 특정 부분만 복사하며, 기본 경로의 복사 블록은 실행 명령 포함 8개입니다. 원본을 찾을 코드 줄·수정 범위·실행 순서·정상 결과는 계속 표시하고 긴 해설, 캡처, 오류 복구와 실제 PASSED 기록은 접어 둡니다.
 
-원본 셀 전체를 교체하지 않습니다. **17개 부분 수정 + 같은 셀 안에 삽입 1개 + Terminal 명령 1개**만 복사하며, **원본 셀 6개는 수정 없이 실행**합니다. 위치 확인용 원본 코드에는 복사 버튼이 없고, 정답 구간만 복사됩니다. 기존 함수·반복문·서버 틀을 유지하고 TODO와 필수 설정만 바꾸는 방식입니다.
+07번은 셀 **3 → 4 → 34 → 36 → 38 → 44**를 사용합니다. 출력 설정과 인덱스 생성·통합은 그대로 실행하고, 모델 주소·논문 목록·저장 후 삭제 줄만 수정합니다. Task 3 미리보기·재검색과 08번 질문/답변/점수 비교는 **선택 실습**으로 분리했습니다. 실제 평가 프론트엔드는 저장된 `docstore_index`와 09번 검색·생성 API를 직접 사용합니다. 09번은 실제 PASSED 코드와 같은 네 부분만 수정한 뒤 원본 writefile 셀을 실행하고 Terminal에서 서버를 켭니다. 일반/비동기 스트리밍 대응과 평가 기준은 그대로 유지합니다.
 
-07번은 같은 노트북에서 셀 3 → 4 → 22 → 34 → 36 → 38 → 40 → 44 → 46, 08번은 3 → 7 → 9 → 11 → 13 → 15 → 17 순서로 안내합니다. 셀 번호는 Markdown을 포함한 파일 위치이며 Jupyter의 실행 횟수와 다릅니다. 09번은 원래 writefile 셀의 지정된 위치만 수정한 뒤 저장하고 Terminal에서 서버를 켭니다. 오류 대처는 문서 다운로드, 인덱스 재생성, 질문·답변 순서, 점수 변수 재실행, 화면·커널·서버 재시작을 구분합니다. 실제 실행과 평가는 DLI 수업 환경에서 수행합니다. 응답이 한 단어에서 잘리는 환경을 위해 08번의 질문·채점 호출은 스트리밍 조각을 합치며, 09번 생성기는 일반 호출과 스트리밍에서 같은 전체 답변을 전달합니다. 원본 평가 프롬프트·판정 기준은 유지합니다.
+`content/certification-route.json`이 필수 흐름과 선택 여부를 정의하고, 원래 `certification-guide.json`의 부분 정답·사진을 재사용합니다. 기존 19개 직접 링크도 필수 작업 또는 선택 실습으로 열립니다. 챗봇 검색 자료도 이 구분을 반영합니다. 간소화는 원본 셀의 정적 의존성과 실제 통과한 서버 코드 일치, 독립된 FAISS/LCEL 작성 코드 검증에 기반하며, 이 짧은 순서로 실제 평가를 새로 실행했다는 뜻은 아닙니다.
 
 2026년 9월 12일 실제 Instructor-Led 랩에서 교안의 부분 수정 17개 셀을 대조하고 07 → 08 → 09 → Frontend Evaluate → NVIDIA ASSESS TASK의 PASSED 결과까지 확인했습니다. 실행 중 발견한 응답 수집·비동기 서버 연결 오류와 복구 방법을 반영했습니다.
 
@@ -90,7 +90,7 @@ React + Vite. `main` 브랜치 push 시 GitHub Actions가 정적 사이트를 �
 - `node --test scripts/test-agentic-practice.mjs`: 진행 기록·대상 치환·예시 일치·ZIP 내용 검증
 - `content/notes.mjs`: PPT·노트북별 한국어 해설, 문제 풀이, 오류 해결
 - `content/certification-guide.json`: 원본 부분 수정 가이드의 단계·위치·정답·실행 순서·오류 대처
-- `src/certification.jsx`, `src/certification.css`, `src/certification-patches.css`: 19단계 가이드와 수정 전/정답 구간 뷰어
+- `src/certification.jsx`, `src/certification-simple.css`: 필수 4단계·선택 실습·부분 수정 코드 뷰어
 - `content/notebook-companion.mjs`, `content/notebook-locations.json`, `content/notebook-lookup.mjs`: 셀별 해설·학습 목표·원본 위치·검색
 - `src/notebook-companion.jsx`, `src/notebook-companion.css`: 원본 순서 탐색·셀 해설 화면
 - `content/notebook-downloads.json`, `src/notebook-downloads.jsx`, `src/notebook-downloads.css`: 한국어 노트북 다운로드 목록·사용법·노트별 연결

@@ -1,0 +1,212 @@
+{
+  "version": 1,
+  "summary": "인증서 필수 경로는 07 인덱스 저장 → 09 서버 실행 → Frontend Evaluate → ASSESS TASK → 인증서 받기입니다. 08번의 질문·답변 비교는 선택 학습이며 최종 평가의 선행 조건이 아닙니다.",
+  "stages": [
+    {
+      "id": "index",
+      "title": "인덱스 저장",
+      "label": "07번",
+      "tasks": [
+        {
+          "id": "index-setup",
+          "title": "출력·모델 설정",
+          "purpose": "07번의 설정 셀 2개만 준비합니다. 모델 주소는 수업 내부 서버로 지정합니다.",
+          "items": [
+            {
+              "action": "07-print",
+              "title": "출력 도우미 설정"
+            },
+            {
+              "action": "07-model",
+              "title": "모델 주소 한 곳만 지정"
+            }
+          ],
+          "execute": "위 두 셀을 각각 Shift+Enter로 실행합니다. 그 사이의 다른 실습은 건너뜁니다.",
+          "outcome": "두 셀의 실행이 오류 없이 끝났다면 다음으로 갑니다. 출력이 없어도 정상입니다."
+        },
+        {
+          "id": "index-docs",
+          "title": "논문 목록만 수정",
+          "purpose": "RAG·ReAct 논문을 읽어 검색할 문서 조각으로 나눕니다.",
+          "items": [
+            {
+              "action": "07-papers"
+            }
+          ],
+          "execute": "목록을 바꾼 셀에서 Shift+Enter. Loading → Chunking 출력이 끝날 때까지 기다립니다.",
+          "outcome": "각 논문의 # Chunks가 표시됩니다. 아래 원본의 읽기·청킹 코드는 그대로 둡니다."
+        },
+        {
+          "id": "index-build",
+          "title": "검색 인덱스 생성·합치기",
+          "purpose": "방금 읽은 문서 조각을 검색할 수 있는 docstore로 만듭니다.",
+          "items": [
+            {
+              "action": "07-build"
+            },
+            {
+              "action": "07-merge"
+            }
+          ],
+          "execute": "Vector Store 생성 셀 → 통합 셀 순서로 각각 Shift+Enter.",
+          "outcome": "Constructed aggregate docstore with … chunks에서 10개 이상인지 확인합니다. 검수 때는 190개였습니다."
+        },
+        {
+          "id": "index-save",
+          "title": "인덱스 저장",
+          "purpose": "09번 서버와 최종 평가가 함께 읽을 파일을 남깁니다. Task 3의 RAG 미리보기는 건너뛰고 Part 4로 갑니다.",
+          "items": [
+            {
+              "action": "07-save"
+            }
+          ],
+          "execute": "삭제 줄만 주석 처리한 뒤 Shift+Enter → Ctrl+S로 노트북 저장.",
+          "outcome": "왼쪽 파일 목록에 docstore_index 폴더와 docstore_index.tgz가 보이면 07번은 끝입니다. 08번을 거치지 않고 09번으로 갑니다.",
+          "screenshotsFrom": "index-save"
+        }
+      ]
+    },
+    {
+      "id": "server",
+      "title": "서버 실행",
+      "label": "09번",
+      "tasks": [
+        {
+          "id": "server",
+          "title": "서버 셀의 모델 주소 수정",
+          "purpose": "09_langserve.ipynb에서 %%writefile server_app.py로 시작하는 셀을 찾으세요. 이 셀 안에서 4곳을 수정한 뒤 한 번만 실행합니다.",
+          "items": [
+            {
+              "action": "09-model"
+            }
+          ],
+          "execute": "아직 실행하지 않습니다. 같은 셀에서 다음 수정으로 이어갑니다.",
+          "outcome": "model= 뒤의 원래 모델 이름·옵션과 첫 줄 %%writefile server_app.py를 유지합니다."
+        },
+        {
+          "id": "server-definitions",
+          "title": "검색·답변 코드 삽입",
+          "purpose": "저장한 인덱스를 불러오고, 검색 문서에 근거해 답하는 체인을 연결합니다.",
+          "items": [
+            {
+              "action": "09-definitions"
+            }
+          ],
+          "execute": "아직 실행하지 않습니다. 같은 셀에서 다음 수정으로 이어갑니다.",
+          "outcome": "app = FastAPI( 줄 위에 코드가 추가됐습니다. 기존 app 정의는 지우지 않습니다."
+        },
+        {
+          "id": "server-generator",
+          "title": "답변 API의 빈칸 교체",
+          "purpose": "/generator가 자리표시자 대신 실제 답변 체인을 사용하게 합니다.",
+          "items": [
+            {
+              "action": "09-generator"
+            }
+          ],
+          "execute": "아직 실행하지 않습니다. 바로 아래 검색 API도 수정합니다.",
+          "outcome": "path=\"/generator\"인 add_routes 안에 generator_chain이 들어갑니다."
+        },
+        {
+          "id": "server-retriever",
+          "title": "검색 API의 빈칸 교체·저장",
+          "purpose": "/retriever에 검색 체인을 연결하면 서버 셀 수정이 끝납니다.",
+          "items": [
+            {
+              "action": "09-retriever"
+            }
+          ],
+          "execute": "이제 같은 셀에서 Shift+Enter를 한 번 누르고, Ctrl+S로 노트북을 저장합니다.",
+          "outcome": "Writing server_app.py 또는 Overwriting server_app.py가 나오면 파일 작성 완료입니다."
+        },
+        {
+          "id": "connect",
+          "title": "Terminal에서 서버 켜기",
+          "purpose": "파일을 작성하는 것과 서버를 켜는 것은 다릅니다. JupyterLab의 + → Terminal을 여세요.",
+          "items": [
+            {
+              "action": "09-terminal"
+            }
+          ],
+          "execute": "명령 붙여넣기 → Enter. 이 Terminal은 평가가 끝날 때까지 켜 둡니다.",
+          "outcome": "Uvicorn running on http://0.0.0.0:9012가 보이면 준비 완료입니다.",
+          "screenshotsFrom": "connect"
+        }
+      ]
+    },
+    {
+      "id": "assessment",
+      "title": "평가 통과",
+      "label": "Evaluate → Assess",
+      "tasks": [
+        {
+          "id": "assess",
+          "title": "두 평가 버튼을 순서대로 누르기",
+          "purpose": "서버를 켜 둔 상태에서 진행합니다. 08번 비교 점수는 이 단계의 통과 조건이 아닙니다.",
+          "items": [],
+          "instructions": [
+            {
+              "title": "수업 Frontend 열기",
+              "text": "09번 Part 3의 Gradio Frontend UI 링크를 엽니다. RAG 모드에서 문서 관련 질문에 답이 나오는지 확인하세요."
+            },
+            {
+              "title": "Evaluate 한 번 누르기",
+              "text": "답변이 계속 출력되는 동안 기다립니다. Retriever and generator checks passed 완료 메시지를 확인하세요. 비교 점수 숫자만으로 통과 여부를 판단하지 않습니다."
+            },
+            {
+              "title": "NVIDIA 강좌 탭 → ASSESS TASK",
+              "text": "랩을 START했던 강좌 탭으로 돌아가 ASSESS TASK를 누릅니다. GRADING이 끝나고 PASSED가 표시되면 최종 평가까지 완료입니다."
+            }
+          ],
+          "outcome": "NVIDIA 강좌 화면의 PASSED를 확인했다면 인증서를 받을 수 있습니다.",
+          "screenshotsFrom": "assess"
+        }
+      ]
+    },
+    {
+      "id": "certificate",
+      "title": "인증서 받기",
+      "label": "My Learning",
+      "tasks": [
+        {
+          "id": "certificate",
+          "title": "인증서 열고 PDF로 저장",
+          "purpose": "실습한 것과 같은 NVIDIA 계정으로 My Learning에 접속하세요.",
+          "items": [],
+          "instructions": [
+            {
+              "title": "Certificates and Completed Courses",
+              "text": "My Learning의 이 구역에서 Building RAG Agents with LLMs를 선택합니다. Instructor Materials가 아니라 수강한 강좌명입니다."
+            },
+            {
+              "title": "Download Certificate",
+              "text": "인증서의 이름·강좌명을 확인하고 버튼을 누릅니다. 인쇄 창이 열리면 PDF로 저장(Save as PDF)을 선택합니다."
+            }
+          ],
+          "outcome": "인증서가 바로 보이지 않으면 잠시 후 새로고침하고, 같은 계정인지와 ASSESS TASK의 PASSED를 확인하세요."
+        }
+      ]
+    }
+  ],
+  "aliases": {
+    "start": "index-setup",
+    "index-merge": "index-build"
+  },
+  "optional": [
+    "index-rag",
+    "index-verify",
+    "prepare",
+    "load",
+    "evaluate",
+    "questions",
+    "answers",
+    "judge",
+    "score"
+  ],
+  "verificationNote": "2026-09-12 실제 랩에서 전체 교안의 Evaluate·ASSESS TASK PASSED와 인증서 페이지 열림을 확인했습니다. 간소화 경로는 그 코드의 의존성을 검토해 07번 미리보기·재검색 및 08번 사전 점검을 제외했습니다. 간소화 순서로 실제 평가를 새로 실행한 기록은 아닙니다.",
+  "optionalPrerequisites": {
+    "index-rag": [
+      "07-helpers"
+    ]
+  }
+}
