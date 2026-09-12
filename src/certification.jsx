@@ -20,7 +20,7 @@ function Edit({item}){
   <h3>{item.title||a.title}<span>{run?'수정 없이 실행':a.kind==='insert'?'이 위치에 추가':a.kind==='terminal'?'명령 실행':'부분 수정'}</span></h3>
   {a.kind!=='terminal'&&<div className="simple-locate">{!run&&<p>{a.section}</p>}<span>찾을 셀의 첫 줄</span><code>{a.firstLine}</code></div>}
   {!run&&<>
-   <p>{a.instruction}</p>
+   {a.before?.trim().endsWith("ChatNVIDIA(")&&<p><strong>기본 주소로 이미 정상 연결되면 이 수정은 건너뛰세요.</strong></p>}<p>{a.instruction}</p>
    {a.before&&<div className="simple-before"><span>{a.kind==='insert'?'아래 줄 바로 위에 삽입':'바꿀 부분'}</span>
     {a.before.length>700?<><pre>{a.before.split('\n')[0]+'\n    … 현재 논문 목록 …\n]'}</pre><details><summary>원본 구간 전체 보기</summary><pre>{a.before}</pre></details></>:<pre>{a.before}</pre>}
    </div>}
@@ -84,7 +84,7 @@ export function Certification(){
    </ExtraHelp>
    <ExtraHelp name="오류가 나거나 중간에 멈췄을 때" detailsRef={recovery}>
     <p>07번 커널을 재시작했다면 설정 2개 → 문서 읽기 → 인덱스 생성·합치기 → 저장 순서로 돌아갑니다. docstore_index가 이미 정상 저장돼 있다면 09번부터 다시 시작할 수 있습니다. 서버는 Terminal에서 별도로 재시작합니다.</p>
-    <div className="simple-errors">{guide.recovery.map(([q,a])=><details key={q}><summary>{q}</summary><p>{a}</p></details>)}</div>
+    <div className="simple-errors"><details><summary>{route.connectionHelp.title}</summary><p>{route.connectionHelp.summary}</p><p>{route.connectionHelp.notebook}</p><p>{route.connectionHelp.server}</p>{route.connectionHelp.actions.map(action=><div key={action}><strong>{guide.actions[action].notebook}</strong><Edit item={{action}}/></div>)}</details>{guide.recovery.map(([q,a])=><details key={q}><summary>{q}</summary><p>{a}</p></details>)}</div>
    </ExtraHelp>
    <ExtraHelp name="실제 ASSESS TASK · PASSED 검수 기록" detailsRef={verification}>
     <p>{route.verificationNote}</p><Screenshots items={sourceStep('assess').screenshots.slice(1)}/>
