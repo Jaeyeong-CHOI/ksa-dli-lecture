@@ -10,11 +10,8 @@ import './certification-simple.css';
 import {certificationPages,resolveCertificationPage} from '../content/certification-pages.mjs';
 const pages=certificationPages(route,guide);
 const sourceStep=id=>guide.steps.find(s=>s.id===id);
-function ExtraHelp({name,detailsRef,children}){
- return <details className="simple-support" ref={detailsRef}><summary>{name}</summary>{children}</details>;
-}
 export function Certification(){
- const [hash,setHash]=useState(()=>location.hash),panel=useRef(),recovery=useRef();
+ const [hash,setHash]=useState(()=>location.hash),panel=useRef();
  const {page,target}=resolveCertificationPage(hash,pages,route);
  useEffect(()=>{
   const sync=()=>setHash(location.hash);
@@ -24,8 +21,6 @@ export function Certification(){
  useEffect(()=>{
   if(!hash)return;
   const frame=requestAnimationFrame(()=>{
-   const help=hash==='#recovery'?recovery.current:null;
-   if(help){help.open=true;help.scrollIntoView({block:'start',behavior:'instant'});return;}
    const element=document.getElementById(target)||panel.current;
    element?.scrollIntoView({block:'start',behavior:'instant'});element?.focus({preventScroll:true});
   });
@@ -53,11 +48,5 @@ export function Certification(){
     {task.id==='certificate'&&<a className="primary-button" href="https://learn.nvidia.com/my-learning" target="_blank" rel="noreferrer">My Learning에서 인증서 받기 <ArrowUpRight size={16}/></a>}
    </section>)}
   </article>
-  <section className="simple-help" aria-label="필요할 때 참고">
-   <ExtraHelp name="오류가 나거나 중간에 멈췄을 때" detailsRef={recovery}>
-    <p>07번 커널을 재시작했다면 설정 2개 → 문서 읽기 → 인덱스 생성·합치기 → 저장 순서로 돌아갑니다. docstore_index가 이미 정상 저장돼 있다면 09번부터 다시 시작할 수 있습니다. 09번 서버는 Kernel → Interrupt Kernel로 중지한 뒤 셀 4 저장 → 셀 5 재실행 순서로 다시 켭니다.</p>
-    <div className="simple-errors"><details><summary>{route.connectionHelp.title}</summary><p>{route.connectionHelp.summary}</p><p>{route.connectionHelp.notebook}</p><p>{route.connectionHelp.server}</p><CellEdits items={route.connectionHelp.actions.map(action=>({action}))} prepared={route.stages.find(s=>s.id==='server').tasks.find(t=>t.id==='server').items.map(i=>i.action)}/></details>{guide.recovery.map(([q,a])=><details key={q}><summary>{q}</summary><p>{a}</p></details>)}</div>
-   </ExtraHelp>
-  </section>
  </main>;
 }

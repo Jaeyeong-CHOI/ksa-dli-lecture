@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {createRoot} from 'react-dom/client';
-import {ArrowRight, ArrowLeft, ArrowUpRight, Check, CheckCircle2, ChevronRight, Code2, Download, Menu, MessageCircle, Search, Terminal, X} from 'lucide-react';
+import {ArrowRight, ArrowLeft, ArrowUpRight, Check, CheckCircle2, ChevronRight, Code2, Download, Menu, MessageCircle, Search, X} from 'lucide-react';
 import {notes as allNotes} from '../content/notes.mjs';
 import {buildLessonSteps, stepFromHash} from '../content/lesson-steps.mjs';
 import notebookCode from '../content/notebook-code.json';
@@ -19,7 +19,7 @@ import {NotebookCompanion,ReaderModes} from './notebook-companion.jsx';
 import {chapterBriefs} from '../content/notebook-companion.mjs';
 import {findNotebookCells,usesCompanion} from '../content/notebook-lookup.mjs';
 import notebookLocations from '../content/notebook-locations.json';
-import {NotebookDownloads,NotebookDownloadCallout,NotebookDownloadLink} from './notebook-downloads.jsx';
+import {NotebookDownloads,NotebookDownloadLink} from './notebook-downloads.jsx';
 
 const notes = allNotes.filter(note => note.kind === 'notebook');
 const COURSE = 'Building RAG Agents with LLMs';
@@ -58,9 +58,6 @@ function NoteCard({note, done}) {
 function NotebookList({done}) {
   return <main id="main" className="wide-page">
     <div className="eyebrow">{COURSE}</div><h1>실습 노트</h1>
-    <p className="page-lead">JupyterLab의 원본 노트북과 나란히 두고 보세요.<br/>파일을 고른 뒤 원본 제목·코드 한 줄로 해당 셀의 설명을 찾을 수 있습니다.</p>
-    <div className="practice-notice"><Terminal size={22}/><div><strong>코드 실행은 수업의 DLI JupyterLab에서</strong><p>이곳에서는 설명을 읽고 코드를 복사합니다. 수업 내부 서버와 패키지가 필요한 코드는 DLI 환경에서 실행하세요.</p></div></div>
-    <NotebookDownloadCallout Link={Link}/>
     {stages.map((stage, i) => <section className="notebook-stage" key={stage.title}>
       <div className="module-heading"><span>{String(i + 1).padStart(2, '0')}</span><h2>{stage.title}</h2></div>
       <p>{stage.text}</p><div className="chapter-grid">{stage.notes.map(note => <NoteCard key={note.slug} note={note} done={done}/>)}</div>
