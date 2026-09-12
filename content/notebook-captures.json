@@ -23,7 +23,31 @@
         ]
       }
     ],
-    "cells": {}
+    "cells": {
+      "9": [
+        {
+          "src": "/images/notebook-learning/00-python-results.png",
+          "width": 1900,
+          "height": 194,
+          "alt": "00_jupyterlab.ipynb 실제 실행 · 문자열·숫자·처리된 문법 오류와 마지막 인사를 비교합니다.",
+          "caption": "2026-09-12 실제 랩 실행. 문자열·숫자·처리된 문법 오류와 마지막 인사를 비교합니다.",
+          "callouts": [
+            {
+              "fromX": 12,
+              "x": 8,
+              "y": 23,
+              "note": "5 8은 글자, 11은 숫자 계산 결과입니다."
+            },
+            {
+              "fromX": 65,
+              "x": 15,
+              "y": 61,
+              "note": "try/except가 오류를 처리해 다음 인사까지 이어집니다. 모든 오류가 커널 중단을 뜻하지 않습니다."
+            }
+          ]
+        }
+      ]
+    }
   },
   "01_microservices.ipynb": {
     "overview": [
@@ -49,7 +73,31 @@
         ]
       }
     ],
-    "cells": {}
+    "cells": {
+      "22": [
+        {
+          "src": "/images/notebook-learning/01-running-services.png",
+          "width": 1900,
+          "height": 374,
+          "alt": "01_microservices.ipynb 실제 실행 · JSON 응답에서 running 항목의 이름만 출력한 결과입니다. 서비스 구성은 환경에 따라 다를 수 있습니다.",
+          "caption": "2026-09-12 실제 랩 실행. JSON 응답에서 running 항목의 이름만 출력한 결과입니다. 서비스 구성은 환경에 따라 다를 수 있습니다.",
+          "callouts": [
+            {
+              "fromX": 15,
+              "x": 14,
+              "y": 10,
+              "note": "frontend는 화면을 제공하는 서비스입니다."
+            },
+            {
+              "fromX": 70,
+              "x": 15,
+              "y": 43,
+              "note": "llm_client는 모델 요청을 받습니다. 이름만 출력되는 이유는 원본의 if와 print를 확인하세요."
+            }
+          ]
+        }
+      ]
+    }
   },
   "02_llms.ipynb": {
     "overview": [
@@ -101,7 +149,54 @@
         ]
       }
     ],
-    "cells": {}
+    "cells": {
+      "18": [
+        {
+          "src": "/images/notebook-learning/03-types-flow.png",
+          "width": 1900,
+          "height": 262,
+          "alt": "03_langchain_intro.ipynb 실제 실행 · A~F에서 딕셔너리 → 문자열 → 딕셔너리로 값이 바뀌는 실제 출력입니다.",
+          "caption": "2026-09-12 실제 랩 실행. A~F에서 딕셔너리 → 문자열 → 딕셔너리로 값이 바뀌는 실제 출력입니다.",
+          "callouts": [
+            {
+              "fromX": 12,
+              "x": 14,
+              "y": 30,
+              "note": "itemgetter(\"input\") 뒤의 C에서는 문자열만 남습니다."
+            },
+            {
+              "fromX": 68,
+              "x": 14,
+              "y": 88,
+              "note": "최종 결과는 output 키 안의 HELLO입니다. 화면에 보이는 접두어와 반환값은 다릅니다."
+            }
+          ]
+        }
+      ],
+      "19": [
+        {
+          "src": "/images/notebook-learning/03-dictionary-result.png",
+          "width": 1900,
+          "height": 262,
+          "alt": "03_langchain_intro.ipynb 실제 실행 · 이번에는 문자열만 입력했습니다. RInput이 형식을 맞춰 같은 결과에 도달합니다.",
+          "caption": "2026-09-12 실제 랩 실행. 이번에는 문자열만 입력했습니다. RInput이 형식을 맞춰 같은 결과에 도달합니다.",
+          "callouts": [
+            {
+              "fromX": 15,
+              "x": 13,
+              "y": 14,
+              "note": "처음에는 Hello World라는 문자열입니다."
+            },
+            {
+              "fromX": 70,
+              "x": 17,
+              "y": 30,
+              "note": "RInput을 지나 input 키를 가진 딕셔너리가 됩니다."
+            }
+          ]
+        }
+      ]
+    }
   },
   "04_running_state.ipynb": {
     "overview": [
@@ -127,7 +222,31 @@
         ]
       }
     ],
-    "cells": {}
+    "cells": {
+      "32": [
+        {
+          "src": "/images/notebook-learning/04-lookup-comparison.png",
+          "width": 1994,
+          "height": 960,
+          "alt": "04_running_state.ipynb 실제 실행 · 수업용 고정 예약 목록에서 정상 조회와 정보 없음 응답을 비교합니다.",
+          "caption": "2026-09-12 실제 랩 실행. 수업용 고정 예약 목록에서 정상 조회와 정보 없음 응답을 비교합니다.",
+          "callouts": [
+            {
+              "fromX": 15,
+              "x": 39,
+              "y": 33,
+              "note": "Alice + Johnson + 98765는 Chicago → Miami 예약과 일치합니다."
+            },
+            {
+              "fromX": 78,
+              "x": 51,
+              "y": 47,
+              "note": "Bob의 27494는 예시 목록과 달라 정보 없음으로 답합니다. 정상적인 조회 실패이지 서버 오류는 아닙니다."
+            }
+          ]
+        }
+      ]
+    }
   },
   "05_documents.ipynb": {
     "overview": [
@@ -153,7 +272,54 @@
         ]
       }
     ],
-    "cells": {}
+    "cells": {
+      "12": [
+        {
+          "src": "/images/notebook-learning/05-document-metadata.png",
+          "width": 1900,
+          "height": 678,
+          "alt": "05_documents.ipynb 실제 실행 · 제공된 ReAct PDF를 읽은 뒤 metadata를 확인했습니다. 로더에 따라 키와 값은 달라집니다.",
+          "caption": "2026-09-12 실제 랩 실행. 제공된 ReAct PDF를 읽은 뒤 metadata를 확인했습니다. 로더에 따라 키와 값은 달라집니다.",
+          "callouts": [
+            {
+              "fromX": 15,
+              "x": 22,
+              "y": 27,
+              "note": "source는 읽은 파일의 출처입니다. title이 비어 있어도 이 경로로 원문을 추적할 수 있습니다."
+            },
+            {
+              "fromX": 75,
+              "x": 23,
+              "y": 83,
+              "note": "page는 페이지 위치입니다. 이 로더의 0은 첫 페이지를 뜻합니다."
+            }
+          ]
+        }
+      ],
+      "15": [
+        {
+          "src": "/images/notebook-learning/05-chunk-settings.png",
+          "width": 1994,
+          "height": 960,
+          "alt": "05_documents.ipynb 실제 실행 · 33쪽의 제공 PDF를 문자 기준 크기 1200·겹침 100 설정으로 나누어 112개 조각을 얻었습니다. 자료·로더가 다르면 개수도 달라집니다.",
+          "caption": "2026-09-12 실제 랩 실행. 33쪽의 제공 PDF를 문자 기준 크기 1200·겹침 100 설정으로 나누어 112개 조각을 얻었습니다. 자료·로더가 다르면 개수도 달라집니다.",
+          "callouts": [
+            {
+              "fromX": 15,
+              "x": 14,
+              "y": 28,
+              "note": "chunk_size와 chunk_overlap은 각각 크기와 경계 겹침 설정입니다."
+            },
+            {
+              "fromX": 70,
+              "x": 8,
+              "y": 97,
+              "note": "112는 문서 페이지 수가 아니라 분할된 청크 개수입니다."
+            }
+          ]
+        }
+      ]
+    }
   },
   "06_embeddings.ipynb": {
     "overview": [
@@ -179,7 +345,37 @@
         ]
       }
     ],
-    "cells": {}
+    "cells": {
+      "13": [
+        {
+          "src": "/images/notebook-learning/06-query-document-matrix.png",
+          "width": 1900,
+          "height": 1098,
+          "alt": "06_embeddings.ipynb 실제 실행 · 실제 임베딩의 유사도 행렬입니다. 계산은 유지하고 원본의 축 이름 두 줄만 바로잡았습니다.",
+          "caption": "2026-09-12 실제 랩 실행. 실제 임베딩의 유사도 행렬입니다. 계산은 유지하고 원본의 축 이름 두 줄만 바로잡았습니다.",
+          "callouts": [
+            {
+              "fromX": 12,
+              "x": 9,
+              "y": 49,
+              "note": "세로는 질문, 가로는 문서입니다. 함수의 첫 인자가 행이 됩니다."
+            },
+            {
+              "fromX": 48,
+              "x": 26,
+              "y": 65,
+              "note": "질문 1번과 문서 1번은 이탈리아 음식으로 대응합니다. 번호는 0부터 시작합니다."
+            },
+            {
+              "fromX": 86,
+              "x": 65,
+              "y": 19,
+              "note": "색상 막대는 유사도 수치입니다. 정답 확률이나 인증 점수가 아닙니다."
+            }
+          ]
+        }
+      ]
+    }
   },
   "07_vectorstores.ipynb": {
     "overview": [

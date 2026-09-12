@@ -15,7 +15,7 @@ hljs.registerLanguage('json', json);
 function highlightedLines(code, language) {
   if (language === 'text') return code.split('\n').map(text => [{text, classes: []}]);
   const html = hljs.highlight(code, {language, ignoreIllegals: true}).value;
-  const root = new DOMParser().parseFromString(html, 'text/html').body;
+  const root = new DOMParser().parseFromString('<div>' + html + '</div>', 'text/html').body.firstElementChild;
   const lines = [[]];
   function visit(node, classes = []) {
     if (node.nodeType === 3) {
