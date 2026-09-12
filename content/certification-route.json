@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "summary": "인증서 필수 경로는 07 인덱스 저장 → 09 서버 실행 → Frontend Evaluate → ASSESS TASK → 인증서 받기입니다. 08번의 질문·답변 비교는 선택 학습이며 최종 평가의 선행 조건이 아닙니다. 모델 주소는 원본 설정을 유지합니다. NVIDIA_BASE_URL이 설정된 환경은 base_url 인자를 추가하지 않아도 자동 적용되며, 주소 수정은 연결 오류·환경변수 미설정 때만 합니다. 같은 코드 셀의 여러 수정은 한 화면에 묶고, 원본 전체와 수정 후 전체를 전환해 봅니다. 전체 코드 복사에는 줄 번호가 들어가지 않습니다. 수정 후 전체는 원본 틀에 필요한 부분만 합친 코드입니다. 07번과 09번은 각각 한 페이지에서 모든 작업을 위에서 아래로 연속해 읽습니다. 이전/다음 버튼으로 작업을 하나씩 넘기지 않습니다. 08번 선택 실습도 파일 단위로 모아 봅니다.",
+  "summary": "인증서 필수 경로는 07 인덱스 저장 → 09 서버 실행 → Frontend Evaluate → ASSESS TASK → 인증서 받기입니다. 08번의 질문·답변 비교는 선택 학습이며 최종 평가의 선행 조건이 아닙니다. 모델 주소는 원본 설정을 유지합니다. NVIDIA_BASE_URL이 설정된 환경은 base_url 인자를 추가하지 않아도 자동 적용되며, 주소 수정은 연결 오류·환경변수 미설정 때만 합니다. 같은 코드 셀의 여러 수정은 한 화면에 묶고, 원본 전체와 수정 후 전체를 전환해 봅니다. 전체 코드 복사에는 줄 번호가 들어가지 않습니다. 수정 후 전체는 원본 틀에 필요한 부분만 합친 코드입니다. 07번과 09번은 각각 한 페이지에서 모든 작업을 위에서 아래로 연속해 읽습니다. 이전/다음 버튼으로 작업을 하나씩 넘기지 않습니다. 08번 선택 실습도 파일 단위로 모아 봅니다. 09번 서버는 원본 셀 5의 !python server_app.py를 Shift+Enter로 실행합니다. 별도 Terminal은 필요 없으며 [*]는 정상 서버 대기 상태입니다. 서버를 중지하려면 Kernel → Interrupt Kernel, 수정 후에는 셀 4 저장 → 셀 5 재실행 순서입니다.",
   "stages": [
     {
       "id": "index",
@@ -88,19 +88,19 @@
             }
           ],
           "execute": "원본이 아래와 같으면 수정 후 전체 코드를 한 번 복사해 같은 셀에 붙여넣습니다. Shift+Enter를 한 번 누르고 Ctrl+S로 저장합니다.",
-          "outcome": "Writing server_app.py 또는 Overwriting server_app.py가 나오면 다음으로 갑니다. 서버 실행은 다음 단계의 Terminal에서 합니다."
+          "outcome": "Writing server_app.py 또는 Overwriting server_app.py가 나오면 파일 저장 완료입니다. 바로 아래 셀 5에서 서버를 실행합니다."
         },
         {
           "id": "connect",
-          "title": "Terminal에서 서버 켜기",
-          "purpose": "파일을 작성하는 것과 서버를 켜는 것은 다릅니다. JupyterLab의 + → Terminal을 여세요.",
+          "title": "바로 아래 실행 셀 켜기",
+          "purpose": "09번의 서버 작성 셀 바로 아래에 있는 !python server_app.py 셀을 사용합니다. 별도 Terminal은 필요 없습니다.",
           "items": [
             {
               "action": "09-terminal"
             }
           ],
-          "execute": "명령 붙여넣기 → Enter. 이 Terminal은 평가가 끝날 때까지 켜 둡니다.",
-          "outcome": "Uvicorn running on http://0.0.0.0:9012가 보이면 준비 완료입니다.",
+          "execute": "기존 셀 5를 선택 → Shift+Enter. [*]가 유지되어도 서버가 실행 중인 정상 상태이므로 기다리지 말고 Part 3의 Frontend 링크를 엽니다.",
+          "outcome": "Uvicorn running on http://0.0.0.0:9012가 보이면 준비 완료입니다. 평가가 끝날 때까지 셀을 실행 중으로 두세요. 종료·수정이 필요하면 Kernel → Interrupt Kernel을 누릅니다.",
           "screenshotsFrom": "connect"
         }
       ]
@@ -187,7 +187,7 @@
     "title": "모델 주소·인증 오류가 날 때만 확인",
     "summary": "ChatNVIDIA는 명시한 base_url → NVIDIA_BASE_URL 환경변수 → SDK 기본 주소 순서로 사용합니다. 수업 환경에서 NVIDIA_BASE_URL이 http://llm_client:9000/v1로 설정돼 있으면 인자를 추가할 필요가 없습니다. 정상 실행되면 아래 수정은 하지 않습니다.",
     "notebook": "07번 모델 설정 셀을 실행한 뒤, 확인이 필요할 때만 print(instruct_llm.base_url)로 실제 주소를 볼 수 있습니다. 이 확인 코드는 필수 단계가 아닙니다.",
-    "server": "09번은 노트북이 아니라 Terminal에서 실행되는 별도 프로세스입니다. 그 환경에도 NVIDIA_BASE_URL이 전달돼 있으면 자동 적용됩니다. 환경변수가 없거나 다른 주소로 연결되어 오류가 날 때만 아래 해당 파일의 모델 주소를 지정하세요.",
+    "server": "09번의 !python server_app.py는 노트북 커널의 환경변수를 물려받는 별도 Python 프로세스를 실행합니다. NVIDIA_BASE_URL이 전달돼 있으면 자동 적용되므로 별도 주소 지정은 필요 없습니다. 미설정·다른 주소로 연결되어 오류가 날 때만 주소를 수정한 뒤 서버를 중지하고 셀 4 저장 → 셀 5 재실행 순서로 반영하세요.",
     "actions": [
       "07-model",
       "09-model"

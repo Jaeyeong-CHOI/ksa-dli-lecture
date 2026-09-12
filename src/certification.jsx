@@ -64,7 +64,7 @@ export function Certification(){
     <nav aria-label="선택 실습">{pages.filter(p=>p.optional).map(p=><a key={p.id} href={'#'+p.tasks[0].id}>{p.title}<ArrowRight size={14}/></a>)}</nav>
    </ExtraHelp>
    <ExtraHelp name="오류가 나거나 중간에 멈췄을 때" detailsRef={recovery}>
-    <p>07번 커널을 재시작했다면 설정 2개 → 문서 읽기 → 인덱스 생성·합치기 → 저장 순서로 돌아갑니다. docstore_index가 이미 정상 저장돼 있다면 09번부터 다시 시작할 수 있습니다. 서버는 Terminal에서 별도로 재시작합니다.</p>
+    <p>07번 커널을 재시작했다면 설정 2개 → 문서 읽기 → 인덱스 생성·합치기 → 저장 순서로 돌아갑니다. docstore_index가 이미 정상 저장돼 있다면 09번부터 다시 시작할 수 있습니다. 09번 서버는 Kernel → Interrupt Kernel로 중지한 뒤 셀 4 저장 → 셀 5 재실행 순서로 다시 켭니다.</p>
     <div className="simple-errors"><details><summary>{route.connectionHelp.title}</summary><p>{route.connectionHelp.summary}</p><p>{route.connectionHelp.notebook}</p><p>{route.connectionHelp.server}</p><CellEdits items={route.connectionHelp.actions.map(action=>({action}))} prepared={route.stages.find(s=>s.id==='server').tasks.find(t=>t.id==='server').items.map(i=>i.action)}/></details>{guide.recovery.map(([q,a])=><details key={q}><summary>{q}</summary><p>{a}</p></details>)}</div>
    </ExtraHelp>
    <ExtraHelp name="실제 ASSESS TASK · PASSED 검수 기록" detailsRef={verification}>
