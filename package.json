@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host 127.0.0.1 --port 5211",
-    "build": "vite build && node scripts/build-pages.mjs",
+    "build": "node scripts/build-notebook-reader.mjs && vite build && node scripts/build-pages.mjs",
     "preview": "vite preview --host 127.0.0.1"
   },
   "dependencies": {

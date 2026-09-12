@@ -1,0 +1,8 @@
+.full-cell-code{min-width:0;max-width:100%;margin:18px 0}
+.full-cell-code>.code-viewer{margin:0}
+.full-cell-code>.code-viewer>pre.code-surface{max-height:none}
+.full-cell-tabs{display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+.full-cell-tabs button{background:#fff;border:1px solid #d8dfd3;border-radius:4px;padding:9px 12px;font-size:12px;color:#52604c;min-height:38px}
+.full-cell-tabs button[aria-pressed=true]{background:#eff7e5;border-color:#76b900;color:#315306;font-weight:650}
+.full-cell-tabs small{color:#677260;font-size:11px;margin-left:auto}
+@media(max-width:550px){.full-cell-tabs small{flex-basis:100%;margin:2px 0}}

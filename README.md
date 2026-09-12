@@ -18,11 +18,11 @@
 
 실습 노트 목록에서는 별도 소개·실행 환경 안내·다운로드 홍보 박스 없이 챕터 목록을 표시합니다.
 
-기본 화면은 **원본 순서로 찾기**입니다. 각 노트의 관찰 가능한 학습 목표 3개와 선행 조건을 확인한 뒤, ipynb의 제목·코드 첫 줄·변수 이름으로 해당 셀을 찾습니다. 원본 코드 셀 105개 모두에 목적, 선행 조건, 입력과 결과, 실행 후 확인, 흔한 혼동을 개별 설명합니다. 설정·실행·TODO·선택·예상 실패를 구분하며, 코드가 생략된 설정/진단 셀도 원본 위치와 역할은 안내합니다. Jupyter 왼쪽 실행 횟수와 파일 내 셀 위치의 차이도 설명합니다.
+실습 노트는 **개념 → 전체 셀 코드 → 설명·실행 결과**를 파일마다 한 페이지에서 이어 읽습니다. 두 읽기 모드, 단계별 이전/다음, 학습 경로·목표 대시보드·확인 질문 UI와 진행률·완료 체크·학습 기록 저장은 제거했습니다. 개념 목차와 파일/코드 검색은 유지합니다.
 
-각 노트의 시작 화면에는 **3단계 학습 경로(총 30개)**를 제공합니다. 단계마다 연결된 원본 셀로 바로 이동하고, 처음 셀에서 직접 할 일을 펼쳐 봅니다. 주요 결과 셀에는 관찰할 출력과 해설을 펼치는 확인 질문을 넣었습니다. 최신 랩에서 달라진 코드 첫 줄도 검색하며, 버전 차이와 실행 주의사항은 해당 셀에 표시합니다. 학습 확인은 수료 채점이 아닙니다.
+42개 개념과 105개 셀을 한 번씩 배치합니다. 공통 코드 뷰어는 Get Certification과 동일하게 밝은 문법 강조·줄 번호·줄바꿈·확대·전체 복사를 제공하고, 셀 내용을 높이 제한 없이 표시합니다. 기존 정답과 검수 수정이 있는 15개 셀은 원본 전체/수정 후 전체를 전환하고 변경한 줄을 표시합니다. 완성본은 원래 틀에 해당 부분 수정만 합친 것이며 모델 이름·기본 주소를 임의 변경하지 않습니다. 일반 셀은 이미 공개한 한국어 ipynb, 인증 가이드 관련 수정 셀은 기존 실제 랩 검수 원본을 기준으로 합니다.
 
-**개념별로 배우기**에서는 기존 42개 소주제·시각자료·개별 풀이·핵심 정리를 한 단계씩 봅니다. 두 화면을 오갈 수 있고, 기존 `#cell-N`은 정확한 셀 해설로, `#section-N`·풀이·정리 주소는 기존 단계로 연결됩니다. 전역 검색도 노트와 코드 셀을 함께 찾습니다. “이 셀에 대해 질문하기”는 원본 파일·셀 위치를 보여 주고 사용자가 작성한 질문에 함께 전달하며 자동 전송하지 않습니다. 검색·진행 기록·목차는 노트북 10개 기준입니다. Google Drive 바로가기는 제공하지 않습니다.
+반복 안내·카드형 입출력 설명·별도 학습 목표/마무리 UI를 없애고, 용어 해설·필요한 준비·실행 결과를 해당 코드에 붙입니다. 노트북의 기존 14개 풀이 중 셀에 합친 정답은 중복 표시하지 않고 나머지 해설 예시는 유지합니다. 도식과 해당 셀의 실제 캡처도 유지합니다. 기존 `#cell-N`·`#section-N`·풀이 주소는 같은 파일의 해당 위치로 이동합니다. 질문하기는 셀 직접 링크의 파일·위치를 이어받으며 자동 전송하지 않습니다. Google Drive 바로가기는 제공하지 않습니다.
 
 ## Get Certification
 
@@ -94,7 +94,10 @@ React + Vite. `main` 브랜치 push 시 GitHub Actions가 정적 사이트를 �
 - `content/certification-guide.json`: 원본 부분 수정 가이드의 단계·위치·정답·실행 순서·오류 대처
 - `src/certification.jsx`, `src/certification-simple.css`: 필수 4단계·선택 실습·부분 수정 코드 뷰어
 - `content/notebook-companion.mjs`, `content/notebook-locations.json`, `content/notebook-lookup.mjs`: 셀별 해설·학습 목표·원본 위치·검색
-- `src/notebook-companion.jsx`, `src/notebook-companion.css`: 원본 순서 탐색·셀 해설 화면
+- `src/notebook-reader.jsx`, `src/notebook-reader.css`: 개념·코드·설명 중심 파일별 연속 읽기
+- `content/notebook-reader.mjs`: 셀 중복 없는 개념 배치·목차
+- `content/notebook-cell-edits.mjs`, `scripts/build-notebook-reader.mjs`, `content/notebook-reader-code.json`: 기존 원문+부분 정답으로 셀 전체 코드 생성
+- `src/full-cell-code.jsx`, `src/full-cell-code.css`: Get Certification과 실습 노트의 공통 전체 셀 뷰어
 - `content/notebook-downloads.json`, `src/notebook-downloads.jsx`, `src/notebook-downloads.css`: 한국어 노트북 다운로드 목록·사용법·노트별 연결
 - `public/downloads/notebooks/`, `public/downloads/Building-RAG-Agents-Korean-Notebooks.zip`: 검토한 한국어 ipynb 사본과 전체 묶음
 - `content/notebook-code.json`: 출력·인증 셀을 제외한 코드 발췌와 줄별 해설
@@ -107,7 +110,7 @@ React + Vite. `main` 브랜치 push 시 GitHub Actions가 정적 사이트를 �
 - `src/beginner-visuals.jsx`, `src/beginner-visuals.css`: 초심자를 위한 실행 환경·요청·평가 도식
 - `content/visual-models.mjs`: 시각자료 배치와 학습용 계산/예시
 - `src/code-viewer.jsx`, `src/code-viewer.css`: 밝은 문법 강조 코드 뷰어
-- `content/lesson-steps.mjs`, `src/reader.css`: 소주제별 단계 구성·기존 링크 매핑·학습 화면
+- `content/lesson-steps.mjs`, `src/reader.css`: 소주제별 단계 구성·기존 링크 매핑·기존 링크 매핑
 
 ## 출처
 
