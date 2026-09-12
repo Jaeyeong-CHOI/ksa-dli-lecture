@@ -1,0 +1,28 @@
+.notebook-workspace{display:grid;grid-template-columns:238px minmax(0,1fr);gap:44px;max-width:1330px;margin:0 auto;padding:38px 40px 64px;align-items:start;min-height:75vh}
+.notebook-sidebar{position:sticky;top:110px;align-self:start;max-height:calc(100dvh - 130px);overflow-y:auto;overscroll-behavior:contain;padding-right:10px;scrollbar-width:thin}
+.notebook-sidebar>h2{font-size:19px;letter-spacing:-.4px;line-height:1.6;margin:0 0 20px;padding:0 10px}
+.notebook-file-nav{display:flex;flex-direction:column;gap:4px}
+.notebook-file-nav>a{display:flex;gap:12px;align-items:flex-start;padding:13px 10px;font-size:13px;line-height:1.7;border-left:3px solid transparent;color:#505847;word-break:keep-all;overflow-wrap:anywhere}
+.notebook-file-nav>a:hover{background:#f5f7f1;color:#2d460c}
+.notebook-file-nav>a[aria-current=page]{background:#f0f6e8;border-left-color:#76b900;color:#2d460c;font-weight:650}
+.notebook-file-number{flex:0 0 25px;display:grid;place-items:center;height:25px;background:#edf1e5;font:11px var(--mono);color:#5b7d2c;margin-top:1px}
+.notebook-file-nav>a[aria-current=page] .notebook-file-number{background:#e0edc9;color:#31550d}
+.notebook-workspace>.notebook-reader{width:100%;max-width:none;padding:0;margin:0;min-width:0;scroll-margin-top:110px}
+.notebook-workspace .reader-heading h1{font-size:32px;line-height:1.4}
+.notebook-workspace .reader-file{font:12px/1.8 var(--mono);color:#718064;overflow-wrap:anywhere;margin:0 0 12px}
+.notebook-workspace .reader-heading h1:focus{outline:none}
+.notebook-mobile-select{display:none}
+@media(max-width:1100px){
+ .notebook-workspace{padding:32px 24px 56px;grid-template-columns:200px minmax(0,1fr);gap:28px}
+ .notebook-file-nav>a{padding:10px 6px;gap:9px;font-size:12px}
+ .notebook-workspace .reader-heading h1{font-size:28px}
+}
+@media(max-width:800px){
+ .notebook-workspace{display:block;padding:24px 20px 48px}
+ .notebook-sidebar{position:static;max-height:none;overflow:visible;padding:0 0 22px;margin-bottom:25px;border-bottom:1px solid #dce2d7}
+ .notebook-sidebar>h2{padding:0;margin-bottom:14px;font-size:18px}
+ .notebook-file-nav{display:none}
+ .notebook-mobile-select{display:block;font-size:12px;line-height:1.6;color:#68755a}
+ .notebook-mobile-select select{display:block;width:100%;max-width:100%;margin-top:7px;padding:12px 10px;font:inherit;font-size:14px;line-height:1.5;color:#293820;background:#fff;border:1px solid #cbd5be;border-radius:4px}
+ .notebook-workspace .reader-heading h1{font-size:26px}
+}

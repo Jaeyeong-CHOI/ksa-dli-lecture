@@ -12,6 +12,8 @@
 .reader-contents{display:flex;flex-wrap:wrap;gap:8px 22px;padding:16px 0 24px;border-bottom:1px solid #dce2d7}
 .reader-contents a{font-size:13px;color:#5c6e4c;line-height:1.8;text-decoration:underline;text-decoration-color:#b9c9a8;text-underline-offset:4px}
 .reader-section{margin-top:42px;scroll-margin-top:110px;min-width:0}
+.reader-section~.reader-section{margin-top:64px;padding-top:32px;border-top:1px solid #dce2d7}
+.reader-cell+.reader-cell{padding-top:28px;border-top:1px solid #edf0e9}
 .reader-section>h2{font-size:24px;line-height:1.5;margin:0 0 16px;letter-spacing:-.55px}
 .reader-concept p,.reader-cell>p,.reader-explanation p,.reader-example p,.reader-example li{font-size:15px;line-height:1.85;margin:10px 0;color:#444b40}
 .reader-cell{margin:28px 0 38px;scroll-margin-top:110px;min-width:0}
@@ -40,11 +42,6 @@
 .reader-algorithm{margin-top:24px;padding-top:18px;border-top:1px solid #e5eadd}
 .reader-explanation .reader-algorithm>p{font-size:14px}
 .reader-explanation p.reader-formula{font-family:var(--mono);font-size:13px;padding:10px 0;color:#31572c;overflow-wrap:anywhere}
-.reader-flow{margin:18px 0}
-.reader-flow figcaption{font-size:12px;color:#6c7564;margin-bottom:9px;line-height:1.7}
-.reader-flow ol{list-style:none;display:flex;flex-wrap:wrap;gap:8px 0;margin:0;padding:0}
-.reader-flow li{display:flex;align-items:center;font-size:12px;line-height:1.8;padding:6px 10px;background:#f3f7ed;overflow-wrap:anywhere;max-width:100%}
-.reader-flow li:not(:last-child):after{content:'→';margin-left:12px;color:#668a37}
 .reader-explanation p.reader-references{display:flex;gap:4px 16px;flex-wrap:wrap;align-items:baseline;font-size:11px;margin-top:16px;line-height:1.9}
 .reader-references>span{color:#727b69}
 .reader-references a{color:#466c29;text-decoration:underline;text-decoration-color:#b8cba4;text-underline-offset:3px;overflow-wrap:anywhere}
@@ -57,12 +54,11 @@
  .reader-contents{gap:8px 16px;padding-bottom:20px}
  .reader-contents a{font-size:12px}
  .reader-section{margin-top:32px}
+ .reader-section~.reader-section{margin-top:46px;padding-top:26px}
+ .reader-cell+.reader-cell{padding-top:24px}
  .reader-section>h2{font-size:21px}
  .reader-cell>h3{font-size:17px;gap:7px}
  .reader-concept p,.reader-cell>p,.reader-explanation p,.reader-example p,.reader-example li{font-size:14px}
  .reader-explanation li{font-size:13px}
  .reader-syntax dd,.reader-explanation .reader-algorithm>p{font-size:13px}
- .reader-flow ol{display:block}
- .reader-flow li{display:block;background:transparent;padding:4px 0}
- .reader-flow li:not(:last-child):after{content:'↓';display:block;margin:4px 0 0}
 }

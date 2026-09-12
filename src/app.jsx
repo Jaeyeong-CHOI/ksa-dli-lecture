@@ -12,8 +12,7 @@ import agenticConcepts from '../content/agentic-concepts.json';
 import './styles.css';
 import {lectures} from '../content/lectures.mjs';
 import {LectureLibrary} from './lecture-library.jsx';
-import {NotebookReader} from './notebook-reader.jsx';
-import {chapterBriefs} from '../content/notebook-companion.mjs';
+import {NotebookWorkspace} from './notebook-workspace.jsx';
 import {findNotebookCells} from '../content/notebook-lookup.mjs';
 import notebookLocations from '../content/notebook-locations.json';
 import fullNotebookCode from '../content/notebook-reader-code.json';
@@ -26,11 +25,6 @@ const COURSE = 'Building RAG Agents with LLMs';
 const PROGRAM = 'NVIDIA DLI 기반 산업 AI 전환(AX) 챌린지';
 const route = () => location.pathname.replace(/\/$/, '') || '/';
 const noteUrl = note => '/notes/' + note.slug;
-const stages = [
-  {title: '실습 환경과 모델 호출', text: '셀을 실행하고, 수업 서버의 모델에 첫 질문을 보냅니다.', notes: notes.slice(0, 3)},
-  {title: '체인과 대화 상태', text: '입력부터 답변까지 연결하고, 대화에서 얻은 정보를 이어 갑니다.', notes: notes.slice(3, 5)},
-  {title: '문서로 답하는 RAG 만들기', text: '문서를 준비해 검색·생성으로 연결한 뒤, 평가하고 API로 제공합니다.', notes: notes.slice(5)},
-];
 function Link({to, children, ...props}) {
   return <a href={to} {...props} onClick={event => {
     props.onClick?.(event);
@@ -41,22 +35,6 @@ function Link({to, children, ...props}) {
       window.scrollTo({top: 0, behavior: 'instant'});
     }
   }}>{children}</a>;
-}
-function NoteCard({note}) {
-  return <Link to={noteUrl(note)} className="chapter-card">
-    <div className="chapter-card-top"><span>실습 {note.no}</span></div>
-    <h3>{note.title}</h3><code className="notebook-card-file">{note.filename}</code><p>{chapterBriefs[note.slug].result}</p>
-    <div className="chapter-card-bottom"><span>{note.flow.join(' → ')}</span><ArrowRight size={18}/></div>
-  </Link>;
-}
-function NotebookList() {
-  return <main id="main" className="wide-page">
-    <div className="eyebrow">{COURSE}</div><h1>실습 노트</h1>
-    {stages.map((stage, i) => <section className="notebook-stage" key={stage.title}>
-      <div className="module-heading"><span>{String(i + 1).padStart(2, '0')}</span><h2>{stage.title}</h2></div>
-      <p>{stage.text}</p><div className="chapter-grid">{stage.notes.map(note => <NoteCard key={note.slug} note={note}/>)}</div>
-    </section>)}
-  </main>;
 }
 function SearchNotes({open, close}) {
   const dialog = useRef(), input = useRef();
@@ -71,7 +49,7 @@ function App() {
   const [path, setPath] = useState(route), [menu, setMenu] = useState(false);
   const [questionContext,setQuestionContext]=useState('');
   const [search, setSearch] = useState(false), [chat, setChat] = useState(false), [prefill, setPrefill] = useState(''), [status, setStatus] = useState({ready: false});
-  const current = notes.find(note => path === '/notes/' + note.slug);
+  const current = notes.find(note => path === '/notes/' + note.slug) || (['/notebooks','/practice'].includes(path) ? notes[0] : null);
   const lecture = lectures.find(item => path === '/lectures/' + item.slug) || (['/', '/notes/introduction-to-llm', '/resources'].includes(path) ? lectures[0] : null);
   const slides = Boolean(lecture);
   const downloads = path === '/notebook-downloads';
@@ -92,7 +70,7 @@ function App() {
       <nav className={menu ? 'open' : ''} aria-label="주 메뉴"><Link to="/" className={slides || downloads ? 'active' : ''}>강의자료</Link><Link to="/notebooks" className={current?.kind === 'notebook' || path === '/notebooks' ? 'active' : ''}>실습 노트</Link><Link to="/get-certification" className={path === '/get-certification' ? 'active' : ''}>Get Certification</Link><Link to="/agentic-coding" className={agentic ? 'active' : ''}>에이전틱 코딩 실습</Link></nav>
       <div className="header-actions"><button className="search-button" onClick={() => setSearch(true)} aria-label="학습 내용 검색"><Search size={18}/><span>검색</span></button>{!agentic&&<button className="ask-button" onClick={ask} aria-label="자료 도우미 열기"><MessageCircle size={16}/><span>질문하기</span></button>}<button className="menu-toggle icon-button" onClick={() => setMenu(!menu)} aria-expanded={menu} aria-label="메뉴 열기">{menu ? <X/> : <Menu/>}</button></div>
     </header>
-    {agentic ? <AgenticPractice/> : downloads ? <NotebookDownloads Link={Link}/> : slides ? <LectureLibrary lecture={lecture} Link={Link} course={COURSE} program={PROGRAM}/> : path === '/get-certification' ? <Certification/> : current ? <NotebookReader key={current.slug} note={current} notes={notes} Link={Link}/> : path === '/notebooks' || path === '/practice' ? <NotebookList/> : <main id="main" className="wide-page"><h1>학습 노트를 찾을 수 없어요.</h1><Link to="/" className="primary-button">강의자료로 이동<ArrowRight size={16}/></Link></main>}
+    {agentic ? <AgenticPractice/> : downloads ? <NotebookDownloads Link={Link}/> : slides ? <LectureLibrary lecture={lecture} Link={Link} course={COURSE} program={PROGRAM}/> : path === '/get-certification' ? <Certification/> : current ? <NotebookWorkspace note={current} notes={notes} Link={Link}/> : <main id="main" className="wide-page"><h1>학습 노트를 찾을 수 없어요.</h1><Link to="/" className="primary-button">강의자료로 이동<ArrowRight size={16}/></Link></main>}
     <footer className="site-footer"><div><strong>{COURSE}</strong><p>{PROGRAM}</p></div><div><span>2026년 충청권 ICT이노베이션스퀘어 확산사업</span></div></footer>
     <SearchNotes open={search} close={() => setSearch(false)}/><Chat questionContext={questionContext} clearQuestionContext={()=>setQuestionContext('')} open={chat} close={() => setChat(false)} prefill={prefill} status={status} initialMode={slides ? 'lecture' : 'notebook'}/>
   </>;
