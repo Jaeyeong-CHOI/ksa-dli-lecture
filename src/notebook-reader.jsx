@@ -1,5 +1,4 @@
-import React, {useEffect, useState} from 'react';
-import {Search, X} from 'lucide-react';
+import React, {useEffect} from 'react';
 import sources from '../content/notebook-code.json';
 import fullCode from '../content/notebook-reader-code.json';
 import locations from '../content/notebook-locations.json';
@@ -7,14 +6,12 @@ import captures from '../content/notebook-captures.json';
 import {cellGuides} from '../content/notebook-companion.mjs';
 import {liveNotebookNotes} from '../content/notebook-learning.mjs';
 import {notebookExplanations,explanationReferences} from '../content/notebook-explanations.mjs';
-import {readerSections,conceptLabels,withFullCellCode} from '../content/notebook-reader.mjs';
-import {findNotebookCells} from '../content/notebook-lookup.mjs';
+import {readerSections} from '../content/notebook-reader.mjs';
 import {FullCellCode} from './full-cell-code.jsx';
 import {CodeBlock} from './code-viewer.jsx';
 import {Screenshots} from './annotated-captures.jsx';
 import './notebook-reader.css';
 
-const searchSources = withFullCellCode(sources,fullCode);
 const exerciseId = i => i === 0 ? 'exercises' : 'exercise-'+i;
 function InlineText({text}) {
  const parts = text.split(/(`[^`]+`)/g);
@@ -54,8 +51,6 @@ function NotebookCell({note, block}) {
 export function NotebookReader({note}) {
  const source = sources[note.slug];
  const sectionBlocks = readerSections(note, source);
- const [query,setQuery] = useState('');
- const matches = query.trim() ? findNotebookCells(query,searchSources,locations,note.slug) : [];
  const integrated = new Set(Object.values(fullCode[note.slug]).map(c=>c.exercise).filter(i=>i!==undefined));
  const examples = note.exercises.map((e,i)=>({e,i})).filter(({i})=>!integrated.has(i));
  useEffect(()=>{
@@ -75,14 +70,7 @@ export function NotebookReader({note}) {
  },[note.slug]);
  return <article id="notebook-content" className="notebook-reader" aria-labelledby="notebook-title">
    <p className="reader-file">{note.filename}</p>
-   <header className="reader-heading"><h1 id="notebook-title" tabIndex={-1}>{note.title}</h1><p>{note.summary}</p></header>
-   <div className="reader-tools">
-     <label className="reader-search"><Search size={17}/><input type="search" aria-label="이 노트에서 개념·코드 찾기" placeholder="개념·코드 찾기" value={query} onChange={e=>setQuery(e.target.value)}/>{query&&<button type="button" aria-label="검색 지우기" onClick={()=>setQuery('')}><X size={16}/></button>}</label>
-   </div>
-   {query.trim() && <div className="reader-search-results" aria-label="셀 검색 결과">{matches.map(m=><a key={m.cell} href={'#cell-'+m.cell} onClick={()=>setQuery('')}>셀 {m.cell} · {m.guide.title}</a>)}{!matches.length&&<p>일치하는 코드가 없습니다.</p>}</div>}
-   <nav className="reader-contents" aria-label="이 파일의 개념과 코드">
-     {note.sections.map((s,i)=><a href={'#section-'+i} key={i}>{conceptLabels[note.slug][i]}</a>)}
-   </nav>
+   <header className="reader-heading"><h1 id="notebook-title" tabIndex={-1}>{note.title}</h1></header>
 
    {note.sections.map((section,i)=><section className="reader-section" id={'section-'+i} key={i}>
      <h2>{section.title}</h2>

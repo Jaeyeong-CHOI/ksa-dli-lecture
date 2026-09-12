@@ -1,16 +1,6 @@
 .notebook-reader{max-width:1000px;margin:0 auto;padding:36px 32px 64px;min-width:0}
 .notebook-reader .breadcrumb{margin-bottom:20px;overflow-wrap:anywhere;font-size:12px}
 .reader-heading h1{font-size:34px;letter-spacing:-1px;line-height:1.35}
-.reader-heading>p{margin-top:16px;color:#5d6559;font-size:16px;line-height:1.8;max-width:800px}
-.reader-tools{display:flex;gap:14px;margin:24px 0 18px;flex-wrap:wrap}
-.reader-search{display:flex;align-items:center;gap:10px;flex:1;min-width:180px;border:1px solid #d9dfd4;border-radius:5px;padding:0 12px;background:#fff}
-.reader-search input{min-width:0;width:100%;padding:12px 0;border:0;background:transparent;outline-offset:0;font-size:13px}
-.reader-search button{padding:7px;background:transparent;color:#666}
-.reader-tools select{max-width:100%;padding:10px;border:1px solid #d9dfd4;border-radius:5px;font:12px var(--mono);background:#fff;color:#50594b}
-.reader-search-results{border:1px solid #d9dfd4;padding:8px;margin:12px 0;max-height:300px;overflow:auto;border-radius:5px}
-.reader-search-results>a{display:block;padding:11px;font-size:13px}.reader-search-results>a:hover{background:#f0f6e9}
-.reader-contents{display:flex;flex-wrap:wrap;gap:8px 22px;padding:16px 0 24px;border-bottom:1px solid #dce2d7}
-.reader-contents a{font-size:13px;color:#5c6e4c;line-height:1.8;text-decoration:underline;text-decoration-color:#b9c9a8;text-underline-offset:4px}
 .reader-section{margin-top:42px;scroll-margin-top:110px;min-width:0}
 .reader-section~.reader-section{margin-top:64px;padding-top:32px;border-top:1px solid #dce2d7}
 .reader-cell+.reader-cell{padding-top:28px;border-top:1px solid #edf0e9}
@@ -48,11 +38,6 @@
 @media(max-width:700px){
  .notebook-reader{padding:24px 18px 48px}
  .reader-heading h1{font-size:28px}
- .reader-heading>p{font-size:14px}
- .reader-tools{gap:10px;margin:20px 0 12px}
- .reader-tools select{width:100%}
- .reader-contents{gap:8px 16px;padding-bottom:20px}
- .reader-contents a{font-size:12px}
  .reader-section{margin-top:32px}
  .reader-section~.reader-section{margin-top:46px;padding-top:26px}
  .reader-cell+.reader-cell{padding-top:24px}
