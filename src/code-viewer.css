@@ -49,3 +49,5 @@
  .code-viewer-dialog .expanded-code pre.code-surface{font-size:13px;max-height:calc(92vh - 125px)}
  .code-viewer-dialog .code-line-number{line-height:2.405em}
 }
+
+.code-viewer .code-line.is-changed:not(.is-highlighted){background:#edf7e0;box-shadow:inset 3px 0 #76b900}.code-viewer .code-line.is-changed:not(.is-highlighted)>.code-line-number{background:#e1f0cd;color:#4c7419}

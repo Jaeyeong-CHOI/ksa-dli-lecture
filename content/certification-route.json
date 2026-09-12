@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "summary": "인증서 필수 경로는 07 인덱스 저장 → 09 서버 실행 → Frontend Evaluate → ASSESS TASK → 인증서 받기입니다. 08번의 질문·답변 비교는 선택 학습이며 최종 평가의 선행 조건이 아닙니다. 모델 주소는 원본 설정을 유지합니다. NVIDIA_BASE_URL이 설정된 환경은 base_url 인자를 추가하지 않아도 자동 적용되며, 주소 수정은 연결 오류·환경변수 미설정 때만 합니다.",
+  "summary": "인증서 필수 경로는 07 인덱스 저장 → 09 서버 실행 → Frontend Evaluate → ASSESS TASK → 인증서 받기입니다. 08번의 질문·답변 비교는 선택 학습이며 최종 평가의 선행 조건이 아닙니다. 모델 주소는 원본 설정을 유지합니다. NVIDIA_BASE_URL이 설정된 환경은 base_url 인자를 추가하지 않아도 자동 적용되며, 주소 수정은 연결 오류·환경변수 미설정 때만 합니다. 같은 코드 셀의 여러 수정은 한 화면에 묶고, 원본 전체와 수정 후 전체를 전환해 봅니다. 전체 코드 복사에는 줄 번호가 들어가지 않습니다. 수정 후 전체는 원본 틀에 필요한 부분만 합친 코드입니다. 07번과 09번은 각각 한 페이지에서 모든 작업을 위에서 아래로 연속해 읽습니다. 이전/다음 버튼으로 작업을 하나씩 넘기지 않습니다. 08번 선택 실습도 파일 단위로 모아 봅니다.",
   "stages": [
     {
       "id": "index",
@@ -73,40 +73,22 @@
       "label": "09번",
       "tasks": [
         {
-          "id": "server-definitions",
-          "title": "검색·답변 코드 삽입",
-          "purpose": "09_langserve.ipynb에서 %%writefile server_app.py로 시작하는 셀을 찾으세요. 원래 모델 설정은 그대로 두고, 아래 체인 정의와 두 API 자리표시자만 수정합니다.",
+          "id": "server",
+          "title": "서버 셀 한 번에 완성하기",
+          "purpose": "09_langserve.ipynb의 %%writefile server_app.py 셀입니다. 체인 정의 추가와 두 API 연결을 하나의 전체 코드에 반영했습니다. 원래 모델 설정은 유지합니다.",
           "items": [
             {
               "action": "09-definitions"
-            }
-          ],
-          "execute": "아직 실행하지 않습니다. 같은 셀에서 다음 수정으로 이어갑니다.",
-          "outcome": "app = FastAPI( 줄 위에 코드가 추가됐습니다. 기존 app 정의는 지우지 않습니다."
-        },
-        {
-          "id": "server-generator",
-          "title": "답변 API의 빈칸 교체",
-          "purpose": "/generator가 자리표시자 대신 실제 답변 체인을 사용하게 합니다.",
-          "items": [
+            },
             {
               "action": "09-generator"
-            }
-          ],
-          "execute": "아직 실행하지 않습니다. 바로 아래 검색 API도 수정합니다.",
-          "outcome": "path=\"/generator\"인 add_routes 안에 generator_chain이 들어갑니다."
-        },
-        {
-          "id": "server-retriever",
-          "title": "검색 API의 빈칸 교체·저장",
-          "purpose": "/retriever에 검색 체인을 연결하면 서버 셀 수정이 끝납니다.",
-          "items": [
+            },
             {
               "action": "09-retriever"
             }
           ],
-          "execute": "이제 같은 셀에서 Shift+Enter를 한 번 누르고, Ctrl+S로 노트북을 저장합니다.",
-          "outcome": "Writing server_app.py 또는 Overwriting server_app.py가 나오면 파일 작성 완료입니다."
+          "execute": "원본이 아래와 같으면 수정 후 전체 코드를 한 번 복사해 같은 셀에 붙여넣습니다. Shift+Enter를 한 번 누르고 Ctrl+S로 저장합니다.",
+          "outcome": "Writing server_app.py 또는 Overwriting server_app.py가 나오면 다음으로 갑니다. 서버 실행은 다음 단계의 Terminal에서 합니다."
         },
         {
           "id": "connect",
@@ -180,7 +162,9 @@
   "aliases": {
     "start": "index-setup",
     "index-merge": "index-build",
-    "server": "server-definitions"
+    "server-definitions": "server",
+    "server-generator": "server",
+    "server-retriever": "server"
   },
   "optional": [
     "index-rag",
@@ -193,7 +177,7 @@
     "judge",
     "score"
   ],
-  "verificationNote": "2026-09-12 실제 랩에서 전체 교안의 Evaluate·ASSESS TASK PASSED와 인증서 페이지 열림을 확인했습니다. 간소화 경로는 그 코드의 의존성을 검토해 07번 미리보기·재검색 및 08번 사전 점검을 제외했습니다. 간소화 순서로 실제 평가를 새로 실행한 기록은 아닙니다. 모델 주소 인자는 환경변수 설정 시 자동 적용됨을 SDK로 별도 검증했으며, 정상 연결되는 환경의 중복 지정은 필수 경로에서 제외했습니다.",
+  "verificationNote": "2026-09-12 실제 랩에서 전체 교안의 Evaluate·ASSESS TASK PASSED와 인증서 페이지 열림을 확인했습니다. 간소화 경로는 그 코드의 의존성을 검토해 07번 미리보기·재검색 및 08번 사전 점검을 제외했습니다. 간소화 순서로 실제 평가를 새로 실행한 기록은 아닙니다. 모델 주소 인자는 환경변수 설정 시 자동 적용됨을 SDK로 별도 검증했으며, 정상 연결되는 환경의 중복 지정은 필수 경로에서 제외했습니다. 전체 코드 보기는 당시 원본에 이 가이드의 부분 수정만 합쳐 생성하며, 새 서버 구조로 다시 작성한 코드가 아닙니다.",
   "optionalPrerequisites": {
     "index-rag": [
       "07-helpers"
@@ -208,5 +192,23 @@
       "07-model",
       "09-model"
     ]
+  },
+  "inheritedModelActions": [
+    "07-rag-model",
+    "08-model",
+    "08-rag-model"
+  ],
+  "optionalOverrides": {
+    "prepare": {
+      "title": "08번 설정 셀 그대로 실행",
+      "purpose": "원본 모델·임베딩 설정을 실행합니다. NVIDIA_BASE_URL이 수업 주소로 설정돼 있으면 주소 인자를 추가하지 않습니다.",
+      "execute": "08번 셀 3을 원본 그대로 Shift+Enter."
+    },
+    "index-rag": {
+      "execute": "셀 22 실행 → 셀 40의 검색 TODO 두 곳을 수정 → 셀 40을 한 번 실행합니다. 모델 설정은 원본 그대로 유지합니다."
+    },
+    "evaluate": {
+      "execute": "08번 셀 9의 context_getter와 generator_chain을 수정 후 셀 9 전체를 한 번 실행합니다. 모델 설정은 원본 그대로 유지합니다."
+    }
   }
 }

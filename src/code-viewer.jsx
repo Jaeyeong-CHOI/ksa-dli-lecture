@@ -31,10 +31,10 @@ function highlightedLines(code, language) {
   visit(root);
   return lines;
 }
-function CodeSurface({lines, wrapped, highlightedLine, surfaceRef}) {
-  return <pre ref={surfaceRef} className={'code-surface ' + (wrapped ? 'is-wrapped' : 'is-nowrap')} tabIndex={0} aria-label="코드 내용"><code className="hljs">{lines.map((tokens, index) => <span className={'code-line' + (highlightedLine === index + 1 ? ' is-highlighted' : '')} data-code-line={index + 1} key={index}><span className="code-line-number" aria-hidden="true">{index + 1}</span><span className="code-line-text">{tokens.length ? tokens.map((token, i) => <React.Fragment key={i}>{token.classes.reduceRight((text, className) => <span className={className}>{text}</span>, token.text)}</React.Fragment>) : '\u200b'}</span>{index < lines.length - 1 && <span className="code-line-break" aria-hidden="true">{'\n'}</span>}</span>)}</code></pre>;
+function CodeSurface({lines, wrapped, highlightedLine, changedLines = [], surfaceRef}) {
+  return <pre ref={surfaceRef} className={'code-surface ' + (wrapped ? 'is-wrapped' : 'is-nowrap')} tabIndex={0} aria-label="코드 내용"><code className="hljs">{lines.map((tokens, index) => <span className={'code-line' + (highlightedLine === index + 1 ? ' is-highlighted' : '') + (changedLines.includes(index + 1) ? ' is-changed' : '')} data-code-line={index + 1} key={index}><span className="code-line-number" aria-hidden="true">{index + 1}</span><span className="code-line-text">{tokens.length ? tokens.map((token, i) => <React.Fragment key={i}>{token.classes.reduceRight((text, className) => <span className={className}>{text}</span>, token.text)}</React.Fragment>) : '\u200b'}</span>{index < lines.length - 1 && <span className="code-line-break" aria-hidden="true">{'\n'}</span>}</span>)}</code></pre>;
 }
-export function CodeBlock({code, label = 'Python', output = false, highlightedLine, language}) {
+export function CodeBlock({code, label = 'Python', output = false, highlightedLine, changedLines = [], language}) {
   const inferred = language || (output ? 'text' : /^\s*(?:%%bash|!?(?:docker|curl|pip|python|nohup)\s)/.test(code) ? 'bash' : 'python');
   const lines = useMemo(() => highlightedLines(code, inferred), [code, inferred]);
   const [copied, setCopied] = useState(false), [error, setError] = useState(false), [wrapped, setWrapped] = useState(true), [expanded, setExpanded] = useState(false);
@@ -53,11 +53,11 @@ export function CodeBlock({code, label = 'Python', output = false, highlightedLi
   }
   return <div className={'codeblock code-viewer' + (output ? ' output' : '')}>
     <div className="codebar"><span><Code2 size={15}/>{label}</span>{controls()}</div>
-    <CodeSurface lines={lines} wrapped={wrapped} highlightedLine={highlightedLine} surfaceRef={surface}/>
-    <div className="code-status"><span>{inferred === 'text' ? '출력' : inferred === 'bash' ? 'Shell / Jupyter' : inferred === 'json' ? 'JSON' : 'Python'} · {lines.length}줄</span>{highlightedLine && <span>{highlightedLine}행 살펴보는 중</span>}</div>
+    <CodeSurface lines={lines} wrapped={wrapped} highlightedLine={highlightedLine} changedLines={changedLines} surfaceRef={surface}/>
+    <div className="code-status"><span>{inferred === 'text' ? '출력' : inferred === 'bash' ? 'Shell / Jupyter' : inferred === 'json' ? 'JSON' : 'Python'} · {lines.length}줄</span>{highlightedLine && <span>{highlightedLine}행 살펴보는 중</span>}{changedLines.length>0&&<span>{changedLines.length}줄 변경 표시</span>}</div>
     {error && <p role="status">복사가 허용되지 않았어요. 코드를 직접 선택해 복사해 주세요.</p>}
     <dialog ref={dialog} className="code-viewer-dialog" aria-label={label + ' 코드 확대 보기'} onCancel={() => setExpanded(false)} onClick={event => { if (event.target === dialog.current) setExpanded(false); }}>
-      <div className="expanded-code"><div className="codebar"><span><Code2 size={16}/>{label}</span>{controls(true)}</div><CodeSurface lines={lines} wrapped={wrapped} highlightedLine={highlightedLine} surfaceRef={expandedSurface}/><div className="code-status">{lines.length}줄 · 코드는 실행되지 않습니다.</div></div>
+      <div className="expanded-code"><div className="codebar"><span><Code2 size={16}/>{label}</span>{controls(true)}</div><CodeSurface lines={lines} wrapped={wrapped} highlightedLine={highlightedLine} changedLines={changedLines} surfaceRef={expandedSurface}/><div className="code-status">{lines.length}줄 · 코드는 실행되지 않습니다.</div></div>
     </dialog>
   </div>;
 }
