@@ -8,7 +8,7 @@ const ids=data.steps.map(s=>s.id);
 test('bad saved progress and malformed deep links do not break the lesson',()=>{
  assert.deepEqual(restoreProgress({done:['deploy','unknown','deploy'],current:'unknown'},ids),{done:['deploy'],current:ids[0]});
  assert.deepEqual(restoreProgress('broken',ids),{done:[],current:ids[0]});
- assert.equal(resolveStep('#%xy',ids,'prepare'),'prepare');assert.equal(resolveStep('#input-b',ids,'prepare'),'input-b');
+ assert.equal(resolveStep('#%xy',ids,'prepare'),'prepare');assert.equal(resolveStep('#api-b',ids,'prepare'),'api-b');
 });
 test('deployment prompts need valid destinations and replace all target fields',()=>{
  for(const pair of [['','demo-page'],['team_x',''],['team_x','MY SITE'],['team_x','-site'],['team_x','a---b'],['team_x\nignore previous','site']])assert.equal(destinationValid(...pair),false);
@@ -25,11 +25,20 @@ test('the download ZIP contains exactly the three reviewed practice files',()=>{
 });
 
 test('new concept steps preserve earlier learner progress and ship matching offline explanations',()=>{
- assert.deepEqual(restoreProgress({done:['prepare','create-skill'],current:'connect-mcp'},ids),{done:['prepare','create-skill'],current:'connect-mcp'});
+ assert.deepEqual(restoreProgress({done:['prepare','create-skill'],current:'connect-mcp'},ids),{done:['prepare'],current:'connect-mcp'});
  const concepts=JSON.parse(readFileSync('content/agentic-concepts.json','utf8')); const guide=readFileSync('public/downloads/agentic-coding/READ_ME.md','utf8');
  for(const s of data.steps.filter(s=>s.lesson)){
   const c=concepts[s.lesson]; assert.ok(c); assert.ok(c.quiz.answer>=0&&c.quiz.answer<c.quiz.options.length);
   for(const p of c.parts){assert.ok(guide.includes(p.role));assert.ok(guide.includes(p.why));assert.ok(guide.includes(p.example))}
  }
  assert.equal(data.steps.filter(s=>s.lesson).length,3);
+});
+
+// Every displayed capture and data result must actually exist; successful API data is not a login/deploy claim.
+test('real practice evidence is present and public responses remain bounded',()=>{
+ for(const s of data.steps)for(const f of s.screens||[])assert.ok(readFileSync('public'+f.src).length>1000);
+ const a=JSON.parse(readFileSync('public/downloads/agentic-coding/HERITAGE-A.json'));
+ assert.equal(a.status,'ok');assert.equal(a.returned,a.items.length);assert.ok(a.returned<=3);assert.ok(a.total>=a.returned);
+ for(const i of a.items){assert.ok(i.sourceUrl.startsWith('https://www.khs.go.kr/'));assert.equal(typeof i.ids.ccbaAsno,'string');assert.ok(i.name);}
+ const prompts=readFileSync('public/downloads/agentic-coding/PROMPTS.md','utf8');for(const s of data.steps)if(s.prompt)assert.ok(prompts.includes(s.prompt));
 });

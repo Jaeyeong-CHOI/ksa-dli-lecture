@@ -1,133 +1,127 @@
-# Copyable prompts
+# 단계별 복사 프롬프트
 
-Use ChatGPT desktop Work. Invoke a Skill from the `@` picker, not by pasting its name as ordinary text. Replace every `<PLACEHOLDER>` before sending. Inputs and the Skill body are in EXAMPLES.md.
+웹 단계 번호와 같습니다. @ 이름은 실제 Skill 선택기에서도 골라 주세요. Codex CLI에서는 $ 이름을 사용합니다. {{TEAM}}과 {{PROJECT}}는 실제 조회한 대상 값으로 바꿉니다.
 
-## 1 · Create the Skill
+## 2. 실행할 작업 공간 준비하기
 
-Select `@skill-creator`, then paste:
+실행 위치: ChatGPT 데스크톱 Work · 개인 실습 폴더
 
-```text
-Create an instruction-only Skill named brief-to-page using the Skill body below.
-It should turn a short public brief into a responsive single-page static website.
-Keep creation and deployment separate. Do not add scripts, external services, or API keys.
-Create it for this host and tell me where it was saved and how to invoke it.
-If you cannot create an installed Skill here, say so; do not call an attachment an installed Skill.
+~~~text
+이 실습 폴더에서 사용할 수 있는 Skill 선택·파일 저장·브라우저 확인 기능과 Node.js/npx, Python 3 실행 가능 여부를 확인해 주세요. 아직 새 프로그램을 설치하거나 계정을 연결하지 말고, 가능한 항목과 없는 항목을 구분해 주세요.
+~~~
 
-[Paste the Skill body from EXAMPLES.md here.]
-```
+## 3. 이미 만들어진 Skill 하나 설치하기
 
-Check: `brief-to-page` appears in Skills / the `@` picker. Review the generated procedure before use.
+실행 위치: ChatGPT Work · Skill Installer / 설치 요청
 
-## 2 · Use it on Input A
+~~~text
+공개 저장소 https://github.com/NomaDamas/k-skill 의 geeknews-search 폴더만 이 호스트가 지원하는 Skill 위치에 설치해 주세요. 먼저 SKILL.md와 instruction.md를 읽고 역할과 실행 의존성을 설명해 주세요. 기존 동명 Skill은 비교 없이 덮어쓰지 말고, 다른 Skill은 설치하지 마세요. 설치한 위치와 실제 선택기에서 호출하는 방법을 알려 주세요.
+~~~
 
-Select `@brief-to-page`, then paste:
+## 4. 뉴스를 읽고 원문과 대조하기
 
-```text
-Use Input A below to create the page in this task's output folder.
-Follow the Skill. Open the result if you have a browser and check the topic link,
-FAQ toggles, and narrow layout. Report only checks you actually performed.
-Do not deploy yet.
+실행 위치: ChatGPT Work · @geeknews-search + 원문 브라우저
 
-[Paste Input A here.]
-```
+~~~text
+@geeknews-search
+현재 피드의 최신 글 5개를 조회하고 제목·게시 시각·링크를 보여 주세요. 각 글의 피드 요약을 한 문장으로 정리하고, 읽을 만한 글 2개와 그 이유를 골라 주세요. 피드 요약만 읽은 부분과 원문까지 확인한 부분을 구분하고, 실제 호출과 결과를 보여 주세요.
+다음 요청에서는 방금 반환된 제목의 키워드 하나로 피드 안에서 검색하겠습니다.
+~~~
 
-Check: open the saved file, use Explore topics, toggle both FAQs, and resize the browser. Keep this task and its file for deployment.
+## 7. 공공데이터를 가져오는 새 Skill 만들기
 
-## 3 · Reuse without repasting the procedure
+실행 위치: ChatGPT Work · @skill-creator
 
-In a fresh task/folder, select the same `@brief-to-page` and paste:
+~~~text
+@skill-creator
+국가유산청 공공데이터 API를 호출하는 새 Skill heritage-brief를 만들어 주세요. 기존 k-skill의 문화유산 Skill을 설치하는 작업이 아닙니다.
+공식 설명: https://www.data.go.kr/data/15034324/openapi.do
+목록: https://www.khs.go.kr/cha/SearchKindOpenapiList.do
+상세: https://www.khs.go.kr/cha/SearchKindOpenapiDt.do
 
-```text
-Use Input B below to create a separate page. Follow the same Skill.
-Do not overwrite Input A or copy its club name, topic list, FAQ answers, or green accent.
-Give the output path and a checked/not-checked summary. Do not deploy.
+입력은 국가유산명 검색어와 결과 수(기본 3, 최대 5)입니다. 목록의 ccbaKdcd·ccbaAsno·ccbaCtcd를 문자열 그대로 상세 조회에 사용하세요. Python 표준 라이브러리로 XML을 읽고 이름·유형·지역·주소·설명·공식 출처·조회 시각을 JSON으로 저장하세요.
+SKILL.md에는 적용 상황·수행 절차·완료 기준, scripts에는 재사용 호출 코드, references에는 확인한 API 계약을 분리해 주세요.
+정상 결과·검색 결과 없음·통신/XML 오류를 구분하고, 운영시간·입장료는 추측하지 마세요. 경복궁과 첨성대 두 입력으로 검증하고 실행한 검사와 미실행 검사를 나눠 보고하세요. 배포는 포함하지 마세요. 실제 생성 위치와 호출 방법도 알려 주세요.
+~~~
 
-[Paste Input B here.]
-```
+## 8. 경복궁 결과 3개 가져오기
 
-Check: compare with EXAMPLES.md. Then return to the task holding Input A.
+실행 위치: ChatGPT Work · @heritage-brief
 
-## 4 · Make one read-only MCP call
+~~~text
+@heritage-brief
+입력 A로 실제 API를 호출해 heritage-a.json에 저장해 주세요. 전체 일치 수와 반환 수를 구분하고 항목 하나의 원문과 이름·주소를 대조하세요. 실행 내역·출처·조회 시각을 보여 주세요. 기존 파일은 덮어쓰지 말고 배포하지 마세요.
+~~~
 
-After connecting `vercel` in Settings → MCP servers, paste:
+## 9. 입력을 바꾸고 실패도 확인하기
 
-```text
-Use the connected Vercel MCP to find the current documentation for deploying
-an agent-generated static page. Summarize what the direct deployment tool needs.
-Show which tool you actually called. Do not create or change any project.
-```
+실행 위치: ChatGPT Work · 새 작업 + 같은 @heritage-brief
 
-Check: a real Vercel documentation-tool call and result, not only an answer from model memory.
+~~~text
+@heritage-brief
+입력 B를 실제 호출해 heritage-b.json에 저장하고 A는 보존하세요. 이어서 존재하지않는유산zzzz를 조회해 정상적인 0건을 확인해 주세요. 네트워크 오류를 모의한 검사도 따로 실행해 0건과 다른 상태로 보고하는지 확인하세요. 실제 호출과 모의 검사를 구분하고, 없는 결과를 채우지 마세요.
+~~~
 
-## 5 · Choose the destination
+## 10. 검증한 데이터를 작은 웹페이지로
 
-```text
-Use Vercel MCP to list my accessible teams. Do not deploy.
-After I select a team, list its projects so I can choose a new, non-conflicting
-workshop project name. Report the selected team ID and the exact project name.
-```
+실행 위치: ChatGPT Work · heritage-a.json과 heritage-b.json이 있는 작업
 
-Choose your team. Pick a unique name, for example `ai-club-your-initials-demo` if unused. Keep the returned team ID and exact project name for the next prompts. Do not select an unrelated existing project.
+~~~text
+검토한 heritage-a.json과 heritage-b.json으로 한국어 문화유산 탐색 페이지를 하나의 index.html로 만들어 주세요. JSON을 안전하게 내장해 파일로 열어도 작동하게 해 주세요.
+A/B 전환, 현재 결과에서 이름 검색, 공식 설명 펼치기, 공식 API 출처 링크를 제공하세요. 전체 일치 수·수집 수·현재 표시 수를 구분하고 조회 시각과 “스냅샷: 브라우저가 API를 새로 호출하지 않음”을 표시하세요.
+운영시간·입장료는 추가하지 말고, 검색 0건 안내·모바일·키보드 포커스를 갖춰 주세요. 외부 라이브러리나 새 API, 로그인, DB는 필요 없습니다. 아직 배포하지 마세요.
+~~~
 
-## 6 · Deploy a Preview with MCP
+## 11. 클릭해서 동작을 증명하기
 
-```text
-Deploy the reviewed Input A page from this task using the connected Vercel MCP.
-Team: <TEAM>
-Project name: <PROJECT_NAME>
-Target: preview
-Use deploy_to_vercel with the actual complete source file contents.
-The generated index.html must be at the deployment root, not inside output/.
-Show the destination and file list before the tool action so I can review it.
-Do not use a different project, switch to production, or claim deployment from code generation alone.
-Return the real deployment ID and URL. If the deployment tool is unavailable,
-report that and stop; do not invent a URL or silently switch to the CLI.
-```
+실행 위치: 실제 생성한 index.html · 브라우저
 
-Check: approve the intended tool action in the host. A tool invocation and a deployment record must exist. No Git repository or Vercel CLI is required for this direct-file route.
+~~~text
+생성한 index.html을 실제 브라우저에서 확인해 주세요. A의 경회루 검색 → 검색어 지우기 → B로 전환 → 설명 열기 → 출처 열기 → 없는 이름 검색 순으로 검사하세요. 좁은 화면과 Tab/Enter도 확인하세요. 문제를 발견하면 재현 순서·기대·실제를 기록하고 해당 부분만 고친 뒤 재검사하세요. 브라우저 도구가 없으면 미실행 항목과 수동 검사 순서를 주세요. 아직 배포하지 마세요.
+~~~
 
-## 7 · Verify the actual deployment
+## 14. 첫 도구 호출은 조회부터
 
-```text
-Use Vercel MCP to inspect deployment <DEPLOYMENT_ID_OR_URL> in team <TEAM>.
-Wait for the build result. If it failed, read its build logs and identify the first actionable error.
-If it is ready, report the exact URL. Fetch the page when a suitable tool is available.
-Distinguish build success, retrieved HTML, and checks performed in a real browser.
-Do not say links, FAQ interaction, or mobile layout passed unless you tested them.
-```
+실행 위치: ChatGPT Work · Vercel MCP가 연결된 문화유산 페이지 작업
 
-Open the returned URL yourself. Check the heading, Explore topics, both FAQ toggles, keyboard focus, and a narrow viewport. If Preview requires sign-in, inspect its access/protection state; do not assume the URL is anonymously public.
+~~~text
+Vercel MCP를 사용해 현재 정적 HTML 파일을 직접 배포하는 공식 문서를 찾아 주세요.
+접근 가능한 팀과 선택한 팀의 기존 프로젝트도 조회해 주세요. 여러 팀이 있으면 어느 팀을 사용할지 먼저 물어보세요.
+deploy_to_vercel 도구가 사용 가능한지와 필요한 입력을 확인해 주세요.
+조회 결과의 팀 이름·ID를 보여 주세요. 아직 프로젝트를 만들거나 배포하지 마세요.
+~~~
 
-## 8 · One change, then another Preview
+## 15. Preview 주소 만들기
 
-```text
-Change only Input A's headline from "Learn AI. Build together." to
-"Build small. Learn together." Keep the remaining content, structure, and styles.
-Show the focused diff. Then deploy the updated files with Vercel MCP to a new Preview
-in team <TEAM>, using the same project name <PROJECT_NAME>.
-Return the new deployment ID and URL. Verify the new heading there, and say which
-checks were run. Do not overwrite or switch to an unrelated project.
-```
+실행 위치: ChatGPT Work · 문화유산 페이지 작업에서 Vercel MCP 실행
 
-Check: open the new URL, not a previous deployment URL. The heading changes; Topics and FAQ still work. Retain the previous deployment ID for comparison.
+~~~text
+Vercel MCP로 검토한 문화유산 페이지의 파일을 직접 배포해 주세요.
+팀: {{TEAM}}
+새 실습 프로젝트 이름: {{PROJECT}}
+대상: preview
 
-## 9 · Optional: publish the reviewed page
+배포할 파일 목록과 이 대상을 먼저 보여 주세요. 기존에 같은 이름의 프로젝트가 있으면 멈추고 알려 주세요.
+배포 요청에는 완전한 파일 내용과 루트의 index.html을 포함해 주세요. 정적 사이트이며 프레임워크는 없습니다.
+실제 배포 ID·URL·현재 빌드 상태를 반환하세요. 다른 프로젝트·커스텀 도메인·보호 설정은 바꾸지 마세요.
+~~~
 
-```text
-I have reviewed this version and want to publish it to production.
-Use Vercel MCP with team <TEAM>, project <PROJECT_NAME>, and target production.
-Deploy the same reviewed source files. Report the real deployment record and URL.
-Check the resulting access behavior without automatically disabling project protection.
-Do not change a custom domain or an unrelated project.
-```
+## 16. 실제 URL에서 확인하기
 
-Check: open the final address in the intended access context. Production and anonymous access are separate checks.
+실행 위치: ChatGPT + 브라우저의 새 Preview URL
 
-## 10 · If blocked, preserve an honest handoff
+~~~text
+방금 만든 실제 배포 ID를 기준으로 Vercel MCP에서 최종 상태를 확인해 주세요.
+실패했다면 빌드 로그의 원인을 설명하고 그 오류만 수정해 주세요.
+성공했다면 실제 URL을 열어 제목, A/B 전환, 이름 검색, 설명 펼치기, 좁은 화면과 키보드 조작을 확인해 주세요.
+상태 확인과 실제 브라우저 검사를 구분해 보고하고, 실행하지 못한 항목은 미확인으로 표시하세요. Preview 보호 설정을 자동으로 끄지 마세요.
+~~~
 
-```text
-Do not claim success for steps that did not run.
-Report: available output files; Skill invocation status; connected tools;
-last real deployment ID/URL, if any; the blocking error; and one concrete next action.
-Keep the generated page intact. Do not install another tool or deploy elsewhere.
-```
+## 17. 한 가지만 바꾸고 재배포하기
+
+실행 위치: ChatGPT Work · 같은 문화유산 페이지 작업과 실습 프로젝트
+
+~~~text
+현재 페이지의 큰 제목만 “우리 동네 유산, 근거와 함께.”로 바꾸고 JSON 데이터·조회 시각·기능은 유지해 주세요. 변경 차이를 보여 주세요.
+검토한 파일을 Vercel MCP로 팀 {{TEAM}}, 프로젝트 {{PROJECT}}의 새 preview에 배포해 주세요. 새 deployment ID와 URL을 반환하고 새 URL에서 제목·A/B 전환·검색·설명을 확인하세요. 이전 배포는 삭제하지 마세요.
+~~~

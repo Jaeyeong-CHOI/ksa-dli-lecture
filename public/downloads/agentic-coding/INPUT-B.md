@@ -1,15 +1,7 @@
-# Input B — Research Reading Circle
+# 입력 B
 
-Fictional practice page. Use a new task folder; do not overwrite Input A.
-- Name: Research Reading Circle
-- Audience: students who want to discuss research papers critically
-- Headline: Read closely. Ask better questions.
-- Description: A reading circle focused on claims, evidence, and limitations.
-- Topics: Research questions; experimental evidence; reproducibility
-- Format: Pick a claim; inspect the evidence; propose a follow-up
-- Primary action: Explore topics — jump to the Topics section
-- FAQ: Must I understand every equation? Bring one question and one observation from the paper.
-- FAQ: What should I share? One claim, supporting evidence, and a limitation.
-- No date, venue, price, registration, or contact details have been supplied. Do not add them.
-- Add a small "Fictional workshop example" label.
-- Visual direction: warm off-white, dark text, one blue accent; concise and readable.
+검색어: 첨성대
+최대 결과: 3개
+저장 파일: heritage-b.json
+A의 결과를 덮어쓰지 말고 새로 API를 호출합니다.
+추가 확인: 존재하지않는유산zzzz → 검색 결과 없음. 통신 오류와 구분합니다.

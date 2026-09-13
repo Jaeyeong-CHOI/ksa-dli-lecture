@@ -1,15 +1,7 @@
-# Input A — AI Study Club
+# 입력 A
 
-Fictional practice page. This is not an existing product.
-- Name: AI Study Club
-- Audience: students who want to learn AI by building small things together
-- Headline: Learn AI. Build together.
-- Description: A study club for turning questions into small, testable projects.
-- Topics: RAG foundations; coding agents; useful evaluation
-- Format: Read one idea; build one example; share what worked
-- Primary action: Explore topics — jump to the Topics section on this page
-- FAQ: Do I need experience? Basic Python helps; beginners can start with guided examples.
-- FAQ: What will I make? A small working artifact and a short explanation of how you checked it.
-- No date, venue, price, registration, or contact details have been supplied. Do not add them.
-- Add a small "Fictional workshop example" label.
-- Visual direction: warm off-white, dark text, one green accent; concise and readable.
+검색어: 경복궁
+최대 결과: 3개
+저장 파일: heritage-a.json
+이름·유형·지역·주소·공식 설명·출처·조회 시각을 반환합니다.
+운영시간·입장료·현재 개방 여부는 만들지 않습니다.

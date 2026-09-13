@@ -1,0 +1,68 @@
+{
+  "source": {
+    "title": "GeekNews - 개발/기술/스타트업 뉴스 서비스",
+    "id": "https://news.hada.io/rss/news",
+    "updated": "2026-09-13T13:06:09+09:00",
+    "home_url": "https://news.hada.io",
+    "feed_url": "https://news.hada.io/rss/news",
+    "category": "technology"
+  },
+  "count": 5,
+  "items": [
+    {
+      "id": "https://news.hada.io/topic?id=33611",
+      "title": "Bun의 컴파일 시간을 이해하려고 빌드 시각화 도구를 만들었다",
+      "link": "https://news.hada.io/topic?id=33611",
+      "published": "2026-09-13T13:06:09+09:00",
+      "updated": "2026-09-13T13:06:09+09:00",
+      "author_name": "neo",
+      "author_url": "https://news.hada.io/user/neo",
+      "summary": "buildprof 는 Linux 빌드 명령이 실행하는 모든 하위 프로세스를 하나의 타임라인으로 보여주는 오픈소스 추적 도구로, 병렬성 부족, 반복 작업, 의존성 다운로드, 오래 걸리는 컴파일과 링크 단계를 확인할 수 있음 Bun의 Zig 빌드를 추적한 결과, 전체 24분 24초 중 최종 링...",
+      "content_html": "<ul>\n<li><strong>buildprof</strong>는 Linux 빌드 명령이 실행하는 모든 하위 프로세스를 하나의 타임라인으로 보여주는 오픈소스 추적 도구로, 병렬성 부족, 반복 작업, 의존성 다운로드, 오래 걸리는 컴파일과 링크 단계를 확인할 수 있음</li>\n<li>Bun의 Zig 빌드를 추적한 결과, 전체 24분 24초 중 <strong>최종 링...</p>"
+    },
+    {
+      "id": "https://news.hada.io/topic?id=33609",
+      "title": "Real-SWE: 비공개 실무 기업 코드베이스에서 AI 모델을 평가하는 벤치마크",
+      "link": "https://news.hada.io/topic?id=33609",
+      "published": "2026-09-13T11:39:52+09:00",
+      "updated": "2026-09-13T11:39:52+09:00",
+      "author_name": "neo",
+      "author_url": "https://news.hada.io/user/neo",
+      "summary": "Real-SWE 는 실제 기업에서 사용 허가를 받은 비공개 프로덕션 코드베이스와 업무를 바탕으로, 코딩 에이전트가 소프트웨어 엔지니어의 실무를 수행할 수 있는지 평가함 모델 단독이 아니라 모델과 기본 하네스의 조합 을 평가하며, 과제마다 8회 독립 실행한 평균 해...",
+      "content_html": "<ul>\n<li><strong>Real-SWE</strong>는 실제 기업에서 사용 허가를 받은 비공개 프로덕션 코드베이스와 업무를 바탕으로, 코딩 에이전트가 소프트웨어 엔지니어의 실무를 수행할 수 있는지 평가함</li>\n<li>모델 단독이 아니라 <strong>모델과 기본 하네스의 조합</strong>을 평가하며, 과제마다 8회 독립 실행한 평균 해...</p>"
+    },
+    {
+      "id": "https://news.hada.io/topic?id=33608",
+      "title": "나만 빼고 모두 AI 개발 속도를 늦춰야 한다",
+      "link": "https://news.hada.io/topic?id=33608",
+      "published": "2026-09-13T11:36:52+09:00",
+      "updated": "2026-09-13T11:36:52+09:00",
+      "author_name": "neo",
+      "author_url": "https://news.hada.io/user/neo",
+      "summary": "AI가 인간의 노동을 대체해 사회 붕괴 를 일으킬 수 있다는 명분으로 전 세계 최첨단 모델 연구개발 중단을 요구하지만, 정작 목적은 자기 회사의 추격과 세계 지배라는 풍자 임 개발 중단 기간에 Techaro의 Lygma AGI lab 이 경쟁사를 따라잡고, In...",
+      "content_html": "<ul>\n<li>AI가 인간의 노동을 대체해 <strong>사회 붕괴</strong>를 일으킬 수 있다는 명분으로 전 세계 최첨단 모델 연구개발 중단을 요구하지만, 정작 목적은 자기 회사의 추격과 세계 지배라는 <strong>풍자</strong>임</li>\n<li>개발 중단 기간에 Techaro의 <strong>Lygma AGI lab</strong>이 경쟁사를 따라잡고, In...</p>"
+    },
+    {
+      "id": "https://news.hada.io/topic?id=33607",
+      "title": "Show GN: irasutoya - (Claude Skill) いらすとや 이라스토야 일러스트를 검색·다운로드해 활용",
+      "link": "https://news.hada.io/topic?id=33607",
+      "published": "2026-09-13T10:35:28+09:00",
+      "updated": "2026-09-13T10:35:28+09:00",
+      "author_name": "molmoty",
+      "author_url": "https://news.hada.io/user/molmoty",
+      "summary": "Claude가 슬라이드·문서·블로그 글을 만들 때 いらすとや에서 어울리는 일러스트를 찾아 투명 PNG로 받아 바로 넣어주는 스킬입니다. Claude Design 캔버스에서도 씁니다. [IMG] how it",
+      "content_html": "<p>Claude가 슬라이드·문서·블로그 글을 만들 때 いらすとや에서 어울리는 일러스트를 찾아 투명 PNG로 받아 바로 넣어주는 스킬입니다. Claude Design 캔버스에서도 씁니다.</p>\n<p><a href=\"https://raw.githubusercontent.com/hsol/irasutoya/main/assets/how-it-works.png\" rel=\"noopener noreferrer\">[IMG] how it"
+    },
+    {
+      "id": "https://news.hada.io/topic?id=33606",
+      "title": "Dreeve - 운동 데이터를 직접 보관하고 분석하는 셀프 호스팅 대시보드",
+      "link": "https://news.hada.io/topic?id=33606",
+      "published": "2026-09-13T10:10:02+09:00",
+      "updated": "2026-09-13T10:10:02+09:00",
+      "author_name": "xguru",
+      "author_url": "https://news.hada.io/user/xguru",
+      "summary": "달리기와 사이클링 등 운동 기록을 내 서버에 모아 얼마나 꾸준히 운동했고, 어디를 다녔으며, 기록이 어떻게 달라졌는지 살펴보는 오픈소스 대시보드 이전 이름은 Statistics for Strava 이며, Strava 연동뿐 아니라 운동 기기에서 내보낸 FIT/TCX/GPX 파일도 가져...",
+      "content_html": "<ul>\n<li>달리기와 사이클링 등 운동 기록을 내 서버에 모아 <strong>얼마나 꾸준히 운동했고, 어디를 다녔으며, 기록이 어떻게 달라졌는지</strong> 살펴보는 오픈소스 대시보드</li>\n<li>이전 이름은 <strong>Statistics for Strava</strong>이며, Strava 연동뿐 아니라 운동 기기에서 내보낸 FIT/TCX/GPX 파일도 가져...</p>"
+    }
+  ]
+}
