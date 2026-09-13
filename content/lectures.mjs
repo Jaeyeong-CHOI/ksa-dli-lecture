@@ -70,11 +70,11 @@ export const lectures = [
     "title": "Product Building with Agentic Coding — Workshop",
     "number": 6,
     "pages": 60,
-    "updatedAt": "2026-09-13T12:19:55.907751Z",
+    "updatedAt": "2026-09-13T20:14:41.674754+00:00",
     "pdf": "/downloads/Product-Building.pdf",
     "cover": "/lecture-covers/product-building.webp",
-    "bytes": 4251395,
+    "bytes": 3741672,
     "releaseAt": "2026-09-17T18:00:00+09:00",
-    "sha256": "a0ec8322d807b1ca922740e70b79743d8937beeab331129681ae00173f683830"
+    "sha256": "80863fcd8134bf6ba325ab9403d3533ca90b3e316bc8abc5161f580cc8452090"
   }
 ];
