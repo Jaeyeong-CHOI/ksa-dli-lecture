@@ -42,9 +42,13 @@ Q&A는 **강의자료 기반 / 실습노트 기반**으로 구분합니다. 강�
 
 ## 에이전틱 코딩 실습
 
-`/agentic-coding`은 상단의 네 번째 메뉴입니다. ChatGPT 데스크톱 Work에서 **Skill 만들기 → 입력 A/B로 재사용 → Vercel MCP 연결·조회 → Preview 배포·확인 → 한 가지 수정 후 재배포**를 13단계(개념 3 + 실행 10)로 따라갑니다. 개념 단계에서는 프롬프트·LLM·Skill·MCP의 차이, Skill 필수/선택 파일, MCP의 Host/Client/Server·도구·인증을 인터랙티브 구성요소 탐색과 실행 흐름·확인 문제로 설명합니다. MCP 설정 및 배포 입력값의 역할도 해당 단계에서 찾아볼 수 있습니다. 시작 안내 다운로드에는 같은 개념 설명을 함께 담습니다. 각 단계에는 실행 위치, 실행 순서, 복사할 요청문, 직접 확인할 성공 기준과 막혔을 때 대처가 있습니다. 실제 Skill 생성·OAuth·배포는 학습자의 ChatGPT와 Vercel에서 진행하며 이 사이트가 대신 실행하지 않습니다.
+`/agentic-coding`은 **기존 Skill 사용 → 새 공공데이터 Skill 만들기 → 웹페이지 제작·검토 → MCP·Preview 배포** 네 실습으로 구성합니다. Get Certification처럼 상단에서 실습을 전환하고, 한 실습의 준비·요청·결과 확인을 한 페이지에서 위부터 쭉 읽습니다. 기존 19개 해시 주소와 검색 결과는 해당 실습의 본문 위치로 이동합니다.
 
-기존 PPT와 함께 쓰는 시작 안내·프롬프트·예시 3파일 ZIP과 개별 Skill/입력 예시를 내려받을 수 있습니다. 단계별 요청문은 화면 그대로 복사하거나 TXT로 받습니다. 배포 대상 입력은 요청문에만 반영하며 서버나 저장소로 전송하지 않습니다. 직접 확인한 단계만 브라우저에 저장하고, 단계별 주소·이전/다음·모바일 선택기와 전역 검색을 지원합니다.
+19개 단계 사이드바·진행률·완료 체크·기록 초기화·이전/다음·클릭형 개념 탐색·퀴즈·반복 안내 카드를 제거했습니다. 진행 상태는 더 이상 브라우저에서 읽거나 저장하지 않습니다. 상세 개념은 본문형 설명으로, 실제 캡처는 필요한 위치에서 접어봅니다. API 통신 실패 시 XML 복구는 선택 항목이며 직접 링크로 열면 자동으로 펼칩니다. API 정상 응답과 실패, 부분 스냅샷, Vercel 인증 미완료 분기는 유지합니다.
+
+복사할 프롬프트는 공통 전체 코드 뷰어로 높이 제한 없이 표시하고 줄바꿈·확대·전체 복사를 지원합니다. 배포 팀·프로젝트는 한 번 입력해 배포와 재배포 요청에 함께 반영하며, 올바른 입력 전에는 미완성 요청문을 복사할 수 없습니다. 입력은 서버나 저장소에 전송하지 않습니다. 전체 자료 ZIP과 필요한 단계별 첨부 다운로드는 유지하며 요청문·다운로드 원본·실제 검수 범위는 변경하지 않았습니다. 별도 PPT·Drive ZIP은 이번 UI 변경 대상이 아닙니다.
+
+기존 k-skill과 새 공공데이터 Skill은 별도 실습입니다. 실제 웹 Skill 사용 및 첨부 XML을 사용한 복구·페이지 검토 기록과, 아직 완료되지 않은 Vercel 인증·배포 검증을 구분합니다. 이 사이트에서 계정 연결이나 배포를 대신 실행하지 않습니다.
 
 ## 코드 읽기
 
@@ -59,7 +63,7 @@ highlight.js 기반의 밝은 코드 뷰어를 사용합니다. Python·셸·JSO
 - 최신 강의 슬라이드 6종의 PDF 열람·다운로드
 - JupyterLab 노트북 00–09번별 해설 노트 10개
 - 한국어 ipynb 10개 개별 다운로드와 전체 ZIP
-- Skill·MCP·Vercel을 연결하는 에이전틱 코딩 실습 13단계와 요청문·예시 다운로드
+- Skill·MCP·Vercel을 연결하는 에이전틱 코딩 실습 4개 연속 페이지와 요청문·예시 다운로드
 - 셀 번호로 연결되는 원본 코드 105개·핵심 연산 해설, 노트북 풀이·확인 예제 14개
 - NVIDIA 공식 심볼 파비콘
 - 강의자료+관련 논문 / 실습노트로 구분된 Q&A 도우미
@@ -87,9 +91,10 @@ React + Vite. `main` 브랜치 push 시 GitHub Actions가 정적 사이트를 �
 
 - `content/agentic-practice.json`, `src/agentic-practice.jsx`, `src/agentic-practice.css`: 에이전틱 코딩 단계별 안내·복사·다운로드 UI
 - `content/agentic-concepts.json`, `content/agentic-field-roles.mjs`, `src/agentic-concepts.jsx`, `src/agentic-concepts.css`: 초심자 개념·구성요소·실행 흐름·확인 문제; 다운로드 안내에도 같은 원문 반영
-- `src/agentic-practice-model.mjs`: 배포 대상 검증·요청문 치환·로컬 진행 기록
+- `content/agentic-pages.mjs`: 4개 실습별 연속 페이지·기존 해시 연결
+- `src/agentic-practice-model.mjs`: 배포 대상 검증·요청문 치환 (과거 기록 파서는 호환 테스트용으로만 유지)
 - `public/downloads/agentic-coding/`: 공개 실습 ZIP 및 개별 교육용 예시; `node scripts/build-agentic-files.mjs`로 JSON의 개별 예시와 3파일 ZIP 갱신
-- `node --test scripts/test-agentic-practice.mjs`: 진행 기록·대상 치환·예시 일치·ZIP 내용 검증
+- `node --test scripts/test-agentic-practice.mjs tests/agentic-pages.test.mjs`: 기존 데이터 호환·실습별 직접 링크·조건 분기·대상 치환·예시·ZIP 검증
 - `content/notes.mjs`: PPT·노트북별 한국어 해설, 문제 풀이, 오류 해결
 - `content/certification-guide.json`: 원본 부분 수정 가이드의 단계·위치·정답·실행 순서·오류 대처
 - `src/certification.jsx`, `src/certification-simple.css`: 필수 4단계·선택 실습·부분 수정 코드 뷰어
