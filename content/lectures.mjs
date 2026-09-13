@@ -4,13 +4,13 @@ export const lectures = [
     "label": "Introduction to LLM",
     "title": "Introduction to LLM",
     "number": 1,
-    "pages": 66,
-    "updatedAt": "2026-09-10T12:26:27.961Z",
+    "pages": 71,
+    "updatedAt": "2026-09-13T15:12:58.241064+00:00",
     "pdf": "/downloads/Introduction-to-LLM.pdf",
     "cover": "/lecture-covers/introduction-to-llm.webp",
-    "bytes": 11698654,
+    "bytes": 13552870,
     "releaseAt": "2026-09-14T18:00:00+09:00",
-    "sha256": "6d80f79b4cf09463f0fecd23500243882ede80c7b43b6c55e9e36e33d3c7153c"
+    "sha256": "72f602d37d6cd46fd43aa3c8e5c3f24f9a2df00dda01cc7d1f05080084751489"
   },
   {
     "slug": "ragas",
