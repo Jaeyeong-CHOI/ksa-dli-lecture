@@ -52,10 +52,23 @@ export const lectures = [
     "sha256": "e51f75fe13877c26b40d78906bfea3b72b35eeb29cedd667daa0d838cb39bc98"
   },
   {
+    "slug": "search-ranking",
+    "label": "Search Ranking",
+    "title": "Search Ranking: BM25, Embeddings & Evaluation",
+    "number": 5,
+    "pages": 64,
+    "updatedAt": "2026-09-13T07:19:05.197Z",
+    "pdf": "/downloads/Search-Ranking.pdf",
+    "cover": "/lecture-covers/search-ranking.webp",
+    "bytes": 1007008,
+    "releaseAt": "2026-09-16T18:00:00+09:00",
+    "sha256": "c8bff32057d227eecdd5cb688329d4c0f3888422e1aaec41e8d65806f17e9de5"
+  },
+  {
     "slug": "product-building",
     "label": "Product Building",
     "title": "Product Building with Agentic Coding — Workshop",
-    "number": 5,
+    "number": 6,
     "pages": 60,
     "updatedAt": "2026-09-13T06:22:00.000Z",
     "pdf": "/downloads/Product-Building.pdf",
