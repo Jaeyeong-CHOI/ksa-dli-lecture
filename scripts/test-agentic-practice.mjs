@@ -42,3 +42,16 @@ test('real practice evidence is present and public responses remain bounded',()=
  for(const i of a.items){assert.ok(i.sourceUrl.startsWith('https://www.khs.go.kr/'));assert.equal(typeof i.ids.ccbaAsno,'string');assert.ok(i.name);}
  const prompts=readFileSync('public/downloads/agentic-coding/PROMPTS.md','utf8');for(const s of data.steps)if(s.prompt)assert.ok(prompts.includes(s.prompt));
 });
+
+test('conditional lesson paths and both recovery requests survive the offline export',()=>{
+ const guide=readFileSync('public/downloads/agentic-coding/READ_ME.md','utf8');
+ const prompts=readFileSync('public/downloads/agentic-coding/PROMPTS.md','utf8');
+ for(const s of data.steps){
+  for(const r of s.routes||[]){assert.ok(ids.includes(r.step),`invalid target ${r.step}`);assert.ok(guide.includes('/#'+r.step));}
+  if(s.followup){assert.ok(prompts.includes(s.followup.prompt));assert.ok(prompts.includes(s.followup.where));}
+ }
+ const recovery=data.steps.find(s=>s.id==='snapshot-recovery');
+ assert.ok(recovery.followup);assert.notEqual(recovery.prompt,recovery.followup.prompt);
+ const original={done:['api-a'],current:'api-b'};
+ assert.deepEqual(restoreProgress({...original,current:resolveStep('#data-page',ids,original.current)},ids),{done:['api-a'],current:'data-page'});
+});
