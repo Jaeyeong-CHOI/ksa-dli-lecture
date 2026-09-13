@@ -22,7 +22,7 @@ export const lectures = [
     "pdf": "/downloads/RAGAS.pdf",
     "cover": "/lecture-covers/ragas.webp",
     "bytes": 1866551,
-    "releaseAt": "2026-09-16T18:00:00+09:00",
+    "releaseAt": "2026-09-15T18:00:00+09:00",
     "sha256": "2b2b866b94a05b705dd1b25dd29816c1bc23ed047c605a9e908c8b7a78af0a90"
   },
   {
@@ -35,7 +35,7 @@ export const lectures = [
     "pdf": "/downloads/QuCo-RAG.pdf",
     "cover": "/lecture-covers/quco-rag.webp",
     "bytes": 2380350,
-    "releaseAt": "2026-09-16T18:00:00+09:00",
+    "releaseAt": "2026-09-15T18:00:00+09:00",
     "sha256": "be01ae72c4dd5656101646d6248e706cbf12d9cd708fdfe0200b4a8ac59308fa"
   },
   {
