@@ -27,19 +27,19 @@
       "id": "prepare",
       "group": "준비",
       "title": "실행할 작업 공간 준비하기",
-      "goal": "브라우저의 일반 채팅과 파일·Skill·도구를 쓰는 작업 공간을 구분합니다.",
-      "where": "ChatGPT 데스크톱 Work · 개인 실습 폴더",
+      "goal": "웹 Work에서 Skill과 파일을 사용하고, 만든 결과를 계정에 남길 준비를 합니다.",
+      "where": "ChatGPT 웹 → Work · 별도 실습 프로젝트",
       "actions": [
-        "기본 ZIP을 풀어 시작 안내와 프롬프트, 예시를 엽니다. ChatGPT 데스크톱의 Work에서 새 작업 폴더를 선택합니다.",
-        "@ 선택기에서 skill-creator, Settings에서 MCP servers를 확인합니다. 이 단계는 웹의 일반 채팅창이 아닙니다.",
-        "에이전트에게 Node.js/npx와 Python 3 실행 가능 여부를 확인하게 합니다. k-skill helper는 Node.js와 Python을, 새 API Skill은 Python을 사용합니다. Vercel 계정도 본인 브라우저에서 준비합니다."
+        "기본 ZIP의 시작 안내·프롬프트·예시를 엽니다. ChatGPT 웹에서 Work를 선택하고 새 실습 프로젝트를 만듭니다.",
+        "Skills 페이지를 열어 Create 메뉴를 확인합니다. Create with chat은 대화로 작성, Create with editor는 직접 편집, Upload from your computer는 기존 Skill 파일 등록입니다.",
+        "아래 요청으로 이 Work 작업의 Node.js/npx·Python·파일 저장 기능을 확인합니다. 웹 실행 환경과 자신의 컴퓨터는 별개입니다. Vercel 로그인은 해당 서비스 화면에서 준비합니다."
       ],
       "check": [
-        "새 작업 폴더에서 파일을 만들 수 있습니다.",
-        "실제 Skill 선택기와 MCP 메뉴를 찾았습니다.",
-        "Node.js/npx·Python 실행 환경을 확인했습니다."
+        "웹의 Work와 Skills → Create 메뉴를 찾았습니다.",
+        "실습 프로젝트에서 파일 생성·다운로드가 가능합니다.",
+        "이 작업의 실행 환경과 계정 기능을 확인했습니다."
       ],
-      "trouble": "메뉴가 없으면 앱·계정의 기능 지원을 확인하세요. Codex 앱/CLI를 쓰는 학습자는 $skill-creator와 $skill-installer를 사용합니다. 웹 일반 채팅에 @ 문자열만 붙여넣는 것은 Skill 설치가 아닙니다. 설치가 막히면 제공된 실제 응답 스냅샷으로 결과 검토를 먼저 하되 실행 완료로 표시하지 않습니다.",
+      "trouble": "계정에 따라 메뉴가 다를 수 있습니다. 웹에 Skills/Create가 없다면 지원되는 데스크톱 또는 Codex 경로를 강사와 확인하세요. @ 글자만 입력하는 것과 등록된 Skill을 선택하는 것은 다릅니다. 예시 파일 검토는 계속할 수 있지만 실제 Skill 실행 완료로 표시하지 않습니다.",
       "downloads": [
         "bundle",
         "guide",
@@ -48,30 +48,37 @@
       ],
       "screens": [
         {
-          "src": "/images/agentic-practice/skills-official.webp",
-          "alt": "OpenAI 공식 안내 화면 · 실제 앱의 로그인·Skill 선택 화면은 아닙니다.",
-          "caption": "OpenAI 공식 안내 화면 · 실제 앱의 로그인·Skill 선택 화면은 아닙니다."
+          "src": "/images/agentic-practice/web-skills-empty.webp",
+          "alt": "실제 웹 Skills 화면 · Create에서 새 Skill을 만들거나 기존 파일을 등록합니다.",
+          "caption": "실제 웹 Skills 화면 · Create에서 새 Skill을 만들거나 기존 파일을 등록합니다."
         }
       ],
-      "prompt": "이 실습 폴더에서 사용할 수 있는 Skill 선택·파일 저장·브라우저 확인 기능과 Node.js/npx, Python 3 실행 가능 여부를 확인해 주세요. 아직 새 프로그램을 설치하거나 계정을 연결하지 말고, 가능한 항목과 없는 항목을 구분해 주세요."
+      "prompt": "이 공개 데이터 실습 프로젝트에서 사용할 수 있는 Skill·파일 생성과 다운로드·브라우저 확인 기능, Node.js/npx와 Python 3 실행 여부를 확인해 주세요. 개인 메모리·메일·Drive·다른 프로젝트는 사용하지 마세요. 아직 프로그램 설치나 계정 연결은 하지 말고 실제 확인한 항목과 없는 항목을 구분해 주세요.",
+      "links": [
+        {
+          "label": "ChatGPT 웹 Skills 열기",
+          "url": "https://chatgpt.com/skills"
+        }
+      ]
     },
     {
       "id": "k-install",
       "group": "실습 1 · k-skill",
       "title": "이미 만들어진 Skill 하나 설치하기",
       "goal": "대표 예제 geeknews-search로 긴 절차를 재사용하는 경험을 먼저 합니다.",
-      "where": "ChatGPT Work · Skill Installer / 설치 요청",
+      "where": "ChatGPT 웹 Work · k-skill 검토 → 등록 → Try in chat",
       "actions": [
-        "k-skill 저장소에서 geeknews-search 폴더를 엽니다. SKILL.md의 설명과 연결된 instruction.md에서 읽기 전용 RSS 조회인지 확인합니다.",
-        "아래 설치 요청으로 그 폴더 하나만 설치합니다. 전체 모음이나 다른 유료·로그인 Skill을 함께 설치할 필요는 없습니다.",
-        "실제 설치 위치를 확인하고 새 작업의 @ 선택기에서 geeknews-search를 찾습니다. 나타나지 않으면 새 작업을 열거나 앱을 다시 시작합니다."
+        "k-skill의 geeknews-search 폴더에서 SKILL.md와 instruction.md를 읽습니다. 공개 RSS 조회 범위와 Node/npx·Python 의존성을 확인합니다.",
+        "아래 요청을 보내 선택한 폴더만 준비합니다. 응답에 Skill 카드가 나오면 내용을 검토하고 Install을 누릅니다. ZIP만 나오면 Skills → Create → Upload from your computer에서 등록합니다.",
+        "Skills의 Installed 목록에서 geeknews-search를 엽니다. SKILL.md·instruction.md·scripts를 확인하고 Try in chat으로 새 대화를 시작합니다. 파일 다운로드, 계정 등록, 실제 호출은 각각 확인합니다."
       ],
       "check": [
-        "선택한 Skill의 사용 목적과 실행 코드를 확인했습니다.",
-        "geeknews-search가 실제로 설치되어 이름으로 선택됩니다."
+        "원본 작성자·사용 목적·실행 코드를 확인했습니다.",
+        "Skills의 Installed 목록에 선택한 Skill이 보입니다.",
+        "Try in chat을 누른 새 Work 입력창에 Skill이 선택되어 있습니다."
       ],
-      "trouble": "Skill Installer가 선택기에 없으면 아래 자연어 설치 요청을 그대로 보내세요. 설치된 파일이 있다는 사실과 실제 실행 성공은 다음 단계에서 따로 확인합니다. 호스트가 외부 Skill 설치를 지원하지 않으면 강사 환경의 실행을 관찰하고 실제 응답 파일을 검토합니다.",
-      "prompt": "공개 저장소 https://github.com/NomaDamas/k-skill 의 geeknews-search 폴더만 이 호스트가 지원하는 Skill 위치에 설치해 주세요. 먼저 SKILL.md와 instruction.md를 읽고 역할과 실행 의존성을 설명해 주세요. 기존 동명 Skill은 비교 없이 덮어쓰지 말고, 다른 Skill은 설치하지 마세요. 설치한 위치와 실제 선택기에서 호출하는 방법을 알려 주세요.",
+      "trouble": "설치 요청에 성공했다고 답해도 Installed 목록을 확인하세요. ZIP은 선택한 Skill 폴더와 필요한 파일을 포함해야 합니다. 이미 같은 이름이 있다면 비교 없이 덮어쓰지 않습니다. 웹의 By me 표시는 내 계정에 등록한 사본이며 원본 k-skill 작성자가 바뀐다는 의미가 아닙니다.",
+      "prompt": "공개 저장소 https://github.com/NomaDamas/k-skill 의 geeknews-search 폴더만 사용하겠습니다. 먼저 SKILL.md와 instruction.md, 실행 코드와 의존성을 읽어 설명해 주세요. 원본 절차를 바꾸지 않고 이 웹 계정의 Skills에 등록 가능한 Skill 카드 또는 standalone Skill ZIP으로 준비하세요. ZIP에는 원본 SKILL.md와 필요한 보조 파일을 포함하세요. 기존 동명 Skill은 덮어쓰지 말고 다른 Skill·설정은 변경하지 마세요. 파일 생성과 계정 등록 상태를 구분하고 원본 작성자와 출처를 남겨 주세요. 공개 데이터만 사용하세요.",
       "links": [
         {
           "label": "k-skill · 예제 폴더 열기",
@@ -80,9 +87,14 @@
       ],
       "screens": [
         {
-          "src": "/images/agentic-practice/k-skill-catalog.webp",
-          "alt": "k-skill 공개 저장소 · 다양한 한국어 작업 중 이번에는 GeekNews 조회만 선택합니다.",
-          "caption": "k-skill 공개 저장소 · 다양한 한국어 작업 중 이번에는 GeekNews 조회만 선택합니다."
+          "src": "/images/agentic-practice/k-skill-anatomy.webp",
+          "alt": "실제 등록된 geeknews-search · 원본 지침과 보조 파일을 읽고 Try in chat으로 호출합니다.",
+          "caption": "실제 등록된 geeknews-search · 원본 지침과 보조 파일을 읽고 Try in chat으로 호출합니다."
+        },
+        {
+          "src": "/images/agentic-practice/web-skill-upload.webp",
+          "alt": "실제 웹 업로드 화면 · Skill 카드가 없으면 .zip/.skill 또는 SKILL.md 등록 경로를 사용합니다.",
+          "caption": "실제 웹 업로드 화면 · Skill 카드가 없으면 .zip/.skill 또는 SKILL.md 등록 경로를 사용합니다."
         }
       ]
     },
@@ -91,9 +103,9 @@
       "group": "실습 1 · k-skill",
       "title": "뉴스를 읽고 원문과 대조하기",
       "goal": "실제 조회 → 선택 → 원문 검토까지 수행하고, 자신의 반복 업무에 맞는 다른 Skill도 골라 봅니다.",
-      "where": "ChatGPT Work · @geeknews-search + 원문 브라우저",
+      "where": "ChatGPT 웹 Work · 등록한 geeknews-search의 Try in chat",
       "actions": [
-        "@ 선택기에서 geeknews-search를 고르고 아래 요청을 보냅니다. 최신 글의 제목·링크·날짜와 도구 실행 내역을 확인합니다.",
+        "등록한 Skill의 Try in chat을 눌러 새 대화를 엽니다. 선택된 Skill을 유지한 채 아래 요청을 추가합니다. 최신 글 5개와 읽을 만한 2개, 선택 이유를 확인합니다.",
         "반환된 제목에서 키워드 하나를 골라 같은 Skill에 검색을 요청합니다. 원문 링크 하나를 직접 열어 제목과 요약을 대조합니다.",
         "관심 글 두 개를 골라 “읽을 이유 / 확인할 질문”을 적습니다. 응용하려면 k-skill 목록에서 본인 업무에 맞는 Skill 하나를 골라 입력·로그인 필요 여부·성공 기준을 비교합니다."
       ],
@@ -109,9 +121,14 @@
       ],
       "screens": [
         {
-          "src": "/images/agentic-practice/geeknews-source.webp",
-          "alt": "실제 GeekNews 원문 화면 · 반환된 제목·링크를 직접 열어 대조합니다.",
-          "caption": "실제 GeekNews 원문 화면 · 반환된 제목·링크를 직접 열어 대조합니다."
+          "src": "/images/agentic-practice/k-skill-live-result.webp",
+          "alt": "실제 등록 Skill 호출 결과 · 최신 5개 조회, AI 키워드 검색과 상세 조회를 실행했습니다. 현재 피드의 결과는 달라질 수 있습니다.",
+          "caption": "실제 등록 Skill 호출 결과 · 최신 5개 조회, AI 키워드 검색과 상세 조회를 실행했습니다. 현재 피드의 결과는 달라질 수 있습니다."
+        },
+        {
+          "src": "/images/agentic-practice/k-skill-open-source.webp",
+          "alt": "Skill이 반환한 실제 GeekNews 링크 · 제목과 요약 범위를 원문과 비교합니다.",
+          "caption": "Skill이 반환한 실제 GeekNews 링크 · 제목과 요약 범위를 원문과 비교합니다."
         }
       ]
     },
@@ -206,47 +223,73 @@
       "group": "실습 2 · Skill Creator",
       "title": "공공데이터를 가져오는 새 Skill 만들기",
       "goal": "기존 k-skill을 호출하는 대신, 공식 API를 읽어 heritage-brief를 직접 만듭니다.",
-      "where": "ChatGPT Work · @skill-creator",
+      "where": "ChatGPT 웹 Skills → Create → Create with chat",
       "actions": [
-        "@ 선택기에서 skill-creator를 실제로 선택하고 아래 요청을 보냅니다. API 설명과 입력 A/B 예시를 함께 전달합니다.",
-        "생성된 SKILL.md에서 적용 상황·절차·완료 기준을 읽습니다. scripts의 코드와 references의 문서가 각각 어떤 역할인지 확인합니다.",
-        "생성 위치와 새 작업의 Skill 선택기를 확인합니다. EXAMPLES.md의 본문 예시는 비교용이며, 파일을 내려받는 것만으로 설치되지는 않습니다."
+        "Skills → Create → Create with chat을 엽니다. 자동으로 입력된 @skill-creator 요청에 아래 요구사항을 전달합니다. 기존 k-skill 설치와 별개의 새 Skill 제작입니다.",
+        "SKILL.md의 적용 상황·절차·완료 기준, scripts의 호출 코드, references의 API 계약을 읽습니다. 실행 검사가 코드 오류를 찾았으면 수정 후 다시 검사했는지 확인합니다.",
+        "생성 결과를 계정 Skills에 저장하고 Installed 목록에서 heritage-brief를 찾습니다. Skill 카드의 Install이나 제공된 등록 절차가 남아 있다면 완료합니다. 다음에는 Try in chat으로 새 입력을 줍니다."
       ],
       "check": [
         "heritage-brief가 선택 가능한 Skill로 생성됐습니다.",
         "SKILL.md, 호출 스크립트, API 참고자료의 역할을 설명할 수 있습니다.",
         "다음 단계에서 실제 API 호출을 검증할 준비가 됐습니다."
       ],
-      "trouble": "코드 실행·외부 네트워크가 막혔다면 해당 환경의 허용 여부를 확인합니다. 예시 JSON은 결과 비교용이지 실제 호출의 대체 증거가 아닙니다. 같은 이름이 이미 있으면 내용을 비교한 후 수정 범위를 정합니다.",
-      "prompt": "@skill-creator\n국가유산청 공공데이터 API를 호출하는 새 Skill heritage-brief를 만들어 주세요. 기존 k-skill의 문화유산 Skill을 설치하는 작업이 아닙니다.\n공식 설명: https://www.data.go.kr/data/15034324/openapi.do\n목록: https://www.khs.go.kr/cha/SearchKindOpenapiList.do\n상세: https://www.khs.go.kr/cha/SearchKindOpenapiDt.do\n\n입력은 국가유산명 검색어와 결과 수(기본 3, 최대 5)입니다. 목록의 ccbaKdcd·ccbaAsno·ccbaCtcd를 문자열 그대로 상세 조회에 사용하세요. Python 표준 라이브러리로 XML을 읽고 이름·유형·지역·주소·설명·공식 출처·조회 시각을 JSON으로 저장하세요.\nSKILL.md에는 적용 상황·수행 절차·완료 기준, scripts에는 재사용 호출 코드, references에는 확인한 API 계약을 분리해 주세요.\n정상 결과·검색 결과 없음·통신/XML 오류를 구분하고, 운영시간·입장료는 추측하지 마세요. 경복궁과 첨성대 두 입력으로 검증하고 실행한 검사와 미실행 검사를 나눠 보고하세요. 배포는 포함하지 마세요. 실제 생성 위치와 호출 방법도 알려 주세요.",
+      "trouble": "실제 호출이 502·timeout이면 서버 전체가 중단됐다고 단정하지 마세요. 브라우저에서 공식 API 주소를 열어 같은 요청을 비교합니다. 정상 XML을 명시적으로 첨부해 파싱을 검증할 수 있지만, 이는 첨부 응답 처리이며 웹 에이전트의 실시간 조회 성공과는 다릅니다.",
+      "prompt": "@skill-creator\n국가유산청 공공데이터 API를 호출하는 새 Skill heritage-brief를 만들어 주세요. 기존 k-skill의 문화유산 Skill을 설치하는 작업이 아닙니다.\n공식 설명: https://www.data.go.kr/data/15034324/openapi.do\n목록: https://www.khs.go.kr/cha/SearchKindOpenapiList.do\n상세: https://www.khs.go.kr/cha/SearchKindOpenapiDt.do\n\n입력은 국가유산명 검색어와 결과 수(기본 3, 최대 5)입니다. 목록의 ccbaKdcd·ccbaAsno·ccbaCtcd를 문자열 그대로 상세 조회에 사용하세요. Python 표준 라이브러리로 XML을 읽고 이름·유형·지역·주소·설명·공식 출처·조회 시각을 JSON으로 저장하세요.\nSKILL.md에는 적용 상황·수행 절차·완료 기준, scripts에는 재사용 호출 코드, references에는 확인한 API 계약을 분리해 주세요.\n정상 결과·검색 결과 없음·통신/XML 오류를 구분하고, 운영시간·입장료는 추측하지 마세요. 경복궁과 첨성대 두 입력으로 검증하고 실행한 검사와 미실행 검사를 나눠 보고하세요. 배포는 포함하지 마세요. 실제 생성 위치와 호출 방법도 알려 주세요.\n이 웹 계정의 Skills 목록에서 재사용할 수 있도록 저장·등록하고 실제 상태를 확인하세요. 같은 이름이 있으면 덮어쓰지 마세요. Skill Creator 적용·파일 생성·등록·실제 API 호출·모의 검사를 따로 보고하세요. 공개 데이터만 사용하며 개인 메모리·메일·Drive·다른 프로젝트는 제외합니다.",
       "downloads": [
         "examples",
         "skill-example"
       ],
-      "sample": "skill"
+      "sample": "skill",
+      "links": [
+        {
+          "label": "웹에서 Skill Creator 시작하기",
+          "url": "https://chatgpt.com/skills"
+        }
+      ],
+      "screens": [
+        {
+          "src": "/images/agentic-practice/heritage-skill-anatomy.webp",
+          "alt": "Skill Creator가 저장한 heritage-brief의 실제 파일 구조",
+          "caption": "실제 계정 저장본 · SKILL.md, scripts, references를 확인한 뒤 Try in chat으로 재사용합니다."
+        }
+      ]
     },
     {
       "id": "api-a",
       "group": "실습 2 · 첫 실행",
-      "title": "경복궁 결과 3개 가져오기",
+      "title": "경복궁 결과를 최대 3개 요청하기",
       "goal": "요청 문장이 아니라 실제 응답·저장 파일로 성공을 확인합니다.",
-      "where": "ChatGPT Work · @heritage-brief",
+      "where": "등록한 heritage-brief → Try in chat",
       "actions": [
         "새 Skill을 선택하고 입력 A를 전달합니다. 실제 호출 내역과 생성된 heritage-a.json을 엽니다.",
-        "query·total·returned·retrievedAt을 읽습니다. 전체 일치 수가 3보다 커도 이번에 받기로 한 결과는 최대 3개입니다.",
+        "전체 일치 수(totalCnt/totalCount), 이번 수집 수, 상세 성공 수, 조회 시각을 읽습니다. 파일마다 키 이름이 다르면 생성한 스키마와 대조하세요. 최대 3개는 전체 건수나 성공 보장이 아닙니다.",
         "항목 하나의 공식 출처를 열고 이름·주소를 비교합니다. 요약이 원래 설명에 없는 내용을 추가하지 않았는지 확인합니다."
       ],
       "check": [
-        "실제 호출과 heritage-a.json 파일이 있습니다.",
-        "목록의 식별자로 상세를 가져왔습니다.",
-        "출처와 조회 시각을 포함하고 없는 사실을 만들지 않았습니다."
+        "실제 호출 내역과 결과 JSON이 있고 오류 여부를 구분했습니다.",
+        "정상 결과는 목록 식별자와 상세의 대응을 확인했습니다. 실패라면 다음 복구 단계에서 원인을 분리합니다.",
+        "출처·시각·누락 상태가 있고 없는 사실을 만들지 않았습니다."
       ],
-      "trouble": "예시 검수에서는 전체 11건 중 3건이 반환됐습니다. 최신 데이터는 달라질 수 있으므로 숫자를 외우지 말고 요청과 응답이 맞는지 확인합니다. API 오류가 나면 오류를 보존하고 원인을 확인합니다.",
+      "trouble": "검수 시 Chrome에서는 전체 11건 중 3건을 받았지만 웹 에이전트의 같은 요청은 502였습니다. 오류 상태와 조회 환경을 남깁니다. 아래 공식 요청을 브라우저에서 직접 열어 XML을 저장·첨부하는 복구 경로를 쓸 수 있습니다. 이때 sourceMode=provided_snapshot, 원래 조회 시각, 상세 응답 누락을 표시하며 실시간 호출 성공으로 세지 않습니다.",
       "prompt": "@heritage-brief\n입력 A로 실제 API를 호출해 heritage-a.json에 저장해 주세요. 전체 일치 수와 반환 수를 구분하고 항목 하나의 원문과 이름·주소를 대조하세요. 실행 내역·출처·조회 시각을 보여 주세요. 기존 파일은 덮어쓰지 말고 배포하지 마세요.",
       "sample": "a",
       "downloads": [
         "input-a",
         "api-result"
+      ],
+      "links": [
+        {
+          "label": "경복궁 목록 API를 브라우저에서 열기",
+          "url": "https://www.khs.go.kr/cha/SearchKindOpenapiList.do?ccbaMnm1=%EA%B2%BD%EB%B3%B5%EA%B6%81&pageUnit=3&pageIndex=1"
+        }
+      ],
+      "screens": [
+        {
+          "src": "/images/agentic-practice/heritage-api-browser.webp",
+          "alt": "브라우저에서 직접 받은 공식 XML · totalCnt=11은 전체 일치 수, pageUnit=3은 이번 요청 범위입니다.",
+          "caption": "브라우저에서 직접 받은 공식 XML · totalCnt=11은 전체 일치 수, pageUnit=3은 이번 요청 범위입니다."
+        }
       ]
     },
     {
@@ -258,18 +301,49 @@
       "actions": [
         "입력 B를 전달해 heritage-b.json을 만듭니다. A는 보존합니다. 반환된 이름이 새 검색어에 맞는지 확인합니다.",
         "존재하지않는유산zzzz로 한 번 더 호출합니다. 정상적인 0건 응답과 통신 실패를 서로 다르게 보고하는지 봅니다.",
-        "오류 처리 확인이 필요하면 에이전트에게 네트워크 예외를 모의한 검사를 요청합니다. 실제 장애가 아니라 모의 검사임을 표시하게 합니다."
+        "실제 호출이 계속 실패하면 정상·0건·통신 오류를 모의한 검사를 별도로 요청합니다. 모의 검사를 실제 API 성공이라고 표시하지 말고, 파싱 검사는 브라우저에서 저장한 실제 XML과도 대조합니다."
       ],
       "check": [
-        "B는 첨성대에 해당하는 새 API 결과입니다.",
+        "B의 검색어로 새 호출을 했고 실제 상태·응답을 기록했습니다.",
         "A의 파일이 보존됐습니다.",
         "0건과 조회 실패를 다른 상태로 처리합니다."
       ],
-      "trouble": "첨성대는 검수 시 1건이었습니다. 요청이 최대 3개라고 해서 3개를 지어내면 안 됩니다. 원본 API 주소를 임의의 다른 주소로 바꾸어 테스트하지 말고 오류를 모의 주입해 검사합니다.",
-      "prompt": "@heritage-brief\n입력 B를 실제 호출해 heritage-b.json에 저장하고 A는 보존하세요. 이어서 존재하지않는유산zzzz를 조회해 정상적인 0건을 확인해 주세요. 네트워크 오류를 모의한 검사도 따로 실행해 0건과 다른 상태로 보고하는지 확인하세요. 실제 호출과 모의 검사를 구분하고, 없는 결과를 채우지 마세요.",
+      "trouble": "이전 로컬 검수에서 첨성대는 1건이었지만, 이번 웹 실행 환경에서는 502였습니다. 두 환경을 같은 성공 기록으로 합치지 않습니다. 최대 3개라고 해서 3개를 지어내면 안 됩니다.",
+      "prompt": "@heritage-brief\n입력 B를 실제 호출해 heritage-b.json에 저장하고 A는 보존하세요. 이어서 존재하지않는유산zzzz를 조회해 반환 상태를 확인해 주세요. 정상 응답이 0건일 때만 no_results로 보고하고 통신 실패를 0건으로 바꾸지 마세요. 네트워크 오류를 모의한 검사도 따로 실행해 0건과 다른 상태로 보고하는지 확인하세요. 실제 호출과 모의 검사를 구분하고, 없는 결과를 채우지 마세요.",
       "sample": "b",
       "downloads": [
         "input-b"
+      ]
+    },
+    {
+      "id": "snapshot-recovery",
+      "group": "실습 2 · 오류에서 복구",
+      "title": "실제 XML을 첨부해 원인을 분리하기",
+      "goal": "통신 실패와 파싱·표시 문제를 나누어 확인합니다. 실시간 성공을 가장하지 않습니다.",
+      "where": "브라우저에서 공식 XML 저장 → Skill Creator로 첨부 처리 경로 추가",
+      "actions": [
+        "같은 공식 목록 요청을 브라우저에서 열어 봅니다. 정상 XML이 보이면 파일로 저장하세요. API 전체 장애와 특정 실행 환경의 연결 실패는 다릅니다.",
+        "목록의 식별자로 상세 요청 하나도 저장하세요. 아래 검수용 XML ZIP에는 실제 목록 3건과 근정전 상세 1건만 있습니다.",
+        "두 XML을 첨부하고 아래 요청을 보냅니다. 전체 11건·수집 3건·상세 1건·누락 2건을 구분하고 원래 수집 시점을 기록합니다.",
+        "새 Skill 버전을 저장하고 같은 첨부로 다시 실행합니다. 상세가 없는 2건의 주소·설명을 만들지 않는지 JSON에서 확인하세요."
+      ],
+      "check": [
+        "sourceMode가 provided_snapshot이고 원래 조회 시점이 있습니다.",
+        "부분 결과는 partial이며 누락 상세는 missing으로 구분됩니다.",
+        "실제 첨부 파싱·모의 검사·실시간 API 호출의 결과를 따로 기록했습니다."
+      ],
+      "trouble": "이 단계는 선택 복구 경로입니다. API 호출이 정상이라면 본인 결과를 그대로 사용합니다. 첨부 XML도 구할 수 없으면 아래 검수 시점 파일로 파싱만 연습하고 현재 데이터 조회를 완료했다고 표시하지 않습니다.",
+      "prompt": "@skill-creator\n방금 만든 heritage-brief에 명시적으로 첨부한 XML을 처리하는 경로를 추가해 주세요. 기본은 실제 API 호출이며, 첨부 처리일 때만 sourceMode=provided_snapshot과 원래 수집 시각을 기록하세요. 검수용 첨부는 2026-09-13 18:32–18:33 KST의 경복궁 목록 3건과 근정전 상세 1건입니다. 전체 11건·수집 3건·상세 1건·누락 2건과 선행 0을 실제 파일로 검사하세요. 누락 주소·설명은 null로 두고 partial 상태를 반환하세요. 모의 검사와 실제 XML 검사를 구분하고 현재 Skill을 업데이트·저장하세요. 결과 JSON을 다운로드로 제공하고 아직 배포하지 마세요.",
+      "downloads": [
+        "snapshot-xml",
+        "snapshot-result"
+      ],
+      "screens": [
+        {
+          "src": "/images/agentic-practice/heritage-api-browser.webp",
+          "alt": "Chrome에서 정상 수신한 국가유산청 목록 XML",
+          "caption": "브라우저의 정상 응답은 웹 에이전트 런타임의 성공을 뜻하지 않습니다. 같은 요청을 다른 환경에서 비교합니다."
+        }
       ]
     },
     {
@@ -277,11 +351,11 @@
       "group": "실습 3 · 결과물",
       "title": "검증한 데이터를 작은 웹페이지로",
       "goal": "API 결과를 학습자·사용자가 탐색할 수 있는 화면으로 바꿉니다.",
-      "where": "ChatGPT Work · heritage-a.json과 heritage-b.json이 있는 작업",
+      "where": "검증한 API 결과 또는 명시적 첨부 스냅샷이 있는 Work 작업",
       "actions": [
-        "검토한 JSON 두 개를 선택하고 아래 요청을 보냅니다. API 호출 기능과 화면 만들기는 별개 작업입니다.",
-        "생성된 index.html을 직접 엽니다. A/B 전환, 이름 검색, 설명 펼치기, 출처 링크를 사용합니다.",
-        "아래 예시는 실제 API 응답으로 만든 참고 결과입니다. 디자인을 똑같이 복제하지 않아도 되며, 비교할 것은 데이터와 동작입니다."
+        "검토한 결과 JSON을 첨부합니다. 정상 결과가 하나뿐이면 하나로 시작하고, A/B 두 결과가 모두 검증됐을 때만 전환을 추가합니다.",
+        "생성된 HTML을 직접 엽니다. 검색·설명 펼치기·공식 출처·조회 시점과 누락 정보를 확인합니다.",
+        "아래 실제 웹 실습 결과는 경복궁 목록 3건·상세 1건의 첨부 스냅샷입니다. 디자인을 복제하는 것이 아니라 표시가 데이터와 일치하는지 확인합니다."
       ],
       "check": [
         "내 결과 파일을 쓰는 index.html이 있습니다.",
@@ -289,7 +363,7 @@
         "사용자가 데이터를 바꾸어 보고 출처를 열 수 있습니다."
       ],
       "trouble": "브라우저에서 공공 API를 직접 호출하려다가 CORS로 막히는 흐름을 피합니다. 이번 결과는 스냅샷입니다. 실시간 서비스는 서버 호출·캐시·인증 관리가 추가로 필요한 확장 과제입니다.",
-      "prompt": "검토한 heritage-a.json과 heritage-b.json으로 한국어 문화유산 탐색 페이지를 하나의 index.html로 만들어 주세요. JSON을 안전하게 내장해 파일로 열어도 작동하게 해 주세요.\nA/B 전환, 현재 결과에서 이름 검색, 공식 설명 펼치기, 공식 API 출처 링크를 제공하세요. 전체 일치 수·수집 수·현재 표시 수를 구분하고 조회 시각과 “스냅샷: 브라우저가 API를 새로 호출하지 않음”을 표시하세요.\n운영시간·입장료는 추가하지 말고, 검색 0건 안내·모바일·키보드 포커스를 갖춰 주세요. 외부 라이브러리나 새 API, 로그인, DB는 필요 없습니다. 아직 배포하지 마세요.",
+      "prompt": "검토한 결과 JSON으로 한국어 국가유산 탐색 페이지를 하나의 index.html로 만들어 주세요. JSON을 안전하게 내장하고 원본 값과 출처·시각을 유지하세요. 이름·유형·지역 검색, 표시 건수·0건 안내·초기화, 설명 펼치기와 공식 출처 링크를 제공하세요. 두 입력 결과가 모두 정상일 때만 A/B 전환을 추가하고 실패 결과를 성공 데이터로 만들지 마세요. 전체·수집·상세 성공·현재 표시 수를 구분하세요. 첨부 결과라면 스냅샷이고 브라우저가 API를 새로 호출하지 않는다고 표시하세요. 상세가 없으면 그 사실을 그대로 표시하세요. label·키보드 focus·모바일을 지원하고 외부 라이브러리·로그인·DB·새 API는 추가하지 마세요. 아직 배포하지 마세요.",
       "links": [
         {
           "label": "실제 응답으로 만든 참고 화면 열기",
@@ -298,9 +372,9 @@
       ],
       "screens": [
         {
-          "src": "/images/agentic-practice/heritage-page.webp",
-          "alt": "실제 API 응답으로 만든 참고 페이지 · 내 결과도 이름·출처·조회 시각부터 대조하세요.",
-          "caption": "실제 API 응답으로 만든 참고 페이지 · 내 결과도 이름·출처·조회 시각부터 대조하세요."
+          "src": "/images/agentic-practice/heritage-web-page.webp",
+          "alt": "웹 Work가 생성하고 브라우저에서 검수한 실제 페이지",
+          "caption": "실제 웹 실행 결과 · 첨부 스냅샷 3건, 상세 1건. 실시간 조회나 배포 완료 화면이 아닙니다."
         }
       ]
     },
@@ -311,27 +385,27 @@
       "goal": "스크린샷만으로는 검색이나 버튼이 제대로 작동하는지 알 수 없습니다.",
       "where": "실제 생성한 index.html · 브라우저",
       "actions": [
-        "A에서 경회루를 검색하고 표시 건수가 줄어드는지 확인합니다. 검색어를 지우면 수집 결과가 다시 나옵니다. B로 바꾸면 경복궁 결과가 남지 않아야 합니다.",
+        "경회루 검색 → 1건 확인 → 초기화 → 3건 복원을 확인합니다. 정상 A/B 결과를 모두 가진 경우에만 전환 후 이전 결과가 남지 않는지도 검사합니다.",
         "설명을 펼치고 출처 링크를 엽니다. 존재하지 않는 이름을 검색하면 0건 안내가 보여야 합니다.",
         "화면 폭을 좁히고 Tab·Enter로 버튼과 설명을 조작합니다. 문제가 있으면 재현 순서·기대한 결과·실제 결과를 전달해 한 부분만 수정합니다."
       ],
       "check": [
-        "검색·초기화·A/B 전환·0건 안내를 직접 사용했습니다.",
+        "검색·초기화·0건 안내를 직접 사용했습니다. A/B를 구현했다면 전환도 확인했습니다.",
         "설명·출처를 확인하고 작은 화면에서도 조작했습니다.",
         "수정했다면 같은 조작을 다시 확인했습니다."
       ],
       "trouble": "에이전트에 브라우저 도구가 없어도 학습자가 직접 검사할 수 있습니다. “테스트 통과”만 적지 말고 어떤 버튼을 눌렀고 결과가 어땠는지 남깁니다.",
-      "prompt": "생성한 index.html을 실제 브라우저에서 확인해 주세요. A의 경회루 검색 → 검색어 지우기 → B로 전환 → 설명 열기 → 출처 열기 → 없는 이름 검색 순으로 검사하세요. 좁은 화면과 Tab/Enter도 확인하세요. 문제를 발견하면 재현 순서·기대·실제를 기록하고 해당 부분만 고친 뒤 재검사하세요. 브라우저 도구가 없으면 미실행 항목과 수동 검사 순서를 주세요. 아직 배포하지 마세요.",
+      "prompt": "생성한 HTML에서 경회루 검색 → 초기화 → 설명 펼치기 → 공식 출처 열기 → 없는 이름 검색을 검사하세요. A/B를 구현했다면 전환도 확인하세요. 좁은 화면과 Tab/Enter도 검사하세요. 검색 안내에 적힌 필드와 실제 검색 대상이 일치하는지 확인하세요. 문제가 있으면 재현 순서·기대·실제를 적고 해당 부분만 고친 뒤 동일 검사를 반복하세요. 원본 JSON은 유지하고 변경 전후 동등성을 검사하세요. 브라우저 도구가 없으면 미실행 항목과 수동 검사 순서를 주세요. 아직 배포하지 마세요.",
       "screens": [
         {
-          "src": "/images/agentic-practice/heritage-filter.webp",
-          "alt": "실제로 경회루를 입력한 결과 · 수집 3건 중 1건 표시",
-          "caption": "실제로 경회루를 입력한 결과 · 수집 3건 중 1건 표시"
+          "src": "/images/agentic-practice/heritage-web-filter.webp",
+          "alt": "경회루 검색 후 1건 표시",
+          "caption": "재검사: 검색어와 실제 표시 결과·건수를 함께 확인합니다."
         },
         {
-          "src": "/images/agentic-practice/heritage-mobile.webp",
-          "alt": "실제 좁은 화면 검수 · 버튼과 설명을 읽고 조작할 수 있는지 확인합니다.",
-          "caption": "실제 좁은 화면 검수 · 버튼과 설명을 읽고 조작할 수 있는지 확인합니다."
+          "src": "/images/agentic-practice/heritage-web-empty.webp",
+          "alt": "없는 이름 검색의 0건 안내",
+          "caption": "초안의 빈 화면 문제를 발견하고 0건 안내·초기화를 추가했습니다."
         }
       ]
     },
@@ -357,26 +431,32 @@
     {
       "id": "connect-mcp",
       "group": "MCP",
-      "title": "Vercel MCP 연결하기",
+      "title": "웹에서 Vercel 도구 연결하기",
       "goal": "외부 서비스 도구를 연결하고, 어느 계정의 권한으로 사용하는지 확인합니다.",
-      "where": "ChatGPT 데스크톱 · Settings → MCP servers",
+      "where": "ChatGPT 웹 Plugins → Vercel → Install plugin",
       "actions": [
-        "Add server를 열고 아래 설정값을 입력합니다. Name은 vercel, Type은 Streamable HTTP입니다.",
-        "Save 후 Restart를 선택합니다. Authenticate가 표시되면 눌러 Vercel의 로그인·허용 화면을 진행합니다.",
-        "문화유산 페이지 작업의 작성창에서 /mcp를 입력해 vercel 연결 상태를 확인합니다."
+        "아래 Plugins 링크에서 Vercel을 검색하고 개발자가 Vercel Labs인지 확인합니다. Install plugin을 선택합니다. 웹에서는 데스크톱의 MCP servers 메뉴를 찾지 않습니다.",
+        "기존 Vercel 계정으로 로그인하고 필요한 연결을 진행합니다. 이메일 인증이 나오면 서비스 화면에서 직접 완료합니다. 계정·권한 범위를 확인하며 실습과 관계없는 범위는 추가하지 않습니다.",
+        "페이지를 만든 Work 작업에서 Vercel을 선택합니다. 연결 표시와 실제 도구 조회를 다음 단계에서 따로 확인합니다. Plugin은 Skill과 앱 연결을 묶을 수 있으며 MCP는 도구를 주고받는 규칙입니다."
       ],
       "check": [
-        "MCP 목록에 vercel이 활성화되어 있습니다.",
-        "필요한 OAuth 로그인을 마쳤습니다.",
-        "다음 단계에서 실제 조회 도구를 호출할 준비가 되었습니다."
+        "웹에서 공식 Vercel 플러그인을 찾았습니다.",
+        "서비스 화면의 로그인·인증·계정 연결을 완료했습니다.",
+        "Work에서 Vercel 도구를 선택할 수 있습니다."
       ],
-      "trouble": "설정 메뉴가 없으면 데스크톱 경로인지 먼저 확인하세요. 로그인 오류는 서버 주소·계정·팀 접근 권한을 확인합니다. 비밀번호나 인증 토큰을 프롬프트 또는 이 페이지에 입력하지 않습니다.",
-      "setting": true,
+      "trouble": "Install, 이메일 로그인, 서비스 권한 연결은 서로 다른 단계입니다. 인증창이 남아 있으면 연결 완료가 아닙니다. 새 계정을 만들 필요가 없다면 기존 계정을 사용하세요. 웹 플러그인과 데스크톱 수동 MCP 설정을 섞지 마세요. 인증코드·비밀번호는 요청문에 넣지 않습니다.",
+      "setting": "optional",
       "screens": [
         {
-          "src": "/images/agentic-practice/mcp-official.webp",
-          "alt": "OpenAI 공식 MCP 설정 안내 · 연결 완료를 보여주는 개인 계정 화면은 아닙니다.",
-          "caption": "OpenAI 공식 MCP 설정 안내 · 연결 완료를 보여주는 개인 계정 화면은 아닙니다."
+          "src": "/images/agentic-practice/vercel-plugin.webp",
+          "alt": "실제 웹 공식 Vercel 플러그인 · 설치 화면이며 계정 연결·배포 성공 기록은 아닙니다.",
+          "caption": "실제 웹 공식 Vercel 플러그인 · 설치 화면이며 계정 연결·배포 성공 기록은 아닙니다."
+        }
+      ],
+      "links": [
+        {
+          "label": "ChatGPT Plugins에서 Vercel 찾기",
+          "url": "https://chatgpt.com/plugins?q=Vercel"
         }
       ]
     },
@@ -385,10 +465,10 @@
       "group": "MCP",
       "title": "첫 도구 호출은 조회부터",
       "goal": "연결됨 표시뿐 아니라 실제 도구가 실행되는지 확인합니다.",
-      "where": "ChatGPT Work · Vercel MCP가 연결된 문화유산 페이지 작업",
+      "where": "ChatGPT 웹 Work · 연결한 Vercel 도구",
       "actions": [
         "아래 요청문으로 정적 페이지 배포 문서와 접근 가능한 팀을 조회합니다.",
-        "응답의 도구 호출 내역과 결과를 펼쳐 확인합니다. deploy_to_vercel이 사용 가능한지도 확인합니다.",
+        "도구 호출 내역과 반환 결과를 펼칩니다. 현재 연결이 제공하는 배포 도구의 실제 이름과 파일 입력 지원을 확인합니다. 도구 이름이 문서와 다르면 현재 도구 스키마를 따릅니다.",
         "배포할 팀의 이름과 ID를 확인하고, 기존 프로젝트와 겹치지 않는 새 실습 프로젝트 이름을 정합니다. 다음 단계의 두 칸에 사용합니다."
       ],
       "check": [
@@ -397,7 +477,7 @@
         "직접 파일 배포 도구의 사용 가능 여부를 확인했습니다."
       ],
       "trouble": "일반 답변만 나오고 도구 호출이 없으면 MCP를 다시 확인합니다. 배포 도구가 없으면 생성 파일을 보존하고 사용 가능한 도구 목록과 오류를 강사에게 보여 주세요. 배포했다고 가정하고 다음 단계로 넘어가지 않습니다.",
-      "prompt": "Vercel MCP를 사용해 현재 정적 HTML 파일을 직접 배포하는 공식 문서를 찾아 주세요.\n접근 가능한 팀과 선택한 팀의 기존 프로젝트도 조회해 주세요. 여러 팀이 있으면 어느 팀을 사용할지 먼저 물어보세요.\ndeploy_to_vercel 도구가 사용 가능한지와 필요한 입력을 확인해 주세요.\n조회 결과의 팀 이름·ID를 보여 주세요. 아직 프로젝트를 만들거나 배포하지 마세요.",
+      "prompt": "Vercel MCP를 사용해 현재 정적 HTML 파일을 직접 배포하는 공식 문서를 찾아 주세요.\n접근 가능한 팀과 선택한 팀의 기존 프로젝트도 조회해 주세요. 여러 팀이 있으면 어느 팀을 사용할지 먼저 물어보세요.\n파일 직접 배포 도구(deploy_to_vercel 또는 현재 연결의 동등한 도구)가 실제로 있는지와 필요한 입력을 확인해 주세요. 없는 도구를 있다고 가정하지 마세요.\n조회 결과의 팀 이름·ID를 보여 주세요. 아직 프로젝트를 만들거나 배포하지 마세요.",
       "screens": [
         {
           "src": "/images/agentic-practice/vercel-tools.webp",
@@ -483,5 +563,7 @@
       ],
       "trouble": "계정 설정에 막혀도 이미 만든 Skill·API 결과·페이지는 보존합니다. 연결 문제를 콘텐츠 문제와 분리하여 해결한 뒤 같은 파일을 배포하면 됩니다."
     }
-  ]
+  ],
+  "verification": "웹 Work에서 두 Skill의 계정 등록을 확인했고, 등록된 GeekNews Skill로 최신 조회·키워드 검색·상세 조회와 원문 대조를 마쳤습니다. Skill Creator는 국가유산 Skill을 만들고 검사했습니다. 국가유산 API는 Chrome에서 정상 XML을 받았으나 웹 에이전트 실행 환경은 502여서 첨부 응답 검증과 구분합니다. Vercel은 공식 플러그인 설치·로그인 경로를 확인했으며 이메일 인증 이후의 도구 조회·배포·재배포는 아직 검증하지 않았습니다.",
+  "environment": "ChatGPT 웹 Work와 Skills/Create가 제공되는 계정, 해당 작업의 Node.js/npx·Python 실행 환경, Vercel 계정. 실제 화면은 계정과 제품 변경에 따라 달라질 수 있습니다. 데스크톱 수동 MCP 설정은 선택 경로입니다."
 }

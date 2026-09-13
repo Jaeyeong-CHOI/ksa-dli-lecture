@@ -1,0 +1,70 @@
+{
+  "query": "경복궁",
+  "requested_limit": 3,
+  "status": "partial",
+  "results": [
+    {
+      "name": "경복궁 근정전",
+      "type": "유적건조물",
+      "region": "서울특별시 종로구",
+      "address": "서울특별시 종로구 사직로 161 (세종로, 경복궁)",
+      "description": "경복궁 근정전은 조선시대 법궁인 경복궁의 중심 건물로, 신하들이 임금에게 새해 인사를 드리거나 국가의식을 거행하고 외국 사신을 맞이하던 곳이다. 태조 4년(1395)에 지었으며, 정종과 세종을 비롯한 조선 전기의 여러 왕들이 이곳에서 즉위식을 하기도 하였다. ‘근정’이란 이름은 천하의 일은 부지런하면 잘 다스려진다는 의미를 담고 있는 것으로, 정도전이 지었다. 지금 있는 건물은 임진왜란 때 불탄 것을 고종 4년(1867) 다시 지은 것이다. 앞면 5칸·옆면 5칸 크기의 2층 건물로 지붕은 옆면에서 볼 때 여덟 팔(八)자 모양인 팔작지붕이다. 지붕 처마를 받치기 위해 장식하여 짜여진 구조가 기둥 위뿐만 아니라 기둥 사이에도 있는 다포식 건물이며 그 형태가 화려한 모습을 띠고 있다. 건물의 기단인 월대의 귀퉁이나 계단 주위 난간기둥에 훌륭한 솜씨로 12지신상을 비롯한 동물상들을 조각해 놓았다. 건물 내부는 아래·위가 트인 통층으로 뒷편 가운데에 임금의 자리인 어좌가 있다. 어좌 뒤에는 ‘일월오악도’병풍을 놓았고, 위는 화려한 장식으로 꾸몄다. 근정전에서 근정문에 이르는 길 좌우에는 문무백관들의 지위를 표시하는 품계석이 차례로 놓여 있으며, 햇빛을 가릴 때 사용하였던 차일 고리가 앞마당에 남아 있다. 근정문 주변으로는 행각(行閣)이 연결되어 근정전을 둘러싸고 있다. 근정전은 조선 중기 이후 세련미를 잃어가던 수법을 가다듬어 완성시킨 왕궁의 위엄을 갖춘 웅장한 궁궐건축이다.",
+      "official_source": "https://www.khs.go.kr/cha/SearchKindOpenapiDt.do?ccbaKdcd=11&ccbaAsno=0002230000000&ccbaCtcd=11",
+      "retrieved_at": "2026-09-13 18:32–18:33 KST",
+      "detailStatus": "success",
+      "identifiers": {
+        "ccbaKdcd": "11",
+        "ccbaAsno": "0002230000000",
+        "ccbaCtcd": "11"
+      }
+    },
+    {
+      "name": "경복궁 경회루",
+      "type": "국보",
+      "region": "서울 종로구",
+      "address": null,
+      "description": null,
+      "official_source": "https://www.khs.go.kr/cha/SearchKindOpenapiDt.do?ccbaKdcd=11&ccbaAsno=0002240000000&ccbaCtcd=11",
+      "retrieved_at": "2026-09-13 18:32–18:33 KST",
+      "detailStatus": "missing",
+      "identifiers": {
+        "ccbaKdcd": "11",
+        "ccbaAsno": "0002240000000",
+        "ccbaCtcd": "11"
+      }
+    },
+    {
+      "name": "경복궁 자경전",
+      "type": "보물",
+      "region": "서울 종로구",
+      "address": null,
+      "description": null,
+      "official_source": "https://www.khs.go.kr/cha/SearchKindOpenapiDt.do?ccbaKdcd=12&ccbaAsno=0008090000000&ccbaCtcd=11",
+      "retrieved_at": "2026-09-13 18:32–18:33 KST",
+      "detailStatus": "missing",
+      "identifiers": {
+        "ccbaKdcd": "12",
+        "ccbaAsno": "0008090000000",
+        "ccbaCtcd": "11"
+      }
+    }
+  ],
+  "sourceMode": "provided_snapshot",
+  "originalRetrievedAt": "2026-09-13 18:32–18:33 KST",
+  "official_sources": {
+    "catalog": "https://www.data.go.kr/data/15034324/openapi.do",
+    "list_endpoint": "https://www.khs.go.kr/cha/SearchKindOpenapiList.do",
+    "detail_endpoint": "https://www.khs.go.kr/cha/SearchKindOpenapiDt.do"
+  },
+  "provided_snapshots": {
+    "list": "gyeongbokgung-list.xml",
+    "details": [
+      "detail-0002230000000.xml"
+    ]
+  },
+  "processed_at": "2026-09-13T09:38:17Z",
+  "totalCount": 11,
+  "collectedCount": 3,
+  "detailSuccessCount": 1,
+  "detailMissingCount": 2
+}
