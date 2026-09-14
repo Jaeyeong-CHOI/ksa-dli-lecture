@@ -7,6 +7,9 @@
 .slides-page{max-width:1230px;padding:35px 40px 55px;margin:auto}
 .slides-page .course-context{margin-bottom:27px;padding-bottom:23px}
 .slides-page .course-context>strong{font-size:21px}
+.lecture-resource-link{max-width:100%;margin-bottom:24px;text-align:left;line-height:1.6}
+.lecture-resource-link span{min-width:0;overflow-wrap:anywhere}
+.lecture-resource-link svg{flex-shrink:0}
 .slides-heading{display:flex;justify-content:space-between;align-items:center;gap:24px;margin-bottom:25px}
 .slides-heading h1{font-size:34px;line-height:1.4;letter-spacing:-1px;margin:9px 0}
 .slides-heading p{font-size:12px;line-height:1.7;color:#78816d}

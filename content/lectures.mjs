@@ -9,7 +9,7 @@ export const lectures = [
     "pdf": "/downloads/Introduction-to-LLM.pdf",
     "cover": "/lecture-covers/introduction-to-llm.webp",
     "bytes": 13552870,
-    "releaseAt": "2026-09-14T18:00:00+09:00",
+    "releaseAt": "2026-09-14T11:51:00+09:00",
     "sha256": "72f602d37d6cd46fd43aa3c8e5c3f24f9a2df00dda01cc7d1f05080084751489"
   },
   {
