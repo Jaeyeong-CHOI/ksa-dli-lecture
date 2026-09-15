@@ -41,15 +41,15 @@ export const lectures = [
   {
     "slug": "recent-rag",
     "label": "Recent RAG",
-    "title": "Recent RAG Research: From Retrieval Pipelines to Learned Search Agents",
+    "title": "Recent RAG",
     "number": 4,
-    "pages": 29,
-    "updatedAt": "2026-09-10T12:40:22.706Z",
+    "pages": 20,
+    "updatedAt": "2026-09-15T11:14:54.675Z",
     "pdf": "/downloads/Recent-RAG.pdf",
     "cover": "/lecture-covers/recent-rag.webp",
-    "bytes": 3004002,
-    "releaseAt": "2026-09-16T18:00:00+09:00",
-    "sha256": "e51f75fe13877c26b40d78906bfea3b72b35eeb29cedd667daa0d838cb39bc98"
+    "bytes": 2998424,
+    "releaseAt": "2026-09-15T20:19:16+09:00",
+    "sha256": "15482bb3043c64996f7e1eea9bf1b1e4e180a859b079cd789f183a50641bfede"
   },
   {
     "slug": "search-ranking",
