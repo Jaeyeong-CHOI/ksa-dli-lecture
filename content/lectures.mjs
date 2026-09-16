@@ -56,13 +56,13 @@ export const lectures = [
     "label": "Search Ranking",
     "title": "Search Ranking: BM25, Embeddings & Evaluation",
     "number": 5,
-    "pages": 64,
-    "updatedAt": "2026-09-13T07:19:05.197Z",
+    "pages": 42,
+    "updatedAt": "2026-09-16T13:22:06.992Z",
     "pdf": "/downloads/Search-Ranking.pdf",
     "cover": "/lecture-covers/search-ranking.webp",
-    "bytes": 1007008,
+    "bytes": 890483,
     "releaseAt": "2026-09-16T18:00:00+09:00",
-    "sha256": "c8bff32057d227eecdd5cb688329d4c0f3888422e1aaec41e8d65806f17e9de5"
+    "sha256": "5bf1592de44ff62f088ef28e6b6deb27bb2c92377bfe397b03a3cc5b618bf874"
   },
   {
     "slug": "product-building",
