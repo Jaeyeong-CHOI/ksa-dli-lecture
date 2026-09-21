@@ -6,11 +6,11 @@
 
 ## 학습 흐름
 
-첫 화면(`/`)은 **강의자료 6종**의 PDF 열람·다운로드 화면입니다. 순서는 Introduction to LLM → RAGAS → QuCo RAG → Recent RAG → Search Ranking → Product Building입니다. 최신 Drive 원본의 PDF와 표지, 페이지 수, 원본 수정일을 함께 제공합니다. 각 자료는 `/lectures/<slug>`로 직접 열 수 있고, 기존 `/notes/introduction-to-llm`과 `/resources`는 첫 자료로 연결됩니다. 별도 강의 해설 노트는 넣지 않습니다. DLI-RAG 슬라이드는 목록·공개 API·예약 배포·챗봇 근거에서 제외했으며, 원본 파일은 비공개로 보관합니다.
+첫 화면(`/`)은 **강의자료 6종**의 PDF 열람·다운로드 화면입니다. 순서는 Introduction to LLM → RAGAS → QuCo RAG → Recent RAG → Search Ranking → Product Building입니다. 최신 Drive 원본의 PDF와 표지, 페이지 수, 원본 수정일을 함께 제공합니다. 각 자료는 `/lectures/<slug>`로 직접 열 수 있고, 기존 `/notes/introduction-to-llm`과 `/resources`는 첫 자료로 연결됩니다. 별도 강의 해설 노트는 넣지 않습니다. DLI-RAG 슬라이드는 목록·공개 API·예약 배포에서 제외했으며, 원본 파일은 비공개로 보관합니다.
 
 강의자료 위에는 NVIDIA 교육·자격증 학습 로드맵 PDF 바로가기를 제공합니다. 새 탭에서 NVIDIA 원문을 엽니다.
 
-Introduction to LLM(1번)은 사용자 요청으로 **2026년 9월 14일 11:51(KST)에 즉시 공개**했습니다. RAGAS·QuCo RAG(2·3번)도 사용자 요청으로 **2026년 9월 14일 21:37(KST)에 즉시 공개**했습니다. Recent RAG(4번)는 사용자 요청으로 **2026년 9월 15일 최신 20쪽 자료로 교체·즉시 공개**했습니다. Search Ranking(5번)은 **2026년 9월 16일 18시(KST)에 공개**했으며 같은 날 최신 42쪽 자료로 교체했습니다. Product Building(6번)은 **9월 17일 18시(KST)에 공개**했으며 **9월 18일 최신 38쪽 자료로 교체**했습니다. 현재 강의자료 6종 모두 열람·다운로드할 수 있습니다. 공개 전에는 예정 시간과 잠금 화면만 표시합니다. 브라우저 시계가 아니라 서버에서 공개 여부를 판단하며, PDF 직접 요청과 챗봇의 미공개 슬라이드 검색을 제한합니다. 공개 논문 및 실습 자료는 계속 이용할 수 있습니다.
+Introduction to LLM(1번)은 사용자 요청으로 **2026년 9월 14일 11:51(KST)에 즉시 공개**했습니다. RAGAS·QuCo RAG(2·3번)도 사용자 요청으로 **2026년 9월 14일 21:37(KST)에 즉시 공개**했습니다. Recent RAG(4번)는 사용자 요청으로 **2026년 9월 15일 최신 20쪽 자료로 교체·즉시 공개**했습니다. Search Ranking(5번)은 **2026년 9월 16일 18시(KST)에 공개**했으며 같은 날 최신 42쪽 자료로 교체했습니다. Product Building(6번)은 **9월 17일 18시(KST)에 공개**했으며 **9월 18일 최신 38쪽 자료로 교체**했습니다. 현재 강의자료 6종 모두 열람·다운로드할 수 있습니다. 공개 전에는 예정 시간과 잠금 화면만 표시합니다. 브라우저 시계가 아니라 서버에서 공개 여부를 판단하며, 미공개 PDF 직접 요청을 제한합니다. 공개 논문 및 실습 자료는 계속 이용할 수 있습니다.
 
 예정 시각에는 맥미니의 시간 제한 PDF API가 열리고, GitHub Actions의 예약 배포가 공개된 PDF를 Pages에 복사합니다. Pages 반영 이후에는 API가 꺼져도 해당 PDF를 받을 수 있습니다. 최초 공개 시각은 GitHub 예약 작업의 지연에 의존하지 않습니다. 과거에 이미 내려받은 사본이나 이전 Git 이력은 회수하지 않습니다.
 
@@ -20,11 +20,11 @@ Introduction to LLM(1번)은 사용자 요청으로 **2026년 9월 14일 11:51(K
 
 실습 노트 목록에서는 별도 소개·실행 환경 안내·다운로드 홍보 박스 없이 챕터 목록을 표시합니다.
 
-실습 노트는 **개념 → 전체 셀 코드 → 설명·실행 결과**를 파일마다 한 페이지에서 이어 읽습니다. 두 읽기 모드, 단계별 이전/다음, 학습 경로·목표 대시보드·확인 질문 UI와 진행률·완료 체크·학습 기록 저장은 제거했습니다. 개념 목차와 파일/코드 검색은 유지합니다.
+실습 노트는 **개념 → 전체 셀 코드 → 설명·실행 결과**를 파일마다 한 페이지에서 이어 읽습니다. 두 읽기 모드, 단계별 이전/다음, 학습 경로·목표 대시보드·확인 질문 UI와 진행률·완료 체크·학습 기록 저장은 제거했습니다. 개념 목차와 파일별 이동은 유지합니다.
 
 42개 개념과 105개 셀을 한 번씩 배치합니다. 공통 코드 뷰어는 Get Certification과 동일하게 밝은 문법 강조·줄 번호·줄바꿈·확대·전체 복사를 제공하고, 셀 내용을 높이 제한 없이 표시합니다. 기존 정답과 검수 수정이 있는 15개 셀은 원본 전체/수정 후 전체를 전환하고 변경한 줄을 표시합니다. 완성본은 원래 틀에 해당 부분 수정만 합친 것이며 모델 이름·기본 주소를 임의 변경하지 않습니다. 일반 셀은 이미 공개한 한국어 ipynb, 인증 가이드 관련 수정 셀은 기존 실제 랩 검수 원본을 기준으로 합니다.
 
-반복 안내·카드형 입출력 설명·별도 학습 목표/마무리 UI를 없애고, 용어 해설·필요한 준비·실행 결과를 해당 코드에 붙입니다. 노트북의 기존 14개 풀이 중 셀에 합친 정답은 중복 표시하지 않고 나머지 해설 예시는 유지합니다. 도식과 해당 셀의 실제 캡처도 유지합니다. 기존 `#cell-N`·`#section-N`·풀이 주소는 같은 파일의 해당 위치로 이동합니다. 질문하기는 셀 직접 링크의 파일·위치를 이어받으며 자동 전송하지 않습니다. Google Drive 바로가기는 제공하지 않습니다.
+반복 안내·카드형 입출력 설명·별도 학습 목표/마무리 UI를 없애고, 용어 해설·필요한 준비·실행 결과를 해당 코드에 붙입니다. 노트북의 기존 14개 풀이 중 셀에 합친 정답은 중복 표시하지 않고 나머지 해설 예시는 유지합니다. 도식과 해당 셀의 실제 캡처도 유지합니다. 기존 `#cell-N`·`#section-N`·풀이 주소는 같은 파일의 해당 위치로 이동합니다. Google Drive 바로가기는 제공하지 않습니다.
 
 ## Get Certification
 
@@ -32,21 +32,21 @@ Introduction to LLM(1번)은 사용자 요청으로 **2026년 9월 14일 11:51(K
 
 07번은 셀 **3 → 4 → 34 → 36 → 38 → 44**를 사용합니다. 출력·모델 설정과 인덱스 생성·통합은 그대로 실행하고, 논문 목록·저장 후 삭제 줄만 수정합니다. Task 3 미리보기·재검색과 08번 질문/답변/점수 비교는 **선택 실습**으로 분리했습니다. 실제 평가 프론트엔드는 저장된 `docstore_index`와 09번 검색·생성 API를 직접 사용합니다. 09번은 실제 PASSED 코드의 체인 정의·두 API 연결, 세 부분만 수정한 뒤 원본 writefile 셀 4를 실행한 뒤 바로 아래 셀 5의 `!python server_app.py`를 Shift+Enter로 실행합니다. 별도 Terminal은 필요 없고, 서버 대기 중 `[*]`는 정상입니다. 수정 시 Kernel → Interrupt Kernel로 먼저 중지하고 셀 4 저장 → 셀 5 재실행 순서를 따릅니다. 일반/비동기 스트리밍 대응과 평가 기준은 그대로 유지합니다. `ChatNVIDIA`의 주소는 `base_url` 인자 → `NVIDIA_BASE_URL` 환경변수 → SDK 기본값 순으로 결정됩니다. 환경에 이미 주소가 설정돼 있으면 명시 인자는 중복이므로 추가하지 않습니다. 07·09번의 주소 지정은 기본 경로에서 빼고, 미설정/다른 주소 연결 오류가 있을 때만 펼치는 복구 항목으로 옮겼습니다.
 
-`content/certification-route.json`이 필수 흐름과 선택 여부를 정의하고, 원래 `certification-guide.json`의 부분 정답·사진을 재사용합니다. `certification-cells.json`은 검수한 실제 랩의 선택 코드 셀 18개만 담고(출력·환경 파일 없음), `certification-pages.mjs`는 파일별 화면과 기존 직접 링크를 매핑하고, `certification-cell-code.mjs`가 같은 셀의 부분 정답을 합쳐 완성본과 변경 행을 계산합니다. 원본 버전이 다르면 강조된 부분만 반영하고 모델명·옵션을 유지합니다. 기존 19개 직접 링크도 필수 작업 또는 선택 실습으로 열립니다. 챗봇 검색 자료도 이 구분을 반영합니다. 간소화는 원본 셀의 정적 의존성과 모델 주소 인자를 제외한 실제 통과 서버 코드 일치, 독립된 FAISS/LCEL 작성 코드 검증에 기반하며, 이 짧은 순서로 실제 평가를 새로 실행했다는 뜻은 아닙니다.
+`content/certification-route.json`이 필수 흐름과 선택 여부를 정의하고, 원래 `certification-guide.json`의 부분 정답·사진을 재사용합니다. `certification-cells.json`은 검수한 실제 랩의 선택 코드 셀 18개만 담고(출력·환경 파일 없음), `certification-pages.mjs`는 파일별 화면과 기존 직접 링크를 매핑하고, `certification-cell-code.mjs`가 같은 셀의 부분 정답을 합쳐 완성본과 변경 행을 계산합니다. 원본 버전이 다르면 강조된 부분만 반영하고 모델명·옵션을 유지합니다. 기존 19개 직접 링크도 필수 작업 또는 선택 실습으로 열립니다. 간소화는 원본 셀의 정적 의존성과 모델 주소 인자를 제외한 실제 통과 서버 코드 일치, 독립된 FAISS/LCEL 작성 코드 검증에 기반하며, 이 짧은 순서로 실제 평가를 새로 실행했다는 뜻은 아닙니다.
 
 2026년 9월 12일 실제 Instructor-Led 랩에서 교안의 부분 수정 17개 셀을 대조하고 07 → 08 → 09 → Frontend Evaluate → NVIDIA ASSESS TASK의 PASSED 결과까지 확인했습니다. 실행 중 발견한 응답 수집·비동기 서버 연결 오류와 복구 방법을 반영했습니다.
 
 실제 랩 캡처는 별도 합성 화면이 아니라 화면 원본에 번호·화살표를 겹쳐 표시합니다. 수정 전/후·실행 출력·클릭 위치를 단계 안에서 펼쳐 볼 수 있고, 확대 화면에서도 번호별 설명을 읽습니다. 계정과 접속 토큰은 캡처에 넣지 않습니다.
 
-Q&A는 **강의자료 기반 / 실습노트 기반**으로 구분합니다. 강의자료 모드는 최신 슬라이드 6종과 관련 원논문 9편(RAGAS, QuCo-RAG, ReSearch, Search-R1, ReasonRAG, WebThinker, DeepResearcher, RAG, ReAct)을 근거로 답합니다. 논문 참고 옵션을 끄면 슬라이드만 사용하며, 옵션 변경 시 현재 대화를 초기화합니다. 등록한 논문을 검색하는 방식이며 실시간 웹 검색은 하지 않습니다. 실습노트 모드는 노트북 10개·해설·Get Certification만 사용합니다. 답변 출처에 자료 종류와 PDF 페이지 또는 노트북 위치를 표시합니다.
+## 강의 종료 후 이용
 
-두 모드의 대화 기록은 브라우저 메모리에서 따로 유지합니다. 모드 전환은 진행 요청을 취소하고 늦은 응답을 무시합니다. **새 대화** 버튼은 현재 모드의 메시지·입력·오류를 비우고 진행 중인 요청을 취소합니다. 초기화 전의 늦은 응답은 무시하며, 다음 질문에는 이전 대화 기록을 보내지 않습니다. 이용 제한용 세션 쿠키는 초기화하지 않습니다.
+2026년 9월 21일 강의 종료에 따라 **질문하기·챗봇·사이트 검색 기능을 제거**했습니다. 강의자료·실습 노트·메뉴·목차·코드 복사·다운로드는 계속 이용할 수 있습니다. 기존 챗봇 API와 상태 API는 종료 응답(HTTP 410)을 반환하며, 모델을 호출하지 않습니다. 자료 배포와 기존 PDF 링크를 위한 읽기 전용 API는 유지합니다.
 
 ## 에이전틱 코딩 실습
 
-2026년 9월 18일 사용자 요청으로 에이전틱 코딩 실습을 메인 사이트에 통합했습니다. 모든 페이지의 공통 메뉴와 일반 검색에서 `/agentic-coding`으로 이동할 수 있으며, 사이트맵에도 포함합니다. 기존 직접 주소·실습 전환·단계 링크·다운로드는 그대로 유지합니다.
+2026년 9월 18일 사용자 요청으로 에이전틱 코딩 실습을 메인 사이트에 통합했습니다. 모든 페이지의 공통 메뉴에서 `/agentic-coding`으로 이동할 수 있으며, 사이트맵에도 포함합니다. 기존 직접 주소·실습 전환·단계 링크·다운로드는 그대로 유지합니다.
 
-`/agentic-coding`은 **기존 Skill 사용 → 새 공공데이터 Skill 만들기 → 웹페이지 제작·검토 → MCP·Preview 배포** 네 실습으로 구성합니다. Get Certification처럼 상단에서 실습을 전환하고, 한 실습의 준비·요청·결과 확인을 한 페이지에서 위부터 쭉 읽습니다. 기존 19개 해시 주소와 검색 결과는 해당 실습의 본문 위치로 이동합니다.
+`/agentic-coding`은 **기존 Skill 사용 → 새 공공데이터 Skill 만들기 → 웹페이지 제작·검토 → MCP·Preview 배포** 네 실습으로 구성합니다. Get Certification처럼 상단에서 실습을 전환하고, 한 실습의 준비·요청·결과 확인을 한 페이지에서 위부터 쭉 읽습니다. 기존 19개 해시 주소는 해당 실습의 본문 위치로 이동합니다.
 
 19개 단계 사이드바·진행률·완료 체크·기록 초기화·이전/다음·클릭형 개념 탐색·퀴즈·반복 안내 카드를 제거했습니다. 진행 상태는 더 이상 브라우저에서 읽거나 저장하지 않습니다. 상세 개념은 본문형 설명으로, 실제 캡처는 필요한 위치에서 접어봅니다. API 통신 실패 시 XML 복구는 선택 항목이며 직접 링크로 열면 자동으로 펼칩니다. API 정상 응답과 실패, 부분 스냅샷, Vercel 인증 미완료 분기는 유지합니다.
 
@@ -70,7 +70,6 @@ highlight.js 기반의 밝은 코드 뷰어를 사용합니다. Python·셸·JSO
 - Skill·MCP·Vercel을 연결하는 에이전틱 코딩 실습 4개 연속 페이지와 요청문·예시 다운로드
 - 셀 번호로 연결되는 원본 코드 105개·핵심 연산 해설, 노트북 풀이·확인 예제 14개
 - NVIDIA 공식 심볼 파비콘
-- 강의자료+관련 논문 / 실습노트로 구분된 Q&A 도우미
 
 해설용 풀이는 공식 Solutions 파일이 아닙니다. 원본 실습에는 DLI 내부 서비스와 수업 패키지가 필요합니다. 이 사이트에서 코드를 실행하거나 수료 평가를 제출하지 않습니다. 검토한 노트북 다운로드 사본만 공개하며, 원본 출력·실제 자격 증명·비공개 원본 폴더는 저장소에 포함하지 않습니다.
 
@@ -85,10 +84,9 @@ npm run build
 React + Vite. `main` 브랜치 push 시 GitHub Actions가 정적 사이트를 빌드하고 GitHub Pages에 배포합니다. 각 노트의 직접 방문·새로고침을 위해 `scripts/build-pages.mjs`가 경로별 HTML 진입점을 만듭니다.
 
 - 프런트엔드: **GitHub Pages** → `ksa.dli-lecture.com`
-- 챗봇 API: **Mac mini / Node.js + Cloudflare Tunnel** → `ksa-api.dli-lecture.com`
+- 강의자료 PDF API: **Mac mini / Node.js + Cloudflare Tunnel** → `ksa-api.dli-lecture.com`
 - API 주소만 공개 빌드 변수 `VITE_API_BASE_URL`로 지정합니다. API 키를 이 변수나 GitHub에 넣지 않습니다.
-- 모델은 서버에서 `gpt-5.6-sol`, reasoning `high`로 고정합니다.
-- 모델 자격 증명과 원문 검색 인덱스는 Mac mini의 보호 저장소/비공개 경로에 유지합니다. 이 저장소는 정적 프런트엔드만 배포합니다.
+- 이 저장소는 정적 프런트엔드만 배포합니다. PDF API는 모델·자격 증명·원문 검색 인덱스를 불러오지 않습니다. 기존 비공개 원본과 운영 이력은 공개하지 않습니다.
 - Mac mini가 꺼져 있어도 학습 노트·한국어 노트북 파일·Pages에 이미 반영된 PDF는 열립니다. 최초 예약 공개 시점부터 Pages 반영 전까지는 PDF API가 필요합니다.
 
 ## 콘텐츠 수정
@@ -102,7 +100,7 @@ React + Vite. `main` 브랜치 push 시 GitHub Actions가 정적 사이트를 �
 - `content/notes.mjs`: PPT·노트북별 한국어 해설, 문제 풀이, 오류 해결
 - `content/certification-guide.json`: 원본 부분 수정 가이드의 단계·위치·정답·실행 순서·오류 대처
 - `src/certification.jsx`, `src/certification-simple.css`: 필수 4단계·선택 실습·부분 수정 코드 뷰어
-- `content/notebook-companion.mjs`, `content/notebook-locations.json`, `content/notebook-lookup.mjs`: 셀별 해설·학습 목표·원본 위치·검색
+- `content/notebook-companion.mjs`, `content/notebook-locations.json`, `content/notebook-lookup.mjs`: 셀별 해설·학습 목표·원본 위치
 - `src/notebook-reader.jsx`, `src/notebook-reader.css`: 개념·코드·설명 중심 파일별 연속 읽기
 - `content/notebook-reader.mjs`: 셀 중복 없는 개념 배치·목차
 - `content/notebook-cell-edits.mjs`, `scripts/build-notebook-reader.mjs`, `content/notebook-reader-code.json`: 기존 원문+부분 정답으로 셀 전체 코드 생성
@@ -113,7 +111,7 @@ React + Vite. `main` 브랜치 push 시 GitHub Actions가 정적 사이트를 �
 - `content/lecture-release.mjs`, `src/lecture-access.js`, `scripts/build-lecture-files.mjs`: 공개 일정·서버 확인·공개 PDF만 정적 배포
 - `content/lectures.mjs`, `content/papers.mjs`: 최신 강의자료와 원논문 메타데이터
 - `src/lecture-library.jsx`, `src/lecture-library.css`: 강의자료 선택·PDF 뷰어·다운로드
-- `src/app.jsx`, `src/shared.jsx`, `src/chat-modes.css`: 페이지와 두 모드 도우미 UI
+- `src/app.jsx`: 공통 메뉴·페이지 UI
 - `src/styles.css`: NVIDIA 로고·흰색·그린 기반 디자인
 - `src/lesson-visuals.jsx`, `src/lesson-visuals.css`: 설명 옆의 인터랙티브 시각자료
 - `src/beginner-visuals.jsx`, `src/beginner-visuals.css`: 초심자를 위한 실행 환경·요청·평가 도식
